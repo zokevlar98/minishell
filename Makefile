@@ -6,7 +6,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	cc
 
-Flags			=	-Wall -Wextra -Werror
+Flags			=	-Wall -Wextra -Werror -I ./includes
 
 READLINE_FLAGS	=	-lreadline \
 
@@ -37,3 +37,5 @@ fclean:		clean
 			rm -f $(NAME)
 
 re:			fclean all
+
+.PHONY: clean

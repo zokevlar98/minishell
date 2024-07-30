@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:02:40 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/29 03:38:54 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/07/30 23:30:54 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include <stdio.h>
+#include "minishell.h"
+
 void	ft_error(char *str)
 {
 	write(2, str, ft_strlen(str));
