@@ -1,8 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
+#    Updated: 2024/07/30 23:24:40 by mohmazou         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME			=	minishell
 
 HEADER			=	includes/minishell.h
-
-LIBFT			=	libft/libft.a
 
 CC				=	cc
 
@@ -10,13 +20,10 @@ Flags			=	-Wall -Wextra -Werror -I ./includes
 
 READLINE_FLAGS	=	-lreadline \
 
-SRCS			=	srcs/minishell.c \
-					srcs/minishell_utils.c \
-					srcs/env_utils_1.c \
-					srcs/env_utils_2.c \
-					srcs/cmd_utils.c \
-					libft/lib_utils1.c \
-					libft/ft_split.c \
+SRCS			=	srcs/main.c \
+					\
+					lib_utils/lib_utilis_1.c \
+					
 					
 
 
@@ -24,8 +31,8 @@ OBJS			=	$(SRCS:.c=.o)
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS)  #$(LIBFT)
-			$(CC) $(Flags) $(READLINE_FLAGS) $(OBJS) -o $(NAME) #$(LIBFT)
+$(NAME):	$(OBJS)
+			$(CC) $(Flags) $(READLINE_FLAGS) $(OBJS) -o $(NAME)
 
 %.o:		%.c $(HEADER)
 			$(CC) $(Flags) -c $< -o $@

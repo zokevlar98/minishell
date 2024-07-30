@@ -5,113 +5,73 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/26 04:07:35 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/29 01:48:37 by mohmazou         ###   ########.fr       */
+/*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/07/30 23:53:40 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_env_befor(char *str)
+char *ft_strchr(const char *s, int c)
 {
-	int		i;
-	char	*name;
-
-	i = 0;
-	while (str[i] && str[i] != '=')
-		i++;
-	name = (char *)malloc(sizeof(char) * (i + 1));
-	if (!name)
-		return (NULL);
-	i = 0;
-	while (str[i] && str[i] != '=')
+	while (*s)
 	{
-		name[i] = str[i];
-		i++;
+		if (*s == c)
+			return ((char *)s);
+		s++;
 	}
-	name[i] = '\0';
-	return (name);
+	return (NULL);
 }
 
-char	*ft_env_after(char *str)
+char *ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int		i;
-	int		y;
-	char	*value;
+	char	*sub;
+	size_t	i;
 
+	if (!s)
+		return (NULL);
+	if (start > ft_strlen(s))
+		return (ft_strdup(""));
+	sub = malloc(sizeof(char) * (len + 1));
+	if (!sub)
+		return (NULL);
 	i = 0;
-	y = 0;
-	while (str[i] && str[i] != '=')
-		i++;
-	if (!str[i])
-		return (NULL);
-	i++;
-	value = (char *)malloc(sizeof(char) * (ft_strlen(str) - i + 1));
-	if (!value)
-		return (NULL);
-	while (str[i])
+	while (i < len && s[start + i])
 	{
-		value[y] = str[i];
+		sub[i] = s[start + i];
 		i++;
-		y++;
 	}
-	value[y] = '\0';
-	return (value);
+	sub[i] = '\0';
+	return (sub);
 }
 
-void	ft_add_last(t_env **env_lst, t_env *new)
-{
-	t_env	*tmp;
-
-	tmp = *env_lst;
-	if (!tmp)
-	{
-		*env_lst = new;
-		return ;
-	}
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
-}
-
-t_env	*lst_new(char *str)
+static t_env	*ft_env_new(char *env)
 {
 	t_env	*new;
+	char	*equal;
 
-	new = (t_env *)malloc(sizeof(t_env));
+	new = malloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
-	new->name = ft_env_befor(str);
-	new->value = ft_env_after(str);
+	equal = ft_strchr(env, '=');
+	new->name = ft_substr(env, 0, equal - env);
+	new->value = ft_strdup(equal + 1);
 	new->next = NULL;
 	return (new);
 }
 
-void	ft_envlst(char **env, t_env **env_lst)
+ft_env_list(t_env **env_list,char **env)
 {
 	int		i;
 	t_env	*new;
-(void)env;
-(void)env_lst;
+
 	i = 0;
-	new = (t_env *)malloc(sizeof(t_env));
-	if (!new)
-		return ;
-	// new->name = ft_strdup("mazouz");
-	// new->value = ft_strdup("mohamed");
-	// new->next = NULL;
-	// *env_lst = new;
+	new = NULL;
 	while (env[i])
 	{
-		new = lst_new(env[i]);
-		ft_add_last(env_lst, new);
-		i ++;
+		new = ft_env_new(env[i]);
+		ft_env_add_back(env_list, new);
+		i++;
 	}
-	// printf("env_lst->name : %s\n", env_lst->name);
-	// while (i < 2)
-	// {
-	// 	new = lst_new("mazouz=mohamed");
-	// 	ft_add_last(&env_lst, new);
-	// 	i ++;
-	// }
+	
 }
