@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 00:38:04 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/07/31 00:45:10 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ static t_env	*ft_env_new(char *env)
 	return (new);
 }
 
+static void	ft_env_add_back(t_env **env_list, t_env *new)
+{
+	t_env	*tmp;
+
+	if (!*env_list)
+	{
+		*env_list = new;
+		return ;
+	}
+	tmp = *env_list;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+}
+
 void	ft_env_list(t_env **env_list,char **env)
 {
 	int		i;
@@ -41,8 +56,7 @@ void	ft_env_list(t_env **env_list,char **env)
 	while (env[i])
 	{
 		new = ft_env_new(env[i]);
-		// ft_env_add_back(env_list, new);
+		ft_env_add_back(env_list, new);
 		i++;
 	}
-	printf("etst\n");
 }
