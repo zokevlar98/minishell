@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+         #
+#    By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/07/30 23:24:40 by mohmazou         ###   ########.fr        #
+#    Updated: 2024/07/31 00:20:27 by zqouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS			=	srcs/main.c \
 					
 
 
-OBJS			=	$(SRCS:.c=.o)
+OBJS		=	$(SRCS:.c=.o)
 
 all:		$(NAME)
 
