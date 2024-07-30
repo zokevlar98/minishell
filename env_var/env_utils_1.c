@@ -6,44 +6,14 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/30 23:53:40 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/07/31 00:38:04 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char *ft_strchr(const char *s, int c)
-{
-	while (*s)
-	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
-	}
-	return (NULL);
-}
 
-char *ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*sub;
-	size_t	i;
 
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-		return (ft_strdup(""));
-	sub = malloc(sizeof(char) * (len + 1));
-	if (!sub)
-		return (NULL);
-	i = 0;
-	while (i < len && s[start + i])
-	{
-		sub[i] = s[start + i];
-		i++;
-	}
-	sub[i] = '\0';
-	return (sub);
-}
 
 static t_env	*ft_env_new(char *env)
 {
@@ -60,18 +30,19 @@ static t_env	*ft_env_new(char *env)
 	return (new);
 }
 
-ft_env_list(t_env **env_list,char **env)
+void	ft_env_list(t_env **env_list,char **env)
 {
 	int		i;
 	t_env	*new;
 
+	(void)env_list;
 	i = 0;
 	new = NULL;
 	while (env[i])
 	{
 		new = ft_env_new(env[i]);
-		ft_env_add_back(env_list, new);
+		// ft_env_add_back(env_list, new);
 		i++;
 	}
-	
+	printf("etst\n");
 }
