@@ -6,13 +6,25 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 00:45:10 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/07/31 00:53:23 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+char	*ft_env_search(t_env *env_list, char *name)
+{
+	t_env	*tmp;
 
+	tmp = env_list;
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->name, name))
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
 
 
 static t_env	*ft_env_new(char *env)
