@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 00:02:25 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/07/31 00:43:19 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ typedef struct s_cmd
 }    t_cmd;
 
 // lib_utils_1.c
-int ft_strcmp(const char *s1, const char *s2);
+int     ft_strcmp(const char *s1, const char *s2);
 
 // env_utils_1.c
-ft_env_list(t_env **env_list,char **env);
+void     ft_env_list(t_env **env_list,char **env);
 
 #endif

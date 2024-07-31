@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/30 23:53:40 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/07/31 00:43:14 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_env	*ft_env_new(char *env)
 	return (new);
 }
 
-ft_env_list(t_env **env_list,char **env)
+void	ft_env_list(t_env **env_list,char **env)
 {
 	int		i;
 	t_env	*new;
