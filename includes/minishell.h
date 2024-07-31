@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 02:26:51 by zqouri            #+#    #+#             */
-/*   Updated: 2024/07/31 05:08:16 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/07/31 06:59:57 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <stddef.h>
 
 //define
-# define NUM_BUILTINS 8
+# define NUM_BUILTINS 8 
 
 // environnement variables linked list
 typedef struct s_env
@@ -49,9 +49,11 @@ typedef struct s_cmd
     struct s_cmd	*next;
 }    t_cmd;
 
-// lib_utils_1.c
-
-int ft_strcmp(const char *s1, const char *s2);
+// lib_utils
+int     ft_strcmp(const char *s1, const char *s2);
+int     ft_strncmp(char *s1, char *s2, size_t size);
+char    *lower_case(char *str);
+int ft_check_env(t_cmd *cmd_list);
 
 // env_utils_1.c
 void    ft_env_list(t_env **env_list,char **env);
