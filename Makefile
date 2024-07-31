@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+         #
+#    By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/07/31 00:41:05 by mohmazou         ###   ########.fr        #
+#    Updated: 2024/07/31 01:13:16 by zqouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,14 @@ Flags			=	-Wall -Wextra -Werror -I ./includes
 
 READLINE_FLAGS	=	-lreadline \
 
-SRCS			=	main.c \
+SRCS			=	srcs/main.c \
+					\
 					lib_utils/lib_utilis_1.c \
-					env_var/env_utils_1.c \
 					
 					
 
 
-OBJS			=	$(SRCS:.c=.o)
+OBJS		=	$(SRCS:.c=.o)
 
 all:		$(NAME)
 

@@ -3,29 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 00:53:23 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/07/31 01:12:51 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_env_search(t_env *env_list, char *name)
+char *ft_strchr(const char *s, int c)
 {
-	t_env	*tmp;
-
-	tmp = env_list;
-	while (tmp)
+	while (*s)
 	{
-		if (!ft_strcmp(tmp->name, name))
-			return (tmp->value);
-		tmp = tmp->next;
+		if (*s == c)
+			return ((char *)s);
+		s++;
 	}
 	return (NULL);
 }
 
+char *ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*sub;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	if (start > ft_strlen(s))
+		return (ft_strdup(""));
+	sub = malloc(sizeof(char) * (len + 1));
+	if (!sub)
+		return (NULL);
+	i = 0;
+	while (i < len && s[start + i])
+	{
+		sub[i] = s[start + i];
+		i++;
+	}
+	sub[i] = '\0';
+	return (sub);
+}
 
 static t_env	*ft_env_new(char *env)
 {
@@ -42,27 +60,11 @@ static t_env	*ft_env_new(char *env)
 	return (new);
 }
 
-static void	ft_env_add_back(t_env **env_list, t_env *new)
-{
-	t_env	*tmp;
-
-	if (!*env_list)
-	{
-		*env_list = new;
-		return ;
-	}
-	tmp = *env_list;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
-}
-
-void	ft_env_list(t_env **env_list,char **env)
+ft_env_list(t_env **env_list,char **env)
 {
 	int		i;
 	t_env	*new;
 
-	(void)env_list;
 	i = 0;
 	new = NULL;
 	while (env[i])
@@ -71,4 +73,5 @@ void	ft_env_list(t_env **env_list,char **env)
 		ft_env_add_back(env_list, new);
 		i++;
 	}
+	
 }
