@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 01:03:59 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/07/31 01:38:48 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_cmd
     int				pipe_line;
     char			*cmd;
     char			**args;
-    char			*in_redir;
-    char			*out_redir;
+    char			**in_redir;
+    char			**out_redir;
     struct s_cmd	*next;
 }    t_cmd;
 
@@ -53,5 +53,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 // env_utils_1.c
 void	ft_env_list(t_env **env_list,char **env);
 char	*ft_env_search(t_env *env_list, char *name);
+
+// parse.c
+t_cmd	*ft_parse_line(char *line);
+int		ft_check_line(char *line);
+
 
 #endif

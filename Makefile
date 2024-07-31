@@ -6,7 +6,7 @@
 #    By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/07/31 00:41:05 by mohmazou         ###   ########.fr        #
+#    Updated: 2024/07/31 01:39:08 by mohmazou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ READLINE_FLAGS	=	-lreadline \
 SRCS			=	main.c \
 					lib_utils/lib_utilis_1.c \
 					env_var/env_utils_1.c \
+					Parsing/parse.c \
 					
 					
 

@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 00:53:23 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/07/31 01:44:39 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void	ft_env_list(t_env **env_list,char **env)
 {
 	int		i;
 	t_env	*new;
-
-	(void)env_list;
+	
 	i = 0;
 	new = NULL;
 	while (env[i])
