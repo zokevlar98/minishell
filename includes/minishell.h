@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 01:38:48 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/07/31 06:51:23 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <libc.h>
+
+# define MAX_TOKENS 100
 
 // environnement variables linked list
 typedef struct s_env
@@ -57,6 +59,10 @@ char	*ft_env_search(t_env *env_list, char *name);
 // parse.c
 t_cmd	*ft_parse_line(char *line);
 int		ft_check_line(char *line);
+
+// tokenize.c
+char	**tokenizing(char *line);
+void	**tokenize_line(char *line, char ***tokens, int length,int *in_double_quote, int *in_single_quote, int *in_parentheses);
 
 
 #endif
