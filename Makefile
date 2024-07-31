@@ -6,7 +6,7 @@
 #    By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/07/30 23:24:40 by mohmazou         ###   ########.fr        #
+#    Updated: 2024/07/31 00:41:05 by mohmazou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,13 @@ HEADER			=	includes/minishell.h
 
 CC				=	cc
 
-Flags			=	-Wall -Wextra -Werror
+Flags			=	-Wall -Wextra -Werror -I ./includes
 
 READLINE_FLAGS	=	-lreadline \
 
-SRCS			=	srcs/main.c \
-					\
+SRCS			=	main.c \
 					lib_utils/lib_utilis_1.c \
+					env_var/env_utils_1.c \
 					
 					
 
