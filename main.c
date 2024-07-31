@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 01:31:42 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/07/31 03:00:38 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int main(int ac, char **av, char **env)
 			break;
 		if (line[0] != '\0')
 			add_history(line);
+		else
+			continue;
 		cmd_list = ft_parse_line(line);
 		printf("%s\n", line);
 		// ft_execut_cmd(cmd_list, env_list);

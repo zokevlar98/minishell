@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:28:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 01:44:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/07/31 02:02:07 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ t_cmd	*ft_parse_line(char *line)
 {
 	t_cmd	*cmd_list;
 	t_cmd	*new_cmd;
-	char	**cmds;
+	char	**all_tokens;
 	int		i;
 
 	(void)line;
-	(void)cmds;
+	(void)all_tokens;
 	(void)i;
 	
 	cmd_list = NULL;
