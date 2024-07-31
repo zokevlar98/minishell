@@ -5,16 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/07/31 01:12:59 by zqouri           ###   ########.fr       */
-=======
-<<<<<<< HEAD
-/*   Updated: 2024/07/31 01:38:48 by mohmazou         ###   ########.fr       */
-=======
-/*   Updated: 2024/07/31 00:43:19 by zqouri           ###   ########.fr       */
->>>>>>> noting
->>>>>>> 5da5991... merge into exec
+/*   Created: 2024/07/31 02:26:51 by zqouri            #+#    #+#             */
+/*   Updated: 2024/07/31 02:42:24 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +34,20 @@ typedef struct s_env
 typedef struct s_cmd
 {
 	char			*ful_cmd;
-    int				pipe_line;
+    int				pipe_line;//indice of command 0 -> ....
     char			*cmd;
     char			**args;
-    char			*in_redir;
-    char			*out_redir;
+    char			**in_redir;
+    char			**out_redir;
     struct s_cmd	*next;
 }    t_cmd;
 
 // lib_utils_1.c
-<<<<<<< HEAD
+
 int ft_strcmp(const char *s1, const char *s2);
 
 // env_utils_1.c
-ft_env_list(t_env **env_list,char **env);
-=======
-<<<<<<< HEAD
+void    ft_env_list(t_env **env_list,char **env);
 
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
@@ -73,12 +63,13 @@ char	*ft_env_search(t_env *env_list, char *name);
 t_cmd	*ft_parse_line(char *line);
 int		ft_check_line(char *line);
 
-=======
+
 int     ft_strcmp(const char *s1, const char *s2);
 
 // env_utils_1.c
 void     ft_env_list(t_env **env_list,char **env);
->>>>>>> noting
->>>>>>> 5da5991... merge into exec
+
+
+void    ft_execut_cmd(t_cmd *cmd_list, t_env *env_list);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/07/31 02:09:46 by zqouri           ###   ########.fr        #
+#    Updated: 2024/07/31 02:31:05 by zqouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,11 @@ Flags			=	-Wall -Wextra -Werror -I ./includes
 
 READLINE_FLAGS	=	-lreadline \
 
-SRCS			=	srcs/main.c \
+SRCS			=	main.c \
 					\
-					lib_utils/lib_utilis_1.c \
-					
+					lib_utils/lib_utilis_1.c 	\
+					execution/exec.c			\
+					env_var/env_utils_1.c		\
 					
 
 
