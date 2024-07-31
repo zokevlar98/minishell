@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 00:43:14 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/07/31 01:12:51 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_env	*ft_env_new(char *env)
 	return (new);
 }
 
-void	ft_env_list(t_env **env_list,char **env)
+ft_env_list(t_env **env_list,char **env)
 {
 	int		i;
 	t_env	*new;
