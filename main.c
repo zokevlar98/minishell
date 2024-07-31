@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 02:44:58 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/07/31 05:11:05 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int main(int ac, char **av, char **env)
 	char *line;
 	t_env *env_list;
 
-	(void)env;
 	env_list = NULL;
 	ft_env_list(&env_list, env);
 	if (ac != 1 || av[1])

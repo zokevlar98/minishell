@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 02:26:51 by zqouri            #+#    #+#             */
-/*   Updated: 2024/07/31 02:42:24 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/07/31 05:08:16 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,18 @@
 
 # include <readline/readline.h>
 # include <readline/history.h>
-
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <libc.h>
+# include <sys/types.h>
+# include <errno.h>
+# include <dirent.h>
+# include <limits.h>
+# include <sys/wait.h>
+# include <stddef.h>
+
+//define
+# define NUM_BUILTINS 8
 
 // environnement variables linked list
 typedef struct s_env
