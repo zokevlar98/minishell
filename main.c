@@ -6,11 +6,11 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 05:36:15 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/01 04:45:00 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 int main(int ac, char **av, char **env)
 {
@@ -27,7 +27,7 @@ int main(int ac, char **av, char **env)
 	}
 	while (1)
 	{
-		line = readline("miishell$>  ");
+		line = readline("minishell$>  ");
 		if (!line)
 			break;
 		if (line[0] != '\0')

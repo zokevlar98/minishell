@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 02:26:51 by zqouri            #+#    #+#             */
-/*   Updated: 2024/07/31 06:59:57 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/01 04:49:07 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ typedef struct s_cmd
 int     ft_strcmp(const char *s1, const char *s2);
 int     ft_strncmp(char *s1, char *s2, size_t size);
 char    *lower_case(char *str);
-int ft_check_env(t_cmd *cmd_list);
+int     ft_check_env(t_cmd *cmd_list);
+void    ft_putstr_fd(char *str, int fd);
+void    ft_error(char *str);
 
 // env_utils_1.c
 void    ft_env_list(t_env **env_list,char **env);
@@ -78,7 +80,7 @@ int     ft_strcmp(const char *s1, const char *s2);
 // env_utils_1.c
 void     ft_env_list(t_env **env_list,char **env);
 
-
+//execution
 void    ft_execut_cmd(t_cmd *cmd_list, t_env *env_list);
-
+int     is_builtin(t_cmd *cmd_list);
 #endif

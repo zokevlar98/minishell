@@ -6,7 +6,7 @@
 #    By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/07/31 05:51:31 by zqouri           ###   ########.fr        #
+#    Updated: 2024/08/01 04:51:36 by zqouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,12 @@ SRCS			=	main.c \
 					\
 					lib_utils/lib_utilis_1.c 		\
 					lib_utils/lib_utilis_exec.c 	\
+					lib_utils/ft_error.c 			\
+					lib_utils/ft_putstr_fd.c		\
 					execution/exec.c				\
 					env_var/env_utils_1.c			\
-					
-					
-
+					execution/exec_utils_1.c		\
+					# builtins/builtin_cmd.c			\
 
 OBJS		=	$(SRCS:.c=.o)
 
