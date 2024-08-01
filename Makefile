@@ -6,7 +6,7 @@
 #    By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/07/31 23:47:03 by mohmazou         ###   ########.fr        #
+#    Updated: 2024/08/01 04:22:13 by mohmazou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS			=	main.c \
 					env_var/env_utils_1.c \
 					parsing/parse.c \
 					parsing/check_syntax.c \
+					parsing/add_space.c \
 					tokenization/tokenize.c \
 					
 					

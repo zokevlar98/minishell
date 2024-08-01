@@ -6,11 +6,18 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 06:05:48 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/01 03:43:52 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+
+void	ft_execut_cmd(t_cmd *cmd_list, t_env *env_list)
+{
+	(void)cmd_list;
+	// printf("cmd : %s\n", cmd_list->cmd);
+	printf("env USER : %s\n", ft_env_search(env_list, "USER"));
+}
 
 int main(int ac, char **av, char **env)
 {
@@ -41,7 +48,12 @@ int main(int ac, char **av, char **env)
 		else
 			continue;
 		cmd_list = ft_parse_line(line);
-		// printf("%s\n", line);
+		if (!cmd_list)
+		{
+			free(line);
+			continue;
+		}
+		
 		// ft_execut_cmd(cmd_list, env_list);
 		free(line);
 	}
