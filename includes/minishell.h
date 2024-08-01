@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 06:51:23 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/01 02:07:24 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,19 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strchr(const char *s, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
+// lib_utils_2.c
+char	*ft_strtrim(char *s1, char *set);
 // env_utils_1.c
 void	ft_env_list(t_env **env_list,char **env);
 char	*ft_env_search(t_env *env_list, char *name);
 
 // parse.c
 t_cmd	*ft_parse_line(char *line);
-int		ft_check_line(char *line);
+
+// check_syntax.c
+int		ft_check_syntax(char *line);
+int		ft_check_quote(char *line);
+int		ft_check_direction(char *line, int *single_quote, int *double_quote, char direction, char opposite);
 
 // tokenize.c
 char	**tokenizing(char *line);

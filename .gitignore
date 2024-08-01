@@ -1,1 +1,3 @@
-./z_ignored
+z_ignored/*
+
+.vscode/

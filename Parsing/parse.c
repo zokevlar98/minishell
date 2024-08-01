@@ -6,57 +6,52 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:28:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 07:11:23 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/01 00:25:48 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		ft_check_line(char *line)
+void	ft_add_space(char **line)
 {
-	int	quote;
-	int	dquote;
-	int	bracket;
-	int	i;
-
-	quote = 0;
-	dquote = 0;
-	bracket = 0;
+	int		i;
+	char	*new_line;
+	int		j;
+	
 	i = 0;
-	while (line[i])
+	j = 0;
+	(void)line;
+	(void)new_line;
+	while ((*line)[i])
 	{
-		if (line[i] == '\'' && dquote == 0)
-			quote = !quote;
-		if (line[i] == '\"' && quote == 0)
-			dquote = !dquote;
-		if (line[i] == '(' && quote == 0 && dquote == 0)
-			bracket++;
-		if (line[i] == ')' && quote == 0 && dquote == 0)
-			bracket--;
+		if ((*line)[i] == '(' || (*line)[i] == ')' || (*line)[i] == ';' || (*line)[i] == '|')
+			j += 2;
 		i++;
 	}
-
-	if (quote || dquote || bracket)
-	{
-		printf("Error: syntax error\n");
-		return (0);
-	}
-	return (1);
+	j += i;
 }
+
 
 t_cmd	*ft_parse_line(char *line)
 {
 	t_cmd	*cmd_list;
-	t_cmd	*new_cmd;
 	char	**all_tokens;
 
 	
 	cmd_list = NULL;
-	new_cmd = NULL;
-	if (ft_check_line(line) == 0)
+	//check line
+	if (ft_check_syntax(line) == 0)
+	{
+		printf("syntax error\n");
 		return (NULL);
-	all_tokens = tokenizing(line);
+	}
+
+	printf("syntax ok : $$ %s\n", line);
+	//add extra space 
+	// ft_add_space(&line);
 	
+	//tokenizing
+	all_tokens = tokenizing(line);
 	//affich tokens
 		// for (int i = 0; all_tokens[i]; i++)
 		// {
