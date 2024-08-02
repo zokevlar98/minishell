@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/02 04:13:27 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/02 07:46:18 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_env
 // command linked list
 typedef struct s_cmd
 {
-	char			*ful_cmd;
+	// char			*ful_cmd;
     int				pipe_line;
     char			*cmd;
     char			**args;
@@ -53,6 +53,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 // lib_utils_2.c
+char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char *s1, char *set);
 // env_utils_1.c
 void	ft_env_list(t_env **env_list,char **env);
