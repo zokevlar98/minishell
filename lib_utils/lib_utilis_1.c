@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:22:31 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 06:05:03 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/02 20:13:28 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,23 @@ int ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
 
-char *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	while (*s)
+	int		i;
+	char	*p;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	p = (char *)s;
+	while (p[i] != '\0')
 	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
+		if (p[i] == (char)c)
+			return (p + i);
+		i++;
 	}
+	if (p[i] == (char)c)
+		return (p + i);
 	return (NULL);
 }
 

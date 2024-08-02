@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib_utilis_exec.c                                  :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 05:40:40 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/02 20:13:23 by zqouri           ###   ########.fr       */
+/*   Created: 2024/08/02 20:14:17 by zqouri            #+#    #+#             */
+/*   Updated: 2024/08/02 20:14:26 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char    *lower_case(char *str)
+char	*ft_strjoin(char *s1, char *s2)
 {
-    int i;
+	size_t	i;
+	size_t	j;
+	char	*dest;
+	size_t	size;
 
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] >= 'A' && str[i] <= 'Z')
-            str[i] += 32;
-        i++;
-    }
-    return (str);
-}
-
-int ft_strncmp(char *s1, char *s2, size_t size)
-{
-    size_t i;
-
-    i = 0;
-    while (i < size - 1 && s1[i] && s2[i] && s1[i] == s2[i])
-        i++;
-    return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	if (!s1 || !s2)
+		return (NULL);
+	i = 0;
+	j = 0;
+	size = ft_strlen(s1) + ft_strlen(s2);
+	dest = (char *)malloc(sizeof(char) * (size + 1));
+	if (!dest)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+		dest[i++] = s2[j++];
+	dest[i] = '\0';
+	return (dest);
 }
