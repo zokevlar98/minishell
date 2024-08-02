@@ -1,3 +1,4 @@
-z_ignored/*
-
+tmp/
 .vscode/
+minishell_db.dSYM/*
+minishell_db

@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/01 04:29:31 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/01 06:47:21 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_cmd	*ft_parse_line(char *line);
 int		ft_check_syntax(char *line);
 int		ft_check_quote(char *line);
 int		ft_check_direction(char *line, int *single_quote, int *double_quote, char direction, char opposite);
-int		in_quotes(char line_i, int *single_quote, int *double_quote);
+void	in_quotes(char line_i, int *single_quote, int *double_quote);
 
 // add_space.c
 char	*ft_add_space(char *line, int i);

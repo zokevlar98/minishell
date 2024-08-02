@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/01 03:43:52 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/01 08:20:31 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ int main(int ac, char **av, char **env)
 	// main loop
 	while (1)
 	{
-		line = readline("miishell$>  ");
+		// if (av[1])
+		// 	line = ft_strdup("echo \"Hello World\"");
+		// else
+			line = readline("miishell$>  ");
 		if (!line)
 			break;
 		if (line[0] != '\0')
