@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/01 04:47:53 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/02 16:15:46 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,3 +55,22 @@ int is_builtin(t_cmd *cmd_list)
 //     }
 //     return (0);
 // }
+
+void	ft_execut_pipe(t_cmd *cmd_list, t_env *env_list)
+{
+	int		fd[2];
+	pid_t	pid;
+
+	if (pipe(fd) == -1)
+		ft_error("pipe failed\n");
+	pid = fork();
+	if (pid == 0)
+	{
+		
+	}
+}
+
+void	ft_execut_redir(t_cmd *cmd_list, t_env *env_list)
+{
+// 4 case reduraction	
+}

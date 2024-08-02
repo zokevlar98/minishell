@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/01 04:50:08 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/02 13:04:35 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,32 @@
 //     //execute command
 // }
 
+int		serch_for_pipe(t_cmd *cmd_list)
+{
+	while (cmd_list != NULL)
+	{
+		if (cmd_list->pipe_line >= 1)
+			return (1);
+		cmd_list = cmd_list->next;
+	}
+	return (0);
+}
+
 void    ft_execut_cmd(t_cmd *cmd_list, t_env *env_list)
 {
-    (void)env_list;
-    //if we have env
-    // if (ft_check_env(cmd_list))
-    // {
-    //      printf("we have env\n");
-    //     // ft_check_env(cmd_list);
-    // }
-    if (is_builtin(cmd_list))
-    {
-        // printf("we have builtin\n");
-        // ft_execut_builtin(cmd_list, env_list);
-    }
-    // else
-    //     ft_execut_cmd(cmd_list, env_list);
+	t_cmd	*tmp;
 
-    // printf("%s\n", ft_env_search(env_list, "USER"));
+	tmp = cmd_list;
+	while (cmd_list)
+	{
+		if (serch_for_pipe(cmd_list))
+			ft_execut_pipe(cmd_list, env_list);
+		if (cmd_list->in_redir != NULL || cmd_list->out_redir != NULL)
+			ft_execut_redir(cmd_list, env_list);
+		if (is_builtin(cmd_list))
+			ft_execut_builtin(cmd_list, env_list);
+		else
+			ft_execut_cmd(cmd_list, env_list);
+		cmd_list = cmd_list->next;
+	}
 }

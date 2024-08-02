@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 02:26:51 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/01 04:49:07 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/02 16:26:37 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 
 //define
 # define NUM_BUILTINS 8 
+# define STD_OUT 1
+# define STD_IN 0
+//define tasks
+# define EXEC 1
 
 // environnement variables linked list
 typedef struct s_env
@@ -47,6 +51,7 @@ typedef struct s_cmd
     char			**in_redir;
     char			**out_redir;
     struct s_cmd	*next;
+	// i need to add prev to make it double linked list
 }    t_cmd;
 
 // lib_utils
