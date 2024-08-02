@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 09:27:43 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/01 08:03:18 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/02 04:06:10 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ int		ft_check_syntax(char *line)
 		return (0);
 	if (!ft_check_direction(line, &single_quote, &double_quote , '>', '<'))
 		return (0);
-	// if (!ft_check_direction(line, &single_quote, &double_quote , '<', '>'))
-	// 	return (0);
+	if (!ft_check_direction(line, &single_quote, &double_quote , '<', '>'))
+		return (0);
 	
 	return (1);
 }

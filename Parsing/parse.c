@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:28:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/01 05:42:12 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/02 04:20:06 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_cmd	*ft_parse_line(char *line)
 	t_cmd	*cmd_list;
 	char	**all_tokens;
 	int		i;
+	char	*new_line;
 	
 
 	(void)all_tokens;
@@ -32,15 +33,21 @@ t_cmd	*ft_parse_line(char *line)
 		return (NULL);
 	}
 	//add extra space 
-	line = ft_add_space(line, i);
+	new_line = ft_add_space(line, i);
 	
 	
 	//tokenizing
-	all_tokens = tokenizing(line);
+	all_tokens = tokenizing(new_line);
+	if (!ft_check_tokens(all_tokens))
+	{
+		printf("syntax error : %s\n", line);
+		return (NULL);
+	}
 	//affich tokens
-		for (int i = 0; all_tokens[i]; i++)
-		{
-			printf("token[%d] %s\n",i , all_tokens[i]);
-		}
+		// for (int i = 0; all_tokens[i]; i++)
+		// {
+		// 	printf("token[%d] --%s--\n",i , all_tokens[i]);
+		// }
+	
 	return ((t_cmd *)1);
 }

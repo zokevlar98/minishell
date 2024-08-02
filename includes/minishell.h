@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/01 06:47:21 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/02 04:13:27 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char	*ft_add_space(char *line, int i);
 // tokenize.c
 char	**tokenizing(char *line);
 void	**tokenize_line(char *line, char ***tokens, int length,int *in_double_quote, int *in_single_quote, int *in_parentheses);
+int		ft_check_tokens(char **tokens);
 
 
 #endif

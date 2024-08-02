@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 06:02:09 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 07:08:45 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/02 04:14:31 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ int		is_whitespace(char c)
 	return (c == ' ' || c == '\t' || c == '\n');
 }
 
+int	ft_check_tokens(char **tokens)
+{
+	int i;
+
+	i = 0;
+	while (tokens[i])
+	{
+		if (tokens[i][0] == '|' && (!tokens[i + 1] || tokens[i + 1][0] == '|'))
+			return (0);
+		i ++;
+	}
+	
+	return (1);
+}
 
 void	ft_toggle_flags(char c, int *in_double_quote, int *in_single_quote, int *in_parentheses)
 {
