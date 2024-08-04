@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/04 02:55:30 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/04 06:17:14 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include <readline/readline.h>
 # include <readline/history.h>
+
 
 # include <stdio.h>
 # include <unistd.h>
@@ -43,6 +44,11 @@ typedef struct s_cmd
     char			**out_redir;
     struct s_cmd	*next;
 }    t_cmd;
+
+// free_all.c
+void	*ft_malloc(size_t size);
+void	ft_free_all(void);
+
 
 // lib_utils_1.c
 
