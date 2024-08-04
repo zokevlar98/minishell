@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/02 07:46:18 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/04 01:53:58 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ char	*ft_env_search(t_env *env_list, char *name);
 
 // parse.c
 t_cmd	*ft_parse_line(char *line);
+
+// cmd_list.c
+void	ft_fill_cmd_list(t_cmd **cmd_list, char **all_tokens, int pipe);
 
 // check_syntax.c
 int		ft_check_syntax(char *line);
