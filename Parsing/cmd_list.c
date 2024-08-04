@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 23:10:43 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/04 02:46:22 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/04 02:54:58 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ void	ft_fill_cmd_list(t_cmd **cmd_list, char **all_tokens, int pipe)
 		i++;
 	}
 	
-	affich_cmd_list(*cmd_list);
 	// cmd_list->next = NULL;
 	// return (cmd_list);
 }

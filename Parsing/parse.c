@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:28:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/04 01:48:44 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/04 02:55:36 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,9 @@ t_cmd	*ft_parse_line(char *line)
 	}
 	all_tokens = re_tokenizing(all_tokens);
 	ft_fill_cmd_list(&cmd_list, all_tokens, nbr_pipe(all_tokens));
-	//affich tokens
-		// for (int i = 0; all_tokens[i]; i++)
-		// {
-		// 	printf("token[%d] --%s--\n",i , all_tokens[i]);
-		// }
 	
-	// affich cmd_list
+	affich_cmd_list(cmd_list);
+	
 
 	
 	
