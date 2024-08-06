@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 05:39:39 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/06 06:30:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 08:55:19 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	ft_alloc_add_back(t_alloc **alst, t_alloc *new)
 void	*ft_malloc(size_t size, int free)
 {
 	static t_alloc	*alloc;
-	void	*ptr;
-	t_alloc	*new_ptr;
+	void			*ptr;
+	t_alloc			*new_ptr;
 
 	if (free)
 		return (free_all(alloc));

@@ -6,17 +6,15 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/06 06:23:11 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 08:21:37 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <readline/readline.h>
 # include <readline/history.h>
-
 
 # include <stdio.h>
 # include <unistd.h>
@@ -28,29 +26,29 @@
 // allocation struct
 typedef struct s_alloc
 {
-	void	*ptr;
+	void			*ptr;
 	struct s_alloc	*next;
 }	t_alloc;
 
 // environnement variables linked list
 typedef struct s_env
 {
-    char	*name;
-    char	*value;
-    struct s_env	*next;
+	char			*name;
+	char			*value;
+	struct s_env	*next;
 }	t_env;
 
 // command linked list
 typedef struct s_cmd
 {
 	// char			*ful_cmd;
-    int				pipe_line;
-    char			*cmd;
-    char			**args;
-    char			**in_redir;
-    char			**out_redir;
-    struct s_cmd	*next;
-}    t_cmd;
+	int				pipe_line;
+	char			*cmd;
+	char			**args;
+	char			**in_redir;
+	char			**out_redir;
+	struct s_cmd	*next;
+}	t_cmd;
 
 // free_all.c
 /*
@@ -58,7 +56,6 @@ taking the size to allocate,
 and takes a boolean to free the allocated memory 1 to free all, 0 to not free
 */
 void	*ft_malloc(size_t size, int free);
-
 
 // lib_utils_1.c
 
@@ -72,7 +69,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char *s1, char *set);
 // env_utils_1.c
-void	ft_env_list(t_env **env_list,char **env);
+void	ft_env_list(t_env **env_list, char **env);
 char	*ft_env_search(t_env *env_list, char *name);
 
 // parse.c
@@ -93,8 +90,7 @@ char	*ft_add_space(char *line, int i);
 
 // tokenize.c
 char	**tokenizing(char *line);
-void	**tokenize_line(char *line, char ***tokens, int length,int *in_double_quote, int *in_single_quote, int *in_parentheses);
+void	**tokenize_line(char *line, char ***tokens, int length, int *in_double_quote, int *in_single_quote, int *in_parentheses);
 int		ft_check_tokens(char **tokens);
-
 
 #endif

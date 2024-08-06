@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/06 06:44:37 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 08:11:51 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	start_loop(t_env *env_list)
 		if (line[0] != '\0')
 			add_history(line);
 		else
+		{
+			free(line);
 			continue ;
+		}
 		cmd_list = ft_parse_line(line);
 		if (!cmd_list)
 		{

@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/06 06:42:07 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 08:15:53 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	*ft_env_search(t_env *env_list, char *name)
 	}
 	return (NULL);
 }
-
 
 static t_env	*ft_env_new(char *env)
 {
@@ -57,11 +56,11 @@ static void	ft_env_add_back(t_env **env_list, t_env *new)
 	tmp->next = new;
 }
 
-void	ft_env_list(t_env **env_list,char **env)
+void	ft_env_list(t_env **env_list, char **env)
 {
 	int		i;
 	t_env	*new;
-	
+
 	i = 0;
 	new = NULL;
 	while (env[i])

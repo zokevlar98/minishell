@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 23:46:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/06 06:42:39 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 08:25:22 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char			*dest;
 	unsigned int	i;
+	int				lenght;
 
 	i = 0;
-	dest = (char*)ft_malloc(sizeof(*dest) * (ft_strlen(s1) + ft_strlen(s2) + 1), 0);
+	lenght = ft_strlen(s1) + ft_strlen(s2) + 1;
+	dest = (char *)ft_malloc(sizeof(*dest) * lenght, 0);
 	if (dest == NULL)
 		return (NULL);
 	while (*s1 != '\0')
