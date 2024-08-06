@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:22:31 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 00:38:27 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 06:42:29 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char *ft_strdup(const char *s)
 	char	*dup;
 	size_t	i;
 
-	dup = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	dup = ft_malloc(sizeof(char) * (ft_strlen(s) + 1), 0);
 	if (!dup)
 		return (NULL);
 	i = 0;
@@ -70,7 +70,7 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start > ft_strlen(s))
 		return (ft_strdup("\0"));
-	sub = malloc(sizeof(char) * (len + 1));
+	sub = ft_malloc(sizeof(char) * (len + 1), 0);
 	if (!sub)
 		return (NULL);
 	i = 0;

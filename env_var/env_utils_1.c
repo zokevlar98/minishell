@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/04 06:34:50 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 06:42:07 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_env	*ft_env_new(char *env)
 	t_env	*new;
 	char	*equal;
 
-	new = malloc(sizeof(t_env));
+	new = ft_malloc(sizeof(t_env), 0);
 	if (!new)
 		return (NULL);
 	equal = ft_strchr(env, '=');

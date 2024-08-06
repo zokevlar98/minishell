@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 06:02:09 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/02 04:14:31 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 06:43:51 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	**tokenizing(char *line)
 	in_double_quote = 0;
 	in_single_quote = 0;
 	in_parentheses = 0;
-	tokens = (char **)malloc(sizeof(char *) * MAX_TOKENS);
+	tokens = (char **)ft_malloc(sizeof(char *) * MAX_TOKENS, 0);
 	
 	tokenize_line(line,&tokens , ft_strlen(line),&in_double_quote, &in_single_quote, &in_parentheses);
 	

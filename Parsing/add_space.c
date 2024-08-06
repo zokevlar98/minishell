@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:21:11 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/01 05:01:35 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 06:42:48 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_add_space(char *line, int i)
 	int		single_quote;
 	int		double_quote;
 
-	new_line = (char *)malloc(new_size(line) + 1);
+	new_line = (char *)ft_malloc(new_size(line) + 1, 0);
 	j = 0;
 	single_quote = 0;
 	double_quote = 0;

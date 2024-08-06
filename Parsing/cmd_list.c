@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 23:10:43 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/04 02:54:58 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 06:43:26 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_cmd	*ft_new_cmd(int pipe)
 {
 	t_cmd	*new_cmd;
 
-	new_cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	new_cmd = (t_cmd *)ft_malloc(sizeof(t_cmd), 0);
 	if (!new_cmd)
 		return (NULL);
 	new_cmd->pipe_line = pipe;
@@ -124,19 +124,19 @@ void	ft_fill_cmd_list(t_cmd **cmd_list, char **all_tokens, int pipe)
 			else if (all_tokens[j][0] == '<')
 			{
 				if (!new_cmd->in_redir)
-					new_cmd->in_redir = (char **)malloc(sizeof(char *) * MAX_TOKENS);
+					new_cmd->in_redir = (char **)ft_malloc(sizeof(char *) * MAX_TOKENS, 0);
 				new_cmd->in_redir = add_to_array(new_cmd->in_redir, all_tokens[j]);
 			}
 			else if (all_tokens[j][0] == '>')
 			{
 				if (!new_cmd->out_redir) 
-					new_cmd->out_redir = (char **)malloc(sizeof(char *) * MAX_TOKENS);
+					new_cmd->out_redir = (char **)ft_malloc(sizeof(char *) * MAX_TOKENS, 0);
 				new_cmd->out_redir = add_to_array(new_cmd->out_redir, all_tokens[j]);
 			}
 			else
 			{
 				if (!new_cmd->args)
-					new_cmd->args = (char **)malloc(sizeof(char *) * MAX_TOKENS);
+					new_cmd->args = (char **)ft_malloc(sizeof(char *) * MAX_TOKENS, 0);
 				new_cmd->args = add_to_array(new_cmd->args, all_tokens[j]);
 			}
 			j ++;

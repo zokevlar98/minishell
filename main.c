@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/06 06:35:14 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 06:44:37 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	}
 	start_loop(env_list);
+	ft_malloc(0, 1);
 	return (0);
 }

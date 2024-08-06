@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:28:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/04 04:51:39 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 06:43:46 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**re_tokenizing(char **all_tokens)
 	(void)all_tokens;
 	i = 0;
 	j = 0;
-	new_tokens = malloc(sizeof(char *) * MAX_TOKENS);
+	new_tokens = ft_malloc(sizeof(char *) * MAX_TOKENS, 0);
 	if (!new_tokens)
 		return (NULL);
 	while (all_tokens[i])
