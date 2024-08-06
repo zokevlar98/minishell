@@ -6,48 +6,71 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 05:39:39 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/04 06:25:51 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 06:30:19 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-#define MAX_ALLOCATIONS 10240
-
-// Global array to store allocated memory addresses
-void *allocated_memory[MAX_ALLOCATIONS];
-// int allocation_count = 0;
-
-// ft_malloc function to allocate memory and store the address
-void* ft_malloc(size_t size)
+static void	*free_all(t_alloc *alloc)
 {
-	static int	allocation_count;
-		
-    if (allocation_count >= MAX_ALLOCATIONS) {
-        fprintf(stderr, "Maximum number of allocations reached.\n");
-        return NULL;
-    }
+	t_alloc	*tmp;
 
-    void *ptr = malloc(size);
-    if (ptr) {
-        allocated_memory[allocation_count++] = ptr;
-    } else {
-        fprintf(stderr, "Memory allocation failed.\n");
-    }
-    return ptr;
+	while (alloc)
+	{
+		tmp = alloc;
+		alloc = alloc->next;
+		free(tmp->ptr);
+		free(tmp);
+	}
+	return (NULL);
 }
 
-// ft_free_all function to free all allocated memory
-void ft_free_all() {
-	int	i;
-	
-	i = 0;
-	while (allocated_memory[i])
+t_alloc	*ft_new_alloc(void *ptr)
+{
+	t_alloc	*new;
+
+	new = malloc(sizeof(t_alloc));
+	if (!new)
 	{
-		free(allocated_memory[i]);
-		allocated_memory[i] = NULL; // Clear the pointer
-		i++;
+		printf("Malloc failed\n");
+		exit(1);
 	}
-	printf("free_all\n");
-	// allocation_count = 0;
+	new->ptr = ptr;
+	new->next = NULL;
+	return (new);
+}
+
+void	ft_alloc_add_back(t_alloc **alst, t_alloc *new)
+{
+	t_alloc	*tmp;
+
+	if (!*alst)
+	{
+		*alst = new;
+		return ;
+	}
+	tmp = *alst;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+}
+
+void	*ft_malloc(size_t size, int free)
+{
+	static t_alloc	*alloc;
+	void	*ptr;
+	t_alloc	*new_ptr;
+
+	if (free)
+		return (free_all(alloc));
+	ptr = malloc(size);
+	if (!ptr)
+	{
+		printf("Malloc failed\n");
+		exit(1);
+	}
+	new_ptr = ft_new_alloc(ptr);
+	ft_alloc_add_back(&alloc, new_ptr);
+	return (ptr);
 }

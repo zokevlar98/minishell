@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/04 06:17:14 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 06:23:11 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@
 # include <libc.h>
 
 # define MAX_TOKENS 100
+
+// allocation struct
+typedef struct s_alloc
+{
+	void	*ptr;
+	struct s_alloc	*next;
+}	t_alloc;
 
 // environnement variables linked list
 typedef struct s_env
@@ -46,8 +53,11 @@ typedef struct s_cmd
 }    t_cmd;
 
 // free_all.c
-void	*ft_malloc(size_t size);
-void	ft_free_all(void);
+/*
+taking the size to allocate,
+and takes a boolean to free the allocated memory 1 to free all, 0 to not free
+*/
+void	*ft_malloc(size_t size, int free);
 
 
 // lib_utils_1.c

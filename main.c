@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/04 07:52:13 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/06 06:35:14 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,15 @@
 
 void	ft_execut_cmd(t_cmd *cmd_list, t_env *env_list)
 {
+	if (ft_strcmp(cmd_list->cmd, "exit") == 0)
+	{
+		printf("exit\n");
+		exit(0);
+	}
 	affich_cmd_list(cmd_list);
-	printf("env USER : %s\n", ft_env_search(env_list, "USER"));
+	(void)env_list;
+	// printf("env USER : %s\n", ft_env_search(env_list, "USER"));
+	
 }
 
 void	start_loop(t_env *env_list)
@@ -26,8 +33,6 @@ void	start_loop(t_env *env_list)
 	while (1)
 	{
 		line = readline("minishell$>  ");
-		if (!line && ft_strcmp(line, "exit") == 0 && line[0] != '\0')
-			break ;
 		if (line[0] != '\0')
 			add_history(line);
 		else
@@ -43,10 +48,16 @@ void	start_loop(t_env *env_list)
 	}
 }
 
+void ft_leaks(void)
+{
+	system("leaks minishell");
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_env	*env_list;
 
+	atexit(ft_leaks);
 	env_list = NULL;
 	ft_env_list(&env_list, env);
 	if (ac != 1 || av[1])
