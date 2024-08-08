@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/08 03:43:17 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/08 04:09:01 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,8 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env *env_list)
 	// {
 		if (serch_for_pipe(tmp))
 			ft_execut_pipe(tmp, env_list);
-		// if (cmd_list->in_redir != NULL || cmd_list->out_redir != NULL)
-		// 	ft_execut_redir(cmd_list, env_list);
-		// if (is_builtin(cmd_list))
-		// 	ft_execut_builtin(cmd_list, env_list);
-		// else
-		// 	ft_execut(cmd_list, env_list);
-		// cmd_list = cmd_list->next;
+		if (is_builtin(tmp))
+			ft_builtin(tmp);
 		// tmp = tmp->next;
 	// }
 }

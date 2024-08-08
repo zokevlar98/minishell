@@ -6,7 +6,7 @@
 #    By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/08/08 03:34:52 by zqouri           ###   ########.fr        #
+#    Updated: 2024/08/08 04:33:28 by zqouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS			=	main.c \
 					lib_utils/ft_split_exec.c			\
 					lib_utils/ft_strjoin.c				\
 					lib_utils/lib_utilis_1.c 			\
+					lib_utils/lib_utilis_2.c 			\
 					lib_utils/lib_utilis_exec.c 		\
 					lib_utils/ft_split_up.c 			\
 					execution/exec_utils_1.c			\
@@ -37,7 +38,8 @@ SRCS			=	main.c \
 					execution/test/ft_lstlast.c			\
 					execution/test/ft_lstadd_back.c		\
 					execution/test/ft_init.c			\
-					# builtins/builtin_cmd.c			\
+					builtins/builtin_cmd.c				\
+					builtins/builtin_utils.c			\
 
 OBJS		=	$(SRCS:.c=.o)
 
