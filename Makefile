@@ -6,7 +6,7 @@
 #    By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/08/04 06:11:28 by mohmazou         ###   ########.fr        #
+#    Updated: 2024/08/08 17:35:18 by mohmazou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS			=	main.c \
 					parsing/parse.c \
 					parsing/cmd_list.c \
 					parsing/check_syntax.c \
+					Parsing/check_syntax_red.c \
 					parsing/add_space.c \
 					tokenization/tokenize.c \
 					free_funcs/free_all.c \

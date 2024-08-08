@@ -6,18 +6,16 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:28:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/08 08:46:47 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:09:35 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-
-
-int		nbr_pipe(char **tokens)
+int	nbr_pipe(char **tokens)
 {
-	int i;
-	int pipe;
+	int	i;
+	int	pipe;
 
 	i = 0;
 	pipe = 0;
@@ -30,13 +28,12 @@ int		nbr_pipe(char **tokens)
 	return (pipe);
 }
 
-
 char	**re_tokenizing(char **all_tokens)
 {
 	char	**new_tokens;
 	int		i;
 	int		j;
-	
+
 	(void)all_tokens;
 	i = 0;
 	j = 0;
@@ -45,7 +42,8 @@ char	**re_tokenizing(char **all_tokens)
 		return (NULL);
 	while (all_tokens[i])
 	{
-		if (ft_strcmp(all_tokens[i], ">>") == 0 || ft_strcmp(all_tokens[i], "<<") == 0 || ft_strcmp(all_tokens[i], ">") == 0 || ft_strcmp(all_tokens[i], "<") == 0)
+		if (ft_strcmp(all_tokens[i], ">>") == 0 || ft_strcmp(all_tokens[i], "<<") == 0
+			|| ft_strcmp(all_tokens[i], ">") == 0 || ft_strcmp(all_tokens[i], "<") == 0)
 		{
 			new_tokens[j] = ft_strjoin(all_tokens[i], all_tokens[i + 1]);
 			i ++;

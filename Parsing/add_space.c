@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:21:11 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/08 08:49:50 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/08 17:27:31 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int	new_size(char *line)
 // 	}
 // }
 
-void ft_add_space_completing(char *line, char *new_line, int *s_q, int *d_q)
+void	ft_add_space_completing(char *line, char *new_line, int *s_q, int *d_q)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	j = 0;
 	while (line[i])
@@ -54,7 +54,8 @@ void ft_add_space_completing(char *line, char *new_line, int *s_q, int *d_q)
 		in_quotes(line[i], s_q, d_q);
 		if ((line[i] == '<' || line[i] == '>') && !(*s_q) && !(*d_q))
 		{
-			if (i && line[i - 1] != ' ' && line[i - 1] != '<' && line[i - 1] != '>')
+			if (i && line[i - 1] != ' '
+				&& line[i - 1] != '<' && line[i - 1] != '>')
 				new_line[j++] = ' ';
 			new_line[j++] = line[i];
 		}

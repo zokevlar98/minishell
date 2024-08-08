@@ -6,13 +6,13 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 23:10:43 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/06 06:43:26 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/08 17:45:06 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void affich_cmd_list(t_cmd *cmd_list)
+void	affich_cmd_list(t_cmd *cmd_list)
 {
 	t_cmd *tmp;
 	int i;
@@ -23,8 +23,6 @@ void affich_cmd_list(t_cmd *cmd_list)
 	while (tmp)
 	{
 		printf("=====================================\n");
-		
-		
 		printf("cmd [%d]\t: %s\n", i, tmp->cmd);
 		printf("pipe\t: %d\n", tmp->pipe_line);
 		j = 0;
@@ -49,8 +47,6 @@ void affich_cmd_list(t_cmd *cmd_list)
 			j++;
 		}
 		printf("next\t: %p\n", tmp->next);
-
-		
 		printf("=====================================\n");
 		tmp = tmp->next;
 		i++;
@@ -90,23 +86,23 @@ void	ft_add_cmd(t_cmd **cmd_list, t_cmd *new_cmd)
 	}
 }
 
-char **add_to_array(char **array, char *str) {
-    int count = 0;
-	
-    while (array && array[count])
+char	**add_to_array(char **array, char *str)
+{
+	int	count;
+
+	count = 0;
+	while (array && array[count])
 		count++;
-
-    array[count] = strdup(str);
-    array[count + 1] = NULL;
-
-    return array;
+	array[count] = strdup(str);
+	array[count + 1] = NULL;
+	return (array);
 }
 
 void	ft_fill_cmd_list(t_cmd **cmd_list, char **all_tokens, int pipe)
 {
 	t_cmd	*new_cmd;
 	int		i;
-	int 	j;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -129,7 +125,7 @@ void	ft_fill_cmd_list(t_cmd **cmd_list, char **all_tokens, int pipe)
 			}
 			else if (all_tokens[j][0] == '>')
 			{
-				if (!new_cmd->out_redir) 
+				if (!new_cmd->out_redir)
 					new_cmd->out_redir = (char **)ft_malloc(sizeof(char *) * MAX_TOKENS, 0);
 				new_cmd->out_redir = add_to_array(new_cmd->out_redir, all_tokens[j]);
 			}
@@ -146,8 +142,4 @@ void	ft_fill_cmd_list(t_cmd **cmd_list, char **all_tokens, int pipe)
 		j++;
 		i++;
 	}
-	
-	// cmd_list->next = NULL;
-	// return (cmd_list);
 }
-
