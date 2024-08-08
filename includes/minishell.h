@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/06 08:21:37 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/08 08:46:51 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		ft_check_direction(char *line, int *single_quote, int *double_quote, char d
 void	in_quotes(char line_i, int *single_quote, int *double_quote);
 
 // add_space.c
-char	*ft_add_space(char *line, int i);
+char	*ft_add_space(char *line);
 
 // tokenize.c
 char	**tokenizing(char *line);
