@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 02:26:51 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/02 21:01:58 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/08 02:34:26 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,10 @@ void	ft_execut(t_cmd *cmd_list, t_env *env_list);
 char	**ft_get_envp(t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
 int		fork1(void);
-
+//test
+t_cmd	*ft_lstnew(void);
+t_cmd	*ft_lstlast(t_cmd *lst);
+void	ft_lstadd_back(t_cmd **lst, t_cmd *new);
+void	ft_init(t_cmd *cmd_list);
+void	ft_init_second(t_cmd *cmd_list);
 #endif

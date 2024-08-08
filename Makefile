@@ -6,7 +6,7 @@
 #    By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/08/02 21:00:47 by zqouri           ###   ########.fr        #
+#    Updated: 2024/08/08 02:38:34 by zqouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,17 +22,20 @@ READLINE_FLAGS	=	-lreadline \
 
 SRCS			=	main.c \
 					\
-					lib_utils/lib_utilis_1.c 		\
-					lib_utils/lib_utilis_exec.c 	\
-					lib_utils/ft_error.c 			\
-					lib_utils/ft_putstr_fd.c		\
-					lib_utils/ft_split_exec.c		\
-					lib_utils/ft_strjoin.c			\
-					execution/exec.c				\
-					execution/exec_utils_1.c		\
-					execution/exec_utils_2.c		\
-					env_var/env_utils_1.c			\
-					execution/exec_utils_1.c		\
+					lib_utils/ft_error.c 				\
+					lib_utils/ft_putstr_fd.c			\
+					lib_utils/ft_split_exec.c			\
+					lib_utils/ft_strjoin.c				\
+					lib_utils/lib_utilis_1.c 			\
+					lib_utils/lib_utilis_exec.c 		\
+					execution/exec_utils_1.c			\
+					execution/exec_utils_2.c			\
+					execution/exec.c					\
+					env_var/env_utils_1.c				\
+					execution/test/ft_lstnew.c			\
+					execution/test/ft_lstlast.c			\
+					execution/test/ft_lstadd_back.c		\
+					execution/test/ft_init.c			\
 					# builtins/builtin_cmd.c			\
 
 OBJS		=	$(SRCS:.c=.o)
