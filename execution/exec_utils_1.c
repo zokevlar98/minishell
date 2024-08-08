@@ -6,11 +6,21 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/02 20:59:10 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/08 03:43:07 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	fork1(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		ft_error("fork failed\n");
+	return (pid);
+}
 
 int is_builtin(t_cmd *cmd_list)
 {
@@ -56,6 +66,33 @@ int is_builtin(t_cmd *cmd_list)
 //     return (0);
 // }
 
+void	ft_execut(t_cmd *cmd_list,t_env *env_list)
+{
+	char	**envp;
+	char	*path;
+	char	**cmd;
+	// char	*tmp;
+
+	envp = ft_get_envp(env_list);
+	if (!envp)
+		ft_error("malloc failed\n");
+	path = find_path_env(cmd_list->cmd, envp);
+	if (!path)
+		ft_error("command not found\n");
+	// int	i = 0;
+	// while (cmd_list->args[i] != NULL)
+	// {		
+	// 	tmp = ft_strjoin(cmd_list->args[i], " ");
+	// 	i++;
+	// }
+	// tmp = ft_strjoin(" ", tmp);
+	// tmp = ft_strjoin(cmd_list->cmd, tmp);
+	// cmd = ft_split(tmp, ' ');
+	cmd = ft_split_up(cmd_list->ful_cmd);
+	if (execve(path, cmd, envp) == -1)
+		ft_error("execve failed\n");
+}
+
 void	ft_execut_pipe(t_cmd *cmd_list, t_env *env_list)
 {
 	int		fd[2];
@@ -84,42 +121,7 @@ void	ft_execut_pipe(t_cmd *cmd_list, t_env *env_list)
 	wait(NULL);
 }
 
-void	ft_execut(t_cmd *cmd_list,t_env *env_list)
-{
-	char	**envp;
-	char	*path;
-	char	**cmd;
-	char	*tmp;
-
-	envp = ft_get_envp(env_list);
-	if (!envp)
-		ft_error("malloc failed\n");
-	path = find_path_env(cmd_list->cmd, envp);
-	if (!path)
-		ft_error("command not found\n");
-	int	i = 0;
-	while (cmd_list->args[i] != NULL)
-	{		
-		tmp = ft_strjoin(cmd_list->args[i], " ");
-		i++;
-	}
-	tmp = ft_strjoin(" ", tmp);
-	tmp = ft_strjoin(cmd_list->cmd, tmp);
-	cmd = ft_split(tmp, ' ');
-	if (execve(path, cmd, envp) == -1)
-		ft_error("execve failed\n");
-}
 // void	ft_execut_redir(t_cmd *cmd_list, t_env *env_list)
 // {
 // // 4 case reduraction	
 // }
-
-int	fork1(void)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == -1)
-		ft_error("fork failed\n");
-	return (pid);
-}

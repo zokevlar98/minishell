@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 00:12:17 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/08 02:34:07 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/08 03:12:16 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,33 @@ void	ft_init_second(t_cmd *cmd_list)
 	cmd_list->args = ft_split(" -l ", ' ');
 	cmd_list->in_redir = NULL;
 	cmd_list->out_redir = NULL;
+}
+
+void	affiche_node(t_cmd *cmd_list)
+{
+	t_cmd	*tmp;
+
+	tmp = cmd_list;
+	while (tmp)
+	{
+		printf("ful_cmd: %s		|\n", tmp->ful_cmd);
+		printf("pipe_line: %d		|\n", tmp->pipe_line);
+		printf("cmd: %s			|\n", tmp->cmd);
+		while (*tmp->args)
+		{
+			printf("args: %s		|\n", *tmp->args);
+			tmp->args++;
+		}
+		printf("-------------------------\n");
+		tmp = tmp->next;
+	}
+}
+
+void	print_args(char **args)
+{
+	while (*args)
+	{
+		printf("%s\n", *args);
+		args++;
+	}
 }

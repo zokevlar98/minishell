@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 02:26:51 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/08 02:34:26 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/08 03:31:21 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	*ft_strchr(const char *s, int c);
 char	**ft_split(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
 void	ft_free(char **tab);
+char	**ft_split_up(char *s);
 
 // env_utils_1.c
 void    ft_env_list(t_env **env_list,char **env);
@@ -103,4 +104,7 @@ t_cmd	*ft_lstlast(t_cmd *lst);
 void	ft_lstadd_back(t_cmd **lst, t_cmd *new);
 void	ft_init(t_cmd *cmd_list);
 void	ft_init_second(t_cmd *cmd_list);
+void	affiche_node(t_cmd *cmd_list);
+void	print_args(char **args);
+
 #endif
