@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/08 17:34:39 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/10 08:36:21 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_cmd
 {
 	// char			*ful_cmd;
 	int				pipe_line;
-	char			*cmd;
-	char			**args;
+	// char			*cmd;
+	char			**cmd;
 	char			**in_redir;
 	char			**out_redir;
 	struct s_cmd	*next;
@@ -73,7 +73,7 @@ void	ft_env_list(t_env **env_list, char **env);
 char	*ft_env_search(t_env *env_list, char *name);
 
 // parse.c
-t_cmd	*ft_parse_line(char *line);
+t_cmd	*ft_parse_line(char *line, t_env *env_list);
 
 // cmd_list.c
 void	ft_fill_cmd_list(t_cmd **cmd_list, char **all_tokens, int pipe);
@@ -94,5 +94,8 @@ char	*ft_add_space(char *line);
 char	**tokenizing(char *line);
 void	**tokenize_line(char *line, char ***tokens, int length, int *in_double_quote, int *in_single_quote, int *in_parentheses);
 int		ft_check_tokens(char **tokens);
+
+//expanding.c
+char	**expand_tokens(char **tokens, t_env *env_list);
 
 #endif

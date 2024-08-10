@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 23:10:43 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/08 18:34:08 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/10 09:00:26 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,29 @@ void	affich_cmd_list(t_cmd *cmd_list)
 	while (tmp)
 	{
 		printf("=====================================\n");
-		printf("cmd [%d]\t: %s\n", i, tmp->cmd);
+		// printf("cmd [%d]\t: {%s}\n", i, tmp->cmd);
 		printf("pipe\t: %d\n", tmp->pipe_line);
 		j = 0;
-		while (tmp->args && tmp->args[j])
+		while (tmp->cmd && tmp->cmd[j])
 		{
-			if (!j) printf("args : \n");
-			printf("\targ[%d]\t: %s\n", j, tmp->args[j]);
+			if (!(tmp->cmd[j]))
+				break ;
+			if (!j) printf("cmd&arg : \n");
+			printf("\targ[%d]\t: {%s}\n", j, tmp->cmd[j]);
 			j++;
 		}
 		j = 0;
 		while (tmp->in_redir && tmp->in_redir[j])
 		{
 			if (!j) printf("in_redir :\n");
-			printf("\tin_redir[%d]\t: %s\n", j, tmp->in_redir[j]);
+			printf("\tin_redir[%d]\t: {%s}\n", j, tmp->in_redir[j]);
 			j++;
 		}
 		j = 0;
 		while (tmp->out_redir && tmp->out_redir[j])
 		{
 			if (!j) printf("out_redir :\n");
-			printf("\tout_redir[%d]\t: %s\n", j, tmp->out_redir[j]);
+			printf("\tout_redir[%d]\t: {%s}\n", j, tmp->out_redir[j]);
 			j++;
 		}
 		printf("next\t: %p\n", tmp->next);
@@ -62,7 +64,6 @@ t_cmd	*ft_new_cmd(int pipe)
 		return (NULL);
 	new_cmd->pipe_line = pipe;
 	new_cmd->cmd = NULL;
-	new_cmd->args = NULL;
 	new_cmd->in_redir = NULL;
 	new_cmd->out_redir = NULL;
 	new_cmd->next = NULL;
@@ -109,15 +110,13 @@ void	ft_fill_cmd_list(t_cmd **cmd_list, char **all_tokens, int pipe)
 	(void)pipe;
 	(void)cmd_list;
 	new_cmd = NULL;
-	while (i <= pipe)
+	while (i <= pipe && all_tokens)
 	{
 		if (ft_strcmp(all_tokens[j], "|") != 0)
 			new_cmd = ft_new_cmd(i);
 		while (all_tokens[j] && ft_strcmp(all_tokens[j], "|") != 0)
 		{
-			if (!new_cmd->cmd && all_tokens[j][0] != '<' && all_tokens[j][0] != '>')
-				new_cmd->cmd = ft_strdup(all_tokens[j]);
-			else if (all_tokens[j][0] == '<')
+			if (all_tokens[j][0] == '<')
 			{
 				if (!new_cmd->in_redir)
 					new_cmd->in_redir = (char **)ft_malloc(sizeof(char *) * MAX_TOKENS, 0);
@@ -131,9 +130,9 @@ void	ft_fill_cmd_list(t_cmd **cmd_list, char **all_tokens, int pipe)
 			}
 			else
 			{
-				if (!new_cmd->args)
-					new_cmd->args = (char **)ft_malloc(sizeof(char *) * MAX_TOKENS, 0);
-				new_cmd->args = add_to_array(new_cmd->args, all_tokens[j]);
+				if (!new_cmd->cmd)
+					new_cmd->cmd = (char **)ft_malloc(sizeof(char *) * MAX_TOKENS, 0);
+				new_cmd->cmd = add_to_array(new_cmd->cmd, all_tokens[j]);
 			}
 			j ++;
 		}

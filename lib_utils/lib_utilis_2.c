@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 23:46:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/06 08:25:22 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/09 10:59:26 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	unsigned int	i;
 	int				lenght;
 
+	if (!s1 && s2)
+		return (ft_strdup(s2));
+	if (!s2 && s1)
+		return (ft_strdup(s1));
+	if (!s1 && !s2)
+		return (NULL);
 	i = 0;
 	lenght = ft_strlen(s1) + ft_strlen(s2) + 1;
 	dest = (char *)ft_malloc(sizeof(*dest) * lenght, 0);

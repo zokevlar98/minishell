@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:28:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/08 18:09:35 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/10 08:51:33 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	nbr_pipe(char **tokens)
 
 	i = 0;
 	pipe = 0;
+	if (!tokens)
+		return (0);
 	while (tokens[i])
 	{
 		if (tokens[i][0] == '|')
@@ -34,7 +36,6 @@ char	**re_tokenizing(char **all_tokens)
 	int		i;
 	int		j;
 
-	(void)all_tokens;
 	i = 0;
 	j = 0;
 	new_tokens = ft_malloc(sizeof(char *) * MAX_TOKENS, 0);
@@ -60,7 +61,7 @@ char	**re_tokenizing(char **all_tokens)
 	return (new_tokens);
 }
 
-t_cmd	*ft_parse_line(char *line)
+t_cmd	*ft_parse_line(char *line, t_env *env_list)
 {
 	t_cmd	*cmd_list;
 	char	**all_tokens;
@@ -68,16 +69,17 @@ t_cmd	*ft_parse_line(char *line)
 	cmd_list = NULL;
 	if (ft_check_syntax(line) == 0)
 	{
-		printf("syntax error : %s\n", line);
+		printf("syntax error 55: %s\n", line);
 		return (NULL);
 	}
 	all_tokens = tokenizing(ft_add_space(line));
 	if (!ft_check_tokens(all_tokens))
 	{
-		printf("syntax error : %s\n", line);
+		printf("syntax error 1: %s\n", line);
 		return (NULL);
 	}
 	all_tokens = re_tokenizing(all_tokens);
+	all_tokens = expand_tokens(all_tokens, env_list);
 	ft_fill_cmd_list(&cmd_list, all_tokens, nbr_pipe(all_tokens));
 	return (cmd_list);
 }

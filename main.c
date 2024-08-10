@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/08 18:17:30 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/10 08:38:23 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_execut_cmd(t_cmd *cmd_list, t_env *env_list)
 {
-	if (cmd_list->cmd && ft_strcmp(cmd_list->cmd, "exit") == 0)
+	if (cmd_list->cmd && ft_strcmp(cmd_list->cmd[0], "exit") == 0)
 	{
 		printf("exit\n");
 		exit(0);
@@ -38,7 +38,7 @@ void	start_loop(t_env *env_list)
 			free(line);
 			continue ;
 		}
-		cmd_list = ft_parse_line(line);
+		cmd_list = ft_parse_line(line, env_list);
 		if (!cmd_list)
 		{
 			free(line);
