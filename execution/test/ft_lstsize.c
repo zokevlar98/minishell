@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib_utilis_2.c                                     :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/08 04:31:22 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/10 00:30:00 by zqouri           ###   ########.fr       */
+/*   Created: 2024/08/10 00:48:05 by zqouri            #+#    #+#             */
+/*   Updated: 2024/08/10 00:49:27 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strtrim(char *s1, char *set)
+int	ft_lstsize(t_cmd *lst)
 {
-	size_t	start;
-	size_t	end;
-	char	*str;
+	int 	i;
+	t_cmd	*tmp;
 
-	start = 0;
-	end = ft_strlen(s1);
-	while (s1[start] && ft_strchr(set, s1[start]))
-		start++;
-	while (end > start && ft_strchr(set, s1[end - 1]))
-		end--;
-	str = ft_substr(s1, start, end - start);
-	if (!str)
-		return (NULL);
-	return (str);
+	i = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);	
 }

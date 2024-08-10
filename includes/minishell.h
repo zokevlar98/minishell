@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 02:26:51 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/08 04:32:06 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/10 02:11:57 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <limits.h>
 # include <sys/wait.h>
 # include <stddef.h>
+# include <fcntl.h>
 
 //define
 # define NUM_BUILTINS 8 
@@ -95,6 +96,7 @@ void     ft_env_list(t_env **env_list,char **env);
 void    ft_execut_cmd(t_cmd *cmd_list, t_env *env_list);
 int     is_builtin(t_cmd *cmd_list);
 void	ft_execut_pipe(t_cmd *cmd_list, t_env *env_list);
+void	ft_execut_mul_pipe(t_cmd *cmd_list, t_env *env_list);
 void	ft_execut(t_cmd *cmd_list, t_env *env_list);
 char	**ft_get_envp(t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
@@ -106,10 +108,12 @@ void	ft_echo(t_cmd *cmd_list);
 
 //test
 t_cmd	*ft_lstnew(void);
+int		ft_lstsize(t_cmd *lst);
 t_cmd	*ft_lstlast(t_cmd *lst);
 void	ft_lstadd_back(t_cmd **lst, t_cmd *new);
 void	ft_init(t_cmd *cmd_list);
 void	ft_init_second(t_cmd *cmd_list);
+void	ft_init_theird(t_cmd *cmd_list);
 void	affiche_node(t_cmd *cmd_list);
 void	print_args(char **args);
 

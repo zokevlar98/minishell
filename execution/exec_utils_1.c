@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/08 03:43:07 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/10 02:16:09 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 	char	**envp;
 	char	*path;
 	char	**cmd;
-	// char	*tmp;
 
 	envp = ft_get_envp(env_list);
 	if (!envp)
@@ -79,15 +78,6 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 	path = find_path_env(cmd_list->cmd, envp);
 	if (!path)
 		ft_error("command not found\n");
-	// int	i = 0;
-	// while (cmd_list->args[i] != NULL)
-	// {		
-	// 	tmp = ft_strjoin(cmd_list->args[i], " ");
-	// 	i++;
-	// }
-	// tmp = ft_strjoin(" ", tmp);
-	// tmp = ft_strjoin(cmd_list->cmd, tmp);
-	// cmd = ft_split(tmp, ' ');
 	cmd = ft_split_up(cmd_list->ful_cmd);
 	if (execve(path, cmd, envp) == -1)
 		ft_error("execve failed\n");
@@ -118,6 +108,41 @@ void	ft_execut_pipe(t_cmd *cmd_list, t_env *env_list)
 	close(fd[0]);
 	close(fd[1]);
 	wait(NULL);
+	wait(NULL);
+}
+
+void	ft_execut_mul_pipe(t_cmd *cmd_list, t_env *env_list)
+{
+	int		fd[2];
+	int		input_file;
+	// int		output_file;
+	
+	if (pipe(fd) == -1)
+		ft_error("pipe failed\n");
+	input_file = open("input_file", O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (dup2(input_file, STDIN_FILENO) == -1)
+		ft_error("dup2 failed\n");
+	close(input_file);
+	if (fork1() == 0)
+	{
+		while (cmd_list != NULL)
+		{
+			if (fork1() == 0)
+			{
+				close(fd[0]);
+				dup2(fd[1], STDOUT_FILENO);
+				close(fd[1]);
+				ft_execut(cmd_list, env_list);
+			}
+			else
+			{
+				close (fd[1]);
+				dup2(fd[0], STDIN_FILENO);
+				close(fd[0]);
+			}
+			cmd_list = cmd_list->next;
+		}
+	}
 	wait(NULL);
 }
 
