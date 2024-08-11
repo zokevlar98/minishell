@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 02:26:51 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/10 02:11:57 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/11 04:01:49 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,7 @@ void	ft_free(char **tab);
 char	**ft_split_up(char *s);
 char	*ft_strtrim(char *s1, char *set);
 
-// env_utils_1.c
-void    ft_env_list(t_env **env_list,char **env);
-
+// lib_utils_2
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 int		ft_strcmp(const char *s1, const char *s2);
@@ -90,6 +88,10 @@ int		ft_check_line(char *line);
 int     ft_strcmp(const char *s1, const char *s2);
 
 // env_utils_1.c
+void	ft_change_env(t_env *env_list, char *name, char *value);
+char	*ft_env_search(t_env *env_list, char *name);
+t_env	*ft_env_new(char *env);
+void	ft_env_add_back(t_env **env_list, t_env *new);
 void     ft_env_list(t_env **env_list,char **env);
 
 //execution
@@ -101,10 +103,11 @@ void	ft_execut(t_cmd *cmd_list, t_env *env_list);
 char	**ft_get_envp(t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
 int		fork1(void);
-void	ft_builtin(t_cmd *cmd_list);
 
 //builtins
+void	ft_builtin(t_cmd *cmd_list, t_env *env_list);
 void	ft_echo(t_cmd *cmd_list);
+void	ft_cd(t_cmd *cmd_list, t_env *env_list);
 
 //test
 t_cmd	*ft_lstnew(void);
@@ -115,6 +118,7 @@ void	ft_init(t_cmd *cmd_list);
 void	ft_init_second(t_cmd *cmd_list);
 void	ft_init_theird(t_cmd *cmd_list);
 void	affiche_node(t_cmd *cmd_list);
+void	affiche_env(t_env *env);
 void	print_args(char **args);
 
 #endif

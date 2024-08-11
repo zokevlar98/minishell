@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/10 01:47:31 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/11 02:47:25 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	ft_exec(t_cmd *cmd_list, t_env *env_list)
 		}
 		wait(NULL);
 	}
-	else
-		printf("9ewada ft_exec\n");
 }
 
 void    ft_execut_cmd(t_cmd *cmd_list, t_env *env_list)
@@ -72,9 +70,9 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env *env_list)
 	// while (tmp)
 	// {
 		if (serch_for_pipe(tmp))
-			ft_execut_mul_pipe(tmp, env_list);
-		else if (is_builtin(tmp))
-			ft_builtin(tmp);
+			ft_execut_pipe(tmp, env_list);
+		else if (is_builtin(tmp)){
+			ft_builtin(tmp, env_list);}
 		else
 			ft_exec(tmp, env_list);
 		// tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 00:12:17 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/10 01:45:03 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/11 02:47:11 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,33 @@
 
 void	ft_init(t_cmd *cmd_list)//nzid tableau char ** ndewa fih cmds diyali o  function dik sa3at t initializie 
 {
-	cmd_list->ful_cmd = ft_strdup("cat main.c");
-	cmd_list->pipe_line = 2;
-	cmd_list->cmd = ft_strdup("cat");
-	cmd_list->args = ft_split("cat main.c", ' ');
+	// cmd_list->ful_cmd = ft_strdup("cd .. ");
+	char	**args;
+	
+	args = ft_split(cmd_list->ful_cmd, ' ');
+	cmd_list->pipe_line = 0;
+	cmd_list->cmd = ft_strdup(args[0]);
+	cmd_list->args = args;
 	cmd_list->in_redir = NULL;
 	cmd_list->out_redir = NULL;
 }
 
 void	ft_init_second(t_cmd *cmd_list)
 {
-	cmd_list->ful_cmd = ft_strdup("ls -la");
-	cmd_list->pipe_line = 2;
-	cmd_list->cmd = ft_strdup("ls");
-	cmd_list->args = ft_split("ls -la ", ' ');
+	cmd_list->ful_cmd = ft_strdup("wc -l");
+	cmd_list->pipe_line = 0;
+	cmd_list->cmd = ft_strdup("wc");
+	cmd_list->args = ft_split("wc -l ", ' ');
 	cmd_list->in_redir = NULL;
 	cmd_list->out_redir = NULL;
 }
 
 void	ft_init_theird(t_cmd *cmd_list)
 {
-	cmd_list->ful_cmd = ft_strdup("wc -l");
+	cmd_list->ful_cmd = ft_strdup("cat main.c");
 	cmd_list->pipe_line = 2;
-	cmd_list->cmd = ft_strdup("wc");
-	cmd_list->args = ft_split("wc -l ", ' ');
+	cmd_list->cmd = ft_strdup("cat");
+	cmd_list->args = ft_split("cat main.c ", ' ');
 	cmd_list->in_redir = NULL;
 	cmd_list->out_redir = NULL;
 }
@@ -51,7 +54,7 @@ void	affiche_node(t_cmd *cmd_list)
 	{
 		printf("ful_cmd: %s		|\n", tmp->ful_cmd);
 		printf("pipe_line: %d		|\n", tmp->pipe_line);
-		printf("cmd: %s			|\n", tmp->cmd);
+		printf("cmd:|%s			|\n", tmp->cmd);
 		while (*tmp->args)
 		{
 			printf("args: %s		|\n", *tmp->args);

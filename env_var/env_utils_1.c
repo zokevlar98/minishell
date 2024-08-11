@@ -6,11 +6,28 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/01 08:12:12 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/10 23:24:21 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_change_env(t_env *env_list, char *name, char *value)
+{
+	t_env	*tmp;
+
+	tmp = env_list;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->name, name, ft_strlen(tmp->name)) == 0)
+		{
+			free(tmp->value);
+			tmp->value = ft_strdup(value);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+}
 
 char	*ft_env_search(t_env *env_list, char *name)
 {
@@ -27,7 +44,7 @@ char	*ft_env_search(t_env *env_list, char *name)
 }
 
 
-static t_env	*ft_env_new(char *env)
+t_env	*ft_env_new(char *env)
 {
 	t_env	*new;
 	char	*equal;
@@ -42,7 +59,7 @@ static t_env	*ft_env_new(char *env)
 	return (new);
 }
 
-static void	ft_env_add_back(t_env **env_list, t_env *new)
+void	ft_env_add_back(t_env **env_list, t_env *new)
 {
 	t_env	*tmp;
 
