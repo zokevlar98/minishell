@@ -6,7 +6,7 @@
 #    By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/08/11 03:51:45 by zqouri           ###   ########.fr        #
+#    Updated: 2024/08/11 08:48:59 by zqouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,11 +37,13 @@ SRCS			=	main.c \
 					execution/test/ft_lstnew.c			\
 					execution/test/ft_lstlast.c			\
 					execution/test/ft_lstadd_back.c		\
+					execution/test/outils_test.c		\
 					execution/test/ft_init.c			\
 					execution/test/ft_lstsize.c			\
 					builtins/builtin_cmd.c				\
 					builtins/builtin_utils.c			\
 					builtins/ft_cd.c					\
+					builtins/ft_pwd.c					\
 
 OBJS		=	$(SRCS:.c=.o)
 

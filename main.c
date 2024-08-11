@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/11 02:46:54 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/11 07:11:57 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int main(int ac, char **av, char **env)
 		if (line[0] != '\0')
 			add_history(line);
 		cmd_list->ful_cmd = line;
+		if (ft_strncmp(line, "env", ft_strlen("env")) == 0)
+			affiche_env(env_list);
 		ft_init(cmd_list);
 		ft_execut_cmd(cmd_list, env_list);
 		free(line);
