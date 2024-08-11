@@ -6,11 +6,11 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/10 23:24:21 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/11 08:41:25 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 void	ft_change_env(t_env *env_list, char *name, char *value)
 {
@@ -36,7 +36,7 @@ char	*ft_env_search(t_env *env_list, char *name)
 	tmp = env_list;
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->name, name))
+		if (!ft_strncmp(tmp->name, name, ft_strlen(name)))
 			return (tmp->value);
 		tmp = tmp->next;
 	}
