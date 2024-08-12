@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 02:26:51 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/11 09:21:57 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/12 04:34:17 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	ft_builtin(t_cmd *cmd_list, t_env *env_list);
 void	ft_echo(t_cmd *cmd_list);
 void	ft_cd(t_cmd *cmd_list, t_env *env_list);
 void	ft_pwd(t_env *env);
-// void	ft_export(t_cmd *cmd, t_env *env);
+void	ft_export(t_cmd *cmd, t_env *env);
 void	ft_env(t_cmd *cmd, t_env *env);
 
 //test
@@ -123,5 +123,10 @@ void	ft_init_theird(t_cmd *cmd_list);
 void	affiche_node(t_cmd *cmd_list);
 void	affiche_env(t_env *env);
 void	print_args(char **args);
+
+
+
+
+t_env	*ft_env_new_(char *key, char *value);
 
 #endif

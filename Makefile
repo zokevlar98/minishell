@@ -6,7 +6,7 @@
 #    By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/08/11 09:21:50 by zqouri           ###   ########.fr        #
+#    Updated: 2024/08/12 04:31:54 by zqouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ SRCS			=	main.c \
 					builtins/ft_cd.c					\
 					builtins/ft_pwd.c					\
 					builtins/ft_env.c					\
-					# builtins/ft_export.c				\
+					builtins/ft_export.c				\
 
 OBJS		=	$(SRCS:.c=.o)
 

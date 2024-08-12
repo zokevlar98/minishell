@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/11 08:41:25 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/12 04:32:30 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,26 @@ char	*ft_env_search(t_env *env_list, char *name)
 	return (NULL);
 }
 
+t_env	*ft_env_new_(char *key, char *value)
+{
+	t_env	*new;
+
+	new = (t_env *)malloc(sizeof(t_env));
+	if (!new)
+		return (NULL);
+	new->name = ft_strdup(key);
+	new->value = ft_strdup(value);
+	new->next = NULL;
+	return (new);
+}
+
 
 t_env	*ft_env_new(char *env)
 {
 	t_env	*new;
 	char	*equal;
 
-	new = malloc(sizeof(t_env));
+	new = (t_env *)malloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
 	equal = ft_strchr(env, '=');
@@ -74,7 +87,7 @@ void	ft_env_add_back(t_env **env_list, t_env *new)
 	tmp->next = new;
 }
 
-void	ft_env_list(t_env **env_list,char **env)
+void	ft_env_list(t_env **env_list, char **env)
 {
 	int		i;
 	t_env	*new;
