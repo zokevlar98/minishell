@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 02:26:51 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/12 04:34:17 by zqouri           ###   ########.fr       */
+/*   Created: 2024/08/13 04:00:50 by marvin            #+#    #+#             */
+/*   Updated: 2024/08/13 04:01:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <sys/wait.h>
 # include <stddef.h>
 # include <fcntl.h>
+
 
 //define
 # define NUM_BUILTINS 8 

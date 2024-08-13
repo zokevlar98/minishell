@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/08/12 04:31:54 by zqouri           ###   ########.fr        #
+#    Updated: 2024/08/13 04:34:30 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,11 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h
 
-CC				=	cc
-
-Flags			=	-Wall -Wextra -Werror -I ./includes
+CC				=	cc -Wall -Wextra -Werror -I ./includes 
 
 READLINE_FLAGS	=	-lreadline \
 
-SRCS			=	main.c \
-					\
+SRCS			=	main.c 								\
 					lib_utils/ft_error.c 				\
 					lib_utils/ft_putstr_fd.c			\
 					lib_utils/ft_split_exec.c			\
@@ -52,16 +49,16 @@ OBJS		=	$(SRCS:.c=.o)
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			$(CC) $(Flags) $(READLINE_FLAGS) $(OBJS) -o $(NAME)
+			$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME)
 
 %.o:		%.c $(HEADER)
 			$(CC) $(Flags) -c $< -o $@
 
 clean:
-			rm -f $(OBJS)
+			rm -rf $(OBJS)
 
 fclean:		clean
-			rm -f $(NAME)
+			rm -rf $(NAME)
 
 re:			fclean all
 
