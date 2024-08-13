@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/12 03:41:32 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/13 18:38:40 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 void	ft_exit(t_cmd *cmd)
 {
-	
+	ft_putstr_fd("exit\n", 1);
+	if (cmd->args[1] != NULL)
+		printf("minishell: exit: %s: numeric argument required\n", cmd->args[1]);
+	exit(EXIT_SUCCESS);
 }

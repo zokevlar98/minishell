@@ -6,11 +6,13 @@
 /*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:39:16 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/13 15:39:19 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/13 18:30:51 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//I need to change the index fd to macro for good practice 
 
 int main(int ac, char **av, char **env)
 {
