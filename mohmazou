@@ -1,0 +1,18 @@
+total 240
+drwxr-xr-x  17 mohmazou  candidate    578 Aug 10 11:22 .
+drwxr-xr-x  22 mohmazou  candidate    748 Aug  7 09:16 ..
+drwxr-xr-x  15 mohmazou  candidate    510 Aug 10 09:13 .git
+-rw-r--r--   1 mohmazou  candidate     52 Aug  9 10:42 .gitignore
+drwxr-xr-x   5 mohmazou  candidate    170 Aug  1 08:09 .vscode
+-rw-r--r--   1 mohmazou  candidate   1633 Aug  9 15:18 Makefile
+drwxr-xr-x   8 mohmazou  candidate    272 Aug 10 11:17 Parsing
+drwxr-xr-x   3 mohmazou  candidate    102 Aug 10 11:17 env_var
+drwxr-xr-x   3 mohmazou  candidate    102 Aug 10 11:17 free_funcs
+drwxr-xr-x   3 mohmazou  candidate    102 Aug  9 10:42 includes
+drwxr-xr-x   4 mohmazou  candidate    136 Aug 10 11:17 lib_utils
+-rw-r--r--   1 mohmazou  candidate   1802 Aug 10 08:38 main.c
+-rwxr-xr-x   1 mohmazou  candidate  52000 Aug 10 11:17 minishell
+-rw-r--r--   1 mohmazou  candidate  54096 Aug  2 02:40 minishell_db
+drwxr-xr-x   3 mohmazou  candidate    102 Aug  1 08:16 minishell_db.dSYM
+-rw-r--r--   1 mohmazou  candidate      0 Aug 10 11:22 mohmazou
+drwxr-xr-x   3 mohmazou  candidate    102 Aug 10 11:17 tokenization

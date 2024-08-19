@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:13:44 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/10 09:07:44 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/19 06:33:03 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,7 @@
 // 	return (token);
 // }
 
-int	ft_isalnum(char c)
-{
-	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')
-		|| (c >= 'a' && c <= 'z'))
-		return (1);
-	return (0);
-}
+
 
 char	*ft_get_name(char *token_i, int *i)
 {
@@ -108,18 +102,22 @@ char	*expand_env(char *token_i, t_env *env_list)
 	{
 		if (token_i[i] == '$')
 		{
+			if (token_i[i - 1] != '$')
+				i ++;
+			if (ft_isalnum(token_i[i]))
+			{	name = ft_get_name(token_i, &i);
+				// if (token_i[i] == '?')
+				// {
+				// 	value = ft_itoa(g_exit_status);
+				// 	env = ft_strjoin(token, value);
+				// 	free(value);
+				// 	free(token);
+				// 	return (env);
+				// }
+				// printf("token: %s\n", );
+				new_token = ft_strjoin(new_token, ft_env_search(env_list, name));
+			}
 			i ++;
-			name = ft_get_name(token_i, &i);
-			// if (token_i[i] == '?')
-			// {
-			// 	value = ft_itoa(g_exit_status);
-			// 	env = ft_strjoin(token, value);
-			// 	free(value);
-			// 	free(token);
-			// 	return (env);
-			// }
-			// printf("token: %s\n", );
-			new_token = ft_strjoin(new_token, ft_env_search(env_list, name));
 		}
 		else
 		{

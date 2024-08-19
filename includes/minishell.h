@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/10 08:36:21 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/19 06:33:40 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 // lib_utils_2.c
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char *s1, char *set);
+int	ft_isalnum(char c);
 // env_utils_1.c
 void	ft_env_list(t_env **env_list, char **env);
 char	*ft_env_search(t_env *env_list, char *name);
@@ -97,5 +98,8 @@ int		ft_check_tokens(char **tokens);
 
 //expanding.c
 char	**expand_tokens(char **tokens, t_env *env_list);
+
+// expanding2.c
+void	ft_expending(t_cmd *cmd_list,t_env *env_list);
 
 #endif

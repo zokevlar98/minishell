@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:28:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/10 08:51:33 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/19 01:25:23 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_cmd	*ft_parse_line(char *line, t_env *env_list)
 {
 	t_cmd	*cmd_list;
 	char	**all_tokens;
-
+(void)env_list;
 	cmd_list = NULL;
 	if (ft_check_syntax(line) == 0)
 	{
@@ -79,7 +79,7 @@ t_cmd	*ft_parse_line(char *line, t_env *env_list)
 		return (NULL);
 	}
 	all_tokens = re_tokenizing(all_tokens);
-	all_tokens = expand_tokens(all_tokens, env_list);
+	// all_tokens = expand_tokens(all_tokens, env_list);
 	ft_fill_cmd_list(&cmd_list, all_tokens, nbr_pipe(all_tokens));
 	return (cmd_list);
 }

@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 23:46:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/09 10:59:26 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/19 06:33:28 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,12 @@ char	*ft_strtrim(char *s1, char *set)
 		end--;
 	str = ft_substr(s1, start, end - start);
 	return (str);
+}
+
+int	ft_isalnum(char c)
+{
+	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')
+		|| (c >= 'a' && c <= 'z'))
+		return (1);
+	return (0);
 }
