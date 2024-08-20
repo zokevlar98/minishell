@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/19 06:50:41 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:18:35 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	start_loop(t_env *env_list)
 			continue ;
 		}
 		ft_expending(cmd_list, env_list);
+		printf("SEGFAULT\n");
 		ft_execut_cmd(cmd_list, env_list);
 		if (cmd_list->cmd && ft_strcmp(cmd_list->cmd[0], "exit") == 0)
 		{
