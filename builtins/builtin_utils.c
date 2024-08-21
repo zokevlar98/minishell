@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 04:02:26 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/11 03:51:07 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/21 17:44:56 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,38 +35,3 @@ int	is_caracter(char *str, char c)
 	}
 	return (0);
 }
-
-void	ft_echo(t_cmd *cmd_list)
-{
-	int		i;
-	char	**cmd;
-
-	i = 1;
-	cmd = cmd_list->args;
-	while (cmd[i])
-	{
-		//tanchouf blan expend
-		// while (cmd[i][0] == '$')
-		// {
-		// 	cmd[i] = ft_get_env(cmd[i] + 1);
-		// 	i++;
-		// }
-		if (is_caracter(cmd[i] , '"'))
-		{
-			cmd[i] = ft_strtrim(cmd[i], "\"");
-			ft_putstr_fd(cmd[i], 1);
-		}
-		else if (is_caracter(cmd[i], '\''))
-		{
-			cmd[i] = ft_strtrim(cmd[i], "\'");
-			ft_putstr_fd(cmd[i], 1);
-		}
-		else
-			ft_putstr_fd(cmd[i], 1);
-		//eho
-		i++;
-	}
-	ft_putstr_fd("\n", 1);
-}
-
-// void	ft_pwd();	
