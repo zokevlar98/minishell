@@ -77,6 +77,7 @@ char	*ft_strdup(const char *s);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strchr(const char *s, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		is_caracter(char *str, char c);
 
 // env_utils_1.c
 void	ft_env_list(t_env **env_list,char **env);
