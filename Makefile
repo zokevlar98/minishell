@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/08/13 04:34:30 by marvin           ###   ########.fr        #
+#    Updated: 2024/08/13 19:52:55 by zqouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,8 @@ SRCS			=	main.c 								\
 					builtins/ft_pwd.c					\
 					builtins/ft_env.c					\
 					builtins/ft_export.c				\
+					builtins/ft_exit.c					\
+					builtins/ft_unset.c					\
 
 OBJS		=	$(SRCS:.c=.o)
 

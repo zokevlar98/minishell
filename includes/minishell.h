@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 04:00:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/08/13 04:01:18 by marvin           ###   ########.fr       */
+/*   Created: 2024/08/13 15:38:07 by zqouri            #+#    #+#             */
+/*   Updated: 2024/08/13 15:38:07 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_env
 {
     char	*name;
     char	*value;
+	struct s_env	*prev;
     struct s_env	*next;
 }	t_env;
 
@@ -94,6 +95,7 @@ char	*ft_env_search(t_env *env_list, char *name);
 t_env	*ft_env_new(char *env);
 void	ft_env_add_back(t_env **env_list, t_env *new);
 void     ft_env_list(t_env **env_list,char **env);
+void	ft_add_env_back(t_env **env, t_env *new);
 
 //execution
 void    ft_execut_cmd(t_cmd *cmd_list, t_env *env_list);
@@ -112,6 +114,8 @@ void	ft_cd(t_cmd *cmd_list, t_env *env_list);
 void	ft_pwd(t_env *env);
 void	ft_export(t_cmd *cmd, t_env *env);
 void	ft_env(t_cmd *cmd, t_env *env);
+void	ft_exit(t_cmd *cmd);
+void	ft_unset(t_cmd *cmd, t_env *env);
 
 //test
 t_cmd	*ft_lstnew(void);
