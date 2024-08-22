@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/20 02:18:35 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:51:16 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,12 @@ void	ft_leaks(void)
 {
 	system("leaks minishell");
 }
+//expand case didnt work :
+/*
+$"USER"
+$'USER'
 
+*/
 int	main(int ac, char **av, char **env)
 {
 	t_env	*env_list;
