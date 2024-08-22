@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:39:16 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/13 18:30:51 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/22 18:16:35 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int main(int ac, char **av, char **env)
 			add_history(line);
 		cmd_list->ful_cmd = line;
 		ft_init(cmd_list);
+		affiche_node(cmd_list);
 		ft_execut_cmd(cmd_list, env_list);
 		free(line);
 	}

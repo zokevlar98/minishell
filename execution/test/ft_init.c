@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 00:12:17 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/11 02:47:11 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/22 18:17:31 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_init(t_cmd *cmd_list)//nzid tableau char ** ndewa fih cmds diyali o  fun
 	cmd_list->args = args;
 	cmd_list->in_redir = NULL;
 	cmd_list->out_redir = NULL;
+	
 }
 
 void	ft_init_second(t_cmd *cmd_list)
@@ -52,12 +53,12 @@ void	affiche_node(t_cmd *cmd_list)
 	tmp = cmd_list;
 	while (tmp)
 	{
-		printf("ful_cmd: %s		|\n", tmp->ful_cmd);
-		printf("pipe_line: %d		|\n", tmp->pipe_line);
-		printf("cmd:|%s			|\n", tmp->cmd);
+		printf("ful_cmd: %s		\n", tmp->ful_cmd);
+		printf("pipe_line: %d		\n", tmp->pipe_line);
+		printf("cmd:%s			\n", tmp->cmd);
 		while (*tmp->args)
 		{
-			printf("args: %s		|\n", *tmp->args);
+			printf("args: %s		\n", *tmp->args);
 			tmp->args++;
 		}
 		printf("-------------------------\n");

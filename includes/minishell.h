@@ -45,14 +45,22 @@ typedef struct s_env
 }	t_env;
 
 // command linked list
+// typedef struct command
+// {
+// 	char **cmd;
+// 	int in;
+// 	int out;
+// 	t_env *env;
+// 	struct command *next;
+// };
 typedef struct s_cmd
 {
 	char			*ful_cmd;// it must be a double pointer
     int				pipe_line;//indice of command 0 -> ....
     char			*cmd;
     char			**args;
-    char			**in_redir;
-    char			**out_redir;
+    char			*in_redir;
+    char			*out_redir;
     struct s_cmd	*next;
 	// i need to add prev to make it double linked list
 }    t_cmd;
