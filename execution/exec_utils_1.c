@@ -111,19 +111,19 @@ void	ft_execut_pipe(t_cmd *cmd_list, t_env *env_list)
 	wait(NULL);
 }
 
-int	process_child(t_cmd *cmd_list, t_env *env_list)
+int	process_child_write(t_cmd *cmd_list, t_env *env_list, int fd[])
 {
-	int	fd[2];
 	int	pid;
 
-	if (pipe(fd) == -1)
-		ft_error("pipe failed\n");
+	pipe(fd);
 	pid = fork1();
 	if (pid == 0)
 	{
+		dup2(cmd_list->fd_in, STDIN_FILENO);
 		close(fd[0]);
 		if (dup2(fd[1], STDOUT_FILENO) == -1)
 			ft_error("dup2 failed\n");
+		dup2(cmd_list->fd_out, STDOUT_FILENO);
 		close(fd[1]);
 		ft_execut(cmd_list, env_list);
 	}
@@ -134,10 +134,50 @@ int	process_child(t_cmd *cmd_list, t_env *env_list)
 			ft_error("dup2 failed\n");
 		close(fd[0]);
 	}
-		// close(STDIN_FILENO);
-	printf("eho\n");
 	return (pid);
 }
+
+int	process_child_read(t_cmd *cmd_list, t_env *env_list, int fd[])
+{
+	int	pid;
+
+	pipe(fd);
+	pid = fork1();
+	if (pid == 0)
+	{
+		dup2(cmd_list->fd_in, STDIN_FILENO);
+		close(fd[0]);
+		if (dup2(fd[1], STDOUT_FILENO) == -1)
+			ft_error("dup2 failed\n");
+		dup2(cmd_list->fd_out, STDOUT_FILENO);
+		close(fd[1]);
+		ft_execut(cmd_list, env_list);
+	}
+	else
+	{
+		close(fd[1]);
+		if (dup2(fd[0], STDIN_FILENO) == -1)
+			ft_error("dup2 failed\n");
+		close(fd[0]);
+	}
+	return (pid);
+}
+
+int	process_child_end(t_cmd *cmd_list, t_env *env_list)
+{
+	int	pid;
+
+	pid = fork1();
+	if (pid == 0)
+	{
+		dup2(cmd_list->fd_in, STDIN_FILENO);
+		dup2(cmd_list->fd_out, STDOUT_FILENO);
+		ft_execut(cmd_list, env_list);
+	}
+	return (pid);
+}
+
+
 
 void	last_routine(t_cmd *cmd_list, t_env *env_list, int par)
 {

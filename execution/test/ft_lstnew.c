@@ -23,8 +23,8 @@ t_cmd	*ft_lstnew(void)
 	new->pipe_line = 0;
 	new->cmd = NULL;
 	new->args = NULL;
-	new->in_redir = NULL;
-	new->out_redir = NULL;
+	new->fd_in = 0;
+	new->fd_out = 1;
 	new->next = NULL;
 	return (new);
 }

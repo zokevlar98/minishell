@@ -21,19 +21,19 @@ void	ft_init(t_cmd *cmd_list)//nzid tableau char ** ndewa fih cmds diyali o  fun
 	cmd_list->pipe_line = 0;
 	cmd_list->cmd = ft_strdup(args[0]);
 	cmd_list->args = args;
-	cmd_list->in_redir = NULL;
-	cmd_list->out_redir = NULL;
+	cmd_list->fd_in = 0;
+	cmd_list->fd_out = 1;
 	
 }
 
 void	ft_init_first(t_cmd *cmd_list)
 {
-	cmd_list->ful_cmd = ft_strdup("ls -la");
+	cmd_list->ful_cmd = ft_strdup("ls");
 	cmd_list->pipe_line = 2;
 	cmd_list->cmd = ft_strdup("ls");
-	cmd_list->args = ft_split("ls -la ", ' ');
-	cmd_list->in_redir = NULL;
-	cmd_list->out_redir = NULL;
+	cmd_list->args = ft_split("ls ", ' ');
+	cmd_list->fd_in = 0;
+	cmd_list->fd_out = 1;
 }
 
 void	ft_init_second(t_cmd *cmd_list)
@@ -42,18 +42,28 @@ void	ft_init_second(t_cmd *cmd_list)
 	cmd_list->pipe_line = 2;
 	cmd_list->cmd = ft_strdup("wc");
 	cmd_list->args = ft_split("wc -l ", ' ');
-	cmd_list->in_redir = NULL;
-	cmd_list->out_redir = NULL;
+	cmd_list->fd_in = 0;
+	cmd_list->fd_out = 1;
 }
 
 void	ft_init_theird(t_cmd *cmd_list)
 {
-	cmd_list->ful_cmd = ft_strdup("cat main.c");
+	cmd_list->ful_cmd = ft_strdup("wc -l");
+	cmd_list->pipe_line = 2;
+	cmd_list->cmd = ft_strdup("wc");
+	cmd_list->args = ft_split("wc -l ", ' ');
+	cmd_list->fd_in = 0;
+	cmd_list->fd_out = 1;
+}
+
+void	ft_init_four(t_cmd *cmd_list)
+{
+	cmd_list->ful_cmd = ft_strdup("cat");
 	cmd_list->pipe_line = 2;
 	cmd_list->cmd = ft_strdup("cat");
-	cmd_list->args = ft_split("cat main.c ", ' ');
-	cmd_list->in_redir = NULL;
-	cmd_list->out_redir = NULL;
+	cmd_list->args = ft_split("wc", ' ');
+	cmd_list->fd_in = 0;
+	cmd_list->fd_out = 1;
 }
 
 void	affiche_node(t_cmd *cmd_list)

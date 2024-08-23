@@ -16,11 +16,12 @@
 
 int main(int ac, char **av, char **env)
 {
-	// char	*line;
+	char	*line;
 	t_env	*env_list;
 	t_cmd	*first_cmd;
 	t_cmd	*second_cmd;
 	t_cmd	*theird_cmd;
+	t_cmd	*four_cmd;
 
 	env_list = NULL;
 	ft_env_list(&env_list, env);
@@ -33,26 +34,29 @@ int main(int ac, char **av, char **env)
 	first_cmd = ft_lstnew();
 	second_cmd = ft_lstnew();
 	theird_cmd = ft_lstnew();
+	four_cmd = ft_lstnew();
 	ft_init_first(first_cmd);
 	ft_init_second(second_cmd);
 	ft_init_theird(theird_cmd);
+	ft_init_four(four_cmd);
 	cmd_list = first_cmd;
-	ft_lstadd_back(&cmd_list, second_cmd);
-	ft_lstadd_back(&cmd_list, theird_cmd);
+	// ft_lstadd_back(&cmd_list, second_cmd);
+	// ft_lstadd_back(&cmd_list, theird_cmd);
+	// ft_lstadd_back(&cmd_list, four_cmd);
 	// affiche_node(cmd_list);
-	ft_execut_cmd(cmd_list, env_list);
 	// exit(0);
-	// while (1)
-	// {
-	// 	line = readline("minishell$>  ");
-	// 	if (!line)
-	// 		break;
-	// 	if (line[0] != '\0')
-	// 		add_history(line);
-	// 	cmd_list->ful_cmd = line;
-	// 	// ft_init(cmd_list);
-	// 	// affiche_node(cmd_list);
-	// 	free(line);
-	// }
+	while (1)
+	{
+		line = readline("minishell$>  ");
+		if (!line)
+			break;
+		if (line[0] != '\0')
+			add_history(line);
+		cmd_list->ful_cmd = line;
+		ft_init(cmd_list);
+		// affiche_node(cmd_list);
+		ft_execut_cmd(cmd_list, env_list);
+		free(line);
+	}
 	return (0);
 }

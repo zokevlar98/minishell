@@ -59,8 +59,8 @@ typedef struct s_cmd
     int				pipe_line;//indice of command 0 -> ....
     char			*cmd;
     char			**args;
-    char			*in_redir;
-    char			*out_redir;
+    int             fd_in;
+    int             fd_out;
     struct s_cmd	*next;
 	// i need to add prev to make it double linked list
 }    t_cmd;
@@ -115,7 +115,9 @@ void	ft_execut(t_cmd *cmd_list, t_env *env_list);
 char	**ft_get_envp(t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
 int		fork1(void);
-int	process_child(t_cmd *cmd_list, t_env *env_list);
+int	process_child_write(t_cmd *cmd_list, t_env *env_list, int fd[]);
+int	process_child_read(t_cmd *cmd_list, t_env *env_list, int fd[]);
+int	process_child_end(t_cmd *cmd_list, t_env *env_list);
 
 //builtins
 void	ft_builtin(t_cmd *cmd_list, t_env *env_list);
@@ -136,6 +138,7 @@ void	ft_init(t_cmd *cmd_list);
 void	ft_init_first(t_cmd *cmd_list);
 void	ft_init_second(t_cmd *cmd_list);
 void	ft_init_theird(t_cmd *cmd_list);
+void	ft_init_four(t_cmd *cmd_list);
 void	affiche_node(t_cmd *cmd_list);
 void	affiche_env(t_env *env);
 void	print_args(char **args);

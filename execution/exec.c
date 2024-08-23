@@ -67,24 +67,37 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env *env_list)
 	t_cmd	*tmp;
 	int		pid;
 	int		status;
+	int		fd[2];
+	int		saves[2];
 
 	tmp = cmd_list;
-		if (serch_for_pipe(tmp))
+	saves[0] = dup(STDIN_FILENO);
+	saves[1] = dup(STDOUT_FILENO);
+	if (serch_for_pipe(tmp))
+	{
+		while (tmp)
 		{
-			while (tmp)
+			if (tmp->next == NULL)
 			{
-				pid = process_child(tmp, env_list);
-				tmp = tmp->next;
-				// printf("eho\n");
+				process_child_end(tmp, env_list);
+				break ;
 			}
-			waitpid(pid, &status, 0);
-			while (waitpid(-1, NULL, 0) != -1)
-				;
+			pid = process_child_write(tmp, env_list, fd);
+			tmp = tmp->next;
+			if (tmp && tmp->next != NULL)
+				pid = process_child_read(tmp, env_list, fd);
+			else
+				process_child_end(tmp, env_list);
+			tmp = tmp->next;
 		}
-		else if (is_builtin(tmp)){
-			ft_builtin(tmp, env_list);}
-		else
-			ft_exec(tmp, env_list);
-		// tmp = tmp->next;
-	// }
+		waitpid(pid, &status, 0);
+		while (waitpid(-1, NULL, 0) != -1)
+			;
+	}
+	else if (is_builtin(tmp)){
+		ft_builtin(tmp, env_list);}
+	else
+		ft_exec(tmp, env_list);
+	dup2(saves[0], STDIN_FILENO);
+	dup2(saves[1], STDOUT_FILENO);
 }
