@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/13 19:34:51 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/23 23:37:16 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_env	*ft_env_new_(char *key, char *value)
 	new->name = ft_strdup(key);
 	new->value = ft_strdup(value);
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
@@ -69,6 +70,7 @@ t_env	*ft_env_new(char *env)
 	new->name = ft_substr(env, 0, equal - env);
 	new->value = ft_strdup(equal + 1);
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
@@ -85,6 +87,7 @@ void	ft_env_add_back(t_env **env_list, t_env *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	new->prev = tmp;
 }
 
 void	ft_env_list(t_env **env_list, char **env)

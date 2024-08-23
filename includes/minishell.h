@@ -107,7 +107,7 @@ void     ft_env_list(t_env **env_list,char **env);
 void	ft_add_env_back(t_env **env, t_env *new);
 
 //execution
-void    ft_execut_cmd(t_cmd *cmd_list, t_env *env_list);
+void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list);
 int     is_builtin(t_cmd *cmd_list);
 void	ft_execut_pipe(t_cmd *cmd_list, t_env *env_list);
 int		ft_execut_mul_pipe(t_cmd *cmd_list, t_env *env_list);
@@ -115,19 +115,19 @@ void	ft_execut(t_cmd *cmd_list, t_env *env_list);
 char	**ft_get_envp(t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
 int		fork1(void);
-int	process_child_write(t_cmd *cmd_list, t_env *env_list, int fd[]);
-int	process_child_read(t_cmd *cmd_list, t_env *env_list, int fd[]);
-int	process_child_end(t_cmd *cmd_list, t_env *env_list);
+int	    process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[]);
+int	    process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[]);
+int	    process_child_end(t_cmd *cmd_list, t_env **env_list);
 
 //builtins
-void	ft_builtin(t_cmd *cmd_list, t_env *env_list);
+void	ft_builtin(t_cmd *cmd_list, t_env **env_list);
 void	ft_echo(t_cmd *cmd_list);
 void	ft_cd(t_cmd *cmd_list, t_env *env_list);
 void	ft_pwd(t_env *env);
 void	ft_export(t_cmd *cmd, t_env *env);
 void	ft_env(t_cmd *cmd, t_env *env);
 void	ft_exit(t_cmd *cmd);
-void	ft_unset(t_cmd *cmd, t_env *env);
+void	ft_unset(t_cmd *cmd, t_env **env);
 
 //test
 t_cmd	*ft_lstnew(void);
@@ -142,8 +142,6 @@ void	ft_init_four(t_cmd *cmd_list);
 void	affiche_node(t_cmd *cmd_list);
 void	affiche_env(t_env *env);
 void	print_args(char **args);
-
-
 
 
 t_env	*ft_env_new_(char *key, char *value);

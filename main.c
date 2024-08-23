@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:39:16 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/23 15:33:53 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/24 00:05:32 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int main(int ac, char **av, char **env)
 	// ft_lstadd_back(&cmd_list, theird_cmd);
 	// ft_lstadd_back(&cmd_list, four_cmd);
 	// affiche_node(cmd_list);
-	// exit(0);
 	while (1)
 	{
 		line = readline("minishell$>  ");
@@ -55,7 +54,7 @@ int main(int ac, char **av, char **env)
 		cmd_list->ful_cmd = line;
 		ft_init(cmd_list);
 		// affiche_node(cmd_list);
-		ft_execut_cmd(cmd_list, env_list);
+		ft_execut_cmd(cmd_list, &env_list);
 		free(line);
 	}
 	return (0);

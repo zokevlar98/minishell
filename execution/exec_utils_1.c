@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/22 21:54:19 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/24 00:08:35 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	ft_execut_pipe(t_cmd *cmd_list, t_env *env_list)
 	wait(NULL);
 }
 
-int	process_child_write(t_cmd *cmd_list, t_env *env_list, int fd[])
+int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 {
 	int	pid;
 
@@ -119,13 +119,16 @@ int	process_child_write(t_cmd *cmd_list, t_env *env_list, int fd[])
 	pid = fork1();
 	if (pid == 0)
 	{
-		dup2(cmd_list->fd_in, STDIN_FILENO);
+		dup2(cmd_list->fd_in, STDIN_FILENO);// Redirects the standard input to the file descriptor fd_in
 		close(fd[0]);
 		if (dup2(fd[1], STDOUT_FILENO) == -1)
 			ft_error("dup2 failed\n");
-		dup2(cmd_list->fd_out, STDOUT_FILENO);
+		dup2(cmd_list->fd_out, STDOUT_FILENO);// Redirects the standard output to the file descriptor fd_out
 		close(fd[1]);
-		ft_execut(cmd_list, env_list);
+		if (is_builtin(cmd_list))
+			ft_builtin(cmd_list, env_list);
+		else
+		ft_execut(cmd_list, *env_list);
 	}
 	else
 	{
@@ -137,7 +140,7 @@ int	process_child_write(t_cmd *cmd_list, t_env *env_list, int fd[])
 	return (pid);
 }
 
-int	process_child_read(t_cmd *cmd_list, t_env *env_list, int fd[])
+int	process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[])
 {
 	int	pid;
 
@@ -145,13 +148,16 @@ int	process_child_read(t_cmd *cmd_list, t_env *env_list, int fd[])
 	pid = fork1();
 	if (pid == 0)
 	{
-		dup2(cmd_list->fd_in, STDIN_FILENO);
+		dup2(cmd_list->fd_in, STDIN_FILENO);// Redirects the standard input to the file descriptor fd_in
 		close(fd[0]);
 		if (dup2(fd[1], STDOUT_FILENO) == -1)
 			ft_error("dup2 failed\n");
-		dup2(cmd_list->fd_out, STDOUT_FILENO);
+		dup2(cmd_list->fd_out, STDOUT_FILENO);// Redirects the standard output to the file descriptor fd_out
 		close(fd[1]);
-		ft_execut(cmd_list, env_list);
+		if (is_builtin(cmd_list))
+			ft_builtin(cmd_list, env_list);
+		else
+		ft_execut(cmd_list, *env_list);
 	}
 	else
 	{
@@ -163,44 +169,16 @@ int	process_child_read(t_cmd *cmd_list, t_env *env_list, int fd[])
 	return (pid);
 }
 
-int	process_child_end(t_cmd *cmd_list, t_env *env_list)
+int	process_child_end(t_cmd *cmd_list, t_env **env_list)
 {
 	int	pid;
 
 	pid = fork1();
 	if (pid == 0)
 	{
-		dup2(cmd_list->fd_in, STDIN_FILENO);
-		dup2(cmd_list->fd_out, STDOUT_FILENO);
-		ft_execut(cmd_list, env_list);
+		dup2(cmd_list->fd_in, STDIN_FILENO);// Redirects the standard input to the file descriptor fd_in
+		dup2(cmd_list->fd_out, STDOUT_FILENO);// Redirects the standard output to the file descriptor fd_out
+		ft_execut(cmd_list, *env_list);
 	}
 	return (pid);
 }
-
-
-
-void	last_routine(t_cmd *cmd_list, t_env *env_list, int par)
-{
-	if (fork1() == 0)
-	{
-		
-		dup2(par, STDOUT_FILENO);
-		close(par);
-		ft_execut(cmd_list, env_list);
-	}
-	
-}
-
-// int	ft_execut_mul_pipe(t_cmd *cmd_list, t_env *env_list)
-// {
-// 	int	pid;
-	
-// 	process_child(cmd_list, env_list);
-// 	cmd_list = cmd_list->next;
-	
-// }
-
-// void	ft_execut_redir(t_cmd *cmd_list, t_env *env_list)
-// {
-// // 4 case reduraction	
-// }

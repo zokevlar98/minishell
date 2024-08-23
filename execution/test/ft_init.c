@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 00:12:17 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/22 19:11:34 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/23 22:52:02 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_init(t_cmd *cmd_list)//nzid tableau char ** ndewa fih cmds diyali o  fun
 	char	**args;
 	
 	args = ft_split(cmd_list->ful_cmd, ' ');
-	cmd_list->pipe_line = 0;
+	cmd_list->pipe_line = 1;
 	cmd_list->cmd = ft_strdup(args[0]);
 	cmd_list->args = args;
 	cmd_list->fd_in = 0;
