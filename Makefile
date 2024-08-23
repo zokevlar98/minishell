@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+         #
+#    By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/08/21 18:04:43 by zqouri           ###   ########.fr        #
+#    Updated: 2024/08/22 21:02:17 by zqouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h
 
-CC				=	cc -Wall -Wextra -Werror -I ./includes 
+CC				=	cc -Wall -Wextra -Werror -fsanitize=address -I ./includes 
 
 READLINE_FLAGS	=	-lreadline \
 

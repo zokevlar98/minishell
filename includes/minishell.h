@@ -110,11 +110,12 @@ void	ft_add_env_back(t_env **env, t_env *new);
 void    ft_execut_cmd(t_cmd *cmd_list, t_env *env_list);
 int     is_builtin(t_cmd *cmd_list);
 void	ft_execut_pipe(t_cmd *cmd_list, t_env *env_list);
-void	ft_execut_mul_pipe(t_cmd *cmd_list, t_env *env_list);
+int		ft_execut_mul_pipe(t_cmd *cmd_list, t_env *env_list);
 void	ft_execut(t_cmd *cmd_list, t_env *env_list);
 char	**ft_get_envp(t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
 int		fork1(void);
+int	process_child(t_cmd *cmd_list, t_env *env_list);
 
 //builtins
 void	ft_builtin(t_cmd *cmd_list, t_env *env_list);
@@ -132,6 +133,7 @@ int		ft_lstsize(t_cmd *lst);
 t_cmd	*ft_lstlast(t_cmd *lst);
 void	ft_lstadd_back(t_cmd **lst, t_cmd *new);
 void	ft_init(t_cmd *cmd_list);
+void	ft_init_first(t_cmd *cmd_list);
 void	ft_init_second(t_cmd *cmd_list);
 void	ft_init_theird(t_cmd *cmd_list);
 void	affiche_node(t_cmd *cmd_list);

@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/11 02:47:25 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/22 21:40:22 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,22 @@ void	ft_exec(t_cmd *cmd_list, t_env *env_list)
 void    ft_execut_cmd(t_cmd *cmd_list, t_env *env_list)
 {
 	t_cmd	*tmp;
+	int		pid;
+	int		status;
 
 	tmp = cmd_list;
-	// while (tmp)
-	// {
 		if (serch_for_pipe(tmp))
-			ft_execut_pipe(tmp, env_list);
+		{
+			while (tmp)
+			{
+				pid = process_child(tmp, env_list);
+				tmp = tmp->next;
+				// printf("eho\n");
+			}
+			waitpid(pid, &status, 0);
+			while (waitpid(-1, NULL, 0) != -1)
+				;
+		}
 		else if (is_builtin(tmp)){
 			ft_builtin(tmp, env_list);}
 		else

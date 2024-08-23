@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/11 02:32:35 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/22 21:54:19 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,15 @@ void	ft_execut_pipe(t_cmd *cmd_list, t_env *env_list)
 	wait(NULL);
 }
 
-void	process_child(t_cmd *cmd_list, t_env *env_list)
+int	process_child(t_cmd *cmd_list, t_env *env_list)
 {
 	int	fd[2];
+	int	pid;
 
 	if (pipe(fd) == -1)
 		ft_error("pipe failed\n");
-	if (fork1() == 0)
+	pid = fork1();
+	if (pid == 0)
 	{
 		close(fd[0]);
 		if (dup2(fd[1], STDOUT_FILENO) == -1)
@@ -132,34 +134,31 @@ void	process_child(t_cmd *cmd_list, t_env *env_list)
 			ft_error("dup2 failed\n");
 		close(fd[0]);
 	}
+		// close(STDIN_FILENO);
+	printf("eho\n");
+	return (pid);
 }
 
-void	last_routine(t_cmd *cmd_list, t_env *env_list)
+void	last_routine(t_cmd *cmd_list, t_env *env_list, int par)
 {
 	if (fork1() == 0)
 	{
-		dup2(0, STDIN_FILENO);
+		
+		dup2(par, STDOUT_FILENO);
+		close(par);
 		ft_execut(cmd_list, env_list);
 	}
-	wait(NULL);
+	
 }
 
-void	 ft_execut_mul_pipe(t_cmd *cmd_list, t_env *env_list)
-{
-	t_cmd	*tmp;
-
-	tmp = cmd_list;
-	if (fork1() == 0)
-	{
-		while (tmp)
-		{
-			process_child(tmp, env_list);
-			tmp = tmp->next;
-		}
-	}
-	// last_routine(tmp, env_list);
-	printf("nchoufo : %s\n", tmp->ful_cmd);
-}
+// int	ft_execut_mul_pipe(t_cmd *cmd_list, t_env *env_list)
+// {
+// 	int	pid;
+	
+// 	process_child(cmd_list, env_list);
+// 	cmd_list = cmd_list->next;
+	
+// }
 
 // void	ft_execut_redir(t_cmd *cmd_list, t_env *env_list)
 // {
