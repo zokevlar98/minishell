@@ -6,24 +6,11 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/24 00:04:54 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/26 00:55:35 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-    Builtins
-    Executor "and or"
-    pipes
-    redirections
-    Expanding
-
-    first we serch for a pipe line
-    then we search for redirections
-    then we search for builtins
-    then we search for commands 
-*/
 
 int		serch_for_pipe(t_cmd *cmd_list)
 {
@@ -57,39 +44,31 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list)
 	tmp = cmd_list;
 	saves[0] = dup(STDIN_FILENO);
 	saves[1] = dup(STDOUT_FILENO);
-	if (serch_for_pipe(tmp))
+	while (tmp)
 	{
-		while (tmp)
+		if (tmp->next == NULL)
 		{
-			if (tmp->next == NULL)
-			{
-				if (is_builtin(tmp))
-					ft_builtin(tmp, env_list);
-				else
-					process_child_end(tmp, env_list);
-				break ;
-			}
-			pid = process_child_write(tmp, env_list, fd);
-			tmp = tmp->next;
-			if (tmp && tmp->next != NULL)
-				pid = process_child_read(tmp, env_list, fd);
+			if (is_builtin(tmp))
+				ft_builtin(tmp, env_list);
 			else
-			{
-				if (is_builtin(tmp))
-					ft_builtin(tmp, env_list);
-				else
 				process_child_end(tmp, env_list);
-			}
-			tmp = tmp->next;
+			break ;
 		}
-		waitpid(pid, &status, 0);
-		while (waitpid(-1, NULL, 0) != -1)
-			;
+		pid = process_child_write(tmp, env_list, fd);
+		tmp = tmp->next;
+		if (tmp && tmp->next != NULL)
+			pid = process_child_read(tmp, env_list, fd);
+		else
+		{
+			if (is_builtin(tmp))
+				ft_builtin(tmp, env_list);
+			else
+				process_child_end(tmp, env_list);
+		}
+		tmp = tmp->next;
 	}
-	// else if (is_builtin(tmp))
-	// 	ft_builtin(tmp, env_list);
-	// else
-	// 	ft_exec(tmp, env_list); // I need to remove
 	dup2(saves[0], STDIN_FILENO);
 	dup2(saves[1], STDOUT_FILENO);
+	while (waitpid(-1, &status, 0) != -1)
+		;
 }

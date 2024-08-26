@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/24 15:51:43 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/26 00:39:43 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,6 @@ int is_builtin(t_cmd *cmd_list)
     return (0);
 }
 
-// int ft_check_env(t_cmd *cmd_list)
-// {
-//     int     i;
-//     char    *cmd;
-
-//     i = 0;
-//     cmd = cmd_list->cmd;
-//     while (cmd[i] == '\t' || cmd[i] == ' ' || cmd[i] == '\n')
-//         i++;
-//     while (cmd[i])
-//     {
-//         if (cmd[i] == '$')
-//             return (1);
-//         i++;
-//     }
-//     return (0);
-// }
-
 void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 {
 	char	**envp;
@@ -81,34 +63,7 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 	cmd = ft_split_up(cmd_list->ful_cmd);
 	if (execve(path, cmd, envp) == -1)
 		ft_error("execve failed\n");
-}
-
-void	ft_execut_pipe(t_cmd *cmd_list, t_env *env_list)
-{
-	int		fd[2];
-
-	if (pipe(fd) == -1)
-		ft_error("pipe failed\n");
-	if (fork1() == 0)
-	{
-		close(fd[0]);
-		if (dup2(fd[1], STDOUT_FILENO) == -1)
-			ft_error("dup2 failed\n");
-		close(fd[1]);
-		ft_execut(cmd_list, env_list);
-	}
-	if (fork1() == 0)
-	{
-		close(fd[1]);
-		if (dup2(fd[0], STDIN_FILENO) == -1)
-			ft_error("dup2 failed\n");
-		close(fd[0]);
-		ft_execut(cmd_list->next, env_list);
-	}
-	close(fd[0]);
-	close(fd[1]);
-	wait(NULL);
-	wait(NULL);
+	exit(1);
 }
 
 int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
@@ -126,9 +81,12 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 		dup2(cmd_list->fd_out, STDOUT_FILENO);// Redirects the standard output to the file descriptor fd_out
 		close(fd[1]);
 		if (is_builtin(cmd_list))
+		{
 			ft_builtin(cmd_list, env_list);
+			exit(0);
+		}
 		else
-		ft_execut(cmd_list, *env_list);
+			ft_execut(cmd_list, *env_list);
 	}
 	else
 	{
@@ -155,9 +113,12 @@ int	process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[])
 		dup2(cmd_list->fd_out, STDOUT_FILENO);// Redirects the standard output to the file descriptor fd_out
 		close(fd[1]);
 		if (is_builtin(cmd_list))
+		{
 			ft_builtin(cmd_list, env_list);
+			exit(0);
+		}
 		else
-		ft_execut(cmd_list, *env_list);
+			ft_execut(cmd_list, *env_list);
 	}
 	else
 	{
