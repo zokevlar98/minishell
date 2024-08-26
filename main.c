@@ -5,12 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 15:39:16 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/26 01:45:55 by zqouri           ###   ########.fr       */
-
-/*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 01:31:42 by mohmazou         ###   ########.fr       */
-
+/*   Created: 2024/08/26 09:41:23 by zqouri            #+#    #+#             */
+/*   Updated: 2024/08/26 09:46:21 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +18,12 @@ int main(int ac, char **av, char **env)
 {
 	char *line;
 	t_env *env_list;
-	t_cmd *cmd_list;
-
 
 	env_list = NULL;
 	ft_env_list(&env_list, env);
 	t_cmd *cmd_list = (t_cmd *)malloc(sizeof(t_cmd));
-	cmd_list = NULL;
-	// check for arguments
+	if (!cmd_list)
+		ft_error("malloc error");
 	if (ac != 1 || av[1])
 	{
 		printf("Usage: %s\n", av[0]);
@@ -45,9 +39,8 @@ int main(int ac, char **av, char **env)
 			add_history(line);
 
 		ft_init_pars(&cmd_list, line);
-		// ft_init(cmd_list);
-		// affiche_node(cmd_list);
 		ft_execut_cmd(cmd_list, &env_list);
+		// affiche_node(cmd_list);
 		free(line);
 	}
 	return (0);
