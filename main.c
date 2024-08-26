@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:39:16 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/24 16:59:01 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/26 01:22:58 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int main(int ac, char **av, char **env)
 		printf("Usage: %s\n", av[0]);
 		return (1);
 	}
+	shell_lvl(env_list);
 	while (1)
 	{
 		line = readline("minishell$>  ");
