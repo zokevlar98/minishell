@@ -6,21 +6,12 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 04:02:26 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/21 17:44:56 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/26 01:27:10 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** 1. ft_echo
-** 2. ft_cd
-** 3. ft_pwd
-** 4. ft_export
-** 5. ft_unset
-** 6. ft_env
-** 7. ft_exit
-*/
 
 int	is_caracter(char *str, char c)
 {
@@ -34,4 +25,23 @@ int	is_caracter(char *str, char c)
 		i++;
 	}
 	return (0);
+}
+
+void	shell_lvl(t_env *env)
+{
+	// I need fonction to sort my ENV varriable
+	char	*value;
+	int		shell_lvl;
+	t_env	*new;
+
+	value = ft_env_search(env, "SHLVL");
+	if (!value)
+	{
+		new = ft_env_new("SHLVL=1");
+		ft_env_add_back(&env, new);
+		return ;
+	}
+	shell_lvl = ft_atoi(value);
+	shell_lvl++;
+	ft_change_env(env, "SHLVL", ft_itoa(shell_lvl));
 }
