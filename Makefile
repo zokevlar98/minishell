@@ -6,7 +6,11 @@
 #    By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
+#
 #    Updated: 2024/08/26 01:48:32 by zqouri           ###   ########.fr        #
+#
+#    Updated: 2024/07/31 01:39:08 by mohmazou         ###   ########.fr        #
+#
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +21,7 @@ HEADER			=	includes/minishell.h
 CC				=	cc -Wall -Wextra -Werror -g -fsanitize=address -I ./includes 
 
 READLINE_FLAGS	=	-lreadline \
+
 
 SRCS			=	main.c 								\
 					lib_utils/ft_error.c 				\
@@ -48,6 +53,8 @@ SRCS			=	main.c 								\
 					builtins/ft_export.c				\
 					builtins/ft_exit.c					\
 					builtins/ft_unset.c					\
+
+
 
 OBJS		=	$(SRCS:.c=.o)
 
