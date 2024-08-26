@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 04:02:26 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/26 01:27:10 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/26 01:42:01 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	is_caracter(char *str, char c)
 
 void	shell_lvl(t_env *env)
 {
-	// I need fonction to sort my ENV varriable
+	// I need fonction to sort my ENV liked list
+	// i well help me for case "export"
 	char	*value;
 	int		shell_lvl;
 	t_env	*new;

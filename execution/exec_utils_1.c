@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/26 00:39:43 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/26 01:44:34 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int is_builtin(t_cmd *cmd_list)
 
     i = 0;
     cmd = lower_case(cmd_list->cmd);
-    
     builtins[0] = "echo";
     builtins[1] = "cd";
     builtins[2] = "pwd";

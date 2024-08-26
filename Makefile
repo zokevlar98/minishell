@@ -6,7 +6,7 @@
 #    By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/08/26 01:20:47 by zqouri           ###   ########.fr        #
+#    Updated: 2024/08/26 01:48:32 by zqouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,16 +29,16 @@ SRCS			=	main.c 								\
 					lib_utils/ft_split_up.c 			\
 					lib_utils/ft_atoi.c 				\
 					lib_utils/ft_itoa.c 				\
+					lib_utils/ft_lstnew.c				\
+					lib_utils/ft_lstlast.c				\
+					lib_utils/ft_lstadd_back.c			\
+					lib_utils/ft_lstsize.c				\
 					execution/exec_utils_1.c			\
 					execution/exec_utils_2.c			\
 					execution/exec.c					\
 					env_var/env_utils_1.c				\
-					execution/test/ft_lstnew.c			\
-					execution/test/ft_lstlast.c			\
-					execution/test/ft_lstadd_back.c		\
 					execution/test/outils_test.c		\
 					execution/test/ft_init.c			\
-					execution/test/ft_lstsize.c			\
 					builtins/builtin_cmd.c				\
 					builtins/builtin_utils.c			\
 					builtins/ft_echo.c					\

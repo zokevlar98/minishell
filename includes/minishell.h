@@ -55,6 +55,10 @@ typedef struct s_env
 // };
 typedef struct s_cmd
 {
+    /*Here we go with the structure of the command
+    we need char **cmd, char *cmd , int fd_in, int fd_out, int index (for evrey noed), int num_pipe(is a option) and next
+    we need index for optimisition algo of execution
+    */
 	char			*ful_cmd;// it must be a double pointer
     int				pipe_line;//indice of command 0 -> ....
     char			*cmd;

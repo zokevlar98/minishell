@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:39:16 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/26 01:22:58 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/26 01:45:55 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int main(int ac, char **av, char **env)
 			break;
 		if (line[0] != '\0')
 			add_history(line);
-		// cmd_list->ful_cmd = line;
 		ft_init_pars(&cmd_list, line);
 		// ft_init(cmd_list);
 		// affiche_node(cmd_list);
