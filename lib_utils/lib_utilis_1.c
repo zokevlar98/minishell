@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_utilis_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:22:31 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 00:38:27 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/10 00:28:32 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
+	if (!s)
+		return (0);
 	while (s[len])
 		len++;
 	return (len);
@@ -50,18 +52,27 @@ int ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
 
-char *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	while (*s)
+	int		i;
+	char	*p;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	p = (char *)s;
+	while (p[i] != '\0')
 	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
+		if (p[i] == (char)c)
+			return (p + i);
+		i++;
 	}
+	if (p[i] == (char)c)
+		return (p + i);
 	return (NULL);
 }
 
-char *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub;
 	size_t	i;
@@ -70,7 +81,7 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start > ft_strlen(s))
 		return (ft_strdup("\0"));
-	sub = malloc(sizeof(char) * (len + 1));
+	sub = (char *)malloc(sizeof(char) * (len + 1));
 	if (!sub)
 		return (NULL);
 	i = 0;
