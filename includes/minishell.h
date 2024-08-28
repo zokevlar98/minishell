@@ -84,6 +84,7 @@ char	**ft_split_up(char *s);
 char	*ft_strtrim(char *s1, char *set);
 int     ft_atoi(char *str);
 char	*ft_itoa(int n);
+int size_array(char **arry);
 
 // lib_utils_2
 size_t	ft_strlen(const char *s);
@@ -96,6 +97,7 @@ int		is_caracter(char *str, char c);
 // env_utils_1.c
 void	ft_env_list(t_env **env_list,char **env);
 char	*ft_env_search(t_env *env_list, char *name);
+char    **empty_env(void);
 
 // parse.c
 t_cmd	*ft_parse_line(char *line);

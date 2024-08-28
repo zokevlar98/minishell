@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 09:51:55 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/26 09:51:57 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/28 06:41:17 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ int main(int ac, char **av, char **env)
 	char *line;
 	t_env *env_list;
 
-	env_list = NULL;
-	ft_env_list(&env_list, env);
+	if (!env[0])
+		env = empty_env();
 	t_cmd *cmd_list = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!cmd_list)
 		ft_error("allocation failed");
-	// check for arguments
+	env_list = NULL;
+	ft_env_list(&env_list, env);
+	
 	if (ac != 1 || av[1])
 	{
 		printf("Usage: %s\n", av[0]);

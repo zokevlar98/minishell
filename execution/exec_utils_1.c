@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/26 01:44:34 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/28 07:39:28 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,16 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 		ft_error("malloc failed\n");
 	path = find_path_env(cmd_list->cmd, envp);
 	if (!path)
-		ft_error("command not found\n");
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(cmd_list->cmd, STDERR_FILENO);
+		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		exit(127);
+	}
 	cmd = ft_split_up(cmd_list->ful_cmd);
 	if (execve(path, cmd, envp) == -1)
 		ft_error("execve failed\n");
-	exit(1);
+	exit(EXIT_SUCCESS);
 }
 
 int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
@@ -82,7 +87,7 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 		if (is_builtin(cmd_list))
 		{
 			ft_builtin(cmd_list, env_list);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 		else
 			ft_execut(cmd_list, *env_list);
@@ -114,7 +119,7 @@ int	process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[])
 		if (is_builtin(cmd_list))
 		{
 			ft_builtin(cmd_list, env_list);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 		else
 			ft_execut(cmd_list, *env_list);

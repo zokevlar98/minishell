@@ -1,39 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib_utilis_exec.c                                  :+:      :+:    :+:   */
+/*   env_utils_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 05:40:40 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/28 07:20:45 by zqouri           ###   ########.fr       */
+/*   Created: 2024/08/28 06:28:16 by zqouri            #+#    #+#             */
+/*   Updated: 2024/08/28 07:34:15 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char    *lower_case(char *str)
+char    **empty_env(void)
+{
+    char   **env;
+    char    *str;
+
+    str = getcwd(NULL, 0);
+    env = (char **)malloc(sizeof(char *) * 4);
+    if (!env)
+        ft_error("malloc failed\n");
+    env[0] = ft_strjoin("PWD=", str);
+    env[1] = ft_strdup("SHLVL=1");
+    env[2] = ft_strdup("_=/usr/bin/env");
+    env[3] = NULL;
+    return (env);
+}
+
+int size_array(char **arry)
 {
     int i;
 
     i = 0;
-    while (str[i])
-    {
-        if (str[i] >= 'A' && str[i] <= 'Z')
-            str[i] += 32;
-        i++;
-    }
-    return (str);
-}
-
-int ft_strncmp(char *s1, char *s2, size_t size)
-{
-    size_t i;
-
-    i = 0;
-    if (!s1 || !s2)
+    if (!arry)
         return (0);
-    while (i < size - 1 && s1[i] && s2[i] && s1[i] == s2[i])
+    while (arry[i] != NULL)
         i++;
-    return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+    return (i);
 }

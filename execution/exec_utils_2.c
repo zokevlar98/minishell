@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:57:41 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/02 20:26:54 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/28 07:42:00 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ char	*find_path_env(char *cmd, char *envp[])
 	{
 		if (access(cmd, F_OK) == 0)
 			return (cmd);
+	}
+	if (size_array(envp) == 0 || size_array(envp) == 3)
+	{
+		path = ft_strjoin("/usr/bin/", cmd);
+		if (access(path, F_OK) == 0)
+			return (path);
 	}
 	while (ft_strncmp(envp[i], "PATH", 4) != 0)
 		i++;
