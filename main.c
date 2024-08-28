@@ -6,13 +6,13 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/28 04:38:36 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/28 06:07:56 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-void	ft_execut_cmd(t_cmd *cmd_list, t_env *env_list)
+void	ft_execut_cmd(t_p_cmd *cmd_list, t_env *env_list)
 {
 	
 	affich_cmd_list(cmd_list);
@@ -22,7 +22,7 @@ void	ft_execut_cmd(t_cmd *cmd_list, t_env *env_list)
 void	start_loop(t_env *env_list)
 {
 	char	*line;
-	t_cmd	*cmd_list;
+	t_p_cmd	*cmd_list;
 
 	while (1)
 	{
@@ -41,14 +41,7 @@ void	start_loop(t_env *env_list)
 			continue ;
 		}
 		ft_expending(cmd_list, env_list);
-		printf("SEGFAULT\n");
 		ft_execut_cmd(cmd_list, env_list);
-		if (cmd_list->cmd && ft_strcmp(cmd_list->cmd[0], "exit") == 0)
-		{
-			printf("exit\n");
-			free(line);
-			exit(0);
-		}
 		free(line);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/19 06:33:40 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/28 06:07:56 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_env
 }	t_env;
 
 // command linked list
-typedef struct s_cmd
+typedef struct s_p_cmd
 {
 	// char			*ful_cmd;
 	int				pipe_line;
@@ -47,8 +47,8 @@ typedef struct s_cmd
 	char			**cmd;
 	char			**in_redir;
 	char			**out_redir;
-	struct s_cmd	*next;
-}	t_cmd;
+	struct s_p_cmd	*next;
+}	t_p_cmd;
 
 // free_all.c
 /*
@@ -74,11 +74,11 @@ void	ft_env_list(t_env **env_list, char **env);
 char	*ft_env_search(t_env *env_list, char *name);
 
 // parse.c
-t_cmd	*ft_parse_line(char *line, t_env *env_list);
+t_p_cmd	*ft_parse_line(char *line, t_env *env_list);
 
 // cmd_list.c
-void	ft_fill_cmd_list(t_cmd **cmd_list, char **all_tokens, int pipe);
-void	affich_cmd_list(t_cmd *cmd_list);
+void	ft_fill_cmd_list(t_p_cmd **cmd_list, char **all_tokens, int pipe);
+void	affich_cmd_list(t_p_cmd *cmd_list);
 
 // check_syntax_red.c
 int		ft_check_direction(char *line);
@@ -100,6 +100,6 @@ int		ft_check_tokens(char **tokens);
 char	**expand_tokens(char **tokens, t_env *env_list);
 
 // expanding2.c
-void	ft_expending(t_cmd *cmd_list,t_env *env_list);
+void	ft_expending(t_p_cmd *cmd_list,t_env *env_list);
 
 #endif

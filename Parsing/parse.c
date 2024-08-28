@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:28:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/19 01:25:23 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/28 06:07:56 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ char	**re_tokenizing(char **all_tokens)
 	return (new_tokens);
 }
 
-t_cmd	*ft_parse_line(char *line, t_env *env_list)
+t_p_cmd	*ft_parse_line(char *line, t_env *env_list)
 {
-	t_cmd	*cmd_list;
+	t_p_cmd	*cmd_list;
 	char	**all_tokens;
 (void)env_list;
 	cmd_list = NULL;

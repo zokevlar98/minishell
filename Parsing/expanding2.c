@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:45:30 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/20 02:15:41 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/28 06:07:56 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*ft_expend(char *str,t_env *env_list)
 }
 
 
-void	ft_expend_cmd(t_cmd *cmd,t_env *env_list)
+void	ft_expend_cmd(t_p_cmd *cmd,t_env *env_list)
 {
 	int	i;
 	char	*tmp;
@@ -119,9 +119,9 @@ void	ft_expend_cmd(t_cmd *cmd,t_env *env_list)
 	}
 }
 
-void	ft_expending(t_cmd *cmd_list,t_env *env_list)
+void	ft_expending(t_p_cmd *cmd_list,t_env *env_list)
 {
-	t_cmd	*tmp;
+	t_p_cmd	*tmp;
 
 	tmp = cmd_list;
 	while (tmp)

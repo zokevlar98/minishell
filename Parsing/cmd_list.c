@@ -6,15 +6,15 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 23:10:43 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/10 09:00:26 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/28 06:07:56 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	affich_cmd_list(t_cmd *cmd_list)
+void	affich_cmd_list(t_p_cmd *cmd_list)
 {
-	t_cmd *tmp;
+	t_p_cmd *tmp;
 	int i;
 	int j;
 
@@ -55,11 +55,11 @@ void	affich_cmd_list(t_cmd *cmd_list)
 	}
 }
 
-t_cmd	*ft_new_cmd(int pipe)
+t_p_cmd	*ft_new_cmd(int pipe)
 {
-	t_cmd	*new_cmd;
+	t_p_cmd	*new_cmd;
 
-	new_cmd = (t_cmd *)ft_malloc(sizeof(t_cmd), 0);
+	new_cmd = (t_p_cmd *)ft_malloc(sizeof(t_p_cmd), 0);
 	if (!new_cmd)
 		return (NULL);
 	new_cmd->pipe_line = pipe;
@@ -70,9 +70,9 @@ t_cmd	*ft_new_cmd(int pipe)
 	return (new_cmd);
 }
 
-void	ft_add_cmd(t_cmd **cmd_list, t_cmd *new_cmd)
+void	ft_add_cmd(t_p_cmd **cmd_list, t_p_cmd *new_cmd)
 {
-	t_cmd	*tmp;
+	t_p_cmd	*tmp;
 
 	if (!new_cmd)
 		return ;
@@ -99,9 +99,9 @@ char	**add_to_array(char **array, char *str)
 	return (array);
 }
 
-void	ft_fill_cmd_list(t_cmd **cmd_list, char **all_tokens, int pipe)
+void	ft_fill_cmd_list(t_p_cmd **cmd_list, char **all_tokens, int pipe)
 {
-	t_cmd	*new_cmd;
+	t_p_cmd	*new_cmd;
 	int		i;
 	int		j;
 
