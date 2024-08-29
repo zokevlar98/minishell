@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 00:12:17 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/24 19:52:34 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/29 08:57:48 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_init(t_cmd *cmd_list)
-{
-	char	**args;
-	
-	args = ft_split(cmd_list->ful_cmd, ' ');
-	cmd_list->pipe_line = 1;
-	cmd_list->cmd = ft_strdup(args[0]);
-	cmd_list->args = args;
-	cmd_list->fd_in = 0;
-	cmd_list->fd_out = 1;
-	
-}
 
 void	ft_init_pars(t_cmd **cmd_list, char *line)
 {
@@ -55,9 +42,9 @@ void	affiche_node(t_cmd *cmd_list)
 	tmp = cmd_list;
 	while (tmp)
 	{
-		printf("ful_cmd: %s		\n", tmp->ful_cmd);
+		// printf("ful_cmd: %s		\n", tmp->ful_cmd);
 		printf("pipe_line: %d		\n", tmp->pipe_line);
-		printf("cmd:%s			\n", tmp->cmd);
+		// printf("cmd:%s			\n", tmp->cmd);
 		while (*tmp->args)
 		{
 			printf("args: %s		\n", *tmp->args);
@@ -65,14 +52,5 @@ void	affiche_node(t_cmd *cmd_list)
 		}
 		printf("-------------------------\n");
 		tmp = tmp->next;
-	}
-}
-
-void	print_args(char **args)
-{
-	while (*args)
-	{
-		printf("%s\n", *args);
-		args++;
 	}
 }

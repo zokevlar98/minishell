@@ -2,7 +2,7 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h
 
-CC				=	cc -Wall -Wextra -Werror -g -fsanitize=address -I ./includes 
+CC				=	cc -Wall -Wextra -I ./includes 
 
 READLINE_FLAGS	=	-lreadline \
 
@@ -15,7 +15,6 @@ SRCS			=	main.c 								\
 					lib_utils/lib_utilis_1.c 			\
 					lib_utils/lib_utilis_2.c 			\
 					lib_utils/lib_utilis_exec.c 		\
-					lib_utils/ft_split_up.c 			\
 					lib_utils/ft_atoi.c 				\
 					lib_utils/ft_itoa.c 				\
 					lib_utils/ft_lstnew.c				\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 09:10:19 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/23 23:53:58 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/29 08:59:23 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,9 @@ void	ft_env(t_cmd *cmd, t_env *env)
 		}
 	}
 	else
-		ft_error("env: no options or arguments");
+	{
+		ft_putstr_fd("env: '", 1);
+		ft_putstr_fd(cmd->args[1], 1);
+		ft_putstr_fd("': No such file or directory\n", 1);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/13 15:38:35 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/29 08:45:08 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void	ft_export(t_cmd *cmd, t_env *env)
 		if (ft_strncmp(tmp->name, cmd->args[1], ft_strlen(tmp->name)) == 0)
 		{
 			str = ft_split(cmd->args[1], '=');
-			// affiche_env(env);
 			ft_change_env(p, tmp->name, str[1]);
-			// affiche_env(env);
 			return ;
 		}
 		tmp = tmp->next;
@@ -58,5 +56,5 @@ void	ft_export(t_cmd *cmd, t_env *env)
 		return ;
 	}
 	else
-		printf("9ewada export\n");
+		ft_error("ERRor: NOT SET YET");
 }

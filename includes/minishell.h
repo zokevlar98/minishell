@@ -59,9 +59,9 @@ typedef struct s_cmd
     we need char **cmd, char *cmd , int fd_in, int fd_out, int index (for evrey noed), int num_pipe(is a option) and next
     we need index for optimisition algo of execution
     */
-	char			*ful_cmd;// it must be a double pointer
+	// char			*ful_cmd;// it must be a double pointer
     int				pipe_line;//indice of command 0 -> ....
-    char			*cmd;
+    // char			*cmd;
     char			**args;
     int             fd_in;
     int             fd_out;
@@ -80,7 +80,6 @@ char	*ft_strchr(const char *s, int c);
 char	**ft_split(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
 void	ft_free(char **tab);
-char	**ft_split_up(char *s);
 char	*ft_strtrim(char *s1, char *set);
 int     ft_atoi(char *str);
 char	*ft_itoa(int n);
@@ -141,11 +140,9 @@ t_cmd	*ft_lstnew(void);
 int		ft_lstsize(t_cmd *lst);
 t_cmd	*ft_lstlast(t_cmd *lst);
 void	ft_lstadd_back(t_cmd **lst, t_cmd *new);
-void	ft_init(t_cmd *cmd_list);
 void    ft_init_pars(t_cmd **cmd_list, char *line);
 void	affiche_node(t_cmd *cmd_list);
 void	affiche_env(t_env *env);
-void	print_args(char **args);
 t_cmd	*ft_lstnew_cmd(char *cmd);
 void	ft_lstadd_back_cmd(t_cmd **cmd_list, t_cmd *new);
 t_env	*ft_env_new_(char *key, char *value);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/28 07:39:28 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/29 08:51:26 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int is_builtin(t_cmd *cmd_list)
     char    *cmd;
 
     i = 0;
-    cmd = lower_case(cmd_list->cmd);
+    cmd = lower_case(cmd_list->args[0]);
     builtins[0] = "echo";
     builtins[1] = "cd";
     builtins[2] = "pwd";
@@ -51,21 +51,19 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 {
 	char	**envp;
 	char	*path;
-	char	**cmd;
 
 	envp = ft_get_envp(env_list);
 	if (!envp)
 		ft_error("malloc failed\n");
-	path = find_path_env(cmd_list->cmd, envp);
+	path = find_path_env(cmd_list->args[0], envp);
 	if (!path)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		ft_putstr_fd(cmd_list->cmd, STDERR_FILENO);
+		ft_putstr_fd(cmd_list->args[0], STDERR_FILENO);
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
 		exit(127);
 	}
-	cmd = ft_split_up(cmd_list->ful_cmd);
-	if (execve(path, cmd, envp) == -1)
+	if (execve(path, cmd_list->args, envp) == -1)
 		ft_error("execve failed\n");
 	exit(EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:35 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/21 17:45:51 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/08/29 08:31:04 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	ft_echo(t_cmd *cmd_list)
 		}
 		else
 			ft_putstr_fd(cmd[i], 1);
-		//eho
 		i++;
 	}
 	ft_putstr_fd("\n", 1);
