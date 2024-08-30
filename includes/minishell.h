@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/28 06:07:56 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/30 15:26:29 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,17 @@ typedef struct s_p_cmd
 	struct s_p_cmd	*next;
 }	t_p_cmd;
 
+typedef struct s_cmd
+{
+	int				pipe_line;
+	char			**args;
+	int				fd_in;
+	int				fd_out;
+	struct s_cmd	*next;
+}	t_cmd;
+
+
+
 // free_all.c
 /*
 taking the size to allocate,
@@ -66,40 +77,59 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 // lib_utils_2.c
+
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char *s1, char *set);
 int	ft_isalnum(char c);
+
 // env_utils_1.c
+
 void	ft_env_list(t_env **env_list, char **env);
 char	*ft_env_search(t_env *env_list, char *name);
 
 // parse.c
+
 t_p_cmd	*ft_parse_line(char *line, t_env *env_list);
 
-// cmd_list.c
+// cmd_p_list.c
+
 void	ft_fill_cmd_list(t_p_cmd **cmd_list, char **all_tokens, int pipe);
-void	affich_cmd_list(t_p_cmd *cmd_list);
+void	affich_cmd_list(t_cmd *cmd_list);
+void	affich_cmd_p_list(t_p_cmd *cmd_list);
+
+// cmd_list.c
+
+t_cmd	*ft_p_cmd_to_cmd(t_p_cmd *cmd_p_list);
 
 // check_syntax_red.c
+
 int		ft_check_direction(char *line);
 
 // check_syntax.c
+
 int		ft_check_syntax(char *line);
 int		ft_check_quote(char *line);
 void	in_quotes(char line_i, int *single_quote, int *double_quote);
 
 // add_space.c
+
 char	*ft_add_space(char *line);
 
 // tokenize.c
+
 char	**tokenizing(char *line);
 void	**tokenize_line(char *line, char ***tokens, int length, int *in_double_quote, int *in_single_quote, int *in_parentheses);
 int		ft_check_tokens(char **tokens);
 
 //expanding.c
+
 char	**expand_tokens(char **tokens, t_env *env_list);
 
 // expanding2.c
+
 void	ft_expending(t_p_cmd *cmd_list,t_env *env_list);
+
+// open_file.c
+void	open_file(t_p_cmd *cmd_p_lit, t_cmd *cmd_list);
 
 #endif

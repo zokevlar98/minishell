@@ -6,13 +6,13 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/28 06:07:56 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/30 15:49:39 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-void	ft_execut_cmd(t_p_cmd *cmd_list, t_env *env_list)
+void	ft_execut_cmd(t_cmd *cmd_list, t_env *env_list)
 {
 	
 	affich_cmd_list(cmd_list);
@@ -22,7 +22,8 @@ void	ft_execut_cmd(t_p_cmd *cmd_list, t_env *env_list)
 void	start_loop(t_env *env_list)
 {
 	char	*line;
-	t_p_cmd	*cmd_list;
+	t_p_cmd	*cmd_p_list;
+	t_cmd	*cmd_list;
 
 	while (1)
 	{
@@ -34,13 +35,16 @@ void	start_loop(t_env *env_list)
 			free(line);
 			continue ;
 		}
-		cmd_list = ft_parse_line(line, env_list);
-		if (!cmd_list)
+		cmd_p_list = ft_parse_line(line, env_list);
+		if (!cmd_p_list)
 		{
 			free(line);
 			continue ;
 		}
-		ft_expending(cmd_list, env_list);
+		ft_expending(cmd_p_list, env_list);
+		// affich_cmd_p_list(cmd_p_list);
+		cmd_list = ft_p_cmd_to_cmd(cmd_p_list);
+		open_file(cmd_p_list, cmd_list);
 		ft_execut_cmd(cmd_list, env_list);
 		free(line);
 	}

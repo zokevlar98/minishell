@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:45:30 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/28 06:07:56 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/08/29 06:16:07 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_expend(char *str,t_env *env_list)
 	int		status;
 	int		i;
 	int		j;
-
+	
 	i = 0;
 	j = 0;
 	new_str = ft_malloc(MAX_TOKENS * 75, 0);
@@ -62,7 +62,51 @@ char	*ft_expend(char *str,t_env *env_list)
 			new_str = ft_strjoin(new_str, "EXIT_STATUS");
 			j = j + ft_strlen("EXIT_STATUS");
 		}
-		else if (status && not_expandable(str[i + 1]))
+		else if (status && (not_expandable(str[i + 1]) || str[i + 1] == '\"'))
+			i ++;
+		else if (status && (ft_isalnum(str[i + 1]) || str[i + 1] == '_'))
+		{
+			new_str = ft_strjoin(new_str, ft_env_search(env_list, ft_get_name(str, i + 1)));
+			j = j + ft_strlen(ft_env_search(env_list, ft_get_name(str, i + 1)));
+			while (str[i + 1] && (ft_isalnum(str[i + 1]) || str[i + 1] == '_'))
+				i ++;
+		}
+		else
+			new_str[j++] = str[i];
+		i ++;
+	}
+	return (new_str);
+}
+
+char	*ft_expend_redir(char *str,t_env *env_list)
+{
+	char	*new_str;
+	int		status;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	new_str = ft_malloc(MAX_TOKENS * 75, 0);
+	if (!new_str)
+		return (NULL);
+	while (str[i])
+	{
+		while (str[i] == '>' || str[i] == '<')
+		{
+			new_str[j++] = str[i];
+			i ++;
+			if (str[i] != '>' && str[i] != '<')
+				new_str[j++] = '\"';
+		}
+		
+		status = is_expandable(str[i]);
+		if (status && str[i + 1] == '?')
+		{
+			new_str = ft_strjoin(new_str, "EXIT_STATUS");
+			j = j + ft_strlen("EXIT_STATUS");
+		}
+		else if (status && (not_expandable(str[i + 1]) || str[i + 1] == '\"'))
 			i ++;
 		else if (status && (ft_isalnum(str[i + 1]) || str[i + 1] == '_'))
 		{
@@ -101,7 +145,7 @@ void	ft_expend_cmd(t_p_cmd *cmd,t_env *env_list)
 		if (ft_strchr(cmd->in_redir[i], '$'))
 		{
 			tmp = cmd->in_redir[i];
-			cmd->in_redir[i] = ft_expend(cmd->in_redir[i], env_list);
+			cmd->in_redir[i] = ft_expend_redir(cmd->in_redir[i], env_list);
 			free(tmp);
 		}
 		i ++;
@@ -112,7 +156,7 @@ void	ft_expend_cmd(t_p_cmd *cmd,t_env *env_list)
 		if (ft_strchr(cmd->out_redir[i], '$'))
 		{
 			tmp = cmd->out_redir[i];
-			cmd->out_redir[i] = ft_expend(cmd->out_redir[i], env_list);
+			cmd->out_redir[i] = ft_expend_redir(cmd->out_redir[i], env_list);
 			free(tmp);
 		}
 		i ++;
