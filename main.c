@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 23:17:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/30 15:49:39 by mohmazou         ###   ########.fr       */
+/*   Created: 2024/08/30 16:12:12 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/08/30 16:12:13 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "includes/minishell.h"
 
@@ -54,7 +56,12 @@ void	ft_leaks(void)
 {
 	system("leaks minishell");
 }
+//expand case didnt work :
+/*
+$"USER"
+$'USER'
 
+*/
 int	main(int ac, char **av, char **env)
 {
 	t_env	*env_list;
