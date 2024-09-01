@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:45:30 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/29 06:16:07 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/01 02:13:43 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_expend(char *str,t_env *env_list)
 			new_str = ft_strjoin(new_str, "EXIT_STATUS");
 			j = j + ft_strlen("EXIT_STATUS");
 		}
-		else if (status && (not_expandable(str[i + 1]) || str[i + 1] == '\"'))
+		else if (status && (not_expandable(str[i + 1]) || str[i + 1] == '\"' || str[i + 1] == '\''))
 			i ++;
 		else if (status && (ft_isalnum(str[i + 1]) || str[i + 1] == '_'))
 		{

@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:12:12 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/30 16:12:13 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/01 02:14:53 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	start_loop(t_env *env_list)
 		// affich_cmd_p_list(cmd_p_list);
 		cmd_list = ft_p_cmd_to_cmd(cmd_p_list);
 		open_file(cmd_p_list, cmd_list);
+		ft_quoting(cmd_list);
 		ft_execut_cmd(cmd_list, env_list);
 		free(line);
 	}

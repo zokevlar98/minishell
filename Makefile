@@ -6,7 +6,7 @@
 #    By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/08/30 14:51:39 by mohmazou         ###   ########.fr        #
+#    Updated: 2024/09/01 02:20:42 by mohmazou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS			=	main.c \
 					parsing/add_space.c \
 					Parsing/expanding2.c \
 					Parsing/open_file.c \
+					parsing/quoting.c \
 					tokenization/tokenize.c \
 					free_funcs/free_all.c \
 					

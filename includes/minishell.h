@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/30 15:26:29 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/01 02:20:14 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,8 @@ void	ft_expending(t_p_cmd *cmd_list,t_env *env_list);
 
 // open_file.c
 void	open_file(t_p_cmd *cmd_p_lit, t_cmd *cmd_list);
+
+// quoting.c
+void	ft_quoting(t_cmd *cmd_list);
 
 #endif
