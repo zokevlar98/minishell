@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/01 02:20:14 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/07 17:55:08 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 
 # include <readline/readline.h>
 # include <readline/history.h>
-
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <libc.h>
+# include <sys/types.h>
+# include <errno.h>
+# include <dirent.h>
+# include <limits.h>
+# include <sys/wait.h>
+# include <stddef.h>
+# include <fcntl.h>
 
 # define MAX_TOKENS 100
 

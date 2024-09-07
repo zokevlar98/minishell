@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+         #
+#    By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 23:02:35 by mohmazou          #+#    #+#              #
-#    Updated: 2024/09/01 02:20:42 by mohmazou         ###   ########.fr        #
+#    Updated: 2024/09/07 18:12:11 by zqouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,7 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h
 
-CC				=	cc
-
-Flags			=	-Wall -Wextra -Werror -I ./includes
+CC				=	cc -Wall -Wextra -I ./includes 
 
 READLINE_FLAGS	=	-lreadline \
 
@@ -36,23 +34,21 @@ SRCS			=	main.c \
 					tokenization/tokenize.c \
 					free_funcs/free_all.c \
 					
-
-
-OBJS			=	$(SRCS:.c=.o)
+OBJS		=	$(SRCS:.c=.o)
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			$(CC) $(Flags) $(READLINE_FLAGS) $(OBJS) -o $(NAME)
+			$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME)
 
 %.o:		%.c $(HEADER)
 			$(CC) $(Flags) -c $< -o $@
 
 clean:
-			rm -f $(OBJS)
+			rm -rf $(OBJS)
 
 fclean:		clean
-			rm -f $(NAME)
+			rm -rf $(NAME)
 
 re:			fclean all
 
