@@ -44,29 +44,13 @@ typedef struct s_env
     struct s_env	*next;
 }	t_env;
 
-// command linked list
-// typedef struct command
-// {
-// 	char **cmd;
-// 	int in;
-// 	int out;
-// 	t_env *env;
-// 	struct command *next;
-// };
 typedef struct s_cmd
 {
-    /*Here we go with the structure of the command
-    we need char **cmd, char *cmd , int fd_in, int fd_out, int index (for evrey noed), int num_pipe(is a option) and next
-    we need index for optimisition algo of execution
-    */
-	// char			*ful_cmd;// it must be a double pointer
-    int				pipe_line;//indice of command 0 -> ....
-    // char			*cmd;
     char			**args;
+    int				pipe_line;//indice of command 0 & number of command
     int             fd_in;
     int             fd_out;
     struct s_cmd	*next;
-	// i need to add prev to make it double linked list
 }    t_cmd;
 
 // lib_utils
@@ -83,7 +67,7 @@ void	ft_free(char **tab);
 char	*ft_strtrim(char *s1, char *set);
 int     ft_atoi(char *str);
 char	*ft_itoa(int n);
-int size_array(char **arry);
+int		size_array(char **arry);
 
 // lib_utils_2
 size_t	ft_strlen(const char *s);
