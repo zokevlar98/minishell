@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/26 00:38:49 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/07 20:32:53 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
+int	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 {
+	int		flag;
 	char	*cmd;
 	
 	cmd = lower_case(cmd_list->args[0]);
 	dup2(cmd_list->fd_in , STDIN_FILENO);
 	dup2(cmd_list->fd_out , STDOUT_FILENO);
 	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
-		ft_echo(cmd_list);
+		flag = ft_echo(cmd_list);
 	else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
 		ft_cd(cmd_list, *env_list);
 	else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
@@ -33,4 +34,5 @@ void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 		ft_exit(cmd_list);
 	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
 		ft_unset(cmd_list, env_list);
+	return (flag);
 }

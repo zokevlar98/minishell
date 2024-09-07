@@ -109,8 +109,8 @@ int	    process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[]);
 int	    process_child_end(t_cmd *cmd_list, t_env **env_list);
 
 //builtins
-void	ft_builtin(t_cmd *cmd_list, t_env **env_list);
-void	ft_echo(t_cmd *cmd_list);
+int		ft_builtin(t_cmd *cmd_list, t_env **env_list);
+int		ft_echo(t_cmd *cmd_list);
 void	ft_cd(t_cmd *cmd_list, t_env *env_list);
 void	ft_pwd(t_env *env);
 void	ft_export(t_cmd *cmd, t_env *env);

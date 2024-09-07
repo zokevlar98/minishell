@@ -6,40 +6,27 @@
 /*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:35 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/29 08:31:04 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/07 20:28:39 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_echo(t_cmd *cmd_list)
+int	ft_echo(t_cmd *cmd)
 {
 	int		i;
-	char	**cmd;
 
 	i = 1;
-	cmd = cmd_list->args;
-	while (cmd[i])
+	while (cmd->args[i] != NULL)
 	{
-		//tanchouf blan expend
-		// while (cmd[i][0] == '$')
-		// {
-		// 	cmd[i] = ft_get_env(cmd[i] + 1);
-		// 	i++;
-		// }
-		if (is_caracter(cmd[i] , '"'))
-		{
-			cmd[i] = ft_strtrim(cmd[i], "\"");
-			ft_putstr_fd(cmd[i], 1);
-		}
-		else if (is_caracter(cmd[i], '\''))
-		{
-			cmd[i] = ft_strtrim(cmd[i], "\'");
-			ft_putstr_fd(cmd[i], 1);
-		}
-		else
-			ft_putstr_fd(cmd[i], 1);
+		if (ft_strncmp(cmd->args[i], "-n", ft_strlen(cmd->args[i])) == 0)
+			i++;
+		ft_putstr_fd(cmd->args[i], cmd->fd_out);
+		ft_putstr_fd(" ", cmd->fd_out);
 		i++;
 	}
-	ft_putstr_fd("\n", 1);
+	if (ft_strncmp(cmd->args[1], "-n", ft_strlen(cmd->args[1])) == 0)//some conflie with read line
+		return (1);
+	ft_putstr_fd("\n", cmd->fd_out);
+	return (0);
 }

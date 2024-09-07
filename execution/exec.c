@@ -6,7 +6,7 @@
 /*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/28 15:32:37 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/07 20:32:04 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list)
 	int		pid;
 	int		status;
 	int		fd[2];
+	int		flag;
 	int		saves[2];
 
 	tmp = cmd_list;
@@ -49,7 +50,7 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list)
 		if (tmp->next == NULL)
 		{
 			if (is_builtin(tmp))
-				ft_builtin(tmp, env_list);
+				flag = ft_builtin(tmp, env_list);
 			else
 				process_child_end(tmp, env_list);
 			break ;
@@ -61,7 +62,7 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list)
 		else
 		{
 			if (is_builtin(tmp))
-				ft_builtin(tmp, env_list);
+				flag = ft_builtin(tmp, env_list);
 			else
 				process_child_end(tmp, env_list);
 		}
@@ -71,4 +72,6 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list)
 	dup2(saves[1], STDOUT_FILENO);
 	while (waitpid(-1, &status, 0) != -1)
 		;
+	if (flag == 1)
+		ft_putstr_fd("\n", 1);
 }
