@@ -2,7 +2,7 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h
 
-CC				=	cc -Wall -Wextra -I ./includes 
+CC				=	cc -Wall -Wextra  -fsanitize=address -g -I ./includes 
 
 READLINE_FLAGS	=	-lreadline \
 

@@ -3,31 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:35 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/07 20:46:46 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/13 23:24:16 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_echo(t_cmd *cmd)
+void	ft_echo(t_cmd *cmd)
 {
 	int		i;
 
 	i = 1;
-	while (cmd->args[i] != NULL)
+	//i can use ft_strtrim to remove the quotes and single quotes
+	//i can also use ft_strchr
+	if (cmd->args[i] && ft_strncmp(cmd->args[i], "-n", ft_strlen(cmd->args[i])) == 0)
 	{
-		if (ft_strncmp(cmd->args[i], "-n", ft_strlen(cmd->args[i])) == 0)
-			i++;
-		ft_putstr_fd(cmd->args[i], cmd->fd_out);
-		if (cmd->args[i + 1] != NULL)
-			ft_putstr_fd(" ", cmd->fd_out);
-		i++;
+		while (cmd->args[++i] != NULL)
+		{
+			ft_putstr_fd(cmd->args[i], cmd->fd_out);
+			if (cmd->args[i + 1] != NULL)
+				ft_putstr_fd(" ", cmd->fd_out);
+		}
 	}
-	if (ft_strncmp(cmd->args[1], "-n", ft_strlen(cmd->args[1])) == 0)//some conflie with read line
-		return (1);
-	ft_putstr_fd("\n", cmd->fd_out);
-	return (0);
+	else
+	{
+		while (cmd->args[i] != NULL)
+		{
+			ft_putstr_fd(cmd->args[i], cmd->fd_out);
+			if (cmd->args[i + 1] != NULL)
+				ft_putstr_fd(" ", cmd->fd_out);
+			i++;
+		}
+		ft_putstr_fd("\n", cmd->fd_out);
+	}
 }

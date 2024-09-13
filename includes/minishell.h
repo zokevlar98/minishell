@@ -57,7 +57,6 @@ typedef struct s_cmd
 int     ft_strcmp(const char *s1, const char *s2);
 int     ft_strncmp(char *s1, char *s2, size_t size);
 char    *lower_case(char *str);
-int     ft_check_env(t_cmd *cmd_list);
 void    ft_putstr_fd(char *str, int fd);
 void    ft_error(char *str);
 char	*ft_strchr(const char *s, int c);
@@ -90,6 +89,7 @@ int		ft_check_line(char *line);
 int     ft_strcmp(const char *s1, const char *s2);
 
 // env_utils_1.c
+int     ft_check_env(t_cmd *cmd_list);
 void	ft_change_env(t_env *env_list, char *name, char *value);
 char	*ft_env_search(t_env *env_list, char *name);
 t_env	*ft_env_new(char *env);
@@ -99,7 +99,6 @@ void	ft_add_env_back(t_env **env, t_env *new);
 
 //execution
 void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list);
-int     is_builtin(t_cmd *cmd_list);
 void	ft_execut(t_cmd *cmd_list, t_env *env_list);
 char	**ft_get_envp(t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
@@ -109,8 +108,9 @@ int	    process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[]);
 int	    process_child_end(t_cmd *cmd_list, t_env **env_list);
 
 //builtins
-int		ft_builtin(t_cmd *cmd_list, t_env **env_list);
-int		ft_echo(t_cmd *cmd_list);
+int     is_builtin(t_cmd *cmd_list);
+void	ft_builtin(t_cmd *cmd_list, t_env **env_list);
+void	ft_echo(t_cmd *cmd_list);
 void	ft_cd(t_cmd *cmd_list, t_env *env_list);
 void	ft_pwd(t_env *env);
 void	ft_export(t_cmd *cmd, t_env *env);
