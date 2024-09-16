@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/01 02:20:14 by mohmazou         ###   ########.fr       */
+/*   Created: 2024/09/02 03:48:34 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/09/16 19:21:34 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,21 @@
 # include <libc.h>
 
 # define MAX_TOKENS 100
-
-// allocation struct
-typedef struct s_alloc
-{
-	void			*ptr;
-	struct s_alloc	*next;
-}	t_alloc;
-
+// # define malloc(x) NULL
 // environnement variables linked list
 typedef struct s_env
 {
 	char			*name;
 	char			*value;
+	struct s_env	*prev;
 	struct s_env	*next;
 }	t_env;
 
 // command linked list
 typedef struct s_p_cmd
 {
-	// char			*ful_cmd;
 	int				pipe_line;
-	// char			*cmd;
+	char			*line;
 	char			**cmd;
 	char			**in_redir;
 	char			**out_redir;
@@ -59,7 +52,22 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
+typedef struct s_utils
+{
+	int		fd;
+	int		i;
+	int		j;
+	int		k;
+	char	*new_line;
+	int		sq;
+	int		dq;
+	int		*fd_tab;
+	char	*f_name;
+	int		status;
+	int		len;
+}	t_utils;
 
+void	affich_array(char **array);
 
 // free_all.c
 /*
@@ -80,59 +88,80 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char *s1, char *set);
-int	ft_isalnum(char c);
+int		ft_isalnum(char c);
+void	ft_strcpy(char *dst, char *src);
+void	ft_memset(void *b, int c, size_t len);
+
+// lib_utils_3.c
+
+void	ft_bzero(void *s, size_t n);
+int		all_space(char *line);
+
+//check_syntax.c
+
+int		ft_check_syntax(char *line);
+int		ft_check_direction(char *line);
+int		ft_isspace(char c);
 
 // env_utils_1.c
 
 void	ft_env_list(t_env **env_list, char **env);
 char	*ft_env_search(t_env *env_list, char *name);
 
-// parse.c
+// parsing.c
 
-t_p_cmd	*ft_parse_line(char *line, t_env *env_list);
+void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list);
+char	**ft_split_cmd(char *line, char c, int s_q, int d_q);
+int		cnt_split(char *line, char c, int in_word);
 
-// cmd_p_list.c
+// parsing_utils_1.c
 
-void	ft_fill_cmd_list(t_p_cmd **cmd_list, char **all_tokens, int pipe);
-void	affich_cmd_list(t_cmd *cmd_list);
-void	affich_cmd_p_list(t_p_cmd *cmd_list);
+int		is_expandable(char c);
+char	*ft_get_name(char *str, int i);
+int		c_ex(char *str);
+int		not_expandable(char c);
+int		ft_to_ex(char c);
 
-// cmd_list.c
+// parsing_utils_2.c
+int		new_len(char *line);
+void	*allocat_zero(size_t size);
+int		ft_cnt_red(char *line, char c);
+void	join_exit(char *new_line, char *str, int *j, int *i);
 
-t_cmd	*ft_p_cmd_to_cmd(t_p_cmd *cmd_p_list);
+// get_line.c
+void	get_line(char *line, t_p_cmd *cp_list, t_env *env_list);
+char	*get_redir(char *line, int i);
 
-// check_syntax_red.c
+// get_line_utils.c
 
-int		ft_check_direction(char *line);
+void	in_qote(int *sq, int *dq, char c);
+char	**get_in_rd(char *line, int dq, int sq);
+char	**get_out_rd(char *line, int dq, int sq);
 
-// check_syntax.c
-
-int		ft_check_syntax(char *line);
-int		ft_check_quote(char *line);
-void	in_quotes(char line_i, int *single_quote, int *double_quote);
-
-// add_space.c
-
-char	*ft_add_space(char *line);
-
-// tokenize.c
-
-char	**tokenizing(char *line);
-void	**tokenize_line(char *line, char ***tokens, int length, int *in_double_quote, int *in_single_quote, int *in_parentheses);
-int		ft_check_tokens(char **tokens);
+// cp_list_utils.c
+t_p_cmd	*ft_new_cp(char *cmd, int i, t_env *env_list);
+void	cp_add_back(t_p_cmd **cp_list, t_p_cmd *new_cmd);
 
 //expanding.c
 
-char	**expand_tokens(char **tokens, t_env *env_list);
+char	*expd_line(char *line, t_env *env);
 
-// expanding2.c
+// merge.c
+void	ft_merge(t_cmd **cmd_list, t_p_cmd *cp_list, t_env *env_list);
 
-void	ft_expending(t_p_cmd *cmd_list,t_env *env_list);
+// merge_utils.c
+t_cmd	*ft_new_cmd(t_p_cmd *cp_cmd, t_env *env_list);
+void	cmd_add_back(t_cmd **cmd_list, t_cmd *new_cmd);
+char	*rm_qot(char *str, int s_q, int d_q);
+void	close_tab(int *fd_tab, int size);
 
 // open_file.c
-void	open_file(t_p_cmd *cmd_p_lit, t_cmd *cmd_list);
 
-// quoting.c
-void	ft_quoting(t_cmd *cmd_list);
+int		open_in(char **in_redir, t_env *env);
+int		open_out(char **out_redir, t_env *env);
+
+// expaind_red.c
+char	*get_f_name(char *f_name, t_env *env);
+char	*expd_rd(char *f_name, t_env *env);
 
 #endif

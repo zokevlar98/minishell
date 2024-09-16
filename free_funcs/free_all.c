@@ -5,72 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/04 05:39:39 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/02 05:11:37 by mohmazou         ###   ########.fr       */
+/*   Created: 2024/09/02 03:48:13 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/09/15 14:39:31 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	*free_all(t_alloc *alloc)
+void	ft_free_all(void **ptrs_list)
 {
-	t_alloc	*tmp;
+	int	i;
 
-	while (alloc)
-	{
-		tmp = alloc;
-		alloc = alloc->next;
-		free(tmp->ptr);
-		free(tmp);
-	}
-	return (NULL);
-}
-
-t_alloc	*ft_new_alloc(void *ptr)
-{
-	t_alloc	*new;
-
-	new = malloc(sizeof(t_alloc));
-	if (!new)
-	{
-		printf("Malloc failed\n");
-		exit(1);
-	}
-	new->ptr = ptr;
-	new->next = NULL;
-	return (new);
-}
-
-void	ft_alloc_add_back(t_alloc **alst, t_alloc *new)
-{
-	t_alloc	*tmp;
-
-	if (!*alst)
-	{
-		*alst = new;
+	i = 0;
+	if (!ptrs_list)
 		return ;
+	
+	while (ptrs_list[i])
+	{
+		free(ptrs_list[i]);
+		i++;
 	}
-	tmp = *alst;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
+	free(ptrs_list);
+	ptrs_list = NULL;
 }
 
 void	*ft_malloc(size_t size, int free)
 {
-	static t_alloc	*alloc;
-	void			*ptr;
-	t_alloc			*new_ptr;
+	static void	**ptrs_list;
+	static int	i;
+	void		*ptr;
+	FILE		*file;
+
 
 	if (free)
-		return (free_all(alloc));
+	{
+		file = fopen("malloc_log", "w");
+		ft_free_all(ptrs_list);
+		fprintf(file, "malloc freed\n");
+		fclose(file);
+		return (NULL);
+	}
+	if (!ptrs_list)
+	{
+		ptrs_list = malloc(sizeof(void *) * 10240);
+		if (!ptrs_list)
+		{
+			printf("xmalloc: cannot allocate memory\n");
+			exit(1);
+		}
+	}
 	ptr = malloc(size);
 	if (!ptr)
 	{
-		printf("Malloc failed\n");
+		printf("xmalloc: cannot allocate memory\n");
 		exit(1);
 	}
-	new_ptr = ft_new_alloc(ptr);
-	ft_alloc_add_back(&alloc, new_ptr);
+		
+	ptrs_list[i++] = ptr;
+	ptrs_list[i] = NULL;
+	
+	file = fopen("malloc_log", "a");
+	fprintf(file, "malloc[%d]: %p\n", i, ptr);
+	fclose(file);
 	return (ptr);
 }

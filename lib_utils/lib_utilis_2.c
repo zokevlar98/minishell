@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 23:46:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/08/19 06:33:28 by mohmazou         ###   ########.fr       */
+/*   Created: 2024/09/02 03:53:10 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/09/04 18:48:36 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,20 @@ int	ft_isalnum(char c)
 		|| (c >= 'a' && c <= 'z'))
 		return (1);
 	return (0);
+}
+
+void	ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*str;
+
+	str = (unsigned char *)b;
+	while (len--)
+		*str++ = (unsigned char)c;
+}
+
+void	ft_strcpy(char *dst, char *src)
+{
+	while (*src)
+		*dst++ = *src++;
+	*dst = '\0';
 }
