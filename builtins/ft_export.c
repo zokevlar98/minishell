@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/16 01:38:53 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/16 03:55:24 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,35 @@ void	ft_export_error(t_cmd *cmd)
 		ft_putstr_fd(tmp->args[i], STDERR_FILENO);
 		ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
 		i++;	
+	}
+}
+
+void	affiche_sort_env(t_env *env)
+{
+	int		i;
+	int		j;
+	char	**envp;
+
+	i = 0;
+	envp = ft_get_envp(env);
+	while (envp[i])
+	{
+		j = i + 1;
+		while (envp[j])
+		{
+			if (ft_strncmp(envp[i], envp[j], ft_strlen(envp[i])) > 0)
+			{
+				envp[i] = envp[j];
+			}
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	while (envp[i])
+	{
+		printf("declare -x %s\n", envp[i]);
+		i++;
 	}
 }
 
@@ -52,6 +81,7 @@ void	ft_export(t_cmd *cmd, t_env *env)
 	if (!cmd->args[1])
 	{
 		print_list_declare(tmp);
+		// affiche_sort_env(tmp);
 		return ;
 	}
 	while (tmp)
