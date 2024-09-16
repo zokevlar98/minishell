@@ -1,19 +1,22 @@
+
 NAME			=	minishell
 
 HEADER			=	includes/minishell.h
+
 
 CC				=	cc -Wall -Wextra -Werror -I ./includes -fsanitize=address -g
 
 READLINE_FLAGS	=	-lreadline \
 
 
-SRCS			=	main.c 								\
+SRCS			=	main.c								\
 					lib_utils/ft_error.c 				\
 					lib_utils/ft_putstr_fd.c			\
 					lib_utils/ft_split_exec.c			\
 					lib_utils/ft_strjoin.c				\
 					lib_utils/lib_utilis_1.c 			\
 					lib_utils/lib_utilis_2.c 			\
+					lib_utils/lib_utilis_3.c 			\
 					lib_utils/lib_utilis_exec.c 		\
 					lib_utils/ft_atoi.c 				\
 					lib_utils/ft_itoa.c 				\
@@ -37,6 +40,21 @@ SRCS			=	main.c 								\
 					builtins/ft_export.c				\
 					builtins/ft_exit.c					\
 					builtins/ft_unset.c					\
+					Parsing/check_syntax.c				\
+					Parsing/check_syntax_red.c 			\
+					Parsing/parsing.c 					\
+					Parsing/expanding_utils_1.c 		\
+					Parsing/expanding_utils_2.c 		\
+					Parsing/cp_list_utils.c 			\
+					Parsing/get_line.c					\
+					Parsing/get_line_utils.c 			\
+					Parsing/expanding.c 				\
+					merging/merge.c 					\
+					merging/merge_utils.c				\
+					merging/open_file.c					\
+					merging/expaind_red.c 				\
+					free_funcs/free_all.c 				\
+					
 
 
 

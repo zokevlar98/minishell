@@ -5,42 +5,70 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 09:51:55 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/16 01:42:15 by zqouri           ###   ########.fr       */
+/*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/09/16 21:41:28 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "includes/minishell.h"
 
-
-int main(int ac, char **av, char **env)
+int	ft_add(char *line)
 {
-	char *line;
-	t_env *env_list;
-
-	if (!env[0])
-		env = empty_env();
-	t_cmd *cmd_list = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!cmd_list)
-		ft_error("allocation failed");
-	env_list = NULL;
-	ft_env_list(&env_list, env);
-	if (ac != 1 || av[1])
+	if (!line)
 	{
-		printf("Usage: %s\n", av[0]);
+		printf("exit\n");
+		ft_malloc(0, 1);
+		exit(0);
+	}
+	if (line[0] == '\0' || all_space(line))
+		return (1);
+	if (!ft_check_syntax(line))
+	{
+		printf("syntax error\n");
+		add_history(line);
 		return (1);
 	}
-	shell_lvl(env_list);
+	add_history(line);
+	return (0);
+}
+
+void	start_loop(t_env *env_list)
+{
+	char	*line;
+	t_p_cmd	*cp_list;
+	t_cmd	*cmd_list;
+
 	while (1)
 	{
 		line = readline("minishell$>  ");
-		if (!line)
-			break;
-		if (line[0] != '\0')
-			add_history(line);
-		ft_init_pars(&cmd_list, line);
+		if (ft_add(line))
+		{
+			free(line);
+			continue ;
+		}
+		if (ft_strcmp(line, "exit") == 0)
+		{
+			free(line);
+			break ;
+		}
+		ft_parsing(line, &cp_list, env_list);
+		cmd_list = NULL;
+		ft_merge(&cmd_list, cp_list, env_list);
 		ft_execut_cmd(cmd_list, &env_list);
 		free(line);
 	}
+}
+
+int	main(int ac, char **av, char **env)
+{
+	t_env	*env_list;
+
+	if (ac != 1 || av[1])
+		return (write(2, "Error: no arguments needed\n", 27));
+	env_list = NULL;
+	ft_env_list(&env_list, env);
+	// ft_handle_signals();
+	start_loop(env_list);
+	ft_malloc(0, 1);
 	return (0);
 }

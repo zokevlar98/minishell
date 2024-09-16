@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 05:37:20 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/16 00:55:40 by zqouri           ###   ########.fr       */
+/*   Created: 2024/09/16 21:21:42 by zqouri            #+#    #+#             */
+/*   Updated: 2024/09/16 21:31:17 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -100,7 +101,7 @@ void	ft_env_list(t_env **env_list, char **env)
 {
 	int		i;
 	t_env	*new;
-	
+
 	i = 0;
 	new = NULL;
 	while (env[i])
