@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 09:51:55 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/29 09:12:36 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/16 01:42:15 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//I need to change the index fd to macro for good practice 
 
 int main(int ac, char **av, char **env)
 {
@@ -26,7 +25,6 @@ int main(int ac, char **av, char **env)
 		ft_error("allocation failed");
 	env_list = NULL;
 	ft_env_list(&env_list, env);
-	
 	if (ac != 1 || av[1])
 	{
 		printf("Usage: %s\n", av[0]);

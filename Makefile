@@ -2,7 +2,7 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h
 
-CC				=	cc -Wall -Wextra  -fsanitize=address -g -I ./includes 
+CC				=	cc -Wall -Wextra -Werror -I ./includes -fsanitize=address -g
 
 READLINE_FLAGS	=	-lreadline \
 
@@ -48,7 +48,7 @@ $(NAME):	$(OBJS)
 			$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME)
 
 %.o:		%.c $(HEADER)
-			$(CC) $(Flags) -c $< -o $@
+			$(CC) -c $< -o $@
 
 clean:
 			rm -rf $(OBJS)

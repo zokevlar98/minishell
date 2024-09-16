@@ -6,18 +6,45 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:57:41 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/28 07:42:00 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/14 23:36:26 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*env_var_not_set(char *cmd)
+{
+	char	*path;
+	char	**path_s;
+	
+	path = ft_strdup("/bin:/sbin:/usr/bin");
+	path_s = ft_split(path, ':');
+	path = check_path(path_s, cmd);
+	return (path);
+}
+
+char	*check_path(char **path_s, char *cmd)
+{
+	int		i;
+	char	*path;
+
+	i = 0;
+	while (path_s[i])
+	{
+		path = ft_strjoin(path_s[i], "/");
+		path = ft_strjoin(path, cmd);
+		if (access(path, F_OK) == 0)
+			return (ft_free(path_s), path);
+		i++;
+	}
+	return (NULL);
+}
 
 char	*find_path_env(char *cmd, char *envp[])
 {
 	char	**path_s;
 	char	*path;
 	int		i;
-	char	*tmp;
 
 	i = 0;
 	if (ft_strchr(cmd, '/'))
@@ -25,26 +52,16 @@ char	*find_path_env(char *cmd, char *envp[])
 		if (access(cmd, F_OK) == 0)
 			return (cmd);
 	}
-	if (size_array(envp) == 0 || size_array(envp) == 3)
-	{
-		path = ft_strjoin("/usr/bin/", cmd);
-		if (access(path, F_OK) == 0)
-			return (path);
-	}
 	while (ft_strncmp(envp[i], "PATH", 4) != 0)
 		i++;
-	path_s = ft_split(envp[i] + 5, ':');
-	i = 0;
-	while (path_s[i++])
+	if (!envp[i])
+		path = env_var_not_set(cmd);
+	else
 	{
-		tmp = ft_strjoin(path_s[i], "/");
-		path = ft_strjoin(tmp, cmd);
-		free(tmp);
-		if (access(path, F_OK) == 0)
-			return (path);
-		free(path);
+		path_s = ft_split(envp[i] + 5, ':');
+		path = check_path(path_s, cmd);
 	}
-	return (ft_free(path_s), NULL);
+	return (path);
 }
 
 char	**ft_get_envp(t_env *env_list)

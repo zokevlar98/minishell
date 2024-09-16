@@ -92,6 +92,7 @@ int     ft_strcmp(const char *s1, const char *s2);
 int     ft_check_env(t_cmd *cmd_list);
 void	ft_change_env(t_env *env_list, char *name, char *value);
 char	*ft_env_search(t_env *env_list, char *name);
+t_env	*ft_env_new_(char *key, char *value);
 t_env	*ft_env_new(char *env);
 void	ft_env_add_back(t_env **env_list, t_env *new);
 void     ft_env_list(t_env **env_list,char **env);
@@ -106,6 +107,8 @@ int		fork1(void);
 int	    process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[]);
 int	    process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[]);
 int	    process_child_end(t_cmd *cmd_list, t_env **env_list);
+char	*check_path(char **path_s, char *cmd);
+char	*env_var_not_set(char *cmd);
 
 //builtins
 int     is_builtin(t_cmd *cmd_list);
@@ -129,6 +132,6 @@ void	affiche_node(t_cmd *cmd_list);
 void	affiche_env(t_env *env);
 t_cmd	*ft_lstnew_cmd(char *cmd);
 void	ft_lstadd_back_cmd(t_cmd **cmd_list, t_cmd *new);
-t_env	*ft_env_new_(char *key, char *value);
+void	ff(void);
 
 #endif

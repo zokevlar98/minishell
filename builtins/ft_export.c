@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/29 08:45:08 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/16 01:38:53 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_export_error(t_cmd *cmd)
+{
+	t_cmd	*tmp;
+	int		i;
+
+	i = 2;
+	tmp = cmd;
+	//this error handling need more work
+	while (tmp->args[i])
+	{
+		ft_putstr_fd("minishell: export: `", STDERR_FILENO);
+		ft_putstr_fd(tmp->args[i], STDERR_FILENO);
+		ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+		i++;	
+	}
+}
 
 void	print_list_declare(t_env *env)
 {
@@ -28,7 +45,8 @@ void	ft_export(t_cmd *cmd, t_env *env)
 	t_env	*p;
 	t_env	*new;
 	char	**str;
-
+//export is not working correctly if more than tow env variable are passed the 1st
+//one is being exported and the ather one is not being exported
 	tmp = env;
 	p = env;
 	if (!cmd->args[1])
@@ -55,6 +73,5 @@ void	ft_export(t_cmd *cmd, t_env *env)
 		ft_env_add_back(&env, new);
 		return ;
 	}
-	else
-		ft_error("ERRor: NOT SET YET");
+	ft_export_error(cmd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/29 08:51:26 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/14 23:18:56 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 
 	envp = ft_get_envp(env_list);
 	if (!envp)
-		ft_error("malloc failed\n");
+		ft_error("malloc failed");
 	path = find_path_env(cmd_list->args[0], envp);
 	if (!path)
 	{
@@ -64,7 +64,7 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 		exit(127);
 	}
 	if (execve(path, cmd_list->args, envp) == -1)
-		ft_error("execve failed\n");
+		ft_error("execve failed");
 	exit(EXIT_SUCCESS);
 }
 
@@ -79,7 +79,7 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 		dup2(cmd_list->fd_in, STDIN_FILENO);// Redirects the standard input to the file descriptor fd_in
 		close(fd[0]);
 		if (dup2(fd[1], STDOUT_FILENO) == -1)
-			ft_error("dup2 failed\n");
+			ft_error("dup2 failed");
 		dup2(cmd_list->fd_out, STDOUT_FILENO);// Redirects the standard output to the file descriptor fd_out
 		close(fd[1]);
 		if (is_builtin(cmd_list))
@@ -94,7 +94,7 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 	{
 		close(fd[1]);
 		if (dup2(fd[0], STDIN_FILENO) == -1)
-			ft_error("dup2 failed\n");
+			ft_error("dup2 failed");
 		close(fd[0]);
 	}
 	return (pid);

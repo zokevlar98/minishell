@@ -6,12 +6,11 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 04:02:26 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/26 01:42:01 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/16 01:12:12 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	is_caracter(char *str, char c)
 {
