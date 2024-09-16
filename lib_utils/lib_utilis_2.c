@@ -3,39 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lib_utilis_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 03:53:10 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/04 18:48:36 by mohmazou         ###   ########.fr       */
+/*   Created: 2024/09/16 21:27:53 by zqouri            #+#    #+#             */
+/*   Updated: 2024/09/16 21:42:56 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../includes/minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char			*dest;
-	unsigned int	i;
-	int				lenght;
-
-	if (!s1 && s2)
-		return (ft_strdup(s2));
-	if (!s2 && s1)
-		return (ft_strdup(s1));
-	if (!s1 && !s2)
-		return (NULL);
-	i = 0;
-	lenght = ft_strlen(s1) + ft_strlen(s2) + 1;
-	dest = (char *)ft_malloc(sizeof(*dest) * lenght, 0);
-	if (dest == NULL)
-		return (NULL);
-	while (*s1 != '\0')
-		dest[i++] = *s1++;
-	while (*s2 != '\0')
-		dest[i++] = *s2++;
-	dest[i] = '\0';
-	return (dest);
-}
 
 char	*ft_strtrim(char *s1, char *set)
 {
@@ -50,6 +27,8 @@ char	*ft_strtrim(char *s1, char *set)
 	while (end > start && ft_strchr(set, s1[end - 1]))
 		end--;
 	str = ft_substr(s1, start, end - start);
+	if (!str)
+		return (NULL);
 	return (str);
 }
 

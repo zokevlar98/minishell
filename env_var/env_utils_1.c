@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/14 10:30:29 by mohmazou         ###   ########.fr       */
+/*   Created: 2024/09/16 21:21:42 by zqouri            #+#    #+#             */
+/*   Updated: 2024/09/16 21:31:17 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+
+#include "minishell.h"
+
+void	ft_change_env(t_env *env_list, char *name, char *value)
+{
+	t_env	*tmp;
+
+	tmp = env_list;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->name, name, ft_strlen(tmp->name)) == 0)
+		{
+			free(tmp->value);
+			tmp->value = ft_strdup(value);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+	if (!tmp)
+	{
+		tmp = ft_env_new_(name, value);
+		ft_env_add_back(&env_list, tmp);
+	}
+	free(value);
+}
 
 char	*ft_env_search(t_env *env_list, char *name)
 {
@@ -19,29 +43,45 @@ char	*ft_env_search(t_env *env_list, char *name)
 	tmp = env_list;
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->name, name))
+		if (!ft_strncmp(tmp->name, name, ft_strlen(name)))
 			return (tmp->value);
 		tmp = tmp->next;
 	}
 	return (NULL);
 }
 
-static t_env	*ft_env_new(char *env)
+t_env	*ft_env_new_(char *key, char *value)
+{
+	t_env	*new;
+
+	new = (t_env *)malloc(sizeof(t_env));
+	if (!new)
+		return (NULL);
+	new->name = ft_strdup(key);
+	new->value = ft_strdup(value);
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
+}
+
+
+t_env	*ft_env_new(char *env)
 {
 	t_env	*new;
 	char	*equal;
 
-	new = ft_malloc(sizeof(t_env), 0);
+	new = (t_env *)malloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
 	equal = ft_strchr(env, '=');
 	new->name = ft_substr(env, 0, equal - env);
 	new->value = ft_strdup(equal + 1);
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
-static void	ft_env_add_back(t_env **env_list, t_env *new)
+void	ft_env_add_back(t_env **env_list, t_env *new)
 {
 	t_env	*tmp;
 
@@ -54,6 +94,7 @@ static void	ft_env_add_back(t_env **env_list, t_env *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	new->prev = tmp;
 }
 
 void	ft_env_list(t_env **env_list, char **env)

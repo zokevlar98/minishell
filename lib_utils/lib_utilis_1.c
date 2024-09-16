@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_utilis_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 03:53:04 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/02 04:16:18 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/16 21:27:12 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ size_t	ft_strlen(const char *s)
 	if (!s)
 		return (0);
 	len = 0;
+	if (!s)
+		return (0);
 	while (s[len])
 		len++;
 	return (len);
@@ -29,6 +31,8 @@ char	*ft_strdup(const char *s)
 	char	*dup;
 	size_t	i;
 
+	if (!s)
+		return (NULL);
 	dup = ft_malloc(sizeof(char) * (ft_strlen(s) + 1), 0);
 	if (!dup)
 		return (NULL);
@@ -54,12 +58,21 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s)
+	int		i;
+	char	*p;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	p = (char *)s;
+	while (p[i] != '\0')
 	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
+		if (p[i] == (char)c)
+			return (p + i);
+		i++;
 	}
+	if (p[i] == (char)c)
+		return (p + i);
 	return (NULL);
 }
 
