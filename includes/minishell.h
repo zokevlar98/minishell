@@ -30,11 +30,6 @@
 
 //define
 # define NUM_BUILTINS 8 
-# define STD_OUT 1
-# define STD_IN 0
-//define tasks
-# define EXEC 1
-
 // environnement variables linked list
 typedef struct s_env
 {
