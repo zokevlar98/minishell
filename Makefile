@@ -6,7 +6,7 @@
 #    By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 04:06:29 by mohmazou          #+#    #+#              #
-#    Updated: 2024/09/16 18:20:52 by mohmazou         ###   ########.fr        #
+#    Updated: 2024/09/16 20:56:56 by mohmazou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h
 
+CC				=	cc -Wall -Wextra -Werror -I ./includes 
 CC				=	cc
 
 Flags			=	-Wall -Wextra -Werror  -g -fsanitize=address
@@ -29,6 +30,11 @@ SRCS			=	main.c \
 					env_var/env_utils_1.c \
 					Parsing/check_syntax.c \
 					Parsing/check_syntax_red.c \
+					Parsing/expanding.c \
+					Parsing/open_file.c \
+					parsing/quoting.c \
+					tokenization/tokenize.c \
+					free_funcs/free_all.c \
 					Parsing/parsing.c \
 					Parsing/expanding_utils_1.c \
 					Parsing/expanding_utils_2.c \
@@ -41,22 +47,21 @@ SRCS			=	main.c \
 					merging/open_file.c \
 					merging/expaind_red.c \
 
-
 OBJS			=	$(SRCS:.c=.o)
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			$(CC) $(Flags) $(READLINE_FLAGS) $(OBJS) -o $(NAME)
+			$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME)
 
 %.o:		%.c $(HEADER)
 			$(CC) $(Flags) -c $< -o $@
 
 clean:
-			rm -f $(OBJS)
+			rm -rf $(OBJS)
 
 fclean:		clean
-			rm -f $(NAME)
+			rm -rf $(NAME)
 
 re:			fclean all
 

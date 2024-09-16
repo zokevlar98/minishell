@@ -5,37 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 20:46:46 by mohmazou         ###   ########.fr       */
+/*   Created: 2024/09/16 20:51:07 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/09/16 20:51:44 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-
-void	affich_cmd_list(t_cmd *cmd_list)
-{
-	int	i;
-
-	while (cmd_list)
-	{
-		printf("\n-------------\n\n");
-		printf("pipe_line = %d\n", cmd_list->pipe_line);
-		i = 0;
-		if (cmd_list->args)
-		{
-			printf("args : \n");
-			while (cmd_list->args[i])
-			{
-				printf("\targs[%d] = `%s`\n", i, cmd_list->args[i]);
-				i++;
-			}
-		}
-		printf("fd_in = %d\n", cmd_list->fd_in);
-		printf("fd_out = %d\n", cmd_list->fd_out);
-		printf("\n-------------\n\n");
-		cmd_list = cmd_list->next;
-	}
-}
 
 int	ft_add(char *line)
 {

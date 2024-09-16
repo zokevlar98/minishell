@@ -5,13 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 03:48:34 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 20:45:44 by mohmazou         ###   ########.fr       */
+/*   Created: 2024/07/30 23:15:58 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/09/16 20:55:40 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# include <readline/readline.h>
+# include <readline/history.h>
+
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <libc.h>
 
 # define MAX_TOKENS 100
 // # define malloc(x) NULL
