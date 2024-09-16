@@ -44,46 +44,29 @@ typedef struct s_env
     struct s_env	*next;
 }	t_env;
 
-// command linked list
-// typedef struct command
-// {
-// 	char **cmd;
-// 	int in;
-// 	int out;
-// 	t_env *env;
-// 	struct command *next;
-// };
 typedef struct s_cmd
 {
-    /*Here we go with the structure of the command
-    we need char **cmd, char *cmd , int fd_in, int fd_out, int index (for evrey noed), int num_pipe(is a option) and next
-    we need index for optimisition algo of execution
-    */
-	char			*ful_cmd;// it must be a double pointer
-    int				pipe_line;//indice of command 0 -> ....
-    char			*cmd;
     char			**args;
+    int				pipe_line;//indice of command 0 & number of command
     int             fd_in;
     int             fd_out;
     struct s_cmd	*next;
-	// i need to add prev to make it double linked list
 }    t_cmd;
 
 // lib_utils
 int     ft_strcmp(const char *s1, const char *s2);
 int     ft_strncmp(char *s1, char *s2, size_t size);
 char    *lower_case(char *str);
-int     ft_check_env(t_cmd *cmd_list);
 void    ft_putstr_fd(char *str, int fd);
 void    ft_error(char *str);
 char	*ft_strchr(const char *s, int c);
 char	**ft_split(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
 void	ft_free(char **tab);
-char	**ft_split_up(char *s);
 char	*ft_strtrim(char *s1, char *set);
 int     ft_atoi(char *str);
 char	*ft_itoa(int n);
+int		size_array(char **arry);
 
 // lib_utils_2
 size_t	ft_strlen(const char *s);
@@ -96,6 +79,7 @@ int		is_caracter(char *str, char c);
 // env_utils_1.c
 void	ft_env_list(t_env **env_list,char **env);
 char	*ft_env_search(t_env *env_list, char *name);
+char    **empty_env(void);
 
 // parse.c
 t_cmd	*ft_parse_line(char *line);
@@ -105,8 +89,10 @@ int		ft_check_line(char *line);
 int     ft_strcmp(const char *s1, const char *s2);
 
 // env_utils_1.c
+int     ft_check_env(t_cmd *cmd_list);
 void	ft_change_env(t_env *env_list, char *name, char *value);
 char	*ft_env_search(t_env *env_list, char *name);
+t_env	*ft_env_new_(char *key, char *value);
 t_env	*ft_env_new(char *env);
 void	ft_env_add_back(t_env **env_list, t_env *new);
 void     ft_env_list(t_env **env_list,char **env);
@@ -114,7 +100,6 @@ void	ft_add_env_back(t_env **env, t_env *new);
 
 //execution
 void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list);
-int     is_builtin(t_cmd *cmd_list);
 void	ft_execut(t_cmd *cmd_list, t_env *env_list);
 char	**ft_get_envp(t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
@@ -122,8 +107,11 @@ int		fork1(void);
 int	    process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[]);
 int	    process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[]);
 int	    process_child_end(t_cmd *cmd_list, t_env **env_list);
+char	*check_path(char **path_s, char *cmd);
+char	*env_var_not_set(char *cmd);
 
 //builtins
+int     is_builtin(t_cmd *cmd_list);
 void	ft_builtin(t_cmd *cmd_list, t_env **env_list);
 void	ft_echo(t_cmd *cmd_list);
 void	ft_cd(t_cmd *cmd_list, t_env *env_list);
@@ -139,13 +127,11 @@ t_cmd	*ft_lstnew(void);
 int		ft_lstsize(t_cmd *lst);
 t_cmd	*ft_lstlast(t_cmd *lst);
 void	ft_lstadd_back(t_cmd **lst, t_cmd *new);
-void	ft_init(t_cmd *cmd_list);
 void    ft_init_pars(t_cmd **cmd_list, char *line);
 void	affiche_node(t_cmd *cmd_list);
 void	affiche_env(t_env *env);
-void	print_args(char **args);
 t_cmd	*ft_lstnew_cmd(char *cmd);
 void	ft_lstadd_back_cmd(t_cmd **cmd_list, t_cmd *new);
-t_env	*ft_env_new_(char *key, char *value);
+void	ff(void);
 
 #endif

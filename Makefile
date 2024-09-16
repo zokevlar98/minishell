@@ -2,7 +2,7 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h
 
-CC				=	cc -Wall -Wextra -Werror -g -fsanitize=address -I ./includes 
+CC				=	cc -Wall -Wextra -Werror -I ./includes -fsanitize=address -g
 
 READLINE_FLAGS	=	-lreadline \
 
@@ -15,7 +15,6 @@ SRCS			=	main.c 								\
 					lib_utils/lib_utilis_1.c 			\
 					lib_utils/lib_utilis_2.c 			\
 					lib_utils/lib_utilis_exec.c 		\
-					lib_utils/ft_split_up.c 			\
 					lib_utils/ft_atoi.c 				\
 					lib_utils/ft_itoa.c 				\
 					lib_utils/ft_lstnew.c				\
@@ -26,6 +25,7 @@ SRCS			=	main.c 								\
 					execution/exec_utils_2.c			\
 					execution/exec.c					\
 					env_var/env_utils_1.c				\
+					env_var/env_utils_2.c				\
 					execution/test/outils_test.c		\
 					execution/test/ft_init.c			\
 					builtins/builtin_cmd.c				\
@@ -48,7 +48,7 @@ $(NAME):	$(OBJS)
 			$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME)
 
 %.o:		%.c $(HEADER)
-			$(CC) $(Flags) -c $< -o $@
+			$(CC) -c $< -o $@
 
 clean:
 			rm -rf $(OBJS)

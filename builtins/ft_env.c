@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 09:10:19 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/23 23:53:58 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/16 01:18:23 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,9 @@ void	ft_env(t_cmd *cmd, t_env *env)
 		}
 	}
 	else
-		ft_error("env: no options or arguments");
+	{
+		ft_putstr_fd("env: '", STDOUT_FILENO);
+		ft_putstr_fd(cmd->args[1], STDOUT_FILENO);
+		ft_putstr_fd("': No such file or directory\n", STDOUT_FILENO);
+	}
 }

@@ -5,13 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-
-/*   Created: 2024/08/13 15:38:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/23 23:37:16 by zqouri           ###   ########.fr       */
-
-/*   Created: 2024/07/30 23:39:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/07/31 01:44:39 by mohmazou         ###   ########.fr       */
-
+/*   Created: 2024/08/28 05:37:20 by zqouri            #+#    #+#             */
+/*   Updated: 2024/09/16 00:55:40 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +27,12 @@ void	ft_change_env(t_env *env_list, char *name, char *value)
 		}
 		tmp = tmp->next;
 	}
+	if (!tmp)
+	{
+		tmp = ft_env_new_(name, value);
+		ft_env_add_back(&env_list, tmp);
+	}
+	free(value);
 }
 
 char	*ft_env_search(t_env *env_list, char *name)

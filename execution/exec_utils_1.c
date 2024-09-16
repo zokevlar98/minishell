@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/26 01:44:34 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/14 23:18:56 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int is_builtin(t_cmd *cmd_list)
     char    *cmd;
 
     i = 0;
-    cmd = lower_case(cmd_list->cmd);
+    cmd = lower_case(cmd_list->args[0]);
     builtins[0] = "echo";
     builtins[1] = "cd";
     builtins[2] = "pwd";
@@ -51,18 +51,21 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 {
 	char	**envp;
 	char	*path;
-	char	**cmd;
 
 	envp = ft_get_envp(env_list);
 	if (!envp)
-		ft_error("malloc failed\n");
-	path = find_path_env(cmd_list->cmd, envp);
+		ft_error("malloc failed");
+	path = find_path_env(cmd_list->args[0], envp);
 	if (!path)
-		ft_error("command not found\n");
-	cmd = ft_split_up(cmd_list->ful_cmd);
-	if (execve(path, cmd, envp) == -1)
-		ft_error("execve failed\n");
-	exit(1);
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(cmd_list->args[0], STDERR_FILENO);
+		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		exit(127);
+	}
+	if (execve(path, cmd_list->args, envp) == -1)
+		ft_error("execve failed");
+	exit(EXIT_SUCCESS);
 }
 
 int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
@@ -76,13 +79,13 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 		dup2(cmd_list->fd_in, STDIN_FILENO);// Redirects the standard input to the file descriptor fd_in
 		close(fd[0]);
 		if (dup2(fd[1], STDOUT_FILENO) == -1)
-			ft_error("dup2 failed\n");
+			ft_error("dup2 failed");
 		dup2(cmd_list->fd_out, STDOUT_FILENO);// Redirects the standard output to the file descriptor fd_out
 		close(fd[1]);
 		if (is_builtin(cmd_list))
 		{
 			ft_builtin(cmd_list, env_list);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 		else
 			ft_execut(cmd_list, *env_list);
@@ -91,7 +94,7 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 	{
 		close(fd[1]);
 		if (dup2(fd[0], STDIN_FILENO) == -1)
-			ft_error("dup2 failed\n");
+			ft_error("dup2 failed");
 		close(fd[0]);
 	}
 	return (pid);
@@ -114,7 +117,7 @@ int	process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[])
 		if (is_builtin(cmd_list))
 		{
 			ft_builtin(cmd_list, env_list);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 		else
 			ft_execut(cmd_list, *env_list);
