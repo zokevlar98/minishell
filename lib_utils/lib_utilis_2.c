@@ -5,12 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/08 04:31:22 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/10 00:30:00 by zqouri           ###   ########.fr       */
+/*   Created: 2024/09/16 21:27:53 by zqouri            #+#    #+#             */
+/*   Updated: 2024/09/16 21:42:56 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+
+#include "../includes/minishell.h"
+
 
 char	*ft_strtrim(char *s1, char *set)
 {
@@ -28,4 +30,28 @@ char	*ft_strtrim(char *s1, char *set)
 	if (!str)
 		return (NULL);
 	return (str);
+}
+
+int	ft_isalnum(char c)
+{
+	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')
+		|| (c >= 'a' && c <= 'z'))
+		return (1);
+	return (0);
+}
+
+void	ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*str;
+
+	str = (unsigned char *)b;
+	while (len--)
+		*str++ = (unsigned char)c;
+}
+
+void	ft_strcpy(char *dst, char *src)
+{
+	while (*src)
+		*dst++ = *src++;
+	*dst = '\0';
 }

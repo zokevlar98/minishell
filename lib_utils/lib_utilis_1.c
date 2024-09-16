@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 23:22:31 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 01:33:29 by zqouri           ###   ########.fr       */
+/*   Created: 2024/09/02 03:53:04 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/09/16 21:27:12 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
+	if (!s)
+		return (0);
 	len = 0;
 	if (!s)
 		return (0);
@@ -31,7 +33,7 @@ char	*ft_strdup(const char *s)
 
 	if (!s)
 		return (NULL);
-	dup = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	dup = ft_malloc(sizeof(char) * (ft_strlen(s) + 1), 0);
 	if (!dup)
 		return (NULL);
 	i = 0;
@@ -44,7 +46,7 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 && *s2 && *s1 == *s2)
 	{
@@ -83,7 +85,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start > ft_strlen(s))
 		return (ft_strdup("\0"));
-	sub = (char *)malloc(sizeof(char) * (len + 1));
+	sub = ft_malloc(sizeof(char) * (len + 1), 0);
 	if (!sub)
 		return (NULL);
 	i = 0;
