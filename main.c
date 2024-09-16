@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 19:28:18 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/16 20:46:46 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,51 +36,6 @@ void	affich_cmd_list(t_cmd *cmd_list)
 		cmd_list = cmd_list->next;
 	}
 }
-
-// void	affich_cp_list(t_p_cmd *cp_list)
-// {
-// 	t_p_cmd	*tmp;
-// 	int		i;
-
-// 	tmp = cp_list;
-// 	while (tmp)
-// 	{
-// 		printf("pipe_line = %d\n", tmp->pipe_line);
-// 		printf("line = %s\n", tmp->line);
-// 		i = 0;
-// 		if (tmp->cmd)
-// 		{
-// 			printf("cmds : \n");
-// 			while (tmp->cmd[i])
-// 			{
-// 				printf("\tcmd[%d] = `%s`\n", i, tmp->cmd[i]);
-// 				i++;
-// 			}
-// 		}
-// 		i = 0;
-// 		if (tmp->in_redir)
-// 		{
-// 			printf("in_redir : \n");
-// 			while (tmp->in_redir[i])
-// 			{
-// 				printf("\tin_redir[%d] = %s\n", i, tmp->in_redir[i]);
-// 				i++;
-// 			}
-// 		}
-// 		i = 0;
-// 		if (tmp->out_redir)
-// 		{
-// 			printf("out_redir : \n");
-// 			while (tmp->out_redir[i])
-// 			{
-// 				printf("\tout_redir[%d] = %s\n", i, tmp->out_redir[i]);
-// 				i++;
-// 			}
-// 		}
-// 		printf("\n-------------\n\n");
-// 		tmp = tmp->next;
-// 	}
-// }
 
 int	ft_add(char *line)
 {
@@ -124,16 +79,8 @@ void	start_loop(t_env *env_list)
 		ft_parsing(line, &cp_list, env_list);
 		cmd_list = NULL;
 		ft_merge(&cmd_list, cp_list, env_list);
-		// affich_cp_list(cp_list);
-		affich_cmd_list(cmd_list);
 		free(line);
 	}
-}
-
-void	ft_leaks(void)
-{
-	// ft_malloc(0, 1);
-	system("leaks minishell");
 }
 
 int	main(int ac, char **av, char **env)
@@ -147,6 +94,5 @@ int	main(int ac, char **av, char **env)
 	// ft_handle_signals();
 	start_loop(env_list);
 	ft_malloc(0, 1);
-	// atexit(ft_leaks);
 	return (0);
 }
