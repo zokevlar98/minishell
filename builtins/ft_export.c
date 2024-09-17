@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/16 03:55:24 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/17 02:18:21 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ void	ft_export(t_cmd *cmd, t_env *env)
 	char	**str;
 //export is not working correctly if more than tow env variable are passed the 1st
 //one is being exported and the ather one is not being exported
+
+/*bash-3.2$ export 1a1=""
+bash: export: `1a1=': not a valid identifier
+bash-3.2$ export _a1=""
+*/
 	tmp = env;
 	p = env;
 	if (!cmd->args[1])
