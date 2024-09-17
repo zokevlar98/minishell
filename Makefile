@@ -4,7 +4,7 @@ NAME			=	minishell
 HEADER			=	includes/minishell.h
 
 
-CC				=	cc -Wall -Wextra -Werror -I ./includes -fsanitize=address -g
+CC				=	cc -Wall -Wextra -Werror -I ./includes  -fsanitize=address -g
 
 READLINE_FLAGS	=	-lreadline \
 

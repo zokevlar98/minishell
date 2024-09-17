@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_utilis_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 05:40:40 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/28 07:20:45 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/17 11:09:09 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char    *lower_case(char *str)
     int i;
 
     i = 0;
+	if (!str)
+		return (NULL);
     while (str[i])
     {
         if (str[i] >= 'A' && str[i] <= 'Z')

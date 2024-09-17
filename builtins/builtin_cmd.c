@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/13 22:30:19 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/17 11:25:11 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 	char	*cmd;
 	
 	cmd = lower_case(cmd_list->args[0]);
+	if (!cmd)
+		return ;
 	dup2(cmd_list->fd_in , STDIN_FILENO);
 	dup2(cmd_list->fd_out , STDOUT_FILENO);
 	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
