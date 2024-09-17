@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/16 01:38:53 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/17 19:33:53 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	ft_export(t_cmd *cmd, t_env *env)
 	}
 	if (ft_strchr(cmd->args[1], '='))
 	{
+		//hendling the case export var======5 & export 1a1="hello" export _a1=""
+		//Also export -var=42 or export +var=42
 		str = ft_split(cmd->args[1], '=');
 		new = ft_env_new_(str[0], str[1]);
 		if (!new)
