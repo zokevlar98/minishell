@@ -7,6 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
 /*   Updated: 2024/09/17 19:33:53 by zqouri           ###   ########.fr       */
+
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +30,35 @@ void	ft_export_error(t_cmd *cmd)
 	}
 }
 
+void	affiche_sort_env(t_env *env)
+{
+	int		i;
+	int		j;
+	char	**envp;
+
+	i = 0;
+	envp = ft_get_envp(env);
+	while (envp[i])
+	{
+		j = i + 1;
+		while (envp[j])
+		{
+			if (ft_strncmp(envp[i], envp[j], ft_strlen(envp[i])) > 0)
+			{
+				envp[i] = envp[j];
+			}
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	while (envp[i])
+	{
+		printf("declare -x %s\n", envp[i]);
+		i++;
+	}
+}
+
 void	print_list_declare(t_env *env)
 {
 	while (env)
@@ -47,11 +77,17 @@ void	ft_export(t_cmd *cmd, t_env *env)
 	char	**str;
 //export is not working correctly if more than tow env variable are passed the 1st
 //one is being exported and the ather one is not being exported
+
+/*bash-3.2$ export 1a1=""
+bash: export: `1a1=': not a valid identifier
+bash-3.2$ export _a1=""
+*/
 	tmp = env;
 	p = env;
 	if (!cmd->args[1])
 	{
 		print_list_declare(tmp);
+		// affiche_sort_env(tmp);
 		return ;
 	}
 	while (tmp)
