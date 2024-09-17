@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/14 23:18:56 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/17 19:11:07 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	fork1(void)
 
 	pid = fork();
 	if (pid == -1)
-		ft_error("fork failed\n");
+		ft_error("fork failed: ");
 	return (pid);
 }
 

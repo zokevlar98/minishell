@@ -97,7 +97,6 @@ void	ft_free(char **tab);
 char	*ft_strtrim(char *s1, char *set);
 int     ft_atoi(char *str);
 char	*ft_itoa(int n);
-int		size_array(char **arry);
 
 // lib_utils_2
 size_t	ft_strlen(const char *s);
