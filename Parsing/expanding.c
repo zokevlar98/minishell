@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:38:34 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 18:31:47 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/17 01:14:36 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 char	*get_ex(t_env *env, char *line, int i)
 {
@@ -46,7 +46,10 @@ t_utils	*intialize_utils(int len)
 {
 	t_utils	*u;
 
-	u = ft_malloc(sizeof(t_utils), 0);
+	// u = ft_malloc(sizeof(t_utils), 0);
+	u = (t_utils *)malloc(sizeof(t_utils));
+	if (!u)
+		return (NULL);
 	u->fd = 0;
 	u->i = 0;
 	u->j = 0;

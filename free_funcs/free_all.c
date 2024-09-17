@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 03:48:13 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/15 14:39:31 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/17 01:18:55 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 void	ft_free_all(void **ptrs_list)
 {
@@ -28,7 +28,7 @@ void	ft_free_all(void **ptrs_list)
 	free(ptrs_list);
 	ptrs_list = NULL;
 }
-
+//ft_malloc fiha chi mouchkil raha tat5eli minishell segv
 void	*ft_malloc(size_t size, int free)
 {
 	static void	**ptrs_list;
@@ -37,8 +37,8 @@ void	*ft_malloc(size_t size, int free)
 	FILE		*file;
 
 
-	if (free)
-	{
+	if (free)//had condetion fach tikon dak fichier diyal log supprime 
+	{//ki tadir exit f minishell SEGV 
 		file = fopen("malloc_log", "w");
 		ft_free_all(ptrs_list);
 		fprintf(file, "malloc freed\n");

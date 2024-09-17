@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expanding_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:16:30 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 18:24:01 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/17 01:14:23 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 int	is_expandable(char c)
 {
