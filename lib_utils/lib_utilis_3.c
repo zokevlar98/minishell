@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lib_utilis_3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 14:32:05 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/10 17:44:55 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/17 01:13:26 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 int	all_space(char *line)
 {

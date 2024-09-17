@@ -6,13 +6,11 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 21:27:53 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/16 21:42:56 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/17 01:13:20 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../includes/minishell.h"
-
+#include "minishell.h"
 
 char	*ft_strtrim(char *s1, char *set)
 {

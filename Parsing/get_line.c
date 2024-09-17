@@ -3,21 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 11:18:12 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 19:14:04 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/17 01:14:47 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 t_utils	*ini_utls(char *line)
 {
 	t_utils	*u;
 
-	u = ft_malloc(sizeof(t_utils), 0);
-	u->new_line = ft_malloc(ft_strlen(line) + 1, 0);
+	// u = ft_malloc(sizeof(t_utils), 0);
+	u = (t_utils *)malloc(sizeof(t_utils));
+	if (!u)
+		return (NULL);
+	// u->new_line = ft_malloc(ft_strlen(line) + 1, 0);
+	u->new_line = (char *)malloc(sizeof(char) * (ft_strlen(line) + 1));
+	if (!u->new_line)
+		return (NULL);
 	ft_bzero(u->new_line, ft_strlen(line) + 1);
 	u->sq = 0;
 	u->dq = 0;

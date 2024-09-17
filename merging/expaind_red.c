@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expaind_red.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:18:07 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 18:12:35 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/17 01:13:37 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 char	*expd_rd(char *f_name, t_env *env)
 {
