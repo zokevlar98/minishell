@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 06:28:16 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/28 15:35:00 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/17 19:26:17 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,4 @@ char    **empty_env(void)
     env[2] = ft_strdup("_=/usr/bin/env");
     env[3] = NULL;
     return (env);
-}
-
-int size_array(char **arry)
-{
-    int i;
-
-    i = 0;
-    if (!arry)
-        return (0);
-    while (arry[i] != NULL)
-        i++;
-    return (i);
 }
