@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   merge.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:23:06 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/11 11:55:58 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/17 01:13:49 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 void	ft_merge(t_cmd **cmd_list, t_p_cmd *cp_list, t_env *env_list)
 {

@@ -6,11 +6,11 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 21:41:28 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/17 01:19:35 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "minishell.h"
 
 int	ft_add(char *line)
 {
@@ -38,6 +38,7 @@ void	start_loop(t_env *env_list)
 	t_p_cmd	*cp_list;
 	t_cmd	*cmd_list;
 
+	shell_lvl(env_list);
 	while (1)
 	{
 		line = readline("minishell$>  ");
@@ -65,10 +66,12 @@ int	main(int ac, char **av, char **env)
 
 	if (ac != 1 || av[1])
 		return (write(2, "Error: no arguments needed\n", 27));
+	if (!env[0])
+		env = empty_env();
 	env_list = NULL;
 	ft_env_list(&env_list, env);
 	// ft_handle_signals();
 	start_loop(env_list);
-	ft_malloc(0, 1);
+	// ft_malloc(0, 1);//de5al l function rani chra7e lach 7iyedtha
 	return (0);
 }
