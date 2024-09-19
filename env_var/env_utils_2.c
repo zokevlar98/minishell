@@ -1,15 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   env_utils_2.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 06:28:16 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/28 15:35:00 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+	
 #include "minishell.h"
 
 char    **empty_env(void)
@@ -26,16 +15,4 @@ char    **empty_env(void)
     env[2] = ft_strdup("_=/usr/bin/env");
     env[3] = NULL;
     return (env);
-}
-
-int size_array(char **arry)
-{
-    int i;
-
-    i = 0;
-    if (!arry)
-        return (0);
-    while (arry[i] != NULL)
-        i++;
-    return (i);
 }

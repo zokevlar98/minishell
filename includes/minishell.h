@@ -1,16 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 21:22:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/16 21:22:39 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -99,7 +86,6 @@ void	ft_free(char **tab);
 char	*ft_strtrim(char *s1, char *set);
 int     ft_atoi(char *str);
 char	*ft_itoa(int n);
-int		size_array(char **arry);
 
 // lib_utils_2
 size_t	ft_strlen(const char *s);
@@ -186,8 +172,6 @@ t_cmd	*ft_lstnew(void);
 int		ft_lstsize(t_cmd *lst);
 t_cmd	*ft_lstlast(t_cmd *lst);
 void	ft_lstadd_back(t_cmd **lst, t_cmd *new);
-void    ft_init_pars(t_cmd **cmd_list, char *line);
-void	affiche_node(t_cmd *cmd_list);
 void	affiche_env(t_env *env);
 t_cmd	*ft_lstnew_cmd(char *cmd);
 void	ft_lstadd_back_cmd(t_cmd **cmd_list, t_cmd *new);

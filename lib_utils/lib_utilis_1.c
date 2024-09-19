@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lib_utilis_1.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 03:53:04 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 21:27:12 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -33,7 +22,8 @@ char	*ft_strdup(const char *s)
 
 	if (!s)
 		return (NULL);
-	dup = ft_malloc(sizeof(char) * (ft_strlen(s) + 1), 0);
+	// dup = ft_malloc(sizeof(char) * (ft_strlen(s) + 1), 0);
+	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!dup)
 		return (NULL);
 	i = 0;
@@ -85,7 +75,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start > ft_strlen(s))
 		return (ft_strdup("\0"));
-	sub = ft_malloc(sizeof(char) * (len + 1), 0);
+	// sub = ft_malloc(sizeof(char) * (len + 1), 0);
+	sub = (char *)malloc(sizeof(char) * (len + 1));
 	if (!sub)
 		return (NULL);
 	i = 0;

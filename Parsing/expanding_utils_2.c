@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   expanding_utils_2.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/04 18:53:19 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 19:18:00 by mohmazou         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 int	new_len(char *line)
 {
@@ -24,7 +13,8 @@ void	*allocat_zero(size_t size)
 {
 	void	*ptr;
 
-	ptr = ft_malloc(size, 0);
+	// ptr = ft_malloc(size, 0);
+	ptr = malloc(size);
 	if (!ptr)
 		return (NULL);
 	ft_memset(ptr, 0, size);

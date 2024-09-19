@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   env_utils_1.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 21:21:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/16 21:31:17 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -22,7 +10,7 @@ void	ft_change_env(t_env *env_list, char *name, char *value)
 	{
 		if (ft_strncmp(tmp->name, name, ft_strlen(tmp->name)) == 0)
 		{
-			free(tmp->value);
+			// free(tmp->value);// if this line is uncommented, the program  will double free becouse of ft_malloc i need a solution
 			tmp->value = ft_strdup(value);
 			return ;
 		}
@@ -43,7 +31,7 @@ char	*ft_env_search(t_env *env_list, char *name)
 	tmp = env_list;
 	while (tmp)
 	{
-		if (!ft_strncmp(tmp->name, name, ft_strlen(name)))
+		if (!ft_strncmp(tmp->name, name, ft_strlen(tmp->name)))
 			return (tmp->value);
 		tmp = tmp->next;
 	}

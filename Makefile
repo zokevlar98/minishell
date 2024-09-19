@@ -30,7 +30,6 @@ SRCS			=	main.c								\
 					env_var/env_utils_1.c				\
 					env_var/env_utils_2.c				\
 					execution/test/outils_test.c		\
-					execution/test/ft_init.c			\
 					builtins/builtin_cmd.c				\
 					builtins/builtin_utils.c			\
 					builtins/ft_echo.c					\

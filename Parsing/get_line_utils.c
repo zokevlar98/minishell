@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_line_utils.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 12:31:03 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 19:14:20 by mohmazou         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 void	in_qote(int *sq, int *dq, char c)
 {
@@ -28,7 +17,10 @@ char	**get_in_rd(char *line, int dq, int sq)
 	int		count;
 
 	count = ft_cnt_red(line, '<');
-	in_rd = ft_malloc(sizeof(char *) * (count + 1), 0);
+	// in_rd = ft_malloc(sizeof(char *) * (count + 1), 0);
+	in_rd = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!in_rd)
+		return (NULL);
 	i = -1;
 	j = 0;
 	while (line[++i])
@@ -57,7 +49,10 @@ char	**get_out_rd(char *line, int dq, int sq)
 	int		count;
 
 	count = ft_cnt_red(line, '>');
-	out_rd = ft_malloc(sizeof(char *) * (count + 1), 0);
+	// out_rd = ft_malloc(sizeof(char *) * (count + 1), 0);
+	out_rd = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!out_rd)
+		return (NULL);
 	i = -1;
 	j = 0;
 	while (line[++i])

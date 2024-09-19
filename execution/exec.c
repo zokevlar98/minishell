@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/13 22:30:55 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -46,6 +35,8 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list)
 	saves[1] = dup(STDOUT_FILENO);
 	while (tmp)
 	{
+		if (tmp->fd_in == -1 || tmp->fd_out == -1)
+			return ;
 		if (tmp->next == NULL)
 		{
 			if (is_builtin(tmp))

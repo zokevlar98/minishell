@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   open_file.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 12:04:45 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 18:09:13 by mohmazou         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 t_utils	*init_utils(void)
 {
@@ -54,7 +43,10 @@ int	open_out(char **redir, t_env *env)
 	t_utils	*u;
 
 	u = init_utils();
-	u->fd_tab = ft_malloc(sizeof(int) * cp_arr(redir), 0);
+	// u->fd_tab = ft_malloc(sizeof(int) * cp_arr(redir), 0);
+	u->fd_tab = malloc(sizeof(int) * cp_arr(redir));
+	if (!u->fd_tab)
+		return (-1);
 	while (redir && redir[u->i])
 	{
 		u->f_name = get_r_name(redir[u->i], env);
@@ -77,7 +69,10 @@ int	open_in(char **redir, t_env *env)
 	t_utils	*u;
 
 	u = init_utils();
-	u->fd_tab = ft_malloc(sizeof(int) * cp_arr(redir), 0);
+	// u->fd_tab = ft_malloc(sizeof(int) * cp_arr(redir), 0);
+	u->fd_tab = malloc(sizeof(int) * cp_arr(redir));
+	if (!u->fd_tab)
+		return (-1);
 	while (redir && redir[u->i])
 	{
 		u->f_name = get_r_name(redir[u->i], env);

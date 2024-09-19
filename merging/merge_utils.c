@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   merge_utils.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 14:38:19 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/16 18:02:29 by mohmazou         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 char	*rm_qot(char *str, int s_q, int d_q)
 {
@@ -20,7 +9,10 @@ char	*rm_qot(char *str, int s_q, int d_q)
 
 	i = 0;
 	j = 0;
-	new_str = ft_malloc(ft_strlen(str) + 1, 0);
+	// new_str = ft_malloc(ft_strlen(str) + 1, 0);
+	new_str = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
+	if (!new_str)
+		return (NULL);
 	ft_bzero(new_str, ft_strlen(str) + 1);
 	while (str[i])
 	{
@@ -62,7 +54,10 @@ t_cmd	*ft_new_cmd(t_p_cmd *cp_cmd, t_env *env_list)
 {
 	t_cmd	*new_cmd;
 
-	new_cmd = ft_malloc(sizeof(t_cmd), 0);
+	// new_cmd = ft_malloc(sizeof(t_cmd), 0);
+	new_cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	if (!new_cmd)
+		return (NULL);
 	new_cmd->pipe_line = cp_cmd->pipe_line;
 	new_cmd->args = ft_quoted_cmd(cp_cmd->cmd);
 	if (cp_cmd->in_redir && cp_cmd->in_redir[0])

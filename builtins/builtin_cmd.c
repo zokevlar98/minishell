@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtin_cmd.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/17 11:25:11 by mohmazou         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -17,7 +6,7 @@ void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 	char	*cmd;
 	
 	cmd = lower_case(cmd_list->args[0]);
-	if (!cmd)
+	if (!cmd || cmd_list->fd_in == -1 || cmd_list->fd_out == -1)
 		return ;
 	dup2(cmd_list->fd_in , STDIN_FILENO);
 	dup2(cmd_list->fd_out , STDOUT_FILENO);
