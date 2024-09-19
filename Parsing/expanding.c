@@ -35,10 +35,7 @@ t_utils	*intialize_utils(int len)
 {
 	t_utils	*u;
 
-	// u = ft_malloc(sizeof(t_utils), 0);
-	u = (t_utils *)malloc(sizeof(t_utils));
-	if (!u)
-		return (NULL);
+	u = (t_utils *)ft_malloc(sizeof(t_utils), 0);
 	u->fd = 0;
 	u->i = 0;
 	u->j = 0;
@@ -59,7 +56,7 @@ int	fill_str(t_env *env, char *line, char *new_line)
 		if (u->status)
 			u->i++;
 		if (line[u->i] && u->status && line[u->i] == '?')
-			join_exit(new_line, "-000", &u->j, &u->i);
+			join_exit(new_line, "0", &u->j, &u->i);
 		else if (line[u->i] && u->status && not_expandable(line[u->i]))
 			u->i++;
 		else if (line[u->i] && u->status && ft_to_ex(line[u->i]))

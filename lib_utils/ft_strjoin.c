@@ -13,9 +13,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	j = 0;
 	size = ft_strlen(s1) + ft_strlen(s2);
-	dest = (char *)malloc(sizeof(char) * (size + 1));
-	if (!dest)
-		return (NULL);
+	dest = (char *)ft_malloc(sizeof(char) * (size + 1), 0);
 	while (s1[i] != '\0')
 	{
 		dest[i] = s1[i];

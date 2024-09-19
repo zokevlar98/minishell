@@ -42,7 +42,7 @@ t_env	*ft_env_new_(char *key, char *value)
 {
 	t_env	*new;
 
-	new = (t_env *)malloc(sizeof(t_env));
+	new = (t_env *)ft_malloc(sizeof(t_env), 0);
 	if (!new)
 		return (NULL);
 	new->name = ft_strdup(key);
@@ -58,7 +58,7 @@ t_env	*ft_env_new(char *env)
 	t_env	*new;
 	char	*equal;
 
-	new = (t_env *)malloc(sizeof(t_env));
+	new = (t_env *)ft_malloc(sizeof(t_env), 0);
 	if (!new)
 		return (NULL);
 	equal = ft_strchr(env, '=');

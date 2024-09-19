@@ -43,10 +43,7 @@ int	open_out(char **redir, t_env *env)
 	t_utils	*u;
 
 	u = init_utils();
-	// u->fd_tab = ft_malloc(sizeof(int) * cp_arr(redir), 0);
-	u->fd_tab = malloc(sizeof(int) * cp_arr(redir));
-	if (!u->fd_tab)
-		return (-1);
+	u->fd_tab = ft_malloc(sizeof(int) * cp_arr(redir), 0);
 	while (redir && redir[u->i])
 	{
 		u->f_name = get_r_name(redir[u->i], env);
@@ -69,10 +66,7 @@ int	open_in(char **redir, t_env *env)
 	t_utils	*u;
 
 	u = init_utils();
-	// u->fd_tab = ft_malloc(sizeof(int) * cp_arr(redir), 0);
-	u->fd_tab = malloc(sizeof(int) * cp_arr(redir));
-	if (!u->fd_tab)
-		return (-1);
+	u->fd_tab = ft_malloc(sizeof(int) * cp_arr(redir), 0);
 	while (redir && redir[u->i])
 	{
 		u->f_name = get_r_name(redir[u->i], env);

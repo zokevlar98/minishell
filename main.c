@@ -61,6 +61,7 @@ int	main(int ac, char **av, char **env)
 	ft_env_list(&env_list, env);
 	// ft_handle_signals();
 	start_loop(env_list);
-	// ft_malloc(0, 1);//de5al l function rani chra7e lach 7iyedtha
+	ft_malloc(0, 1);
+	
 	return (0);
 }

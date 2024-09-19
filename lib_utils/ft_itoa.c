@@ -18,9 +18,7 @@ char	*ft_zero(void)
 {
 	char	*str;
 
-	str = (char *)malloc(sizeof(char) * 2);
-	if (!str)
-		return (NULL);
+	str = (char *)ft_malloc(sizeof(char) * 2, 0);
 	str[0] = '0';
 	str[1] = '\0';
 	return (str);
@@ -50,9 +48,7 @@ char	*ft_itoa(int n)
 	i = 0;
 	count = 0;
 	count = ft_check_is_negative(&n, count) + ft_count_number(n);
-	nbr = (char *)malloc(sizeof(char) * (count + 1));
-	if (!nbr)
-		return (NULL);
+	nbr = (char *)ft_malloc(sizeof(char) * (count + 1), 0);
 	if ((n * (-1)) < 0)
 		nbr[0] = '-';
 	while (n > 0)

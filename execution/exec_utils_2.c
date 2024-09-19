@@ -66,7 +66,7 @@ char	**ft_get_envp(t_env *env_list)
 		i++;
 		tmp = tmp->next;
 	}
-	envp = (char **)malloc(sizeof(char *) * (i + 1));
+	envp = (char **)ft_malloc(sizeof(char *) * (i + 1), 0);
 	if (!envp)
 		return (NULL);
 	i = 0;

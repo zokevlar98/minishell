@@ -7,9 +7,7 @@ char    **empty_env(void)
     char    *str;
 
     str = getcwd(NULL, 0);
-    env = (char **)malloc(sizeof(char *) * 4);
-    if (!env)
-        ft_error("malloc failed\n");
+    env = (char **)ft_malloc(sizeof(char *) * 4, 0);
     env[0] = ft_strjoin("PWD=", str);
     env[1] = ft_strdup("SHLVL=0");
     env[2] = ft_strdup("_=/usr/bin/env");

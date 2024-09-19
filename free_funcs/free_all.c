@@ -17,21 +17,17 @@ void	ft_free_all(void **ptrs_list)
 	free(ptrs_list);
 	ptrs_list = NULL;
 }
-//ft_malloc fiha chi mouchkil raha tat5eli minishell segv
+
 void	*ft_malloc(size_t size, int free)
 {
 	static void	**ptrs_list;
 	static int	i;
 	void		*ptr;
-	FILE		*file;
 
 
-	if (free)//had condetion fach tikon dak fichier diyal log supprime 
-	{//ki tadir exit f minishell SEGV 
-		file = fopen("malloc_log", "w");
+	if (free)
+	{
 		ft_free_all(ptrs_list);
-		fprintf(file, "malloc freed\n");
-		fclose(file);
 		return (NULL);
 	}
 	if (!ptrs_list)
@@ -49,12 +45,8 @@ void	*ft_malloc(size_t size, int free)
 		printf("xmalloc: cannot allocate memory\n");
 		exit(1);
 	}
-		
 	ptrs_list[i++] = ptr;
 	ptrs_list[i] = NULL;
 	
-	file = fopen("malloc_log", "a");
-	fprintf(file, "malloc[%d]: %p\n", i, ptr);
-	fclose(file);
 	return (ptr);
 }

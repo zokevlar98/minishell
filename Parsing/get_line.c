@@ -5,14 +5,8 @@ t_utils	*ini_utls(char *line)
 {
 	t_utils	*u;
 
-	// u = ft_malloc(sizeof(t_utils), 0);
-	u = (t_utils *)malloc(sizeof(t_utils));
-	if (!u)
-		return (NULL);
-	// u->new_line = ft_malloc(ft_strlen(line) + 1, 0);
-	u->new_line = (char *)malloc(sizeof(char) * (ft_strlen(line) + 1));
-	if (!u->new_line)
-		return (NULL);
+	u = (t_utils *)ft_malloc(sizeof(t_utils), 0);
+	u->new_line = (char *)ft_malloc(sizeof(char) * (ft_strlen(line) + 1), 0);
 	ft_bzero(u->new_line, ft_strlen(line) + 1);
 	u->sq = 0;
 	u->dq = 0;

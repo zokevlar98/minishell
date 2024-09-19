@@ -13,10 +13,7 @@ void	*allocat_zero(size_t size)
 {
 	void	*ptr;
 
-	// ptr = ft_malloc(size, 0);
-	ptr = malloc(size);
-	if (!ptr)
-		return (NULL);
+	ptr = ft_malloc(size, 0);
 	ft_memset(ptr, 0, size);
 	return (ptr);
 }

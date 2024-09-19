@@ -42,8 +42,6 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 	char	*path;
 
 	envp = ft_get_envp(env_list);
-	if (!envp)
-		ft_error("malloc failed");
 	path = find_path_env(cmd_list->args[0], envp);
 	if (!path)
 	{

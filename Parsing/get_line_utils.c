@@ -17,10 +17,7 @@ char	**get_in_rd(char *line, int dq, int sq)
 	int		count;
 
 	count = ft_cnt_red(line, '<');
-	// in_rd = ft_malloc(sizeof(char *) * (count + 1), 0);
-	in_rd = (char **)malloc(sizeof(char *) * (count + 1));
-	if (!in_rd)
-		return (NULL);
+	in_rd = (char **)ft_malloc(sizeof(char *) * (count + 1), 0);
 	i = -1;
 	j = 0;
 	while (line[++i])
@@ -49,10 +46,7 @@ char	**get_out_rd(char *line, int dq, int sq)
 	int		count;
 
 	count = ft_cnt_red(line, '>');
-	// out_rd = ft_malloc(sizeof(char *) * (count + 1), 0);
-	out_rd = (char **)malloc(sizeof(char *) * (count + 1));
-	if (!out_rd)
-		return (NULL);
+	out_rd = (char **)ft_malloc(sizeof(char *) * (count + 1), 0);
 	i = -1;
 	j = 0;
 	while (line[++i])

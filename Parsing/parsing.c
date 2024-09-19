@@ -41,10 +41,7 @@ t_utils	*utils_init(void)
 {
 	t_utils	*u;
 
-	// u = ft_malloc(sizeof(t_utils), 0);
-	u = (t_utils *)malloc(sizeof(t_utils));
-	if (!u)
-		return (NULL);
+	u = (t_utils *)ft_malloc(sizeof(t_utils), 0);
 	u->i = -1;
 	u->j = 0;
 	u->k = 0;
@@ -57,10 +54,7 @@ char	**ft_split_cmd(char *line, char c, int s_q, int d_q)
 	char	**cmd;
 
 	u = utils_init();
-	// cmd = ft_malloc(sizeof(char *) * (cnt_split(line, c, 0) + 1), 0);
-	cmd = (char **)malloc(sizeof(char *) * (cnt_split(line, c, 0) + 1));
-	if (!cmd)
-		return (NULL);
+	cmd = (char **)ft_malloc(sizeof(char *) * (cnt_split(line, c, 0) + 1), 0);
 	while (line[++u->i])
 	{
 		sp_qt(line[u->i], &s_q, &d_q);
