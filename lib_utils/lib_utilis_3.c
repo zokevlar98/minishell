@@ -28,3 +28,12 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
+
+int	exit_status(int status)
+{
+	static int	exit_status;
+
+	if (status != -1)
+		exit_status = status;
+	return (exit_status);
+}

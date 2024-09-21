@@ -10,6 +10,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <signal.h>
 # include <sys/types.h>
 # include <errno.h>
 # include <dirent.h>
@@ -101,7 +102,8 @@ int		ft_check_direction(char *line);
 int		ft_isspace(char c);
 int		is_caracter(char *str, char c);
 
-// env_utils_1.c
+// parsing_part
+
 void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list);
 char	**ft_split_cmd(char *line, char c, int s_q, int d_q);
 int		cnt_split(char *line, char c, int in_word);
@@ -132,7 +134,8 @@ int		open_out(char **out_redir, t_env *env);
 char	*get_f_name(char *f_name, t_env *env);
 char	*expd_rd(char *f_name, t_env *env);
 char    **empty_env(void);
-
+int		exit_status(int status);
+void	ft_handle_signals(void);
 // env_utils_1.c
 int     ft_check_env(t_cmd *cmd_list);
 void	ft_change_env(t_env *env_list, char *name, char *value);

@@ -53,6 +53,8 @@ SRCS			=	main.c								\
 					merging/open_file.c					\
 					merging/expaind_red.c 				\
 					free_funcs/free_all.c 				\
+					signals/signals.c					\
+
 					
 
 
