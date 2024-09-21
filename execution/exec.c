@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/17 18:54:39 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/21 06:19:29 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,6 @@ int		serch_for_pipe(t_cmd *cmd_list)
 		cmd_list = cmd_list->next;
 	}
 	return (0);
-}
-
-void	ft_exec(t_cmd *cmd_list, t_env *env_list)
-{
-	if (ft_lstsize(cmd_list) == 1)
-	{
-		if (fork1() == 0)
-			ft_execut(cmd_list, env_list);
-		wait(NULL);
-	}
 }
 
 void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list)

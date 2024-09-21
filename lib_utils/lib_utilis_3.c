@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 14:32:05 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/17 01:13:26 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/21 06:31:51 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,32 @@ void	ft_bzero(void *s, size_t n)
 		((char *)s)[i] = 0;
 		i++;
 	}
+}
+
+char	**append_args(char **args)
+{
+	int		i;
+	int		j;
+	int		size;
+	char	**new_args;
+	
+	size = 0;
+	j = 0;
+	i = 2;
+	while (ft_strncmp(args[i], ''))
+		i++;
+	while (args[size])
+		size++;
+	new_args = (char **)malloc(sizeof(char *) * (size + 2));
+	if (!new_args)
+		return (NULL);
+	new_args[0] = args[0];
+	new_args[1] = ft_strdup("-G");
+	while (args[i] != NULL)
+	{
+		new_args[i] = args[i];
+		i++;
+	}
+	new_args[i] = NULL;
+	return (new_args);
 }

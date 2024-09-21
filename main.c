@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/17 18:42:58 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/21 04:35:59 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,13 @@ void	start_loop(t_env *env_list)
 	t_p_cmd	*cp_list;
 	t_cmd	*cmd_list;
 
-	shell_lvl(env_list);
 	while (1)
 	{
-		line = readline("minishell$>  ");
+		line = readline(GRN" -> "CYN"Minishell "RST);
 		if (ft_add(line))
 		{
 			free(line);
 			continue ;
-		}
-		if (ft_strcmp(line, "exit") == 0)
-		{
-			free(line);
-			break ;
 		}
 		ft_parsing(line, &cp_list, env_list);
 		cmd_list = NULL;
@@ -70,6 +64,7 @@ int	main(int ac, char **av, char **env)
 		env = empty_env();
 	env_list = NULL;
 	ft_env_list(&env_list, env);
+	shell_lvl(env_list);
 	// ft_handle_signals();
 	start_loop(env_list);
 	// ft_malloc(0, 1);//de5al l function rani chra7e lach 7iyedtha

@@ -31,7 +31,13 @@
 
 
 //define
-# define NUM_BUILTINS 8 
+# define NUM_BUILTINS 8
+#define BLK "\e[1;90m"
+#define RED "\e[1;91m"
+#define GRN "\e[3;92m"
+#define MAG "\e[1;95m"
+#define CYN "\e[3;96m"
+#define RST "\e[0m"
 // environnement variables linked list
 typedef struct s_env
 {
@@ -111,8 +117,9 @@ int		ft_check_syntax(char *line);
 int		ft_check_direction(char *line);
 int		ft_isspace(char c);
 int		is_caracter(char *str, char c);
+char	**append_args(char **args);
 
-// env_utils_1.c
+// pars.c
 void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list);
 char	**ft_split_cmd(char *line, char c, int s_q, int d_q);
 int		cnt_split(char *line, char c, int in_word);
@@ -145,14 +152,12 @@ char	*expd_rd(char *f_name, t_env *env);
 char    **empty_env(void);
 
 // env_utils_1.c
-int     ft_check_env(t_cmd *cmd_list);
 void	ft_change_env(t_env *env_list, char *name, char *value);
 char	*ft_env_search(t_env *env_list, char *name);
 t_env	*ft_env_new_(char *key, char *value);
 t_env	*ft_env_new(char *env);
 void	ft_env_add_back(t_env **env_list, t_env *new);
 void     ft_env_list(t_env **env_list,char **env);
-void	ft_add_env_back(t_env **env, t_env *new);
 
 //execution
 void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list);
