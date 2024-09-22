@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_utilis_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 05:40:40 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/17 11:38:21 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/09/22 07:57:09 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char    *lower_case(char *str)
 
 int ft_strncmp(char *s1, char *s2, size_t size)
 {
-    size_t i;
+    size_t  i;
 
     i = 0;
     if (!s1 || !s2)

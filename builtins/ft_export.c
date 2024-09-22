@@ -44,9 +44,7 @@ void	affiche_sort_env(t_env *env)
 		while (envp[j])
 		{
 			if (ft_strncmp(envp[i], envp[j], ft_strlen(envp[i])) > 0)
-			{
 				envp[i] = envp[j];
-			}
 			j++;
 		}
 		i++;
@@ -113,3 +111,5 @@ bash-3.2$ export _a1=""
 	}
 	ft_export_error(cmd);
 }
+
+//export a=ll && export a+=ll => a=llll
