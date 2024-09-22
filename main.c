@@ -21,23 +21,12 @@ int	ft_add(char *line)
 	return (0);
 }
 
-void	sig_handel(int sig)
-{
-	if (sig == SIGINT)
-		write(1, "\n", 1);
-	else if (sig == SIGQUIT)
-		return;
-}
-
 void	start_loop(t_env *env_list)
 {
 	char	*line;
 	t_p_cmd	*cp_list;
 	t_cmd	*cmd_list;
 
-	struct sigaction	act;
-	act.sa_handler = sig_handel;
-	act.sa_flags = 0;
 	shell_lvl(env_list);
 	while (1)
 	{
@@ -52,8 +41,6 @@ void	start_loop(t_env *env_list)
 			free(line);
 			break ;
 		}
-		sigaction(SIGINT, &act, NULL);
-		sigaction(SIGQUIT, &act, NULL);
 		ft_parsing(line, &cp_list, env_list);
 		cmd_list = NULL;
 		ft_merge(&cmd_list, cp_list, env_list);

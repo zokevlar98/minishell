@@ -13,7 +13,7 @@ void	int_handel(int sig)
 void	quit_handel(int sig)
 {
 	(void)sig;
-	write(1, "Quit: 3\n", 8);
+	return ;
 }
 
 void	ft_handle_signals(void)

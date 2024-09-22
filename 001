@@ -29,7 +29,7 @@ echo <123 <456 hi | echo 42							\\NOT LIKE THE BASH
 
 $_													\\NOT WORKING
 
+export 8a==											\\NOT LIKE THE BASH
 
-
-
+echo -n -n -n -nnnnnnnnnnnn "hey"					\\NOT LIKE THE BASH
 
