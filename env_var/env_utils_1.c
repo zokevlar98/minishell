@@ -6,10 +6,9 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 21:21:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/17 19:08:31 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/21 03:33:04 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -18,6 +17,8 @@ void	ft_change_env(t_env *env_list, char *name, char *value)
 	t_env	*tmp;
 
 	tmp = env_list;
+	if (!name || !value)
+		return ;
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->name, name, ft_strlen(tmp->name)) == 0)
@@ -50,41 +51,12 @@ char	*ft_env_search(t_env *env_list, char *name)
 	return (NULL);
 }
 
-t_env	*ft_env_new_(char *key, char *value)
-{
-	t_env	*new;
-
-	new = (t_env *)malloc(sizeof(t_env));
-	if (!new)
-		return (NULL);
-	new->name = ft_strdup(key);
-	new->value = ft_strdup(value);
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
-}
-
-
-t_env	*ft_env_new(char *env)
-{
-	t_env	*new;
-	char	*equal;
-
-	new = (t_env *)malloc(sizeof(t_env));
-	if (!new)
-		return (NULL);
-	equal = ft_strchr(env, '=');
-	new->name = ft_substr(env, 0, equal - env);
-	new->value = ft_strdup(equal + 1);
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
-}
-
 void	ft_env_add_back(t_env **env_list, t_env *new)
 {
 	t_env	*tmp;
 
+	if (!new)
+		return ;
 	if (!*env_list)
 	{
 		*env_list = new;
@@ -104,9 +76,13 @@ void	ft_env_list(t_env **env_list, char **env)
 
 	i = 0;
 	new = NULL;
+	if (!env)
+		return ;
 	while (env[i])
 	{
 		new = ft_env_new(env[i]);
+		if (!new)
+			ft_error("error: failed");
 		ft_env_add_back(env_list, new);
 		i++;
 	}

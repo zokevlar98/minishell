@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 01:18:13 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/26 01:19:48 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/21 03:43:40 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ char	*ft_zero(void)
 {
 	char	*str;
 
-	str = (char *)malloc(sizeof(char) * 2);
-	if (!str)
-		return (NULL);
-	str[0] = '0';
-	str[1] = '\0';
+	str = ft_strdup("0");
 	return (str);
 }
 

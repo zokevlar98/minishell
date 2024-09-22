@@ -55,23 +55,27 @@ SRCS			=	main.c								\
 					free_funcs/free_all.c 				\
 					
 
-
+RED             =   \033[0;31m
+GREEN           =   \033[0;32m
+RESET           =   \033[0m
 
 OBJS		=	$(SRCS:.c=.o)
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME)
+			@echo "$(GREEN)Loading$(RESET)"
+			@$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME)
 
 %.o:		%.c $(HEADER)
-			$(CC) -c $< -o $@
+			@$(CC) -c $< -o $@
 
 clean:
-			rm -rf $(OBJS)
+			@echo "$(RED)Cleaning$(RESET)"
+			@rm -rf $(OBJS)
 
 fclean:		clean
-			rm -rf $(NAME)
+			@rm -rf $(NAME)
 
 re:			fclean all
 
