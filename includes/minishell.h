@@ -157,7 +157,7 @@ char	*ft_env_search(t_env *env_list, char *name);
 t_env	*ft_env_new_(char *key, char *value);
 t_env	*ft_env_new(char *env);
 void	ft_env_add_back(t_env **env_list, t_env *new);
-void     ft_env_list(t_env **env_list,char **env);
+void	ft_env_list(t_env **env_list,char **env);
 
 //execution
 void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list);

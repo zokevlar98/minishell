@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/21 08:37:10 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/22 04:05:05 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 {
 	char	**envp;
 	char	*path;
-	char	**args;
+	// char	**args;
 
 	envp = ft_get_envp(env_list);
 	if (!envp)
@@ -64,11 +64,10 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
 		exit(127);
 	}
-	if (ft_strncmp(cmd_list->args[0], "ls", ft_strlen(cmd_list->args[0])) == 0)
-		args = append_args(cmd_list->args);
-	else
-		args = cmd_list->args;//problem here segv
-	if (execve(path, args, envp) == -1)
+	if (ft_strncmp(cmd_list->args[0], "ls", ft_strlen(cmd_list->args[0])) == 0 ||
+			ft_strncmp(cmd_list->args[0], "LS", ft_strlen(cmd_list->args[0])) == 0)
+		cmd_list->args = append_args(cmd_list->args);
+	if (execve(path, cmd_list->args, envp) == -1)
 		ft_error("execve failed");
 	exit(EXIT_SUCCESS);
 }
