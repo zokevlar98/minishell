@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/22 07:55:31 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/23 12:32:41 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,21 @@ void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 		ft_exit(cmd_list);
 	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
 		ft_unset(cmd_list, env_list);
+}
+
+void	ft_export_error(char *name)
+{
+	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
+	ft_putstr_fd(name, STDERR_FILENO);
+	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+}
+
+void	print_list_declare(t_env *env)
+{
+	while (env)
+	{
+		// I need to print with alhabetical order
+		printf("declare -x %s=\"%s\"\n", env->name, env->value);
+		env = env->next;
+	}
 }

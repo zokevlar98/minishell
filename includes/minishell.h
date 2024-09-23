@@ -105,6 +105,8 @@ int     ft_atoi(char *str);
 char	*ft_itoa(int n);
 
 // lib_utils_2
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
@@ -158,11 +160,11 @@ t_env	*ft_env_new_(char *key, char *value);
 t_env	*ft_env_new(char *env);
 void	ft_env_add_back(t_env **env_list, t_env *new);
 void	ft_env_list(t_env **env_list,char **env);
+t_env	*find_env(t_env *env, char *name);
 
 //execution
 void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list);
 void	ft_execut(t_cmd *cmd_list, t_env *env_list);
-char	**ft_get_envp(t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
 int		fork1(void);
 int	    process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[]);
@@ -174,6 +176,8 @@ char	*env_var_not_set(char *cmd);
 //builtins
 int     is_builtin(t_cmd *cmd_list);
 void	ft_builtin(t_cmd *cmd_list, t_env **env_list);
+void	ft_export_error(char *name);
+void	print_list_declare(t_env *env);
 void	ft_echo(t_cmd *cmd_list);
 void	ft_cd(t_cmd *cmd_list, t_env *env_list);
 void	ft_pwd(t_env *env);

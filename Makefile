@@ -4,7 +4,7 @@ NAME			=	minishell
 HEADER			=	includes/minishell.h
 
 
-CC				=	cc -Wall -Wextra -Werror -I ./includes -fsanitize=address -g
+CC				=	cc -Wall -Wextra -Werror -I ./includes #-fsanitize=address -g
 
 READLINE_FLAGS	=	-lreadline \
 
@@ -66,6 +66,8 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			@echo "$(GREEN)Loading$(RESET)"
 			@$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME)
+			@sleep 1
+			@echo "$(GREEN)Minishell Ready$(RESET)"
 
 %.o:		%.c $(HEADER)
 			@$(CC) -c $< -o $@

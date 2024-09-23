@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 06:28:16 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/21 03:31:40 by zqouri           ###   ########.fr       */
+/*   Created: 2024/09/23 08:08:27 by zqouri            #+#    #+#             */
+/*   Updated: 2024/09/23 12:42:45 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,18 @@ t_env	*ft_env_new(char *env)
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
+}
+
+t_env   *find_env(t_env *env, char *name)
+{
+    t_env   *tmp;
+
+    tmp = env;
+    while (tmp)
+    {
+        if (ft_strncmp(tmp->name, name, ft_strlen(tmp->name)) == 0)
+            return (tmp);
+        tmp = tmp->next;
+    }
+    return (NULL);
 }
