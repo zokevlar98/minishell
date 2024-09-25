@@ -112,7 +112,7 @@ char	*ft_get_name(char *str, int i);
 int		c_ex(char *str);
 int		not_expandable(char c);
 int		ft_to_ex(char c);
-int		new_len(char *line);
+int		new_len(char *line, t_env *env);
 void	*allocat_zero(size_t size);
 int		ft_cnt_red(char *line, char c);
 void	join_exit(char *new_line, char *str, int *j, int *i);
@@ -136,6 +136,9 @@ char	*expd_rd(char *f_name, t_env *env);
 char    **empty_env(void);
 int		exit_status(int status);
 void	ft_handle_signals(void);
+int		ft_maxsize(t_env *env_list, int flag);
+
+
 // env_utils_1.c
 int     ft_check_env(t_cmd *cmd_list);
 void	ft_change_env(t_env *env_list, char *name, char *value);

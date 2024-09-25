@@ -78,6 +78,28 @@ char	*line_no_rd(char *line, int i, int j)
 	return (u->new_line);
 }
 
+int	to_expand(char *line)
+{
+	int	i;
+	int	sq;
+	int	dq;
+
+	i = 0;
+	sq = 0;
+	dq = 0;
+	while (line[i])
+	{
+		if (line[i] == '\'' && !dq)
+			sq = !sq;
+		if (line[i] == '\"' && !sq)
+			dq = !dq;
+		if (line[i] == '$' && !sq)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	get_line(char *line, t_p_cmd *cp_list, t_env *env_list)
 {
 	char	*new_line;
@@ -90,7 +112,8 @@ void	get_line(char *line, t_p_cmd *cp_list, t_env *env_list)
 	in_rd = get_in_rd(line, 0, 0);
 	out_rd = get_out_rd(line, 0, 0);
 	new_line = line_no_rd(line, 0, 0);
-	if (ft_strchr(new_line, '$'))
+	// if (ft_strchr(new_line, '$'))
+	if (to_expand(new_line))
 		new_line = expd_line(new_line, env_list);
 	cp_list->line = new_line;
 	cp_list->in_redir = in_rd;

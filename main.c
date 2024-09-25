@@ -21,6 +21,25 @@ int	ft_add(char *line)
 	return (0);
 }
 
+int	ft_maxsize(t_env *env_list, int flag)
+{
+	t_env		*tmp;
+	static int	i;
+
+	if (flag == 0)
+	{
+		i = 0;
+		tmp = env_list;
+		while (tmp)
+		{
+			if ((int)ft_strlen(tmp->value) > i)
+				i = ft_strlen(tmp->value);
+			tmp = tmp->next;
+		}
+	}
+	return (i);
+}
+
 void	start_loop(t_env *env_list)
 {
 	char	*line;
@@ -30,6 +49,7 @@ void	start_loop(t_env *env_list)
 	shell_lvl(env_list);
 	while (1)
 	{
+		ft_maxsize(env_list, 0);
 		line = readline("minishell$>  ");
 		if (ft_add(line))
 		{

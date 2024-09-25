@@ -53,7 +53,7 @@ int	fill_str(t_env *env, char *line, char *new_line)
 	while (u->i < u->len)
 	{
 		u->status = is_expandable(line[u->i]);
-		if (u->status)
+		if (u->status && line[u->i + 1] && line[u->i + 1] != ' ')
 			u->i++;
 		if (line[u->i] && u->status && line[u->i] == '?')
 			join_exit(new_line, "0", &u->j, &u->i);
@@ -66,7 +66,10 @@ int	fill_str(t_env *env, char *line, char *new_line)
 				u->i++;
 		}
 		else
+		{
 			new_line[u->j++] = line[u->i++];
+		}
+			
 	}
 	return (0);
 }
@@ -80,8 +83,8 @@ char	*expd_line(char *line, t_env *env)
 		return (NULL);
 	if (line[0] == '\0')
 		return (NULL);
-	len = new_len(line);
-	new_line = allocat_zero(len);
+	len = new_len(line, env);
+	new_line = allocat_zero(len + 1);
 	if (fill_str(env, line, new_line) == -1)
 		return (NULL);
 	return (new_line);

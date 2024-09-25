@@ -3,6 +3,7 @@ exit												\\stop workin
 
 echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $  <<'	\\SEGV
 
+
 echo "$"											\\NOT LIKE THE BASH
 
 echo '$'											\\NOT LIKE THE BASH
@@ -33,3 +34,8 @@ export 8a==											\\NOT LIKE THE BASH
 
 echo -n -n -n -nnnnnnnnnnnn "hey"					\\NOT LIKE THE BASH
 
+exit | exit 										\\NOT LIKE THE BASH
+
+exit | exit 										\\NOT LIKE THE BASH
+
+echo hello | exit 									\\NOT LIKE THE BASH

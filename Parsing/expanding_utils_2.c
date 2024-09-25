@@ -1,11 +1,11 @@
 
 #include "minishell.h"
 
-int	new_len(char *line)
+int	new_len(char *line, t_env *env)
 {
 	int		len;
 
-	len = ft_strlen(line) + (c_ex(line) * MAX_TOKENS * 2);
+	len = ft_strlen(line) + (c_ex(line) * ft_maxsize(env, 1));
 	return (len);
 }
 
