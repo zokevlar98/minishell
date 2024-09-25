@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:57:41 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/25 01:00:09 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/25 16:17:03 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,11 @@ char	**ft_get_envp(t_env *env_list)
 	char	**envp;	
 	int		i;
 
-	i = 0;
 	tmp = env_list;
-	while (tmp)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	envp = (char **)malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	envp = (char **)malloc(sizeof(char *) * (count_env(tmp) + 1));
 	if (!envp)
 		return (NULL);
-	i = 0;
-	tmp = env_list;
 	while (tmp)
 	{
 		envp[i] = ft_strjoin(tmp->name, "=");

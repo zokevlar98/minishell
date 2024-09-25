@@ -162,6 +162,7 @@ void	ft_env_add_back(t_env **env_list, t_env *new);
 void	ft_env_list(t_env **env_list,char **env);
 t_env	*find_env(t_env *env, char *name);
 char	**ft_get_envp(t_env *env_list);
+int count_env(t_env *env);
 
 //execution
 void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list);

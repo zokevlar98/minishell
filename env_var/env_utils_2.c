@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:08:27 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/25 00:25:38 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/25 17:02:04 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,21 @@ t_env   *find_env(t_env *env, char *name)
         tmp = tmp->next;
     }
     return (NULL);
+}
+
+int count_env(t_env *env)
+{
+    int     i;
+    t_env   *tmp;
+
+    i = 0;
+    if (!env)
+        return (0);
+    tmp = env;
+    while (tmp)
+    {
+        i++;
+        tmp = tmp->next;
+    }
+    return (i);
 }
