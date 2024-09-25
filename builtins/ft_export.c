@@ -13,53 +13,6 @@
 
 #include "minishell.h"
 
-void	ft_export(t_cmd *cmd, t_env *env)
-{
-	t_env	*tmp;
-	t_env	*p;
-	t_env	*new;
-	char	**str;
-//export is not working correctly if more than tow env variable are passed the 1st
-//one is being exported and the ather one is not being exported
-
-/*bash-3.2$ export 1a1=""
-bash: export: `1a1=': not a valid identifier
-bash-3.2$ export _a1=""
-*/
-	tmp = env;
-	p = env;
-	if (!cmd->args[1])
-	{
-		print_list_declare(tmp);
-		// affiche_sort_env(tmp);
-		return ;
-	}
-	while (tmp)
-	{
-		if (ft_strncmp(tmp->name, cmd->args[1], ft_strlen(tmp->name)) == 0)
-		{
-			str = ft_split(cmd->args[1], '=');
-			ft_change_env(p, tmp->name, str[1]);
-			return ;
-		}
-		tmp = tmp->next;
-	}
-	if (ft_strchr(cmd->args[1], '='))
-	{
-		//hendling the case export var======5 & export 1a1="hello" export _a1=""
-		//Also export -var=42 or export +var=42
-		str = ft_split(cmd->args[1], '=');
-		new = ft_env_new_(str[0], str[1]);
-		if (!new)
-			ft_error("error: feailed");
-		ft_env_add_back(&env, new);
-		return ;
-	}
-	ft_export_error(cmd);
-}
-
-//export a=ll && export a+=ll => a=llll
-
 int	check_env_var(char *var, int flag)
 {
 	int	i;
@@ -79,7 +32,7 @@ int	check_env_var(char *var, int flag)
 			else if (flag == 1)
 				return (-1);
 		}
-		if (!ft_isalpha(var[i]) && var[i] != '_' && var[i] != '=')
+		if (!ft_isalnum(var[i]) && var[i] != '_' && var[i] != '=')
 			return (0);
 		if (var[i] == '=')
 			return (i);
@@ -110,18 +63,14 @@ void	update_var(t_env **env, char *name, char *value, int flag)
 			else if (flag == 1)
 				var->value = ft_strjoin(var->value, value);
 		}
-	// 	else
-	// 	{
-	// 		if (flag == 0)
-	// 		{
-
-	// 		}
-	// 		else if (flag == 1)
-	// 		{
-
-	// 		}
-	// 	}
-	// }
+		else
+		{
+			if (flag == 0)
+				var->value = ft_strdup(value);
+			else if (flag == 1)
+			var->value = ft_strdup(value);
+		}
+	}
 }
 
 void	add_var_env(char *var, t_env **env)
@@ -139,17 +88,20 @@ void	add_var_env(char *var, t_env **env)
 	while (var[size_name] == '=' && var[size_value])
 		size_value++;
 	value = ft_substr(var, size_name + 1, size_value);
+	if (ft_strlen(value) == 0)
+		value = NULL;
 	if (check_env_var(var, 1) == -1)
 		update_var(env, name, value, 1);//append
 	else
 		update_var(env, name, value, 0);//update
 }
 
-void	ft_export_(t_cmd *cmd, t_env **env)
+void	ft_export(t_cmd *cmd, t_env **env)
 {
 	int		i;
-	char	**str;
-
+	//case export a=4 then export a => env: a
+	// more check
+	// case export => this string declare -x _="/usr/bin/env" has to be removed
 	i = 1;
 	if (!cmd->args[1])
 	{

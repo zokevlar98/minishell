@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 03:53:04 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/21 03:36:31 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/24 09:44:21 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char	*ft_strdup(const char *s)
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
+	if (!s2)
+		return (1);
 	while (*s1 && *s2 && *s1 == *s2)
 	{
 		s1++;

@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 21:21:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/23 12:26:42 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/25 00:31:53 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,21 @@ void	ft_env_add_back(t_env **env_list, t_env *new)
 void	ft_env_list(t_env **env_list, char **env)
 {
 	int		i;
+	int		j;
 	t_env	*new;
 
 	i = 0;
+	j = 0;
 	new = NULL;
 	if (!env)
 		return ;
+	while (env[j])
+		j++;
+	if (j == 3)
+	{
+		new = ft_env_new_("OLDPWD", NULL);
+		ft_env_add_back(env_list, new);
+	}
 	while (env[i])
 	{
 		new = ft_env_new(env[i]);

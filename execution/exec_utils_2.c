@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:57:41 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/23 09:11:00 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/25 01:00:09 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*env_var_not_set(char *cmd)
 	char	*path;
 	char	**path_s;
 	
-	path = ft_strdup("/bin:/sbin:/usr/bin");
+	path = ft_strdup("/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:");//new PATH is need to expend 
 	path_s = ft_split(path, ':');
 	path = check_path(path_s, cmd);
 	return (path);

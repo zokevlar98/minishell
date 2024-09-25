@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 09:10:19 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/16 01:18:23 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/24 21:53:42 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void	ft_env(t_cmd *cmd, t_env *env)
 	{
 		while (tmp)
 		{
-			if (tmp->value && tmp->name)
+			if (tmp->value)
 				printf("%s=%s\n", tmp->name, tmp->value);
-			else
-				printf("%s=\n", tmp->name);
 			tmp = tmp->next;
 		}
 	}
