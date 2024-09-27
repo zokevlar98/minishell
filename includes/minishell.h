@@ -158,11 +158,13 @@ void	ft_change_env(t_env *env_list, char *name, char *value);
 char	*ft_env_search(t_env *env_list, char *name);
 t_env	*ft_env_new_(char *key, char *value);
 t_env	*ft_env_new(char *env);
+t_env	*ft_lstlast_env(t_env *env);
 void	ft_env_add_back(t_env **env_list, t_env *new);
 void	ft_env_list(t_env **env_list,char **env);
 t_env	*find_env(t_env *env, char *name);
 char	**ft_get_envp(t_env *env_list);
-int count_env(t_env *env);
+int		count_env(t_env *env);
+char	**sort_env(t_env *env, int n);
 
 //execution
 void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list);
@@ -173,7 +175,6 @@ int	    process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[]);
 int	    process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[]);
 int	    process_child_end(t_cmd *cmd_list, t_env **env_list);
 char	*check_path(char **path_s, char *cmd);
-char	*env_var_not_set(char *cmd);
 
 //builtins
 int     is_builtin(t_cmd *cmd_list);
@@ -190,7 +191,6 @@ void	ft_unset(t_cmd *cmd, t_env **env);
 void	shell_lvl(t_env *env);
 
 //test
-t_cmd	*ft_lstnew(void);
 int		ft_lstsize(t_cmd *lst);
 t_cmd	*ft_lstlast(t_cmd *lst);
 void	ft_lstadd_back(t_cmd **lst, t_cmd *new);

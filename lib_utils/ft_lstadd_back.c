@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 00:00:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/21 03:27:07 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/27 11:59:59 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,4 @@ void	ft_lstadd_back(t_cmd **lst, t_cmd *new)
 	}
 	else
 		(*lst) = new;
-}
-
-t_env	*ft_lstlast_env(t_env *env)
-{
-	if (!env)
-		return (NULL);
-	while (env->next)
-		env = env->next;
-	return (env);
 }

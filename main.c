@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/23 05:27:05 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/27 19:48:46 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ int	main(int ac, char **av, char **env)
 	shell_lvl(env_list);
 	// ft_handle_signals();
 	start_loop(env_list);
-	// ft_malloc(0, 1);//de5al l function rani chra7e lach 7iyedtha
+	// ft_malloc(0, 1);
 	return (0);
 }

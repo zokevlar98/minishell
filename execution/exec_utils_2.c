@@ -6,22 +6,11 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:57:41 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/25 16:17:03 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/27 16:53:20 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*env_var_not_set(char *cmd)
-{
-	char	*path;
-	char	**path_s;
-	
-	path = ft_strdup("/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:");//new PATH is need to expend 
-	path_s = ft_split(path, ':');
-	path = check_path(path_s, cmd);
-	return (path);
-}
 
 char	*check_path(char **path_s, char *cmd)
 {
@@ -50,17 +39,26 @@ char	*find_path_env(char *cmd, char *envp[])
 	if (ft_strchr(cmd, '/'))
 	{
 		if (access(cmd, F_OK) == 0)
-			return (cmd);
+			return (cmd);	
+	}
+	else
+	{
+		path = ft_strjoin(getcwd(NULL, 0), "/");
+		path = ft_strjoin(path, cmd);
+		if (access(path, F_OK) == 0)
+			return (path);
 	}
 	while (ft_strncmp(envp[i], "PATH", 4) != 0)
 		i++;
 	if (!envp[i])
-		path = env_var_not_set(cmd);
-	else
 	{
-		path_s = ft_split(envp[i] + 5, ':');
-		path = check_path(path_s, cmd);
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(cmd, STDERR_FILENO);
+		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		exit(EXIT_FAILURE);
 	}
+	path_s = ft_split(envp[i] + 5, ':');
+	path = check_path(path_s, cmd);
 	return (path);
 }
 
@@ -77,8 +75,13 @@ char	**ft_get_envp(t_env *env_list)
 		return (NULL);
 	while (tmp)
 	{
-		envp[i] = ft_strjoin(tmp->name, "=");
-		envp[i] = ft_strjoin(envp[i], tmp->value);
+		if (!tmp->value)
+			envp[i] = ft_strdup(tmp->name);
+		else
+		{
+			envp[i] = ft_strjoin(tmp->name, "=");
+			envp[i] = ft_strjoin(envp[i], tmp->value);
+		}
 		tmp = tmp->next;
 		i++;
 	}

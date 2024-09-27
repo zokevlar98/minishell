@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/22 07:59:56 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/27 16:39:29 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 
 	envp = ft_get_envp(env_list);
 	if (!envp)
-		ft_error("malloc failed");
+		printf("minishell: %s: No such file or directory\n", cmd_list->args[0]);//make with ft_putstr_fd
 	path = find_path_env(cmd_list->args[0], envp);
 	if (!path)
 	{
