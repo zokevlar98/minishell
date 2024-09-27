@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/25 18:15:25 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/27 16:31:41 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,40 +44,29 @@ void	ft_export_error(char *name)
 	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
 }
 
-void	check_min_node(t_env **check_env, t_env **min_node)
-{
-	while (*check_env)
-	{
-		if (!(*min_node) || ft_strcmp((*check_env)->name, (*min_node)->name) < 0)
-			*min_node = (*check_env);
-		*check_env = (*check_env)->next;
-	}
-}
-
 void	print_list_declare(t_env *env)
 {
-	t_env	*check_env;
 	t_env	*current_env;
-	t_env	*min_node;
+	t_env	*tmp;
+	char	**envp;
 
-	current_env = env;
+	current_env = NULL;
+	tmp = env;
+	envp = sort_env(tmp, count_env(tmp));
+	ft_env_list(&current_env, envp);
+	ft_free(envp);
 	while (current_env)
 	{
-		min_node = NULL;
-		check_env = env;
-		check_min_node(&check_env, &min_node);
-		if (min_node)
+		if (ft_strcmp(current_env->name, "_") == 0)
 		{
-			if (ft_strcmp(current_env->name, "_") == 0)
-			{
-				current_env = current_env->next;
-				continue ;
-			}
-			if (current_env->name && current_env->value)
-				printf("declare -x %s=\"%s\"\n", current_env->name, current_env->value);
-			else if (!current_env->value)
-				printf("declare -x %s\n", current_env->name);
 			current_env = current_env->next;
+			continue ;
 		}
+		if (current_env->name && current_env->value)
+			printf("declare -x %s=\"%s\"\n", current_env->name, current_env->value);
+		else if (!current_env->value)
+			printf("declare -x %s\n", current_env->name);
+		current_env = current_env->next;
 	}
+	//free env linkedlist
 }

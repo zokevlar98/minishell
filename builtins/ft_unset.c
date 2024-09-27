@@ -14,6 +14,7 @@
 
 void	ft_unset(t_cmd *cmd, t_env **env)
 {
+	//NOTE: this function is not working properly
 	t_env	*ptr;
 	t_env	*tmp;
 	t_env	*tmp1;
