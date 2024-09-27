@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 21:21:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/25 00:31:53 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/27 19:44:51 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,33 @@ char	*ft_env_search(t_env *env_list, char *name)
 	return (NULL);
 }
 
-void	ft_env_add_back(t_env **env_list, t_env *new)
+t_env	*ft_lstlast_env(t_env *env)
 {
-	t_env	*tmp;
+	t_env	*last;
 
-	if (!new)
+	if (!env)
+		return (NULL);
+	last = env;
+	while (last->next)
+		last = last->next;
+	return (last);
+}
+
+void	ft_env_add_back(t_env **env, t_env *new)
+{
+	t_env	*last;
+
+	if (!env || !new)
 		return ;
-	if (!*env_list)
+	if (*env)
 	{
-		*env_list = new;
-		return ;
+		last = ft_lstlast_env(*env);
+		if (!last)
+			return ;
+		last->next = new;
 	}
-	tmp = *env_list;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
-	new->prev = tmp;
+	else
+		(*env) = new;
 }
 
 void	ft_env_list(t_env **env_list, char **env)
@@ -82,7 +93,7 @@ void	ft_env_list(t_env **env_list, char **env)
 		return ;
 	while (env[j])
 		j++;
-	if (j == 3)
+	if (j == 4)
 	{
 		new = ft_env_new_("OLDPWD", NULL);
 		ft_env_add_back(env_list, new);
