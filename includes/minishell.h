@@ -38,6 +38,16 @@
 #define MAG "\e[1;95m"
 #define CYN "\e[3;96m"
 #define RST "\e[0m"
+
+//global varaibles status
+
+typedef struct s_global
+{
+	int	exit_status;
+}	t_global;
+
+extern t_global g_data;
+
 // environnement variables linked list
 typedef struct s_env
 {
@@ -107,10 +117,10 @@ char	*ft_itoa(int n);
 // lib_utils_2
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
+int		ft_isalnum(int c);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-int		ft_isalnum(int c);
 void	ft_strcpy(char *dst, char *src);
 void	ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
