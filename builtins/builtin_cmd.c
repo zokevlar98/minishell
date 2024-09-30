@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/27 16:31:41 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/30 12:23:39 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	ft_export_error(char *name)
 	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
 }
 
-void	print_list_declare(t_env *env)
+void	print_list_declare(t_env **env)
 {
 	t_env	*current_env;
 	t_env	*tmp;
 	char	**envp;
 
 	current_env = NULL;
-	tmp = env;
+	tmp = *env;
 	envp = sort_env(tmp, count_env(tmp));
 	ft_env_list(&current_env, envp);
 	ft_free(envp);

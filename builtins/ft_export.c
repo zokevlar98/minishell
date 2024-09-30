@@ -104,7 +104,7 @@ void	ft_export(t_cmd *cmd, t_env **env)
 	i = 1;
 	if (!cmd->args[1])
 	{
-		print_list_declare(*env);
+		print_list_declare(env);
 		return ;
 	}
 	while (cmd->args[i])

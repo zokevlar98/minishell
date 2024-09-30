@@ -38,15 +38,19 @@ int check_unset_var(char *name)
 void	remove_first_node(t_env **env)
 {
 	t_env	*tmp;
+	t_env	*next_var;
 
 	tmp = (*env);
-	(*env) = (*env)->next;
+	next_var = (*env)->next;
+	tmp->next = NULL;
+	(*env) = next_var;
 	if (tmp && tmp->name)
 		free(tmp->name);
 	if (tmp && tmp->value)
 		free(tmp->value);
 	if (tmp)
 		free(tmp);
+	tmp = NULL;
 }
 
 void	remove_env_var(t_env **env, char *name)
@@ -97,4 +101,5 @@ void	ft_unset(t_cmd *cmd, t_env **env)
 			remove_env_var(env, var->name);
 		i++;
 	}
+	affiche_env(*env);
 }

@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:08:27 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/27 16:09:31 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/30 11:33:22 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_env	*ft_env_new_(char *key, char *value)
 	new->name = ft_strdup(key);
     new->value = ft_strdup(value);
 	new->next = NULL;
-	new->prev = NULL;
 	return (new);
 }
 
@@ -63,7 +62,6 @@ t_env	*ft_env_new(char *env)
 	    new->value = ft_strdup(equal + 1);
     }
 	new->next = NULL;
-	new->prev = NULL;
 	return (new);
 }
 
