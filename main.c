@@ -6,11 +6,13 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/29 06:06:08 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/30 05:57:34 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_global	g_data;
 
 int	ft_add(char *line)
 {
