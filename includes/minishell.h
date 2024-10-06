@@ -112,6 +112,7 @@ void	ft_free(char **tab);
 char	*ft_strtrim(char *s1, char *set);
 int     ft_atoi(char *str);
 char	*ft_itoa(int n);
+int		size_array(char **array);
 
 // lib_utils_2
 int		ft_isalpha(int c);
@@ -160,9 +161,9 @@ int		open_in(char **in_redir, t_env *env);
 int		open_out(char **out_redir, t_env *env);
 char	*get_f_name(char *f_name, t_env *env);
 char	*expd_rd(char *f_name, t_env *env);
-char    **empty_env(void);
 
 // env_utils_1.c
+char    **empty_env(void);
 void	ft_change_env(t_env *env_list, char *name, char *value);
 char	*ft_env_search(t_env *env_list, char *name);
 t_env	*ft_env_new_(char *key, char *value);
@@ -195,7 +196,7 @@ void	ft_cd(t_cmd *cmd_list, t_env *env_list);
 void	ft_pwd(t_env *env);
 void	ft_export(t_cmd *cmd, t_env **env);
 void	ft_env(t_cmd *cmd, t_env *env);
-void	ft_exit(t_cmd *cmd);
+void	ft_exit(t_cmd *cmd, int flag);
 void	ft_unset(t_cmd *cmd, t_env **env);
 void	shell_lvl(t_env *env);
 
