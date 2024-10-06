@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/30 12:23:39 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/06 16:18:35 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	print_list_declare(t_env **env)
 	current_env = NULL;
 	tmp = *env;
 	envp = sort_env(tmp, count_env(tmp));
-	ft_env_list(&current_env, envp);
+	ft_env_list(&current_env, envp, 1);
 	ft_free(envp);
 	while (current_env)
 	{

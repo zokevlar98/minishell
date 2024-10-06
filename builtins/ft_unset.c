@@ -101,5 +101,4 @@ void	ft_unset(t_cmd *cmd, t_env **env)
 			remove_env_var(env, var->name);
 		i++;
 	}
-	affiche_env(*env);
 }
