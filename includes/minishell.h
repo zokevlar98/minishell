@@ -137,6 +137,7 @@ char    **empty_env(void);
 int		exit_status(int status);
 void	ft_handle_signals(void);
 int		ft_maxsize(t_env *env_list, int flag);
+int	herdoc_hundeler(char *del, t_env *env);
 
 
 // env_utils_1.c

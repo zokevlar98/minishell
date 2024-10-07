@@ -71,7 +71,7 @@ int	open_in(char **redir, t_env *env)
 	{
 		u->f_name = get_r_name(redir[u->i], env);
 		if (redir[u->i][1] == '<')
-			printf("%s : heredoc> al5ra\n", rm_qot(u->f_name, 0, 0));
+			u->fd = herdoc_hundeler(u->f_name, env);
 		else
 		{
 			u->f_name = get_f_name(u->f_name, env);
