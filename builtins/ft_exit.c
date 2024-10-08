@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/06 17:08:59 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/06 20:00:18 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	ft_exit(t_cmd *cmd, int flag)
 	//check if the argument is a number use ft_atoi with long long
 	//check if we have pipe
 	//exit_status
-	// if (size_array(cmd->args) > 2)
-	// {
-	// 	if (flag)
-	// 		ft_putstr("exit\n", STDOUT_FILENO);
-	// 	ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
-	// }
+	if (size_array(cmd->args) > 2)
+	{
+		if (flag)
+			ft_putstr_fd("exit\n", STDOUT_FILENO);
+		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+	}
 }
