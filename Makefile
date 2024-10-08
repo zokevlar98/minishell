@@ -17,6 +17,7 @@ SRCS			=	main.c								\
 					lib_utils/lib_utilis_1.c 			\
 					lib_utils/lib_utilis_2.c 			\
 					lib_utils/lib_utilis_3.c 			\
+					lib_utils/lib_utilis_4.c 			\
 					lib_utils/lib_utilis_exec.c 		\
 					lib_utils/ft_atoi.c 				\
 					lib_utils/ft_itoa.c 				\
