@@ -13,103 +13,106 @@
 
 #include "minishell.h"
 
-void	ft_export_error(t_cmd *cmd)
+int	check_env_var(char *var, int flag)
 {
-	t_cmd	*tmp;
-	int		i;
-
-	i = 2;
-	tmp = cmd;
-	//this error handling need more work
-	while (tmp->args[i])
-	{
-		ft_putstr_fd("minishell: export: `", STDERR_FILENO);
-		ft_putstr_fd(tmp->args[i], STDERR_FILENO);
-		ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
-		i++;	
-	}
-}
-
-void	affiche_sort_env(t_env *env)
-{
-	int		i;
-	int		j;
-	char	**envp;
+	int	i;
 
 	i = 0;
-	envp = ft_get_envp(env);
-	while (envp[i])
+	while (var[i])
 	{
-		j = i + 1;
-		while (envp[j])
+		if (i == 0 && ft_isdigit(var[i]) && var[i] != '_')
+			return (0);
+		if (var[i] == '+' && var[i + 1] != '\0')
 		{
-			if (ft_strncmp(envp[i], envp[j], ft_strlen(envp[i])) > 0)
+			if  (flag == 0)
 			{
-				envp[i] = envp[j];
+				if (var[i + 1] == '=')
+					return (i + 1);
 			}
-			j++;
+			else if (flag == 1)
+				return (-1);
 		}
+		if (!ft_isalnum(var[i]) && var[i] != '_' && var[i] != '=')
+			return (0);
+		if (var[i] == '=')
+			return (i);
 		i++;
 	}
-	i = 0;
-	while (envp[i])
+	return (i);
+}
+
+void	update_var(t_env **env, char *name, char *value, int flag)
+{
+	t_env	*var;
+
+	var = find_env(*env, name);
+	if (!var)
 	{
-		printf("declare -x %s\n", envp[i]);
-		i++;
+		var = ft_env_new_(name, value);
+		ft_env_add_back(env, var);
+	}
+	else
+	{
+		if (var->value && value)
+		{
+			if (flag == 0)
+			{
+				free(var->value);
+				var->value = ft_strdup(value);
+			}
+			else if (flag == 1)
+				var->value = ft_strjoin(var->value, value);
+		}
+		else
+		{
+			if (flag == 0)
+				var->value = ft_strdup(value);
+			else if (flag == 1)
+			var->value = ft_strdup(value);
+		}
 	}
 }
 
-void	print_list_declare(t_env *env)
+void	add_var_env(char *var, t_env **env)
 {
-	while (env)
-	{
-		// I need to print with alhabetical order
-		printf("declare -x %s=\"%s\"\n", env->name, env->value);
-		env = env->next;
-	}
+	int		size_name;
+	int		size_value;
+	char	*name;
+	char	*value;
+
+	size_name = check_env_var(var, 0);
+	if (!size_name)
+		return ;
+	name = ft_substr(var, 0, size_name);
+	size_value = size_name;
+	while (var[size_name] == '=' && var[size_value])
+		size_value++;
+	value = ft_substr(var, size_name + 1, size_value);
+	if (ft_strlen(value) == 0)
+		value = NULL;
+	if (check_env_var(var, 1) == -1)
+		update_var(env, name, value, 1);//append
+	else
+		update_var(env, name, value, 0);//update
 }
 
-void	ft_export(t_cmd *cmd, t_env *env)
+void	ft_export(t_cmd *cmd, t_env **env)
 {
-	t_env	*tmp;
-	t_env	*p;
-	t_env	*new;
-	char	**str;
-//export is not working correctly if more than tow env variable are passed the 1st
-//one is being exported and the ather one is not being exported
-
-/*bash-3.2$ export 1a1=""
-bash: export: `1a1=': not a valid identifier
-bash-3.2$ export _a1=""
-*/
-	tmp = env;
-	p = env;
+	int		i;
+	//case export a=4 then export a => env: a
+	// more check
+	i = 1;
 	if (!cmd->args[1])
 	{
-		print_list_declare(tmp);
-		// affiche_sort_env(tmp);
+		print_list_declare(env);
 		return ;
 	}
-	while (tmp)
+	while (cmd->args[i])
 	{
-		if (ft_strncmp(tmp->name, cmd->args[1], ft_strlen(tmp->name)) == 0)
-		{
-			str = ft_split(cmd->args[1], '=');
-			ft_change_env(p, tmp->name, str[1]);
-			return ;
-		}
-		tmp = tmp->next;
+		if (!check_env_var(cmd->args[i], 0))
+			ft_export_error(cmd->args[i]);
+		else
+			add_var_env(cmd->args[i], env);
+		i++;
 	}
-	if (ft_strchr(cmd->args[1], '='))
-	{
-		//hendling the case export var======5 & export 1a1="hello" export _a1=""
-		//Also export -var=42 or export +var=42
-		str = ft_split(cmd->args[1], '=');
-		new = ft_env_new_(str[0], str[1]);
-		if (!new)
-			ft_error("error: feailed");
-		ft_env_add_back(&env, new);
-		return ;
-	}
-	ft_export_error(cmd);
 }

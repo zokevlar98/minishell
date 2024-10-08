@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 21:27:53 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/17 01:13:20 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/23 10:50:44 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ char	*ft_strtrim(char *s1, char *set)
 	return (str);
 }
 
-int	ft_isalnum(char c)
+int	ft_isalnum(int c)
 {
-	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')
-		|| (c >= 'a' && c <= 'z'))
+	if (ft_isalpha(c) || ft_isdigit(c))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:57:23 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/14 23:14:40 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/30 11:23:44 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	affiche_env(t_env *env)
 
 void	ff(void)
 {
-	system("leaks minishell");	
+	system("leaks minishell");
+	// system("lsof -c minishell");
 }

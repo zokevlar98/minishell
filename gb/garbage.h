@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   garbage.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 09:10:19 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/24 21:53:42 by zqouri           ###   ########.fr       */
+/*   Created: 2024/09/27 09:42:43 by zqouri            #+#    #+#             */
+/*   Updated: 2024/09/27 09:42:53 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef GARBAGE_H
 
-void	ft_env(t_cmd *cmd, t_env *env)
+# define GARBAGE_H
+
+# include <stdlib.h>
+
+typedef struct s_garb
 {
-	t_env	*tmp;
-	
-	tmp = env;
-	if (cmd && !cmd->args[1])
-	{
-		while (tmp)
-		{
-			if (tmp->value)
-				printf("%s=%s\n", tmp->name, tmp->value);
-			tmp = tmp->next;
-		}
-	}
-	else
-	{
-		ft_putstr_fd("env: '", STDOUT_FILENO);
-		ft_putstr_fd(cmd->args[1], STDOUT_FILENO);
-		ft_putstr_fd("': No such file or directory\n", STDOUT_FILENO);
-	}
-}
+	void			*addr;
+	struct s_garb	*next;
+}				t_garb ;
+
+void	clear_list(t_garb *list);
+void	add_node(t_garb **list, t_garb *node);
+void	*gb_malloc(size_t size, int type);
+
+#endif

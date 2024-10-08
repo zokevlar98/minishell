@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 03:53:04 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/21 03:36:31 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/06 16:00:34 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
-	if (!s)
-		return (0);
 	len = 0;
 	if (!s)
 		return (0);
@@ -49,6 +47,8 @@ char	*ft_strdup(const char *s)
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
+	if (!s2)
+		return (1);
 	while (*s1 && *s2 && *s1 == *s2)
 	{
 		s1++;

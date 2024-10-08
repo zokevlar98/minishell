@@ -38,12 +38,21 @@
 #define MAG "\e[1;95m"
 #define CYN "\e[3;96m"
 #define RST "\e[0m"
+
+//global varaibles status
+
+typedef struct s_global
+{
+	int	exit_status;
+}	t_global;
+
+extern t_global g_data;
+
 // environnement variables linked list
 typedef struct s_env
 {
 	char			*name;
 	char			*value;
-	struct s_env	*prev;
 	struct s_env	*next;
 }	t_env;
 
@@ -103,12 +112,15 @@ void	ft_free(char **tab);
 char	*ft_strtrim(char *s1, char *set);
 int     ft_atoi(char *str);
 char	*ft_itoa(int n);
+int		size_array(char **array);
 
 // lib_utils_2
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
+int		ft_isalnum(int c);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-int		ft_isalnum(char c);
 void	ft_strcpy(char *dst, char *src);
 void	ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
@@ -149,42 +161,46 @@ int		open_in(char **in_redir, t_env *env);
 int		open_out(char **out_redir, t_env *env);
 char	*get_f_name(char *f_name, t_env *env);
 char	*expd_rd(char *f_name, t_env *env);
-char    **empty_env(void);
 
 // env_utils_1.c
+char    **empty_env(void);
 void	ft_change_env(t_env *env_list, char *name, char *value);
 char	*ft_env_search(t_env *env_list, char *name);
 t_env	*ft_env_new_(char *key, char *value);
 t_env	*ft_env_new(char *env);
+t_env	*ft_lstlast_env(t_env *env);
 void	ft_env_add_back(t_env **env_list, t_env *new);
-void	ft_env_list(t_env **env_list,char **env);
+void	ft_env_list(t_env **env_list,char **env, int flag);
+t_env	*find_env(t_env *env, char *name);
+char	**ft_get_envp(t_env *env_list);
+int		count_env(t_env *env);
+char	**sort_env(t_env *env, int n);
 
 //execution
 void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list);
 void	ft_execut(t_cmd *cmd_list, t_env *env_list);
-char	**ft_get_envp(t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
 int		fork1(void);
 int	    process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[]);
 int	    process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[]);
 int	    process_child_end(t_cmd *cmd_list, t_env **env_list);
 char	*check_path(char **path_s, char *cmd);
-char	*env_var_not_set(char *cmd);
 
 //builtins
 int     is_builtin(t_cmd *cmd_list);
 void	ft_builtin(t_cmd *cmd_list, t_env **env_list);
+void	ft_export_error(char *name);
+void	print_list_declare(t_env **env);
 void	ft_echo(t_cmd *cmd_list);
 void	ft_cd(t_cmd *cmd_list, t_env *env_list);
 void	ft_pwd(t_env *env);
-void	ft_export(t_cmd *cmd, t_env *env);
+void	ft_export(t_cmd *cmd, t_env **env);
 void	ft_env(t_cmd *cmd, t_env *env);
-void	ft_exit(t_cmd *cmd);
+void	ft_exit(t_cmd *cmd, int flag);
 void	ft_unset(t_cmd *cmd, t_env **env);
 void	shell_lvl(t_env *env);
 
 //test
-t_cmd	*ft_lstnew(void);
 int		ft_lstsize(t_cmd *lst);
 t_cmd	*ft_lstlast(t_cmd *lst);
 void	ft_lstadd_back(t_cmd **lst, t_cmd *new);

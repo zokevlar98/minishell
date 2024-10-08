@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/22 04:05:05 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/27 16:39:29 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int is_builtin(t_cmd *cmd_list)
     builtins[7] = NULL;
     while (builtins[i])
     {
-        if (ft_strncmp(builtins[i], cmd, ft_strlen(builtins[i])) == 0)
+        if (ft_strcmp(builtins[i], cmd) == 0)
             return (1);
         i++;
     }
@@ -51,11 +51,10 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 {
 	char	**envp;
 	char	*path;
-	// char	**args;
 
 	envp = ft_get_envp(env_list);
 	if (!envp)
-		ft_error("malloc failed");
+		printf("minishell: %s: No such file or directory\n", cmd_list->args[0]);//make with ft_putstr_fd
 	path = find_path_env(cmd_list->args[0], envp);
 	if (!path)
 	{

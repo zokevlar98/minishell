@@ -6,11 +6,13 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/22 04:22:20 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/06 16:18:42 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_global	g_data;
 
 int	ft_add(char *line)
 {
@@ -63,10 +65,9 @@ int	main(int ac, char **av, char **env)
 	if (!env[0])
 		env = empty_env();
 	env_list = NULL;
-	ft_env_list(&env_list, env);
+	ft_env_list(&env_list, env, 0);
 	shell_lvl(env_list);
 	// ft_handle_signals();
 	start_loop(env_list);
-	// ft_malloc(0, 1);//de5al l function rani chra7e lach 7iyedtha
 	return (0);
 }

@@ -1,10 +1,10 @@
 
 NAME			=	minishell
 
-HEADER			=	includes/minishell.h
+HEADER			=	includes/minishell.h gb/garbage.h
 
 
-CC				=	cc -Wall -Wextra -Werror -I ./includes -fsanitize=address -g
+CC				=	cc -Wall -Wextra -Werror -g -I ./includes -fsanitize=address
 
 READLINE_FLAGS	=	-lreadline \
 
@@ -17,6 +17,7 @@ SRCS			=	main.c								\
 					lib_utils/lib_utilis_1.c 			\
 					lib_utils/lib_utilis_2.c 			\
 					lib_utils/lib_utilis_3.c 			\
+					lib_utils/lib_utilis_4.c 			\
 					lib_utils/lib_utilis_exec.c 		\
 					lib_utils/ft_atoi.c 				\
 					lib_utils/ft_itoa.c 				\
@@ -29,6 +30,7 @@ SRCS			=	main.c								\
 					execution/exec.c					\
 					env_var/env_utils_1.c				\
 					env_var/env_utils_2.c				\
+					env_var/env_utils_3.c				\
 					execution/test/outils_test.c		\
 					builtins/builtin_cmd.c				\
 					builtins/builtin_utils.c			\
@@ -53,6 +55,7 @@ SRCS			=	main.c								\
 					merging/open_file.c					\
 					merging/expaind_red.c 				\
 					free_funcs/free_all.c 				\
+					gb/gb.c
 					
 
 RED             =   \033[0;31m
@@ -66,6 +69,8 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			@echo "$(GREEN)Loading$(RESET)"
 			@$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME)
+			@sleep 1
+			@echo "$(GREEN)Minishell Ready$(RESET)"
 
 %.o:		%.c $(HEADER)
 			@$(CC) -c $< -o $@

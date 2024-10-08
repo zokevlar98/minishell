@@ -1,35 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   env_utils_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 09:10:19 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/24 21:53:42 by zqouri           ###   ########.fr       */
+/*   Created: 2024/09/27 07:45:31 by zqouri            #+#    #+#             */
+/*   Updated: 2024/09/27 13:57:54 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(t_cmd *cmd, t_env *env)
+void    swap(char **a, char **b)
 {
-	t_env	*tmp;
+	char	*tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+char	**sort_env(t_env *env, int n)
+{
+	char	**envp;
+	int		swapped;
+	int		i;
+	int		j;
 	
-	tmp = env;
-	if (cmd && !cmd->args[1])
+	envp = ft_get_envp(env);
+	i = 0;
+	while (i < n - 1)
 	{
-		while (tmp)
+		j = 0;
+		swapped = 0;
+		while (j < n - i - 1)
 		{
-			if (tmp->value)
-				printf("%s=%s\n", tmp->name, tmp->value);
-			tmp = tmp->next;
+			if (ft_strcmp(envp[j], envp[j + 1]) > 0)
+			{
+				swap(&envp[j], &envp[j + 1]);
+				swapped = 1;
+			}
+			j++;
 		}
+		if (!swapped)
+			break ;
+		i++;
 	}
-	else
-	{
-		ft_putstr_fd("env: '", STDOUT_FILENO);
-		ft_putstr_fd(cmd->args[1], STDOUT_FILENO);
-		ft_putstr_fd("': No such file or directory\n", STDOUT_FILENO);
-	}
+	return (envp);
 }

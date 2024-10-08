@@ -6,30 +6,19 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/21 06:19:29 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/30 05:44:51 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int		serch_for_pipe(t_cmd *cmd_list)
-{
-	while (cmd_list != NULL)
-	{
-		if (cmd_list->pipe_line >= 1)
-			return (1);
-		cmd_list = cmd_list->next;
-	}
-	return (0);
-}
 
 void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list)
 {
 	t_cmd	*tmp;
 	int		pid;
 	int		status;
-	int		fd[2];
 	int		saves[2];
+	int		fd[2];
 
 	tmp = cmd_list;
 	saves[0] = dup(STDIN_FILENO);
@@ -61,6 +50,7 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list)
 	}
 	dup2(saves[0], STDIN_FILENO);
 	dup2(saves[1], STDOUT_FILENO);
+	close_tab(saves, 2);
 	while (waitpid(-1, &status, 0) != -1)
 		;
 }

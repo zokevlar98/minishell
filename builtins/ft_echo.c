@@ -6,35 +6,52 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:35 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/17 01:46:39 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/09/27 20:28:29 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	echo_option(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (1);
+	if (str[i] != '-')
+		return (1);
+	if (str[++i] != 'n')
+		return (1);
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	ft_echo(t_cmd *cmd)
 {
-	int		i;// test : echo -nnnn -nnn h
+	int		i;
+	int		n_flag;
 
+	n_flag = 0;
 	i = 1;
-	if (cmd->args[i] && ft_strncmp(cmd->args[i], "-n", ft_strlen(cmd->args[i])) == 0)
+	while (cmd->args[i] && !echo_option(cmd->args[i]))
 	{
-		while (cmd->args[++i] != NULL)
-		{
-			ft_putstr_fd(cmd->args[i], cmd->fd_out);
-			if (cmd->args[i + 1] != NULL)
-				ft_putstr_fd(" ", cmd->fd_out);
-		}
+		n_flag++;
+		i++;
 	}
-	else
+	while (cmd->args[i] && cmd->args[i + 1])
 	{
-		while (cmd->args[i] != NULL)
-		{
-			ft_putstr_fd(cmd->args[i], cmd->fd_out);
-			if (cmd->args[i + 1] != NULL)
-				ft_putstr_fd(" ", cmd->fd_out);
-			i++;
-		}
-		ft_putstr_fd("\n", cmd->fd_out);
+		ft_putstr_fd(cmd->args[i], cmd->fd_out);
+		ft_putstr_fd(" ", cmd->fd_out);
+		i++;
 	}
+	if (cmd->args[i])
+		ft_putstr_fd(cmd->args[i], cmd->fd_out);
+	if (!n_flag)
+		write(cmd->fd_out, "\n", cmd->fd_out);
 }
