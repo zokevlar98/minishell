@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 01:18:13 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/21 03:43:40 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/16 16:49:52 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ char	*ft_itoa(int n)
 	i = 0;
 	count = 0;
 	count = ft_check_is_negative(&n, count) + ft_count_number(n);
-	nbr = (char *)malloc(sizeof(char) * (count + 1));
-	if (!nbr)
-		return (NULL);
+	nbr = (char *)ft_malloc(sizeof(char) * (count + 1), 0);
 	if ((n * (-1)) < 0)
 		nbr[0] = '-';
 	while (n > 0)

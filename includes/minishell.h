@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 21:22:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/16 21:22:39 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -21,6 +10,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <signal.h>
 # include <sys/types.h>
 # include <errno.h>
 # include <dirent.h>
@@ -62,8 +52,7 @@ typedef struct s_p_cmd
 	int				pipe_line;
 	char			*line;
 	char			**cmd;
-	char			**in_redir;
-	char			**out_redir;
+	char			**redir;
 	struct s_p_cmd	*next;
 }	t_p_cmd;
 
@@ -85,7 +74,7 @@ typedef struct s_utils
 	char	*new_line;
 	int		sq;
 	int		dq;
-	int		*fd_tab;
+	int		*fds_tab;
 	char	*f_name;
 	int		status;
 	int		len;
@@ -129,9 +118,9 @@ int		ft_check_syntax(char *line);
 int		ft_check_direction(char *line);
 int		ft_isspace(char c);
 int		is_caracter(char *str, char c);
-char	**append_args(char **args);
 
-// pars.c
+// parsing_part
+
 void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list);
 char	**ft_split_cmd(char *line, char c, int s_q, int d_q);
 int		cnt_split(char *line, char c, int in_word);
@@ -140,27 +129,32 @@ char	*ft_get_name(char *str, int i);
 int		c_ex(char *str);
 int		not_expandable(char c);
 int		ft_to_ex(char c);
-int		new_len(char *line);
+int		new_len(char *line, t_env *env);
 void	*allocat_zero(size_t size);
 int		ft_cnt_red(char *line, char c);
-void	join_exit(char *new_line, char *str, int *j, int *i);
+void	join_exit(char *new_line, int pipe_line, int *j, int *i);
 void	get_line(char *line, t_p_cmd *cp_list, t_env *env_list);
 char	*get_redir(char *line, int i);
 void	in_qote(int *sq, int *dq, char c);
-char	**get_in_rd(char *line, int dq, int sq);
-char	**get_out_rd(char *line, int dq, int sq);
+char	**get_rd(char *line, int dq, int sq);
 t_p_cmd	*ft_new_cp(char *cmd, int i, t_env *env_list);
 void	cp_add_back(t_p_cmd **cp_list, t_p_cmd *new_cmd);
-char	*expd_line(char *line, t_env *env);
+char	*expd_line(char *line, t_env *env, int pipe_line);
 void	ft_merge(t_cmd **cmd_list, t_p_cmd *cp_list, t_env *env_list);
 t_cmd	*ft_new_cmd(t_p_cmd *cp_cmd, t_env *env_list);
 void	cmd_add_back(t_cmd **cmd_list, t_cmd *new_cmd);
 char	*rm_qot(char *str, int s_q, int d_q);
-void	close_tab(int *fd_tab, int size);
-int		open_in(char **in_redir, t_env *env);
-int		open_out(char **out_redir, t_env *env);
-char	*get_f_name(char *f_name, t_env *env);
-char	*expd_rd(char *f_name, t_env *env);
+void	close_tab(int *fd_tab, int size, int in, int out);
+void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out,t_env *env);
+char	*get_f_name(char *f_name, t_env *env, int pipe_line);
+char	*expd_rd(char *f_name, t_env *env, int pipe_line);
+int		exit_status(int status);
+void	ft_handle_signals(void);
+int		ft_maxsize(t_env *env_list, int flag);
+void	herdoc_hundeler(t_p_cmd **cmd,t_env *env, int *sig_flag);
+void	ft_sig_herdoc(int sig);
+int		to_expand(char *line);
+
 
 // env_utils_1.c
 char    **empty_env(void);

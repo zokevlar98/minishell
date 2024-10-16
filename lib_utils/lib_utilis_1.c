@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lib_utilis_1.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 03:53:04 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/06 16:00:34 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -31,10 +20,7 @@ char	*ft_strdup(const char *s)
 
 	if (!s)
 		return (NULL);
-	// dup = ft_malloc(sizeof(char) * (ft_strlen(s) + 1), 0);
-	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!dup)
-		return (NULL);
+	dup = (char *)ft_malloc(sizeof(char) * (ft_strlen(s) + 1), 0);
 	i = 0;
 	while (s[i])
 	{
@@ -86,10 +72,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start > ft_strlen(s))
 		return (ft_strdup("\0"));
-	// sub = ft_malloc(sizeof(char) * (len + 1), 0);
-	sub = (char *)malloc(sizeof(char) * (len + 1));
-	if (!sub)
-		return (NULL);
+	sub = (char *)ft_malloc(sizeof(char) * (len + 1), 0);
 	i = 0;
 	while (i < len && s[start + i])
 	{

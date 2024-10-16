@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lib_utilis_3.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/08 14:32:05 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/23 09:45:33 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -40,43 +29,11 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-char	**append_args(char **args)
+int	exit_status(int status)
 {
-	int		i;
-	int		j;
-	int		k;
-	int		size;
-	char	**new_args;
+	static int	exit_status;
 
-	j = 0;
-	k = 1;
-	i = 2;
-	size = 0;
-	while (ft_strncmp(args[j], "-G", ft_strlen(args[j])) == 0)
-		return (args);
-	while (args[size])
-		size++;
-	new_args = (char **)malloc(sizeof(char *) * (size + 2));
-	if (!new_args)
-		return (NULL);
-	new_args[0] = ft_strdup(args[0]);
-	new_args[1] = ft_strdup("-G");
-	while (args[k] != NULL)
-		new_args[i++] = ft_strdup(args[k++]);
-	new_args[i] = NULL;
-	return (ft_free(args) ,new_args);
-}
-
-int	ft_isalpha(int c)
-{
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1);
-	return (0);
-}
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	if (status != -1)
+		exit_status = status;
+	return (exit_status);
 }

@@ -3,11 +3,9 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h gb/garbage.h
 
-
 CC				=	cc -Wall -Wextra -Werror -g -I ./includes -fsanitize=address
 
 READLINE_FLAGS	=	-lreadline \
-
 
 SRCS			=	main.c								\
 					lib_utils/ft_error.c 				\
@@ -56,6 +54,9 @@ SRCS			=	main.c								\
 					merging/expaind_red.c 				\
 					free_funcs/free_all.c 				\
 					gb/gb.c
+					signals/signals.c					\
+					herdoc/herdoc.c						\
+
 					
 
 RED             =   \033[0;31m

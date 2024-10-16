@@ -1,0 +1,41 @@
+
+exit												\\stop workin 
+
+echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $  <<'	\\SEGV
+
+
+echo "$"											\\NOT LIKE THE BASH
+
+echo '$'											\\NOT LIKE THE BASH
+
+echo $?												\\NOT YET
+
+export hello										\\NOT LIKE THE BASH
+
+export A-											\\NOT LIKE THE BASH
+
+export =											\\SEGV
+
+export 123											\\NOT LIKE THE BASH
+
+exit 123											\\NOT LIKE THE BASH
+
+cat includes/minishell.h | grep ");"$				\\NOT LIKE THE BASH
+
+cat <nothimg | cat <001								\\NOT LIKE THE BASH
+
+echo <123 <456 hi | echo 42							\\NOT LIKE THE BASH
+
+./test_files										\\NOT LIKE THE BASH	
+
+$_													\\NOT WORKING
+
+export 8a==											\\NOT LIKE THE BASH
+
+echo -n -n -n -nnnnnnnnnnnn "hey"					\\NOT LIKE THE BASH
+
+exit | exit 										\\NOT LIKE THE BASH
+
+exit | exit 										\\NOT LIKE THE BASH
+
+echo hello | exit 									\\NOT LIKE THE BASH

@@ -1,22 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   expanding_utils_2.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/04 18:53:19 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/17 01:14:29 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
-int	new_len(char *line)
+int	new_len(char *line, t_env *env)
 {
 	int		len;
 
-	len = ft_strlen(line) + (c_ex(line) * MAX_TOKENS * 2);
+	len = ft_strlen(line) + (c_ex(line) * ft_maxsize(env, 1));
 	return (len);
 }
 
@@ -24,10 +13,7 @@ void	*allocat_zero(size_t size)
 {
 	void	*ptr;
 
-	// ptr = ft_malloc(size, 0);
-	ptr = malloc(size);
-	if (!ptr)
-		return (NULL);
+	ptr = ft_malloc(size, 0);
 	ft_memset(ptr, 0, size);
 	return (ptr);
 }
@@ -52,10 +38,15 @@ int	ft_cnt_red(char *line, char c)
 	return (count);
 }
 
-void	join_exit(char *new_line, char *str, int *j, int *i)
+void	join_exit(char *new_line, int pipe_line, int *j, int *i)
 {
 	int	k;
+	char	*str;
 
+	if (pipe_line == 0)
+		str = ft_itoa(exit_status(-1));
+	else
+		str = ft_itoa(0);
 	k = 0;
 	while (str[k])
 	{

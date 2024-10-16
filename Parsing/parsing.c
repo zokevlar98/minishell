@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/03 12:49:48 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/17 01:14:55 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -52,10 +41,7 @@ t_utils	*utils_init(void)
 {
 	t_utils	*u;
 
-	// u = ft_malloc(sizeof(t_utils), 0);
-	u = (t_utils *)malloc(sizeof(t_utils));
-	if (!u)
-		return (NULL);
+	u = (t_utils *)ft_malloc(sizeof(t_utils), 0);
 	u->i = -1;
 	u->j = 0;
 	u->k = 0;
@@ -68,10 +54,7 @@ char	**ft_split_cmd(char *line, char c, int s_q, int d_q)
 	char	**cmd;
 
 	u = utils_init();
-	// cmd = ft_malloc(sizeof(char *) * (cnt_split(line, c, 0) + 1), 0);
-	cmd = (char **)malloc(sizeof(char *) * (cnt_split(line, c, 0) + 1));
-	if (!cmd)
-		return (NULL);
+	cmd = (char **)ft_malloc(sizeof(char *) * (cnt_split(line, c, 0) + 1), 0);
 	while (line[++u->i])
 	{
 		sp_qt(line[u->i], &s_q, &d_q);
@@ -99,9 +82,11 @@ void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list)
 	t_p_cmd	*cmd_list;
 	t_p_cmd	*new_cmd;
 	int		i;
+	int sig_flag;
 
 	cmd_list = NULL;
 	i = 0;
+	sig_flag = 0;
 	cmd = ft_split_cmd(line, '|', 0, 0);
 	while (cmd[i])
 	{
@@ -110,4 +95,9 @@ void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list)
 		i++;
 	}
 	(*cp_list) = cmd_list;
+	while(cmd_list && sig_flag != -1337)
+	{
+		herdoc_hundeler(&cmd_list, env_list, &sig_flag);
+		cmd_list = cmd_list->next;
+	}
 }
