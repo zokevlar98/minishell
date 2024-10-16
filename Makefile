@@ -53,7 +53,7 @@ SRCS			=	main.c								\
 					merging/open_file.c					\
 					merging/expaind_red.c 				\
 					free_funcs/free_all.c 				\
-					gb/gb.c
+					gb/gb.c								\
 					signals/signals.c					\
 					herdoc/herdoc.c						\
 
