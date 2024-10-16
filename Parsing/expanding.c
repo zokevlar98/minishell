@@ -45,7 +45,7 @@ t_utils	*intialize_utils(int len)
 	return (u);
 }
 
-int	fill_str(t_env *env, char *line, char *new_line)
+int	fill_str(t_env *env, char *line, char *new_line, int pipe_line)
 {
 	t_utils	*u;
 
@@ -56,7 +56,7 @@ int	fill_str(t_env *env, char *line, char *new_line)
 		if (u->status && line[u->i + 1] && line[u->i + 1] != ' ')
 			u->i++;
 		if (line[u->i] && u->status && line[u->i] == '?')
-			join_exit(new_line, "0", &u->j, &u->i);
+			join_exit(new_line, pipe_line, &u->j, &u->i);
 		else if (line[u->i] && u->status && not_expandable(line[u->i]))
 			u->i++;
 		else if (line[u->i] && u->status && ft_to_ex(line[u->i]))
@@ -66,15 +66,12 @@ int	fill_str(t_env *env, char *line, char *new_line)
 				u->i++;
 		}
 		else
-		{
 			new_line[u->j++] = line[u->i++];
-		}
-			
 	}
 	return (0);
 }
 
-char	*expd_line(char *line, t_env *env)
+char	*expd_line(char *line, t_env *env, int pipe_line)
 {
 	char	*new_line;
 	int		len;
@@ -85,7 +82,7 @@ char	*expd_line(char *line, t_env *env)
 		return (NULL);
 	len = new_len(line, env);
 	new_line = allocat_zero(len + 1);
-	if (fill_str(env, line, new_line) == -1)
+	if (fill_str(env, line, new_line, pipe_line) == -1)
 		return (NULL);
 	return (new_line);
 }

@@ -82,9 +82,11 @@ void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list)
 	t_p_cmd	*cmd_list;
 	t_p_cmd	*new_cmd;
 	int		i;
+	int sig_flag;
 
 	cmd_list = NULL;
 	i = 0;
+	sig_flag = 0;
 	cmd = ft_split_cmd(line, '|', 0, 0);
 	while (cmd[i])
 	{
@@ -93,4 +95,9 @@ void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list)
 		i++;
 	}
 	(*cp_list) = cmd_list;
+	while(cmd_list && sig_flag != -1337)
+	{
+		herdoc_hundeler(&cmd_list, env_list, &sig_flag);
+		cmd_list = cmd_list->next;
+	}
 }

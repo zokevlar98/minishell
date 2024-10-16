@@ -37,8 +37,7 @@ typedef struct s_p_cmd
 	int				pipe_line;
 	char			*line;
 	char			**cmd;
-	char			**in_redir;
-	char			**out_redir;
+	char			**redir;
 	struct s_p_cmd	*next;
 }	t_p_cmd;
 
@@ -60,7 +59,7 @@ typedef struct s_utils
 	char	*new_line;
 	int		sq;
 	int		dq;
-	int		*fd_tab;
+	int		*fds_tab;
 	char	*f_name;
 	int		status;
 	int		len;
@@ -115,29 +114,31 @@ int		ft_to_ex(char c);
 int		new_len(char *line, t_env *env);
 void	*allocat_zero(size_t size);
 int		ft_cnt_red(char *line, char c);
-void	join_exit(char *new_line, char *str, int *j, int *i);
+void	join_exit(char *new_line, int pipe_line, int *j, int *i);
 void	get_line(char *line, t_p_cmd *cp_list, t_env *env_list);
 char	*get_redir(char *line, int i);
 void	in_qote(int *sq, int *dq, char c);
-char	**get_in_rd(char *line, int dq, int sq);
-char	**get_out_rd(char *line, int dq, int sq);
+char	**get_rd(char *line, int dq, int sq);
 t_p_cmd	*ft_new_cp(char *cmd, int i, t_env *env_list);
 void	cp_add_back(t_p_cmd **cp_list, t_p_cmd *new_cmd);
-char	*expd_line(char *line, t_env *env);
+char	*expd_line(char *line, t_env *env, int pipe_line);
 void	ft_merge(t_cmd **cmd_list, t_p_cmd *cp_list, t_env *env_list);
 t_cmd	*ft_new_cmd(t_p_cmd *cp_cmd, t_env *env_list);
 void	cmd_add_back(t_cmd **cmd_list, t_cmd *new_cmd);
 char	*rm_qot(char *str, int s_q, int d_q);
-void	close_tab(int *fd_tab, int size);
-int		open_in(char **in_redir, t_env *env);
-int		open_out(char **out_redir, t_env *env);
-char	*get_f_name(char *f_name, t_env *env);
-char	*expd_rd(char *f_name, t_env *env);
+void	close_tab(int *fd_tab, int size, int in, int out);
+void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out,t_env *env);
+int		open_in(char **in_redir, t_env *env); //itmsa7
+int		open_out(char **out_redir, t_env *env); //itmsa7
+char	*get_f_name(char *f_name, t_env *env, int pipe_line);
+char	*expd_rd(char *f_name, t_env *env, int pipe_line);
 char    **empty_env(void);
 int		exit_status(int status);
 void	ft_handle_signals(void);
 int		ft_maxsize(t_env *env_list, int flag);
-int	herdoc_hundeler(char *del, t_env *env);
+void	herdoc_hundeler(t_p_cmd **cmd,t_env *env, int *sig_flag);
+void	ft_sig_herdoc(int sig);
+int		to_expand(char *line);
 
 
 // env_utils_1.c

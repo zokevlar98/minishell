@@ -103,20 +103,14 @@ int	to_expand(char *line)
 void	get_line(char *line, t_p_cmd *cp_list, t_env *env_list)
 {
 	char	*new_line;
-	char	**in_rd;
-	char	**out_rd;
+	char	**rd;
 
 	new_line = NULL;
-	in_rd = NULL;
-	out_rd = NULL;
-	in_rd = get_in_rd(line, 0, 0);
-	out_rd = get_out_rd(line, 0, 0);
+	rd = get_rd(line, 0, 0);
 	new_line = line_no_rd(line, 0, 0);
-	// if (ft_strchr(new_line, '$'))
 	if (to_expand(new_line))
-		new_line = expd_line(new_line, env_list);
+		new_line = expd_line(new_line, env_list, cp_list->pipe_line);
 	cp_list->line = new_line;
-	cp_list->in_redir = in_rd;
-	cp_list->out_redir = out_rd;
+	cp_list->redir = rd;
 	cp_list->cmd = ft_split_cmd(new_line, ' ', 0, 0);
 }

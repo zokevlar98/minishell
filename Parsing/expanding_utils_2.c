@@ -38,10 +38,15 @@ int	ft_cnt_red(char *line, char c)
 	return (count);
 }
 
-void	join_exit(char *new_line, char *str, int *j, int *i)
+void	join_exit(char *new_line, int pipe_line, int *j, int *i)
 {
 	int	k;
+	char	*str;
 
+	if (pipe_line == 0)
+		str = ft_itoa(exit_status(-1));
+	else
+		str = ft_itoa(0);
 	k = 0;
 	while (str[k])
 	{
