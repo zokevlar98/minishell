@@ -3,7 +3,7 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h gb/garbage.h
 
-CC				=	cc -Wall -Wextra -Werror -g -I ./includes -fsanitize=address
+CC				=	cc -Wall -Wextra -g -I ./includes #-fsanitize=address
 
 READLINE_FLAGS	=	-lreadline \
 

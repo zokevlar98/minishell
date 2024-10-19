@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/16 16:20:31 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/19 16:03:18 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	start_loop(t_env *env_list)
 	while (1)
 	{
 		ft_maxsize(env_list, 0);
-		line = readline("minishell$>  ");
 		line = readline(GRN" -> "CYN"Minishell "RST);
 		if (ft_add(line))
 		{
@@ -74,8 +73,6 @@ void	start_loop(t_env *env_list)
 		ft_merge(&cmd_list, cp_list, env_list);
 		ft_execut_cmd(cmd_list, &env_list);
 		free(line);
-		
-
 	}
 }
 

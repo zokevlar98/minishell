@@ -118,6 +118,7 @@ int		ft_check_syntax(char *line);
 int		ft_check_direction(char *line);
 int		ft_isspace(char c);
 int		is_caracter(char *str, char c);
+char	**append_args(char **args);
 
 // parsing_part
 
@@ -202,5 +203,6 @@ void	affiche_env(t_env *env);
 t_cmd	*ft_lstnew_cmd(char *cmd);
 void	ft_lstadd_back_cmd(t_cmd **cmd_list, t_cmd *new);
 void	ff(void);
+void	close_tab_(int *fd_tab, int size);
 
 #endif
