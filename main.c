@@ -6,14 +6,14 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/06 16:18:42 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/09 15:41:17 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 t_global	g_data;
-
+// static int	exit_status;
 int	ft_add(char *line)
 {
 	if (!line)

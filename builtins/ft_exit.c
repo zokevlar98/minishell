@@ -6,11 +6,18 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/08 17:32:17 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/20 22:34:30 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// int	ft_signe(int signe)
+// {
+// 	if (signe > 0)
+// 		return (-1);
+// 	return (0);
+// }
 
 long long	ft_atoul(const char *str)
 {
@@ -31,6 +38,9 @@ long long	ft_atoul(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
+		// if (res > 922337203685477580 
+		// 	|| (res == 922337203685477580 && str[i] > 7))
+		// 	return (ft_signe(sign));
 		res = (res * 10) + (str[i] - '0');
 		i++;
 	}
@@ -68,7 +78,7 @@ void	ft_exit(t_cmd *cmd, int flag)
 		return ;//when exit status emplimented, remove this return and replace by exit_status = 1;
 	}
 	else if (!cmd->args[1])
-		exit_status = 0;
+		exit_status = 0;//i need here
 	else if (cmd->args[1] && ft_str_isdigit(cmd->args[1]))
 		exit_status = ft_atoul(cmd->args[1]);
 	if (flag)
