@@ -100,4 +100,12 @@ void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list)
 		herdoc_hundeler(&cmd_list, env_list, &sig_flag);
 		cmd_list = cmd_list->next;
 	}
+	if (sig_flag == -1337 | sig_flag == -42)
+	{
+		(*cp_list) = NULL;
+		if (sig_flag == -1337)
+			exit_status(1);
+		else
+			exit_status(0);
+	}
 }

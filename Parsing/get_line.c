@@ -25,7 +25,7 @@ char	*get_redir(char *line, int i)
 	sq = 0;
 	while (line[j] && (line[j] == '>' || line[j] == '<'))
 		j++;
-	while (line[j] && line[j] == ' ')
+	while (line[j] && (line[j] == ' ' || line[j] == '\t'))
 		j++;
 	while (line[j])
 	{
@@ -33,7 +33,8 @@ char	*get_redir(char *line, int i)
 			sq = !sq;
 		if (line[j] == '\"' && !sq)
 			dq = !dq;
-		if ((line[j] == ' ' || line[j] == '>' || line[j] == '<') && !dq && !sq)
+		if ((line[j] == ' ' || line[j] == '\t' ||
+			line[j] == '>' || line[j] == '<') && !dq && !sq)
 			break ;
 		j++;
 	}
@@ -64,13 +65,18 @@ char	*line_no_rd(char *line, int i, int j)
 			while (line[i])
 			{
 				in_qote(&u->sq, &u->dq, line[i]);
-				if (line[i] == ' ' && !u->dq && !u->sq)
+				if ((line[i] == ' ' || line[i] == '\t')&& !u->dq && !u->sq)
 					break ;
 				i++;
 			}
 		}
 		else
+		{
+			if (line[i] =='\t' && !u->dq && !u->sq)
+				u->new_line[j++] = ' ';
+			else
 			u->new_line[j++] = line[i];
+		}
 		if (line[i])
 			i++;
 	}

@@ -1,0 +1,25 @@
+-> Minishell echo Hello -n > file
+====> segfault
+
+Minishell ""
+====> execve failed: Permission denied
+
+----------------------------------------------------
+problem when exporting for first time with "key+=value"
+key becoms "key+"
+example:
+export a+=hello
+declare -x a+="hello"
+-----------------------------------------------------
+export a
+export a=
+should be declare -x a=""
+instead of declare -x a
+-----------------------------------------------------
+ls | exit ======> should not exit
+exit | exit  ======> should not exit
+-----------------------------------------------------
+cd ~ 
+cd -
+
+.

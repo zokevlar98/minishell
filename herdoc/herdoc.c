@@ -75,7 +75,13 @@ char	*get_buffer(int *s,char *del)
 		signal(SIGINT, ft_sig_herdoc);
 		line = readline("> ");
 		if (!line)
+		{
+			if (exit_status(-1) == -1337)
+				*s = -1337;
+			else
+				*s = -42;
 			break ;
+		}
 		if (ft_strcmp(line, del) == 0)
 		{
 			free(line);
@@ -86,11 +92,6 @@ char	*get_buffer(int *s,char *del)
 		free(line);
 	}
 	dup2(fd_dup, 0);
-	if (exit_status(-1) == -1337)
-	{
-		*s = -1337;
-		exit_status(1);
-	}
 	return (buffer);
 }
 

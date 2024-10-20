@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/19 16:03:18 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/20 11:53:30 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	main(int ac, char **av, char **env)
 	ft_handle_signals();
 	ft_env_list(&env_list, env, 0);
 	shell_lvl(env_list);
-	// ft_handle_signals();
 	start_loop(env_list);
 	ft_malloc(0, 1);
 	
