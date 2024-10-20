@@ -155,6 +155,7 @@ int		ft_maxsize(t_env *env_list, int flag);
 void	herdoc_hundeler(t_p_cmd **cmd,t_env *env, int *sig_flag);
 void	ft_sig_herdoc(int sig);
 int		to_expand(char *line);
+int		cp_arr(char **in_redir);
 
 
 // env_utils_1.c

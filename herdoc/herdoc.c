@@ -95,6 +95,15 @@ char	*get_buffer(int *s,char *del)
 	return (buffer);
 }
 
+void	unlik_herdoc(char **redir)
+{
+	int	i;
+
+	i = 0;
+	while (redir[i])
+			unlink(redir[i++]);
+}
+
 void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 {
 	t_p_cmd	*cmd;
@@ -102,26 +111,31 @@ void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 	int		fd;
 	char	*del;
 	char	*file_name;
+	char	**file_tab;
 	char	*buffer;
-	cmd = *new_cmd;
+
+	cmd = 	*new_cmd;
+	file_tab = (char **)ft_malloc(sizeof(char *) * (cp_arr(cmd->redir) + 1), 0);
 (void)env;
 	i = 0;
 	if (!cmd || !cmd->redir)
 		return ;
-	while (cmd->redir[i] && *sig_flag != -1337)
+	while (cmd->redir[i] && *sig_flag != -1337 && *sig_flag != -42)
 	{
 		if (to_herdoc(cmd->redir[i]))
 		{
 			del = get_del(cmd->redir[i]);
 			file_name = gnrt_name();
 			fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			file_tab[i] = file_name;
 			buffer = get_buffer( sig_flag,del);
 			write(fd, buffer, ft_strlen(buffer));
 			close(fd);
 			cmd->redir[i] = ft_strjoin("<<",file_name);
 		}
 		i ++;
+		file_tab[i] = NULL;
 	}
-	
-	
+	if (*sig_flag == -1337 || *sig_flag == -42)
+		unlik_herdoc(file_tab);
 }
