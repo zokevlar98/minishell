@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/20 11:53:30 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:12:54 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 t_global	g_data;
 
+void	to_execute(t_cmd *cmd_list, t_env **env_list)
+{
+	if (cmd_list && cmd_list->args && cmd_list->args[0])
+		ft_execut_cmd(cmd_list, env_list);
+}
+
 int	ft_add(char *line)
 {
 	if (!line)
 	{
 		printf("exit\n");
-		ft_malloc(0, 1);
 		exit(0);
 	}
 	if (line[0] == '\0' || all_space(line))
@@ -71,7 +76,7 @@ void	start_loop(t_env *env_list)
 		ft_parsing(line, &cp_list, env_list);
 		cmd_list = NULL;
 		ft_merge(&cmd_list, cp_list, env_list);
-		ft_execut_cmd(cmd_list, &env_list);
+		to_execute(cmd_list, &env_list);
 		free(line);
 	}
 }

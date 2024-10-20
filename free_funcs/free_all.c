@@ -20,7 +20,7 @@ void	ft_free_all(void **ptrs_list)
 
 void	*ft_malloc(size_t size, int free)
 {
-	static void	**ptrs_list;
+	static void	*ptrs_list[INT_MAX];
 	static int	i;
 	void		*ptr;
 
@@ -29,15 +29,6 @@ void	*ft_malloc(size_t size, int free)
 	{
 		ft_free_all(ptrs_list);
 		return (NULL);
-	}
-	if (!ptrs_list)
-	{
-		ptrs_list = malloc(sizeof(void *) * 10240);
-		if (!ptrs_list)
-		{
-			printf("xmalloc: cannot allocate memory\n");
-			exit(1);
-		}
 	}
 	ptr = malloc(size);
 	if (!ptr)

@@ -111,11 +111,11 @@ void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 	int		fd;
 	char	*del;
 	char	*file_name;
-	char	**file_tab;
+	char	*file_tab[cp_arr((*new_cmd)->redir)];
 	char	*buffer;
 
 	cmd = 	*new_cmd;
-	file_tab = (char **)ft_malloc(sizeof(char *) * (cp_arr(cmd->redir) + 1), 0);
+	// file_tab = (char **)ft_malloc(sizeof(char *) * (cp_arr(cmd->redir) + 1), 0);
 (void)env;
 	i = 0;
 	if (!cmd || !cmd->redir)
