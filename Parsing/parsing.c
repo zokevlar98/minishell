@@ -97,8 +97,8 @@ void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list)
 	(*cp_list) = cmd_list;
 	while(cmd_list && sig_flag != -1337)
 	{
-		herdoc_hundeler(&cmd_list, env_list, &sig_flag);
-		cmd_list = cmd_list->next;
+		herdoc_hundeler(&cmd_list, env_list, &sig_flag); //you have error here
+		cmd_list = cmd_list->next;//for exemple export a=5 > file => segv
 	}
 	if (sig_flag == -1337 | sig_flag == -42)
 	{

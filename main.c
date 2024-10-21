@@ -69,7 +69,7 @@ void	start_loop(t_env *env_list)
 		ft_parsing(line, &cp_list, env_list);
 		cmd_list = NULL;
 		ft_merge(&cmd_list, cp_list, env_list);
-		to_execute(cmd_list, &env_list);
+		ft_execut_cmd(cmd_list, &env_list);
 		free(line);
 	}
 }
@@ -88,6 +88,5 @@ int	main(int ac, char **av, char **env)
 	shell_lvl(env_list);
 	start_loop(env_list);
 	ft_malloc(0, 1);
-	
 	return (0);
 }

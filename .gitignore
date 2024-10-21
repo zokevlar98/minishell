@@ -54,3 +54,4 @@ dkms.conf
 minishell_tester
 minishell
 update
+malloc_log 

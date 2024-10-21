@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/09 15:53:04 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/21 04:18:13 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list)
 	}
 	dup2(saves[0], STDIN_FILENO);
 	dup2(saves[1], STDOUT_FILENO);
-	close_tab_(saves, 2);
+	close_fd(saves, 2);
 	while (waitpid(-1, &status, 0) != -1)
 		;
 }
