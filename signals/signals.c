@@ -5,7 +5,6 @@
 
 void	int_handel(int sig)
 {
-	printf("handle signals\n");
 	(void)sig;
 	write(1, "\n", 1);
 	rl_on_new_line();

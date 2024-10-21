@@ -1,40 +1,5 @@
 #include "../minishell.h"
 
-// int	herdoc_hundeler1(char *del, t_env *env)
-// {
-// 	int		fd;
-// 	char	*line;
-// 	char	*new_path;
-// 	char	*buffer;
-// 	static int	i;
-// (void)env;
-// 	buffer = NULL;
-// 	new_path = ft_strjoin("/tmp/mohmazou/herdoc", ft_itoa(i++));
-// 	while (1)
-// 	{
-// 		line = readline("> ");
-// 		if (!line)
-// 			break ;
-// 		if (ft_strcmp(line, del) == 0)
-// 		{
-// 			free(line);
-// 			break ;
-// 		}
-// 		buffer = ft_strjoin(buffer, line);
-// 		buffer = ft_strjoin(buffer, "\n");
-// 		free(line);
-// 	}
-// 	fd = open(new_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-// 	if (fd == -1)
-// 		ft_error("open failed");
-// 	write(fd, buffer, ft_strlen(buffer));
-// 	close(fd);
-// 	fd = open(new_path, O_RDONLY);
-// 	if (fd == -1)
-// 		ft_error("open failed");
-// 	return (fd);
-// }
-
 int	to_herdoc(char *redir)
 {
 	if (redir[0] == '<' && redir[1] == '<')
@@ -51,15 +16,47 @@ char	*gnrt_name(void)
 	return (file_name);
 }
 
+int	del_quote(int *sq, int *dq, char r)
+{
+	if (r == '\'' && !(*dq))
+	{
+		*sq = !(*sq);
+		return (1);
+	}
+	if (r == '"' && !(*sq))
+	{
+		*dq = !(*dq);
+		return (1);
+	}
+	return (0);
+}
+
 char	*get_del(char *redir)
 {
 	int		i;
+	int		j;
 	char	*del;
+	int		sq;
+	int		dq;
 
 	i = 2;
-	while (redir[i] == ' ')
+	j = 0;
+	sq = 0;
+	dq = 0;
+	while (redir[i] && ft_isspace(redir[i]))
 		i++;
-	del = ft_strdup(redir + i);
+	
+	del = ft_malloc(ft_strlen(redir) - i + 1, 0);
+	while (redir[i])
+	{
+		i += del_quote(&sq, &dq, redir[i]);
+		if (!sq && !dq && redir[i] == '$' &&
+			(redir[i + 1] == '\'' || redir[i + 1] == '"'))
+			i++;
+		if (redir[i])
+			del[j ++] = redir[i ++];
+	}
+	del[j] = '\0';
 	return (del);
 }
 
@@ -113,8 +110,10 @@ void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 	char	*file_name;
 	char	**file_tab;
 	char	*buffer;
+	int		expd;
 
 	cmd = 	*new_cmd;
+	expd = 0;
 	file_tab = (char **)ft_malloc(sizeof(char *) * (cp_arr(cmd->redir) + 1), 0);
 (void)env;
 	i = 0;
@@ -125,17 +124,18 @@ void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 		if (to_herdoc(cmd->redir[i]))
 		{
 			del = get_del(cmd->redir[i]);
+			printf("del = %s\n",del);
+			buffer = get_buffer(sig_flag,del);
 			file_name = gnrt_name();
 			fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			file_tab[i] = file_name;
-			buffer = get_buffer( sig_flag,del);
 			write(fd, buffer, ft_strlen(buffer));
 			close(fd);
 			cmd->redir[i] = ft_strjoin("<<",file_name);
 		}
 		i ++;
-		file_tab[i] = NULL;
 	}
+	file_tab[i] = NULL;
 	if (*sig_flag == -1337 || *sig_flag == -42)
 		unlik_herdoc(file_tab);
 }

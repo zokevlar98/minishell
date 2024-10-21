@@ -7,8 +7,10 @@ CC				=	cc -Wall -Wextra -Werror -g -fsanitize=address
 
 READLINE_FLAGS	=	-lreadline \
 
-LDFLAGS = -L/goinfre/mohmazou/homebrew/opt/readline/lib
-CPPFLAGS = -I/goinfre/mohmazou/homebrew/opt/readline/include
+USER = $(shell echo $$USER)
+
+LDFLAGS = -L/goinfre/$(USER)/homebrew/opt/readline/lib
+CPPFLAGS = -I/goinfre/$(USER)/homebrew/opt/readline/include
 
 SRCS			=	main.c								\
 					lib_utils/ft_error.c 				\
