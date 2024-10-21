@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/06 16:56:56 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/21 03:32:23 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 {
 	char	*cmd;
 	
-	cmd = lower_case(cmd_list->args[0]);
+	cmd = cmd_list->args[0];
 	if (!cmd || cmd_list->fd_in == -1 || cmd_list->fd_out == -1)
 		return ;
 	dup2(cmd_list->fd_in , STDIN_FILENO);
@@ -69,4 +69,32 @@ void	print_list_declare(t_env **env)
 		current_env = current_env->next;
 	}
 	//free env linkedlist
+}
+
+char	*check_name_env(char *name)
+{
+	int	i;
+
+	i = 0;
+	while (name[i])
+	{
+		if (name[i] == '+')
+			return (ft_substr(name, 0, i));
+		i++;
+	}
+	return (name);
+}
+
+int	check_empty_value(char *var)
+{
+	int	i;
+
+	i = 0;
+	while (var[i])
+	{
+		if (var[i] == '=' && var[i + 1] == '\0')
+			return (0);
+		i++;
+	}
+	return (1);
 }

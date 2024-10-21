@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/27 16:39:29 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/21 00:43:42 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int is_builtin(t_cmd *cmd_list)
     char    *cmd;
 
     i = 0;
-    cmd = lower_case(cmd_list->args[0]);
+    cmd = cmd_list->args[0];
     builtins[0] = "echo";
     builtins[1] = "cd";
     builtins[2] = "pwd";
@@ -57,17 +57,9 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 		printf("minishell: %s: No such file or directory\n", cmd_list->args[0]);//make with ft_putstr_fd
 	path = find_path_env(cmd_list->args[0], envp);
 	if (!path)
-	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		ft_putstr_fd(cmd_list->args[0], STDERR_FILENO);
-		ft_putstr_fd(": command not found\n", STDERR_FILENO);
-		exit(127);
-	}
-	if (ft_strncmp(cmd_list->args[0], "ls", ft_strlen(cmd_list->args[0])) == 0 ||
-			ft_strncmp(cmd_list->args[0], "LS", ft_strlen(cmd_list->args[0])) == 0)
-		cmd_list->args = append_args(cmd_list->args);
+		ft_execution_error(cmd_list->args[0]);
 	if (execve(path, cmd_list->args, envp) == -1)
-		ft_error("execve failed");
+		ft_execution_error(cmd_list->args[0]);
 	exit(EXIT_SUCCESS);
 }
 

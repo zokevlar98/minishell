@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/20 22:34:08 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/21 03:29:44 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	update_var(t_env **env, char *name, char *value, int flag)
 	}
 	else
 	{
+		if (var->name && var->value && !value)
+			return ;
 		if (var->value && value)
 		{
 			if (flag == 0)
@@ -83,12 +85,15 @@ void	add_var_env(char *var, t_env **env)
 	if (!size_name)
 		return ;
 	name = ft_substr(var, 0, size_name);
+	name = check_name_env(name);
 	size_value = size_name;
 	while (var[size_name] == '=' && var[size_value])
 		size_value++;
 	value = ft_substr(var, size_name + 1, size_value);
 	if (ft_strlen(value) == 0)
 		value = NULL;
+	if (!check_empty_value(var))
+		value = "";
 	if (check_env_var(var, 1) == -1)
 		update_var(env, name, value, 1);//append
 	else
@@ -98,8 +103,7 @@ void	add_var_env(char *var, t_env **env)
 void	ft_export(t_cmd *cmd, t_env **env)
 {
 	int		i;
-	//case export a=4 then export a => env: a
-	// more check
+
 	i = 1;
 	if (!cmd->args[1])
 	{
