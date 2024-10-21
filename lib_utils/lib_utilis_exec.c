@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lib_utilis_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 05:40:40 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 00:40:09 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 // char    *lower_case(char *str) // ila ma5damtch biha nemsse7ha
 // {

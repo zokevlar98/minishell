@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../minishell.h"
 
 t_cmd	*ft_lstlast(t_cmd *lst)
 {

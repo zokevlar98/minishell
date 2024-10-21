@@ -6,11 +6,11 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 21:21:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/16 16:42:12 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_change_env(t_env *env_list, char *name, char *value)
 {

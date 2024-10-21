@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	*get_ex(t_env *env, char *line, int i)
 {

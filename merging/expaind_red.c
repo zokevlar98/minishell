@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	*expd_rd(char *f_name, t_env *env, int pipe_line)
 {

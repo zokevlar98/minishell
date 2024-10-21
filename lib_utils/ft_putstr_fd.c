@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void    ft_putstr_fd(char *str, int fd)
 {

@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_merge(t_cmd **cmd_list, t_p_cmd *cp_list, t_env *env_list)
 {

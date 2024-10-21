@@ -6,11 +6,11 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 03:32:23 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 {

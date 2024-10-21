@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../minishell.h"
 
 // int	herdoc_hundeler1(char *del, t_env *env)
 // {

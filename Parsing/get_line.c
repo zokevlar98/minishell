@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../minishell.h"
 
 t_utils	*ini_utls(char *line)
 {

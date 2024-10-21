@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 07:45:31 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/27 13:57:54 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void    swap(char **a, char **b)
 {

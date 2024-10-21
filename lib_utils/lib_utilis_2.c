@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	*ft_strtrim(char *s1, char *set)
 {

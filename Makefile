@@ -3,9 +3,12 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h gb/garbage.h
 
-CC				=	cc -Wall -Wextra -Werror -g -I ./includes -fsanitize=address
+CC				=	cc -Wall -Wextra -Werror -g -fsanitize=address
 
 READLINE_FLAGS	=	-lreadline \
+
+LDFLAGS = -L/goinfre/mohmazou/homebrew/opt/readline/lib
+CPPFLAGS = -I/goinfre/mohmazou/homebrew/opt/readline/include
 
 SRCS			=	main.c								\
 					lib_utils/ft_error.c 				\
@@ -57,8 +60,6 @@ SRCS			=	main.c								\
 					signals/signals.c					\
 					herdoc/herdoc.c						\
 
-					
-
 RED             =   \033[0;31m
 GREEN           =   \033[0;32m
 RESET           =   \033[0m
@@ -69,7 +70,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			@echo "$(GREEN)Loading$(RESET)"
-			@$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME)
+			@$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME) $(CPPFLAGS) $(LDFLAGS)
 			@sleep 1
 			@echo "$(GREEN)Minishell Ready$(RESET)"
 

@@ -11,8 +11,6 @@
 
 #include "minishell.h"
 
-t_global	g_data;
-// static int	exit_status;
 int	ft_add(char *line)
 {
 	if (!line)
@@ -60,7 +58,7 @@ void	start_loop(t_env *env_list)
 	while (1)
 	{
 		ft_maxsize(env_list, 0);
-		line = readline(GRN" -> "CYN"Minishell "RST);
+		line = readline("-> Minishell ");
 		if (ft_add(line))
 		{
 			free(line);

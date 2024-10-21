@@ -1,20 +1,19 @@
 
-#include "minishell.h"
+#include "../minishell.h"
+
+
 
 void	int_handel(int sig)
 {
+	printf("handle signals\n");
 	(void)sig;
 	write(1, "\n", 1);
 	rl_on_new_line();
+	rl_replace_line("", 0);
 	rl_redisplay();
 	exit_status(1);
 }
 
-void	quit_handel(int sig)
-{
-	(void)sig;
-	return ;
-}
 void ft_sig_herdoc(int sig)
 {
 	(void)sig;
@@ -25,5 +24,5 @@ void ft_sig_herdoc(int sig)
 void	ft_handle_signals(void)
 {
 	signal(SIGINT, int_handel);
-	signal(SIGQUIT, quit_handel);
+	signal(SIGQUIT, SIG_IGN);
 }

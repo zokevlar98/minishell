@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static int	check_red_pattern(char *line, int *i)
 {

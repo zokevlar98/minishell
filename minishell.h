@@ -16,9 +16,9 @@
 # define MAX_TOKENS 100
 // # define malloc(x) NULL
 
+# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
@@ -39,15 +39,6 @@
 #define MAG "\e[1;95m"
 #define CYN "\e[3;96m"
 #define RST "\e[0m"
-
-//global varaibles status
-
-typedef struct s_global
-{
-	int	exit_status;
-}	t_global;
-
-extern t_global g_data;
 
 // environnement variables linked list
 typedef struct s_env

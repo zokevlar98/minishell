@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	cnt_split(char *line, char c, int in_word)
 {

@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	*rm_qot(char *str, int s_q, int d_q)
 {

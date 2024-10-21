@@ -6,12 +6,12 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:57:23 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 03:32:05 by zqouri           ###   ########.fr       */
-/*   Updated: 2024/10/16 16:46:06 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:28:42 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+
+#include "../../minishell.h"
 
 void	affiche_env(t_env *env)
 {

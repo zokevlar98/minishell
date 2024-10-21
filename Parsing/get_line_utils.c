@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	in_qote(int *sq, int *dq, char c)
 {
