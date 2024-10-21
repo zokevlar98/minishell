@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 00:43:42 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/22 00:41:32 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 	char	**envp;
 	char	*path;
 
+	// if (is_builtin(cmd_list))
+	// {
+	// 	ft_builtin(cmd_list, &env_list);
+	// 	exit(EXIT_SUCCESS);
+	// }
 	envp = ft_get_envp(env_list);
 	if (!envp)
 		printf("minishell: %s: No such file or directory\n", cmd_list->args[0]);//make with ft_putstr_fd
