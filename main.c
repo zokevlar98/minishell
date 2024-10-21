@@ -6,13 +6,13 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/09 15:41:17 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/21 04:03:14 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_global	g_data;
+// t_global	g_data;
 // static int	exit_status;
 int	ft_add(char *line)
 {
@@ -67,7 +67,7 @@ int	main(int ac, char **av, char **env)
 	env_list = NULL;
 	ft_env_list(&env_list, env, 0);
 	shell_lvl(env_list);
-	// ft_handle_signals();
+	//ft_handle_signals();
 	start_loop(env_list);
 	return (0);
 }
