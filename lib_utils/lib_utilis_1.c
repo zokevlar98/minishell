@@ -31,10 +31,7 @@ char	*ft_strdup(const char *s)
 
 	if (!s)
 		return (NULL);
-	// dup = ft_malloc(sizeof(char) * (ft_strlen(s) + 1), 0);
-	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!dup)
-		return (NULL);
+	dup = (char *)ft_malloc(sizeof(char) * (ft_strlen(s) + 1), 0);
 	i = 0;
 	while (s[i])
 	{
@@ -86,10 +83,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start > ft_strlen(s))
 		return (ft_strdup("\0"));
-	// sub = ft_malloc(sizeof(char) * (len + 1), 0);
-	sub = (char *)malloc(sizeof(char) * (len + 1));
-	if (!sub)
-		return (NULL);
+	sub = (char *)ft_malloc(sizeof(char) * (len + 1), 0);
 	i = 0;
 	while (i < len && s[start + i])
 	{

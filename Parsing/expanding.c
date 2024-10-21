@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   expanding.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/04 15:38:34 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/17 01:14:36 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -46,10 +35,7 @@ t_utils	*intialize_utils(int len)
 {
 	t_utils	*u;
 
-	// u = ft_malloc(sizeof(t_utils), 0);
-	u = (t_utils *)malloc(sizeof(t_utils));
-	if (!u)
-		return (NULL);
+	u = (t_utils *)ft_malloc(sizeof(t_utils), 0);
 	u->fd = 0;
 	u->i = 0;
 	u->j = 0;
@@ -59,7 +45,7 @@ t_utils	*intialize_utils(int len)
 	return (u);
 }
 
-int	fill_str(t_env *env, char *line, char *new_line)
+int	fill_str(t_env *env, char *line, char *new_line, int pipe_line)
 {
 	t_utils	*u;
 
@@ -67,10 +53,10 @@ int	fill_str(t_env *env, char *line, char *new_line)
 	while (u->i < u->len)
 	{
 		u->status = is_expandable(line[u->i]);
-		if (u->status)
+		if (u->status && line[u->i + 1] && line[u->i + 1] != ' ')
 			u->i++;
 		if (line[u->i] && u->status && line[u->i] == '?')
-			join_exit(new_line, "-000", &u->j, &u->i);
+			join_exit(new_line, pipe_line, &u->j, &u->i);
 		else if (line[u->i] && u->status && not_expandable(line[u->i]))
 			u->i++;
 		else if (line[u->i] && u->status && ft_to_ex(line[u->i]))
@@ -85,7 +71,7 @@ int	fill_str(t_env *env, char *line, char *new_line)
 	return (0);
 }
 
-char	*expd_line(char *line, t_env *env)
+char	*expd_line(char *line, t_env *env, int pipe_line)
 {
 	char	*new_line;
 	int		len;
@@ -94,9 +80,9 @@ char	*expd_line(char *line, t_env *env)
 		return (NULL);
 	if (line[0] == '\0')
 		return (NULL);
-	len = new_len(line);
-	new_line = allocat_zero(len);
-	if (fill_str(env, line, new_line) == -1)
+	len = new_len(line, env);
+	new_line = allocat_zero(len + 1);
+	if (fill_str(env, line, new_line, pipe_line) == -1)
 		return (NULL);
 	return (new_line);
 }

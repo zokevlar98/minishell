@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri < zqouri@student.1337.ma >          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/07 23:46:53 by zqouri            #+#    #+#             */
-/*   Updated: 2024/08/29 09:00:33 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -17,9 +6,7 @@ t_cmd	*ft_lstnew_cmd(char *cmd)
 	t_cmd	*new;
 	char	**args;
 
-	new = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!new)
-		return (NULL);
+	new = (t_cmd *)ft_malloc(sizeof(t_cmd), 0);
 	// new->ful_cmd = ft_strdup(cmd);
 	args = ft_split(cmd, ' ');
 	// new->cmd = ft_strdup(args[0]);

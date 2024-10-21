@@ -1,15 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   env_utils_2.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 08:08:27 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/06 16:11:29 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+	
 #include "minishell.h"
 
 char    **empty_env(void)
@@ -18,14 +7,11 @@ char    **empty_env(void)
     char    *str;
 
     str = getcwd(NULL, 0);
-    env = (char **)malloc(sizeof(char *) * 5);
-    if (!env)
-        ft_error("malloc failed\n");
-    env[0] = ft_strdup("PATH=/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.");
-    env[1] = ft_strjoin("PWD=", str);
-    env[2] = ft_strdup("SHLVL=0");
-    env[3] = ft_strdup("_=/usr/bin/env");
-    env[4] = NULL;
+    env = (char **)ft_malloc(sizeof(char *) * 4, 0);
+    env[0] = ft_strjoin("PWD=", str);
+    env[1] = ft_strdup("SHLVL=0");
+    env[2] = ft_strdup("_=/usr/bin/env");
+    env[3] = NULL;
     return (env);
 }
 

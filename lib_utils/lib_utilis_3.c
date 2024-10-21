@@ -53,3 +53,12 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
+
+int	exit_status(int status)
+{
+	static int	exit_status;
+
+	if (status != -1)
+		exit_status = status;
+	return (exit_status);
+}

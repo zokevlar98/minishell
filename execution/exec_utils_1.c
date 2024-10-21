@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
 /*   Updated: 2024/10/21 00:43:42 by zqouri           ###   ########.fr       */

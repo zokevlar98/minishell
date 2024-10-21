@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   merge_utils.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 14:38:19 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/17 18:53:18 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -20,10 +9,7 @@ char	*rm_qot(char *str, int s_q, int d_q)
 
 	i = 0;
 	j = 0;
-	// new_str = ft_malloc(ft_strlen(str) + 1, 0);
-	new_str = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
-	if (!new_str)
-		return (NULL);
+	new_str = (char *)ft_malloc(sizeof(char) * (ft_strlen(str) + 1), 0);
 	ft_bzero(new_str, ft_strlen(str) + 1);
 	while (str[i])
 	{
@@ -64,21 +50,18 @@ char	**ft_quoted_cmd(char **cmd)
 t_cmd	*ft_new_cmd(t_p_cmd *cp_cmd, t_env *env_list)
 {
 	t_cmd	*new_cmd;
+	int		fd_in;
+	int		fd_out;
 
-	// new_cmd = ft_malloc(sizeof(t_cmd), 0);
-	new_cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!new_cmd)
-		return (NULL);
+	fd_in = 0;
+	fd_out = 1;
+	new_cmd = (t_cmd *)ft_malloc(sizeof(t_cmd), 0);
 	new_cmd->pipe_line = cp_cmd->pipe_line;
 	new_cmd->args = ft_quoted_cmd(cp_cmd->cmd);
-	if (cp_cmd->in_redir && cp_cmd->in_redir[0])
-		new_cmd->fd_in = open_in(cp_cmd->in_redir, env_list);
-	else
-		new_cmd->fd_in = 0;
-	if (cp_cmd->out_redir && cp_cmd->out_redir[0])
-		new_cmd->fd_out = open_out(cp_cmd->out_redir, env_list);
-	else
-		new_cmd->fd_out = 1;
+	if (cp_cmd->redir)
+		open_red(cp_cmd, &fd_in, &fd_out, env_list);
+	new_cmd->fd_in = fd_in;
+	new_cmd->fd_out = fd_out;
 	new_cmd->next = NULL;
 	return (new_cmd);
 }
@@ -98,14 +81,15 @@ void	cmd_add_back(t_cmd **cmd_list, t_cmd *new_cmd)
 	tmp->next = new_cmd;
 }
 
-void	close_tab(int *fd_tab, int size)
+void	close_tab(int *fd_tab, int size, int in, int out)
 {
 	int	i;
 
 	i = 0;
 	while (i < size)
 	{
-		close(fd_tab[i]);
+		if (i != in && i != out)
+			close(fd_tab[i]);
 		i++;
 	}
 }

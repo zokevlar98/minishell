@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_line.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/03 11:18:12 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/09/17 01:14:47 by zqouri           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -16,14 +5,8 @@ t_utils	*ini_utls(char *line)
 {
 	t_utils	*u;
 
-	// u = ft_malloc(sizeof(t_utils), 0);
-	u = (t_utils *)malloc(sizeof(t_utils));
-	if (!u)
-		return (NULL);
-	// u->new_line = ft_malloc(ft_strlen(line) + 1, 0);
-	u->new_line = (char *)malloc(sizeof(char) * (ft_strlen(line) + 1));
-	if (!u->new_line)
-		return (NULL);
+	u = (t_utils *)ft_malloc(sizeof(t_utils), 0);
+	u->new_line = (char *)ft_malloc(sizeof(char) * (ft_strlen(line) + 1), 0);
 	ft_bzero(u->new_line, ft_strlen(line) + 1);
 	u->sq = 0;
 	u->dq = 0;
@@ -42,7 +25,7 @@ char	*get_redir(char *line, int i)
 	sq = 0;
 	while (line[j] && (line[j] == '>' || line[j] == '<'))
 		j++;
-	while (line[j] && line[j] == ' ')
+	while (line[j] && (line[j] == ' ' || line[j] == '\t'))
 		j++;
 	while (line[j])
 	{
@@ -50,7 +33,8 @@ char	*get_redir(char *line, int i)
 			sq = !sq;
 		if (line[j] == '\"' && !sq)
 			dq = !dq;
-		if ((line[j] == ' ' || line[j] == '>' || line[j] == '<') && !dq && !sq)
+		if ((line[j] == ' ' || line[j] == '\t' ||
+			line[j] == '>' || line[j] == '<') && !dq && !sq)
 			break ;
 		j++;
 	}
@@ -81,13 +65,18 @@ char	*line_no_rd(char *line, int i, int j)
 			while (line[i])
 			{
 				in_qote(&u->sq, &u->dq, line[i]);
-				if (line[i] == ' ' && !u->dq && !u->sq)
+				if ((line[i] == ' ' || line[i] == '\t')&& !u->dq && !u->sq)
 					break ;
 				i++;
 			}
 		}
 		else
+		{
+			if (line[i] =='\t' && !u->dq && !u->sq)
+				u->new_line[j++] = ' ';
+			else
 			u->new_line[j++] = line[i];
+		}
 		if (line[i])
 			i++;
 	}
@@ -95,22 +84,39 @@ char	*line_no_rd(char *line, int i, int j)
 	return (u->new_line);
 }
 
+int	to_expand(char *line)
+{
+	int	i;
+	int	sq;
+	int	dq;
+
+	i = 0;
+	sq = 0;
+	dq = 0;
+	while (line[i])
+	{
+		if (line[i] == '\'' && !dq)
+			sq = !sq;
+		if (line[i] == '\"' && !sq)
+			dq = !dq;
+		if (line[i] == '$' && !sq)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	get_line(char *line, t_p_cmd *cp_list, t_env *env_list)
 {
 	char	*new_line;
-	char	**in_rd;
-	char	**out_rd;
+	char	**rd;
 
 	new_line = NULL;
-	in_rd = NULL;
-	out_rd = NULL;
-	in_rd = get_in_rd(line, 0, 0);
-	out_rd = get_out_rd(line, 0, 0);
+	rd = get_rd(line, 0, 0);
 	new_line = line_no_rd(line, 0, 0);
-	if (ft_strchr(new_line, '$'))
-		new_line = expd_line(new_line, env_list);
+	if (to_expand(new_line))
+		new_line = expd_line(new_line, env_list, cp_list->pipe_line);
 	cp_list->line = new_line;
-	cp_list->in_redir = in_rd;
-	cp_list->out_redir = out_rd;
+	cp_list->redir = rd;
 	cp_list->cmd = ft_split_cmd(new_line, ' ', 0, 0);
 }
