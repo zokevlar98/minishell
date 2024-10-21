@@ -91,7 +91,7 @@ void	*ft_malloc(size_t size, int free);
 // lib_utils
 int     ft_strcmp(const char *s1, const char *s2);
 int     ft_strncmp(char *s1, char *s2, size_t size);
-char    *lower_case(char *str);
+// char    *lower_case(char *str); i9dar nemsse7ha
 void    ft_putstr_fd(char *str, int fd);
 void    ft_error(char *str);
 char	*ft_strchr(const char *s, int c);
@@ -102,6 +102,7 @@ char	*ft_strtrim(char *s1, char *set);
 int     ft_atoi(char *str);
 char	*ft_itoa(int n);
 int		size_array(char **array);
+void    ft_execution_error(char *str);
 
 // lib_utils_2
 int		ft_isalpha(int c);
@@ -118,7 +119,6 @@ int		ft_check_syntax(char *line);
 int		ft_check_direction(char *line);
 int		ft_isspace(char c);
 int		is_caracter(char *str, char c);
-char	**append_args(char **args);
 
 // parsing_part
 
@@ -187,6 +187,8 @@ int     is_builtin(t_cmd *cmd_list);
 void	ft_builtin(t_cmd *cmd_list, t_env **env_list);
 void	ft_export_error(char *name);
 void	print_list_declare(t_env **env);
+char	*check_name_env(char *name);
+int		check_empty_value(char *var);
 void	ft_echo(t_cmd *cmd_list);
 void	ft_cd(t_cmd *cmd_list, t_env *env_list);
 void	ft_pwd(t_env *env);

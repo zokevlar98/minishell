@@ -1,21 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lib_utilis_exec.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 05:40:40 by zqouri            #+#    #+#             */
+/*   Updated: 2024/10/21 00:40:09 by zqouri           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-char    *lower_case(char *str)
-{
-    int i;
+// char    *lower_case(char *str) // ila ma5damtch biha nemsse7ha
+// {
+//     int i;
 
-    i = 0;
-	if (!str)
-		return (NULL);
-    while (str[i])
-    {
-        if (str[i] >= 'A' && str[i] <= 'Z')
-            str[i] += 32;
-        i++;
-    }
-    return (str);
-}
+//     i = 0;
+// 	if (!str)
+// 		return (NULL);
+//     while (str[i])
+//     {
+//         if (str[i] >= 'A' && str[i] <= 'Z')
+//             str[i] += 32;
+//         i++;
+//     }
+//     return (str);
+// }
 
 int ft_strncmp(char *s1, char *s2, size_t size)
 {

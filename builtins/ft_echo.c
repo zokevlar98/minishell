@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:35 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/16 16:40:09 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/20 22:53:17 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ void	ft_echo(t_cmd *cmd)
 	if (cmd->args[i])
 		ft_putstr_fd(cmd->args[i], cmd->fd_out);
 	if (!n_flag)
-		write(cmd->fd_out, "\n", cmd->fd_out);
+		ft_putstr_fd("\n", cmd->fd_out);
 }
