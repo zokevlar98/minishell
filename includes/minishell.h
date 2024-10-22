@@ -41,12 +41,12 @@
 
 //global varaibles status
 
-typedef struct s_global
-{
-	int	exit_status;
-}	t_global;
+// typedef struct s_global
+// {
+// 	int	exit_status;
+// }	t_global;
 
-extern t_global g_data;
+extern  g_data;
 
 // environnement variables linked list
 typedef struct s_env

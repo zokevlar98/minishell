@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 22:49:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/22 00:42:34 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/22 14:49:23 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ void	ft_execut_builtin(t_cmd *cmd_list, t_env **env_list)
 	dup2(cmd_list->fd_in , STDIN_FILENO);
 	dup2(cmd_list->fd_out , STDOUT_FILENO);
 	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
-		g_data.exit_status = ft_echo(cmd_list);
+		g_data = ft_echo(cmd_list);
 	else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
-		g_data.exit_status = ft_cd(cmd_list, *env_list);
+		g_data = ft_cd(cmd_list, *env_list);
 	else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
-		g_data.exit_status = ft_pwd(*env_list);
+		g_data = ft_pwd(*env_list);
 	else if (ft_strncmp(cmd, "env", ft_strlen("env")) == 0)
-		g_data.exit_status = ft_env(cmd_list, *env_list);
+		g_data = ft_env(cmd_list, *env_list);
 	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
-		g_data.exit_status = ft_export(cmd_list, env_list);
+		g_data = ft_export(cmd_list, env_list);
 	else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
-		g_data.exit_status = ft_exit(cmd_list, 1);
+		g_data = ft_exit(cmd_list, 1);
 	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
-		g_data.exit_status = ft_unset(cmd_list, env_list);
+		g_data = ft_unset(cmd_list, env_list);
 }
 
 int	execution_builtin(t_cmd *cmd, t_env **env)
