@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/22 00:41:32 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/22 18:01:13 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 	// 	ft_builtin(cmd_list, &env_list);
 	// 	exit(EXIT_SUCCESS);
 	// }
-	envp = ft_get_envp(env_list);
+	envp = ft_get_envp(env_list);//i need to check . like /
 	if (!envp)
 		printf("minishell: %s: No such file or directory\n", cmd_list->args[0]);//make with ft_putstr_fd
 	path = find_path_env(cmd_list->args[0], envp);

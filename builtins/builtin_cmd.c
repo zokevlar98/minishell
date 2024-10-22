@@ -6,13 +6,13 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 03:32:23 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/22 17:56:12 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
+void	ft_builtin(t_cmd *cmd_list, t_env **env_list, int exit_flag)
 {
 	char	*cmd;
 	
@@ -32,7 +32,7 @@ void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
 		ft_export(cmd_list, env_list);
 	else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
-		ft_exit(cmd_list, 1);
+		ft_exit(cmd_list, exit_flag);
 	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
 		ft_unset(cmd_list, env_list);
 }

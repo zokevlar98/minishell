@@ -46,7 +46,7 @@
 // 	int	exit_status;
 // }	t_global;
 
-extern  g_data;
+extern  int g_data;
 
 // environnement variables linked list
 typedef struct s_env
@@ -188,7 +188,7 @@ char	*check_path(char **path_s, char *cmd);
 
 //builtins
 int     is_builtin(t_cmd *cmd_list);
-void	ft_builtin(t_cmd *cmd_list, t_env **env_list);
+void	ft_builtin(t_cmd *cmd_list, t_env **env_list, int exit_flag);
 void	ft_export_error(char *name);
 void	print_list_declare(t_env **env);
 char	*check_name_env(char *name);

@@ -6,11 +6,41 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 22:49:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/22 14:49:23 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/22 18:03:04 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	child_execution(t_cmd *cmd, t_env *env, int *fd)
+{
+	//Protection
+	if (cmd->fd_in == -1 || cmd->fd_out == -1)
+		return ;
+	if (cmd->next)
+	{
+		dup2(cmd->fd_in, STDIN_FILENO);
+		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+		dup2(cmd->fd_out, STDOUT_FILENO);
+	}
+	if (is_builtin(cmd))
+	{
+		ft_builtin(cmd, &env, 0);
+		exit(EXIT_SUCCESS);
+	}
+	else
+		ft_execut(cmd, env);
+}
+
+void	close_dup(int in_save, int out_save)
+{
+	dup2(in_save, STDIN_FILENO);
+	dup2(out_save, STDOUT_FILENO);
+	close(in_save);
+	close(out_save);
+}
 
 int	execut_command(t_cmd *cmd,t_env *env)
 {
@@ -22,7 +52,15 @@ int	execut_command(t_cmd *cmd,t_env *env)
 	pid = fork1();
 	if (pid == 0)
 	{
+		child_execution(cmd, env, fd);
 	}
+	if (cmd->next)
+	{
+		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+	}
+	return (pid);
 }
 
 void	ft_execut_builtin(t_cmd *cmd_list, t_env **env_list)
@@ -68,10 +106,14 @@ void	ft_test_execution(t_cmd *cmd, t_env **env, int in_save, int out_save)
     if (execution_builtin(cmd, env))//I will check if i have one builtins first the i check multiple command
 		return ;
 	in_save = dup(STDIN_FILENO);
-	out_save - dup(STDOUT_FILENO);
+	out_save = dup(STDOUT_FILENO);
 	while (cmd)
 	{
 		pid = execut_command(cmd, env);
 		cmd = cmd->next;
 	}
+	waitipid(pid, &status, 0);
+	while (waitpid(-1, NULL, WNOHANG) != -1)
+		;
+	close_dup(in_save, out_save);
 }
