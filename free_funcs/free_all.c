@@ -1,7 +1,7 @@
 
 #include "../minishell.h"
 
-void	ft_free_all(void **ptrs_list)
+void	ft_free_all(void **ptrs_list, int *s)
 {
 	int	i;
 
@@ -14,7 +14,7 @@ void	ft_free_all(void **ptrs_list)
 		free(ptrs_list[i]);
 		i++;
 	}
-	free(ptrs_list);
+	(*s) = 0;
 	ptrs_list = NULL;
 }
 
@@ -27,7 +27,7 @@ void	*ft_malloc(size_t size, int free)
 
 	if (free)
 	{
-		ft_free_all(ptrs_list);
+		ft_free_all(ptrs_list, &i);
 		return (NULL);
 	}
 	ptr = malloc(size);

@@ -29,6 +29,7 @@
 # include <sys/wait.h>
 # include <stddef.h>
 # include <fcntl.h>
+# include <termios.h>
 
 
 //define

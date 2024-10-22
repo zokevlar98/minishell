@@ -49,12 +49,12 @@ int	ft_maxsize(t_env *env_list, int flag)
 	return (i);
 }
 
-void	start_loop(t_env *env_list)
+void	start_loop(t_env *env_list, struct termios *term)
 {
 	char	*line;
 	t_p_cmd	*cp_list;
 	t_cmd	*cmd_list;
-
+	(void)term;
 	while (1)
 	{
 		ft_handle_signals();
@@ -70,22 +70,31 @@ void	start_loop(t_env *env_list)
 		ft_merge(&cmd_list, cp_list, env_list);
 		ft_execut_cmd(cmd_list, &env_list);
 		free(line);
+		tcsetattr(STDIN_FILENO, TCSANOW, term);
 	}
+}
+
+void set_tty_attrs(struct termios *term)
+{
+
+	tcgetattr(STDIN_FILENO, term);
 }
 
 int	main(int ac, char **av, char **env)
 {
+	struct termios	term;
 	t_env	*env_list;
 
 	if (ac != 1 || av[1])
 		return (write(2, "Error: no arguments needed\n", 27));
 	if (!env[0])
 		env = empty_env();
+	set_tty_attrs(&term);
 	env_list = NULL;
 	ft_env_list(&env_list, env, 0);
 	rl_catch_signals = 0;
 	shell_lvl(env_list);
-	start_loop(env_list);
+	start_loop(env_list, &term);
 	ft_malloc(0, 1);
 	return (0);
 }
