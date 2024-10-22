@@ -1,7 +1,7 @@
 
 #include "../minishell.h"
 
-void	ft_pwd(t_env *env)
+int	ft_pwd(t_env *env)
 {
 	char	*path;
 
@@ -24,4 +24,5 @@ void	ft_pwd(t_env *env)
 	}
 	else
 		ft_putstr_fd("minishell: pwd:", STDERR_FILENO);
+	return (0);
 }

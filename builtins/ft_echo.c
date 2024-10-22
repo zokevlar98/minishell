@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:35 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/22 22:45:19 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	echo_option(char *str)
 	return (0);
 }
 
-void	ft_echo(t_cmd *cmd)
+int	ft_echo(t_cmd *cmd)
 {
 	int		i;
 	int		n_flag;
@@ -54,4 +54,5 @@ void	ft_echo(t_cmd *cmd)
 		ft_putstr_fd(cmd->args[i], cmd->fd_out);
 	if (!n_flag)
 		ft_putstr_fd("\n", cmd->fd_out);
+	return (0);
 }

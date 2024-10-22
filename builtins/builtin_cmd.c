@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/22 23:29:14 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 	dup2(cmd_list->fd_in , STDIN_FILENO);
 	dup2(cmd_list->fd_out , STDOUT_FILENO);
 	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
-		ft_echo(cmd_list);
+		exit_status(ft_echo(cmd_list));
 	else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
-		ft_cd(cmd_list, *env_list);
+		ft_cd(cmd_list, *env_list); // exit not set
 	else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
-		ft_pwd(*env_list);
+		exit_status(ft_pwd(*env_list));
 	else if (ft_strncmp(cmd, "env", ft_strlen("env")) == 0)
-		ft_env(cmd_list, *env_list);
+		exit_status(ft_env(cmd_list, *env_list));
 	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
 		ft_export(cmd_list, env_list);
 	else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
@@ -37,11 +37,12 @@ void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 		ft_unset(cmd_list, env_list);
 }
 
-void	ft_export_error(char *name)
+int	ft_export_error(char *name)
 {
 	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 	ft_putstr_fd(name, STDERR_FILENO);
 	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+	return (1);
 }
 
 void	print_list_declare(t_env **env)

@@ -59,7 +59,7 @@ void	start_loop(t_env *env_list, struct termios *term)
 	{
 		ft_handle_signals();
 		ft_maxsize(env_list, 0);
-		line = readline("-> Minishell ");
+		line = readline("minishell $> ");
 		if (ft_add(line))
 		{
 			free(line);
@@ -87,6 +87,11 @@ int	main(int ac, char **av, char **env)
 
 	if (ac != 1 || av[1])
 		return (write(2, "Error: no arguments needed\n", 27));
+	// if (!isatty(STDIN_FILENO))
+	// {
+	// 	printf("You should run minishell from TTY :\n");
+	// 	exit(1);
+	// }
 	if (!env[0])
 		env = empty_env();
 	set_tty_attrs(&term);

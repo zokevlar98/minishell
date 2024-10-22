@@ -80,7 +80,10 @@ void	ft_unset(t_cmd *cmd, t_env **env)
 
 	i = 1;
 	if (!cmd->args[i] || !(*env))
+	{
+		exit_status(1);
 		return ;
+	}
 	while (cmd->args[i])
 	{
 		if (!check_unset_var(cmd->args[i]))
@@ -90,4 +93,5 @@ void	ft_unset(t_cmd *cmd, t_env **env)
 			remove_env_var(env, var->name);
 		i++;
 	}
+	exit_status(0);
 }

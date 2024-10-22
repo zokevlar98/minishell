@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/22 23:16:23 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,29 @@ int	ft_str_isdigit(char *str)
 	return (1);
 }
 
+int max_index(t_cmd *cmd)
+{
+	while (cmd->next)
+		cmd = cmd->next;
+	return (cmd->pipe_line);
+}
 void	ft_exit(t_cmd *cmd, int flag)
 {
-	long long	exit_status;
+	int 		index;
 
+	index = max_index(cmd);
 	if (size_array(cmd->args) > 2)
 	{
 		if (flag)
 			ft_putstr_fd("exit\n", STDOUT_FILENO);
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
-		return ;//when exit status emplimented, remove this return and replace by exit_status = 1;
+		exit_status(1);
+		return ;//when exit status emplimented, remove this return and replace by status = 1;
 	}
 	else if (!cmd->args[1])
-		exit_status = 0;//i need here
+		exit_status(0); //i need here
 	else if (cmd->args[1] && ft_str_isdigit(cmd->args[1]))
-		exit_status = ft_atoul(cmd->args[1]);
+		exit_status(ft_atoul(cmd->args[1]));
 	if (flag)
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 	if (cmd->args[1] && !ft_str_isdigit(cmd->args[1]))
@@ -88,8 +96,9 @@ void	ft_exit(t_cmd *cmd, int flag)
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(cmd->args[1], STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-		exit_status = 255;
+		exit_status(255);
 	}
-	exit(exit_status);
+	if (!index)
+		exit(exit_status(-1));
 }
 //case exit | exit 

@@ -2,11 +2,21 @@
 ls | exit ======> should not exit
 exit | exit  ======> should not exit                in progress
 -----------------------------------------------------
+-> Minishell cat <"1""2""3""4""5"					\\ exit status
+-> Minishell export HELLO-=123						\\ exit status
+-> Minishell cd 123123								\\ exit status
+-> Minishell exit 42 world							\\ exit status
+-> Minishell grep cat <pipes						\\ bad redirection
+-> ls >./outfiles/outfile01 >./outfiles/outfile02	\\ bad redirection
 
 
 
-
-
-
-
-
+-----------------------------------------------------
+-> Minishell $PWD																							
+minishell: /Users/mohmazou/Desktop/new_minishell/minishell_tester: command not found
+bash: Permission denied																	\\ exit status
+-----------------------------------------------------
+minishell $> ./missing.out
+minishell: ./missing.out: command not found
+bash: ./missing.out: No such file or directory											\\ exit status
+-----------------------------------------------------
