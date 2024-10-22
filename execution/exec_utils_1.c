@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/22 00:46:15 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,12 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 	int	pid;
 
 	pipe(fd);
+	signal(SIGINT, SIG_IGN);
 	pid = fork1();
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		dup2(cmd_list->fd_in, STDIN_FILENO);// Redirects the standard input to the file descriptor fd_in
 		close(fd[0]);
 		if (dup2(fd[1], STDOUT_FILENO) == -1)
@@ -100,9 +103,12 @@ int	process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[])
 	int	pid;
 
 	pipe(fd);
+	signal(SIGINT, SIG_IGN);
 	pid = fork1();
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		dup2(cmd_list->fd_in, STDIN_FILENO);// Redirects the standard input to the file descriptor fd_in
 		close(fd[0]);
 		if (dup2(fd[1], STDOUT_FILENO) == -1)
@@ -132,8 +138,11 @@ int	process_child_end(t_cmd *cmd_list, t_env **env_list)
 	int	pid;
 
 	pid = fork1();
+	signal(SIGINT, SIG_IGN);
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		dup2(cmd_list->fd_in, STDIN_FILENO);// Redirects the standard input to the file descriptor fd_in
 		dup2(cmd_list->fd_out, STDOUT_FILENO);// Redirects the standard output to the file descriptor fd_out
 		ft_execut(cmd_list, *env_list);

@@ -45,7 +45,6 @@ char	*get_del(char *redir)
 	dq = 0;
 	while (redir[i] && ft_isspace(redir[i]))
 		i++;
-	
 	del = ft_malloc(ft_strlen(redir) - i + 1, 0);
 	while (redir[i])
 	{
@@ -53,6 +52,7 @@ char	*get_del(char *redir)
 		if (!sq && !dq && redir[i] == '$' &&
 			(redir[i + 1] == '\'' || redir[i + 1] == '"'))
 			i++;
+		i += del_quote(&sq, &dq, redir[i]);
 		if (redir[i])
 			del[j ++] = redir[i ++];
 	}
@@ -77,6 +77,7 @@ char	*get_buffer(int *s,char *del)
 				*s = -1337;
 			else
 				*s = -42;
+			rl_replace_line("", 0);
 			break ;
 		}
 		if (ft_strcmp(line, del) == 0)
@@ -110,10 +111,9 @@ void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 	char	*file_name;
 	char	**file_tab;
 	char	*buffer;
-	int		expd;
+	// int		expd;
 
 	cmd = 	*new_cmd;
-	expd = 0;
 	file_tab = (char **)ft_malloc(sizeof(char *) * (cp_arr(cmd->redir) + 1), 0);
 (void)env;
 	i = 0;
@@ -124,7 +124,7 @@ void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 		if (to_herdoc(cmd->redir[i]))
 		{
 			del = get_del(cmd->redir[i]);
-			printf("del = %s\n",del);
+			// expd = will_expd(del);
 			buffer = get_buffer(sig_flag,del);
 			file_name = gnrt_name();
 			fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);

@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/22 00:41:10 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,21 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list)
 	dup2(saves[1], STDOUT_FILENO);
 	close_fd(saves, 2);
 	while (waitpid(-1, &status, 0) != -1)
-		;
+	{
+		if (WIFEXITED(status))
+			exit_status(WEXITSTATUS(status));
+		else if (WIFSIGNALED(status))
+		{
+			if (WTERMSIG(status) == 2)
+			{
+				write(1, "\n", 1);
+				exit_status(130);
+			}
+			else if (WTERMSIG(status) == 3)
+			{
+				write(1, "Quit: 3\n", 8);
+				exit_status(131);
+			}
+		}
+	}
 }

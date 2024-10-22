@@ -57,6 +57,7 @@ void	start_loop(t_env *env_list)
 
 	while (1)
 	{
+		ft_handle_signals();
 		ft_maxsize(env_list, 0);
 		line = readline("-> Minishell ");
 		if (ft_add(line))
@@ -67,7 +68,7 @@ void	start_loop(t_env *env_list)
 		ft_parsing(line, &cp_list, env_list);
 		cmd_list = NULL;
 		ft_merge(&cmd_list, cp_list, env_list);
-		// ft_execut_cmd(cmd_list, &env_list);
+		ft_execut_cmd(cmd_list, &env_list);
 		free(line);
 	}
 }
@@ -81,8 +82,8 @@ int	main(int ac, char **av, char **env)
 	if (!env[0])
 		env = empty_env();
 	env_list = NULL;
-	ft_handle_signals();
 	ft_env_list(&env_list, env, 0);
+	rl_catch_signals = 0;
 	shell_lvl(env_list);
 	start_loop(env_list);
 	ft_malloc(0, 1);
