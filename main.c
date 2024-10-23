@@ -16,7 +16,7 @@ int	ft_add(char *line)
 	if (!line)
 	{
 		printf("exit\n");
-		exit(0);
+		exit(exit_status(-1));
 	}
 	if (line[0] == '\0' || all_space(line))
 		return (1);
@@ -70,15 +70,10 @@ void	start_loop(t_env *env_list, struct termios *term)
 		ft_merge(&cmd_list, cp_list, env_list);
 		ft_execut_cmd(cmd_list, &env_list);
 		free(line);
-		tcsetattr(STDIN_FILENO, TCSANOW, term);
+		// tcsetattr(STDIN_FILENO, TCSANOW, term);
 	}
 }
 
-void set_tty_attrs(struct termios *term)
-{
-
-	tcgetattr(STDIN_FILENO, term);
-}
 
 int	main(int ac, char **av, char **env)
 {
@@ -87,14 +82,14 @@ int	main(int ac, char **av, char **env)
 
 	if (ac != 1 || av[1])
 		return (write(2, "Error: no arguments needed\n", 27));
-	// if (!isatty(STDIN_FILENO))
-	// {
-	// 	printf("You should run minishell from TTY :\n");
-	// 	exit(1);
-	// }
+	if (!isatty(STDIN_FILENO))
+	{
+		printf("You should run minishell from TTY :\n");
+		exit(1);
+	}
 	if (!env[0])
 		env = empty_env();
-	set_tty_attrs(&term);
+	tcgetattr(STDIN_FILENO, &term);
 	env_list = NULL;
 	ft_env_list(&env_list, env, 0);
 	rl_catch_signals = 0;

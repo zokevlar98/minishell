@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/22 23:16:23 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/23 01:36:01 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_exit(t_cmd *cmd, int flag)
 		exit_status(0); //i need here
 	else if (cmd->args[1] && ft_str_isdigit(cmd->args[1]))
 		exit_status(ft_atoul(cmd->args[1]));
-	if (flag)
+	if (flag && !index)
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 	if (cmd->args[1] && !ft_str_isdigit(cmd->args[1]))
 	{
