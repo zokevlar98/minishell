@@ -60,11 +60,16 @@ char	*get_del(char *redir)
 	return (del);
 }
 
-char	*get_buffer(int *s,char *del)
+char	*get_buffer(int *s, char *red, int pipe_line, t_env *env)
 {
 	char	*line;
 	char	*buffer;
-	int fd_dup;
+	char	*del;
+	int		fd_dup;
+	int		expd;
+
+	del = get_del(red);
+	expd = will_expd(red);
 	buffer = NULL;
 	fd_dup = dup(0);
 	while (1)
@@ -90,6 +95,8 @@ char	*get_buffer(int *s,char *del)
 		free(line);
 	}
 	dup2(fd_dup, 0);
+	if (expd)
+		return (expended_buffer(buffer, env, pipe_line));
 	return (buffer);
 }
 
@@ -102,12 +109,22 @@ void	unlik_herdoc(char **redir)
 			unlink(redir[i++]);
 }
 
+int	will_expd(char *del)
+{
+	while (*del)
+	{
+		if (*del == '\'' || *del == '\"')
+			return (0);
+		del ++;
+	}
+	return (1);
+}
+
 void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 {
 	t_p_cmd	*cmd;
 	int		i;
 	int		fd;
-	char	*del;
 	char	*file_name;
 	char	**file_tab;
 	char	*buffer;
@@ -123,13 +140,11 @@ void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 	{
 		if (to_herdoc(cmd->redir[i]))
 		{
-			del = get_del(cmd->redir[i]);
-			// expd = will_expd(del);
-			buffer = get_buffer(sig_flag,del);
 			file_name = gnrt_name();
+			buffer = get_buffer(sig_flag, cmd->redir[i], cmd->pipe_line, env);
 			fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			file_tab[i] = file_name;
-			write(fd, buffer, ft_strlen(buffer));
+			write(1, buffer, ft_strlen(buffer));
 			close(fd);
 			cmd->redir[i] = ft_strjoin("<<",file_name);
 		}

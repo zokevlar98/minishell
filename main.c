@@ -70,7 +70,7 @@ void	start_loop(t_env *env_list, struct termios *term)
 		ft_merge(&cmd_list, cp_list, env_list);
 		ft_execut_cmd(cmd_list, &env_list);
 		free(line);
-		// tcsetattr(STDIN_FILENO, TCSANOW, term);
+		tcsetattr(STDIN_FILENO, TCSANOW, term);
 	}
 }
 

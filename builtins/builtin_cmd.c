@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/22 23:29:14 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:47:09 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 		return ;
 	dup2(cmd_list->fd_in , STDIN_FILENO);
 	dup2(cmd_list->fd_out , STDOUT_FILENO);
+	if (cmd_list->fd_in != 0)
+		close(cmd_list->fd_in);
+	if (cmd_list->fd_out != 1)
+		close(cmd_list->fd_out);
 	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
 		exit_status(ft_echo(cmd_list));
 	else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)

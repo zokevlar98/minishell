@@ -137,6 +137,7 @@ int		new_len(char *line, t_env *env);
 void	*allocat_zero(size_t size);
 int		ft_cnt_red(char *line, char c);
 void	join_exit(char *new_line, int pipe_line, int *j, int *i);
+void	join_val(t_env *env, char *line, char *new_line, int *j);
 void	get_line(char *line, t_p_cmd *cp_list, t_env *env_list);
 char	*get_redir(char *line, int i);
 void	in_qote(int *sq, int *dq, char c);
@@ -159,6 +160,8 @@ void	herdoc_hundeler(t_p_cmd **cmd,t_env *env, int *sig_flag);
 void	ft_sig_herdoc(int sig);
 int		to_expand(char *line);
 int		cp_arr(char **in_redir);
+int		will_expd(char *del);
+char	*expended_buffer(char *buffer, t_env *env, int pipe_line);
 
 
 // env_utils_1.c

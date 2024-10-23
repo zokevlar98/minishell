@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/22 00:41:10 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:48:57 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,19 @@ void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list)
 	int		fd[2];
 
 	tmp = cmd_list;
-	saves[0] = dup(STDIN_FILENO);
-	saves[1] = dup(STDOUT_FILENO);
+	saves[0] = dup(STDIN_FILENO); 
+	saves[1] = dup(STDOUT_FILENO); 
 	while (tmp)
 	{
 		if (tmp->fd_in == -1 || tmp->fd_out == -1)
-			return ;
+		{
+			if (tmp->fd_in > 0)
+				close(tmp->fd_in);
+			if (tmp->fd_out > 1)
+				close(tmp->fd_out);
+			tmp = tmp->next;
+			continue;
+		}
 		if (tmp->next == NULL)
 		{
 			if (is_builtin(tmp))
