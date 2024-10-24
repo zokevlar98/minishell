@@ -88,7 +88,7 @@ void	close_tab(int *fd_tab, int size, int in, int out)
 	i = 0;
 	while (i < size)
 	{
-		if (i != in && i != out)
+		if (fd_tab[i] != in && fd_tab[i] != out)
 			close(fd_tab[i]);
 		i++;
 	}
