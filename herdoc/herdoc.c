@@ -65,13 +65,13 @@ char	*get_buffer(int *s, char *red, int pipe_line, t_env *env)
 	char	*line;
 	char	*buffer;
 	char	*del;
-	// int		fd_dup;
+	int		fd_dup;
 	int		expd;
 
 	del = get_del(red);
 	expd = will_expd(red);
 	buffer = NULL;
-	// fd_dup = dup(STDIN_FILENO);
+	fd_dup = dup(STDIN_FILENO);
 	while (1)
 	{
 		signal(SIGINT, ft_sig_herdoc);
@@ -94,8 +94,8 @@ char	*get_buffer(int *s, char *red, int pipe_line, t_env *env)
 		buffer = ft_strjoin(buffer, "\n");
 		free(line);
 	}
-	// dup2(fd_dup, STDIN_FILENO);
-	// close(fd_dup);
+	dup2(fd_dup, STDIN_FILENO);
+	close(fd_dup);
 	if (expd)
 		return (expended_buffer(buffer, env, pipe_line));
 	return (buffer);
@@ -129,7 +129,6 @@ void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 	char	*file_name;
 	char	**file_tab;
 	char	*buffer;
-	// int		expd;
 
 	cmd = 	*new_cmd;
 	file_tab = (char **)ft_malloc(sizeof(char *) * (cp_arr(cmd->redir) + 1), 0);
