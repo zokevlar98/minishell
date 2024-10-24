@@ -13,7 +13,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define MAX_TOKENS 100
 // # define malloc(x) NULL
 
 # include <stdio.h>

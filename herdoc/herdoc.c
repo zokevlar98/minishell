@@ -65,13 +65,13 @@ char	*get_buffer(int *s, char *red, int pipe_line, t_env *env)
 	char	*line;
 	char	*buffer;
 	char	*del;
-	int		fd_dup;
+	// int		fd_dup;
 	int		expd;
 
 	del = get_del(red);
 	expd = will_expd(red);
 	buffer = NULL;
-	fd_dup = dup(0);
+	// fd_dup = dup(STDIN_FILENO);
 	while (1)
 	{
 		signal(SIGINT, ft_sig_herdoc);
@@ -94,8 +94,8 @@ char	*get_buffer(int *s, char *red, int pipe_line, t_env *env)
 		buffer = ft_strjoin(buffer, "\n");
 		free(line);
 	}
-	dup2(fd_dup, 0);
-	close(fd_dup);
+	// dup2(fd_dup, STDIN_FILENO);
+	// close(fd_dup);
 	if (expd)
 		return (expended_buffer(buffer, env, pipe_line));
 	return (buffer);

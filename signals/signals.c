@@ -16,7 +16,7 @@ void	int_handel(int sig)
 void ft_sig_herdoc(int sig)
 {
 	(void)sig;
-	close(0);
+	close(STDIN_FILENO);
 	exit_status(-1337);
 	g_sig = 0;
 }
