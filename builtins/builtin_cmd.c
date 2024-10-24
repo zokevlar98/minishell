@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/23 19:47:09 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/24 23:40:53 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
 		ft_export(cmd_list, env_list);
 	else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
-		ft_exit(cmd_list, 1);
+		ft_exit(cmd_list);
 	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
 		ft_unset(cmd_list, env_list);
 }

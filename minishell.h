@@ -180,7 +180,7 @@ int		count_env(t_env *env);
 char	**sort_env(t_env *env, int n);
 
 //execution
-void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list);
+void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list, int fd_in, int fd_out);
 void	ft_execut(t_cmd *cmd_list, t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
 int		fork1(void);
@@ -201,7 +201,7 @@ void	ft_cd(t_cmd *cmd_list, t_env *env_list);
 int		ft_pwd(t_env *env);
 void	ft_export(t_cmd *cmd, t_env **env);
 int		ft_env(t_cmd *cmd, t_env *env);
-void	ft_exit(t_cmd *cmd, int flag);
+void	ft_exit(t_cmd *cmd);
 void	ft_unset(t_cmd *cmd, t_env **env);
 void	shell_lvl(t_env *env);
 
@@ -213,6 +213,6 @@ void	affiche_env(t_env *env);
 t_cmd	*ft_lstnew_cmd(char *cmd);
 void	ft_lstadd_back_cmd(t_cmd **cmd_list, t_cmd *new);
 void	ff(void);
-void	close_fd(int *fd_tab, int size);
+void	close_fd(int fd_in, int fd_out);
 
 #endif

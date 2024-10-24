@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:50:43 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/23 01:51:39 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/25 00:12:10 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	cd_error(char *path, int flag)
 		ft_putstr_fd(path, STDERR_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 	}
+	exit_status(1);
 }
 
 void	ft_cd(t_cmd *cmd, t_env *env)
@@ -60,25 +61,17 @@ void	ft_cd(t_cmd *cmd, t_env *env)
 			ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
 			exit_status(1);
 		}
-		else
-			exit_status(0);
+		exit_status(0);
 	}
 	else if (!ft_strcmp(cmd->args[1], ".") || !ft_strcmp(cmd->args[1], ".."))
 	{
 		path = getcwd(NULL, 0);
 		if (chdir((const char *)cmd->args[1]) == -1 || !path)
-		{
 			cd_error(cmd->args[1], 0);
-			exit_status(1);
-		}
-		else
-			exit_status(0);
+		exit_status(0);
 	}
 	else if (chdir((const char *)cmd->args[1]) == -1)
-	{
 		cd_error(cmd->args[1], 1);
-		exit_status(1);
-	}
 	path = getcwd(NULL, 0);
 	if (!path)
 		cd_error(NULL, 0);
