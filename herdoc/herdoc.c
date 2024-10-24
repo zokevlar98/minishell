@@ -95,6 +95,7 @@ char	*get_buffer(int *s, char *red, int pipe_line, t_env *env)
 		free(line);
 	}
 	dup2(fd_dup, 0);
+	close(fd_dup);
 	if (expd)
 		return (expended_buffer(buffer, env, pipe_line));
 	return (buffer);
@@ -144,7 +145,7 @@ void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 			buffer = get_buffer(sig_flag, cmd->redir[i], cmd->pipe_line, env);
 			fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			file_tab[i] = file_name;
-			write(1, buffer, ft_strlen(buffer));
+			write(fd, buffer, ft_strlen(buffer));
 			close(fd);
 			cmd->redir[i] = ft_strjoin("<<",file_name);
 		}

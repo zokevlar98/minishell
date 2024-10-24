@@ -17,8 +17,8 @@ void ft_sig_herdoc(int sig)
 {
 	(void)sig;
 	close(0);
-	write(1, "\n", 1);
 	exit_status(-1337);
+	g_sig = 0;
 }
 void	ft_handle_signals(void)
 {

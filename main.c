@@ -23,7 +23,6 @@ int	ft_add(char *line)
 	if (!ft_check_syntax(line))
 	{
 		printf("syntax error\n");
-		add_history(line);
 		return (1);
 	}
 	add_history(line);
@@ -55,8 +54,10 @@ void	start_loop(t_env *env_list, struct termios *term)
 	t_p_cmd	*cp_list;
 	t_cmd	*cmd_list;
 	(void)term;
+	line = NULL;
 	while (1)
 	{
+		g_sig = 1;
 		ft_handle_signals();
 		ft_maxsize(env_list, 0);
 		line = readline("minishell $> ");
@@ -70,7 +71,8 @@ void	start_loop(t_env *env_list, struct termios *term)
 		ft_merge(&cmd_list, cp_list, env_list);
 		ft_execut_cmd(cmd_list, &env_list);
 		free(line);
-		tcsetattr(STDIN_FILENO, TCSANOW, term);
+		if (g_sig)
+			tcsetattr(STDIN_FILENO, TCSANOW, term);
 	}
 }
 
@@ -92,8 +94,8 @@ int	main(int ac, char **av, char **env)
 	tcgetattr(STDIN_FILENO, &term);
 	env_list = NULL;
 	ft_env_list(&env_list, env, 0);
-	rl_catch_signals = 0;
 	shell_lvl(env_list);
+	rl_catch_signals = 0;
 	start_loop(env_list, &term);
 	ft_malloc(0, 1);
 	return (0);

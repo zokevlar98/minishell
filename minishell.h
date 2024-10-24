@@ -31,6 +31,8 @@
 # include <fcntl.h>
 # include <termios.h>
 
+int		g_sig ;
+
 
 //define
 # define NUM_BUILTINS 8
