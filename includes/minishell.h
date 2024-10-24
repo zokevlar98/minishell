@@ -188,7 +188,8 @@ char	*check_path(char **path_s, char *cmd);
 
 //builtins
 int     is_builtin(t_cmd *cmd_list);
-void	ft_builtin(t_cmd *cmd_list, t_env **env_list, int exit_flag);
+// void	ft_builtin(t_cmd *cmd_list, t_env **env_list, int exit_flag);
+void	ft_builtin(t_cmd *cmd_list, t_env **env_list);
 void	ft_export_error(char *name);
 void	print_list_declare(t_env **env);
 char	*check_name_env(char *name);
