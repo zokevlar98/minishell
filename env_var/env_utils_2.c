@@ -7,7 +7,8 @@ char    **empty_env(void)
     char    *str;
 
     str = getcwd(NULL, 0);
-    env = (char **)ft_malloc(sizeof(char *) * 4, 0);
+    // env = (char **)ft_malloc(sizeof(char *) * 4, 0);
+    env = (char **)malloc(sizeof(char *) * 4);
     env[0] = ft_strjoin("PWD=", str);
     env[1] = ft_strdup("SHLVL=0");
     env[2] = ft_strdup("_=/usr/bin/env");
@@ -22,8 +23,8 @@ t_env	*ft_env_new_(char *key, char *value)
 	new = (t_env *)malloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
-	new->name = ft_strdup(key);
-    new->value = ft_strdup(value);
+	new->name = ft_strdup_(key);
+    new->value = ft_strdup_(value);
 	new->next = NULL;
 	return (new);
 }
@@ -39,13 +40,13 @@ t_env	*ft_env_new(char *env)
 	equal = ft_strchr(env, '=');
     if (!equal)
     {
-        new->name = ft_strdup(env);
+        new->name = ft_strdup_(env);
         new->value = NULL;
     }
     else
     {  
-	    new->name = ft_substr(env, 0, equal - env);
-	    new->value = ft_strdup(equal + 1);
+	    new->name = ft_substr_(env, 0, equal - env);
+	    new->value = ft_strdup_(equal + 1);
     }
 	new->next = NULL;
 	return (new);

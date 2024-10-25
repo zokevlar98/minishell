@@ -97,6 +97,7 @@ int	main(int ac, char **av, char **env)
 	shell_lvl(env_list);
 	rl_catch_signals = 0;
 	start_loop(env_list, &term);
+	ft_lst_clear_env(&env_list);
 	ft_malloc(0, 1);
 	return (0);
 }

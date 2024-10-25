@@ -39,6 +39,7 @@ SRCS			=	main.c								\
 					env_var/env_utils_1.c				\
 					env_var/env_utils_2.c				\
 					env_var/env_utils_3.c				\
+					env_var/env_utils_4.c				\
 					execution/test/outils_test.c		\
 					builtins/builtin_cmd.c				\
 					builtins/builtin_utils.c			\

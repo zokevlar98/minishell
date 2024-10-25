@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 02:44:27 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/25 03:36:56 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	print_list_declare(t_env **env)
 			printf("declare -x %s\n", current_env->name);
 		current_env = current_env->next;
 	}
-	//free env linkedlist
+	ft_lst_clear_env(&current_env);
 }
 
 char	*check_name_env(char *name)
