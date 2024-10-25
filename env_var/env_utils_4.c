@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 03:07:19 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 03:38:28 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/25 23:39:16 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ char	*ft_strdup_(const char *s)
 	if (!s)
 		return (NULL);
 	i = -1;
-	// dup = (char *)ft_malloc(sizeof(char) * (ft_strlen(s) + 1), 0);
     dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
     if (!dup)
         return (NULL);
@@ -38,9 +37,8 @@ char	*ft_substr_(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s))
-		return (ft_strdup("\0"));
+		return (ft_strdup_("\0"));
 	i = 0;
-	// sub = (char *)ft_malloc(sizeof(char) * (len + 1), 0);
     sub = (char *)malloc(sizeof(char) * (len + 1));
     if (!sub)
         return (NULL);
@@ -51,6 +49,36 @@ char	*ft_substr_(char const *s, unsigned int start, size_t len)
 	}
 	sub[i] = '\0';
 	return (sub);
+}
+
+char	*ft_strjoin_(char *s1, char *s2)
+{
+	size_t	i;
+	size_t	j;
+	char	*dest;
+	size_t	size;
+
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1)
+		return (ft_strdup_(s2));
+	if (!s2)
+		return (ft_strdup_(s1));
+	i = 0;
+	j = 0;
+	size = ft_strlen(s1) + ft_strlen(s2);
+	dest = (char *)malloc(sizeof(char) * (size + 1));
+	if (!dest)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+		dest[i++] = s2[j++];
+	dest[i] = '\0';
+	return (dest);
 }
 
 void    ft_lst_clear_env(t_env **env)

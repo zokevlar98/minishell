@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 03:36:56 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/25 23:19:01 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	print_list_declare(t_env **env)
 	char	**envp;
 
 	current_env = NULL;
-	tmp = *env;
-	envp = sort_env(tmp, count_env(tmp));
+	envp = sort_env(*env, count_env(*env));
 	ft_env_list(&current_env, envp, 1);
+	tmp = current_env;
 	ft_free(envp);
 	while (current_env)
 	{
@@ -72,7 +72,7 @@ void	print_list_declare(t_env **env)
 			printf("declare -x %s\n", current_env->name);
 		current_env = current_env->next;
 	}
-	ft_lst_clear_env(&current_env);
+	ft_lst_clear_env(&tmp);
 }
 
 char	*check_name_env(char *name)
@@ -83,7 +83,7 @@ char	*check_name_env(char *name)
 	while (name[i])
 	{
 		if (name[i] == '+')
-			return (ft_substr(name, 0, i));
+			return (ft_substr_(name, 0, i));
 		i++;
 	}
 	return (name);

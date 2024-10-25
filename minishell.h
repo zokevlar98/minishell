@@ -219,4 +219,5 @@ void	close_fd(int fd_in, int fd_out);
 //env_utils_4.c
 char	*ft_strdup_(const char *s);
 char	*ft_substr_(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin_(char *s1, char *s2);
 #endif
