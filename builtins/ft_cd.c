@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:50:43 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 00:12:10 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/25 02:20:02 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	ft_cd(t_cmd *cmd, t_env *env)
 	char	*old_pwd;
 
 	old_pwd = getcwd(NULL, 0);
-	if (!old_pwd)
-		cd_error(NULL, 0);
 	if (!cmd->args[1])
 	{
 		path = get_home(env);
@@ -66,8 +64,7 @@ void	ft_cd(t_cmd *cmd, t_env *env)
 	else if (!ft_strcmp(cmd->args[1], ".") || !ft_strcmp(cmd->args[1], ".."))
 	{
 		path = getcwd(NULL, 0);
-		if (chdir((const char *)cmd->args[1]) == -1 || !path)
-			cd_error(cmd->args[1], 0);
+		chdir((const char *)cmd->args[1]);
 		exit_status(0);
 	}
 	else if (chdir((const char *)cmd->args[1]) == -1)
