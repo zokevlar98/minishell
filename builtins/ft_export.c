@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/22 23:31:26 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/25 02:22:34 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	add_var_env(char *var, t_env **env)
 void	ft_export(t_cmd *cmd, t_env **env)
 {
 	int	i;
-	int	status;
+	int	status;//leaks
 
 	i = 1;
 	status = 0;
