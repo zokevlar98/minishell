@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:50:43 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 02:20:02 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/25 02:21:48 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,6 @@ void	ft_cd(t_cmd *cmd, t_env *env)
 		cd_error(NULL, 0);
 	ft_change_env(env, "OLDPWD", old_pwd);
 	ft_change_env(env, "PWD", path);
+	free(old_pwd);
+	free(path);
 }

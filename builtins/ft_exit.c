@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/24 23:54:49 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/25 02:23:46 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int max_index(t_cmd *cmd)
 void	ft_exit(t_cmd *cmd)
 {
 	int 		index;
-
+	//if numbers to big message error and exit 255!
 	index = max_index(cmd);
 	if (size_array(cmd->args) > 2 && ft_str_isdigit(cmd->args[1]))
 	{
