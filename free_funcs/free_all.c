@@ -33,7 +33,7 @@ void	*ft_malloc(size_t size, int free)
 	ptr = malloc(size);
 	if (!ptr)
 	{
-		printf("xmalloc: cannot allocate memory\n");
+		ft_putstr_fd("xmalloc: cannot allocate memory\n", STDERR_FILENO);
 		exit(1);
 	}
 	ptrs_list[i++] = ptr;

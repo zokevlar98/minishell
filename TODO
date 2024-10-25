@@ -1,22 +1,32 @@
+echo "$" \\ output: $
+----------------------------------------
+cat <missing | cat 
+----------------------------------------
+cat <missing | cat \\Pipes probleme
+----------------------------------------
+Test 133: ❌ $PWD 
+mini exit code = 127
+bash exit code = 126
+mini error = ( command not found)
+bash error = ( is a directory)
+----------------------------------------
 
-minishell $> ./missing.out
-minishell: ./missing.out: command not found
-bash: ./missing.out: No such file or directory											\\ exit status
------------------------------------------------------
-minishell $> $PWD
-minishell: /Users/mohmazou/Desktop/new_minishell: command not found
-minishell $> echo $?
-127
+----------------------------------------
 
-bash-3.2$ $PWD
-bash: /Users/mohmazou/Desktop/new_minishell: is a directory
-bash-3.2$ echo $?
-126
------------------------------------------------------
-cat <missing | cat
+----------------------------------------
 
------------------------------------------------------
-bash-3.2$ cat <missing | echo oi 
-bash: missing: No such file or directory
-oi
------------------------------------------------------
+----------------------------------------
+
+----------------------------------------
+
+----------------------------------------
+
+----------------------------------------
+
+----------------------------------------
+
+----------------------------------------
+
+----------------------------------------
+
+----------------------------------------

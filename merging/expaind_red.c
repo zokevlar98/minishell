@@ -8,7 +8,9 @@ char	*expd_rd(char *f_name, t_env *env, int pipe_line)
 	new_name = expd_line(f_name, env, pipe_line);
 	if (cnt_split(new_name, ' ', 0) != 1)
 	{
-		printf("minishell: %s: ambiguous redirect\n", new_name);
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(new_name, STDERR_FILENO);
+		ft_putstr_fd(": ambiguous redirect\n", STDERR_FILENO);
 		return (NULL);
 	}
 	return (new_name);
@@ -23,15 +25,11 @@ char	*get_f_name(char *f_name, t_env *env, int pipe_line)
 		new_name = expd_rd(new_name, env, pipe_line);
 	if (!new_name)
 		return (NULL);
-	// if (ft_strcmp(f_name, "\"\"") == 0)
-	// {
-	// 	printf("minishell: %s: No such file or directory\n", f_name);
-	// 	return (NULL);
-	// }
 	if (!ft_strcmp(rm_qot(new_name, 0, 0), "\0"))
 	{
-		printf("minishell: %s: No such file or directory\n",
-			rm_qot(new_name, 0, 0));
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(rm_qot(new_name, 0, 0), STDERR_FILENO);
+		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		return (NULL);
 	}
 	return (rm_qot(new_name, 0, 0));

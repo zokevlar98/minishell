@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 01:52:10 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/25 18:40:34 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ void	ft_execut(t_cmd *cmd_list,t_env *env_list)
 
 	envp = ft_get_envp(env_list);
 	if (!envp)
-		printf("minishell: %s: No such file or directory\n", cmd_list->args[0]);//make with ft_putstr_fd
+	{
+		ft_putstr_fd("minishell: \n", STDERR_FILENO);
+		ft_putstr_fd(cmd_list->args[0], STDERR_FILENO);
+		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+	}
 	path = find_path_env(cmd_list->args[0], envp);
 	if (!path)
 		ft_execution_error(cmd_list->args[0]);

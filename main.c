@@ -15,14 +15,14 @@ int	ft_add(char *line)
 {
 	if (!line)
 	{
-		printf("exit\n");
+		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		exit(exit_status(-1));
 	}
 	if (line[0] == '\0' || all_space(line))
 		return (1);
 	if (!ft_check_syntax(line))
 	{
-		printf("syntax error\n");
+		ft_putstr_fd("syntax error\n", STDERR_FILENO);
 		return (1);
 	}
 	add_history(line);
@@ -84,11 +84,11 @@ int	main(int ac, char **av, char **env)
 
 	if (ac != 1 || av[1])
 		return (write(2, "Error: no arguments needed\n", 27));
-	if (!isatty(STDIN_FILENO))
-	{
-		printf("You should run minishell from TTY :\n");
-		exit(1);
-	}
+	// if (!isatty(STDIN_FILENO))
+	// {
+	// 	printf("You should run minishell from TTY :\n");
+	// 	exit(1);
+	// }
 	if (!env[0])
 		env = empty_env();
 	tcgetattr(STDIN_FILENO, &term);

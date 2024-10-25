@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 09:10:19 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/22 23:00:14 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/25 19:23:25 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	ft_env(t_cmd *cmd, t_env *env)
 	}
 	else
 	{
-		ft_putstr_fd("env: '", STDOUT_FILENO);
-		ft_putstr_fd(cmd->args[1], STDOUT_FILENO);
-		ft_putstr_fd("': No such file or directory\n", STDOUT_FILENO);
+		ft_putstr_fd("env: '", STDERR_FILENO);
+		ft_putstr_fd(cmd->args[1], STDERR_FILENO);
+		ft_putstr_fd("': No such file or directory\n", STDERR_FILENO);
 		return (127);
 	}
 }
