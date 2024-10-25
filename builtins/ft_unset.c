@@ -1,11 +1,12 @@
 
 #include "../minishell.h"
 
-void    ft_unset_error(char *name)
+int    ft_unset_error(char *name)
 {
 	ft_putstr_fd("minishell: unset: `", 2);
 	ft_putstr_fd(name, 2);
 	ft_putstr_fd("': not a valid identifier\n", 2);
+	return 1;
 }
 
 int check_unset_var(char *name)
@@ -76,22 +77,23 @@ void	remove_env_var(t_env **env, char *name)
 void	ft_unset(t_cmd *cmd, t_env **env)
 {
 	int		i;
+	int		flag;
 	t_env	*var;
 
 	i = 1;
+	flag = 0;
 	if (!cmd->args[i] || !(*env))
 	{
-		exit_status(1);
 		return ;
 	}
 	while (cmd->args[i])
 	{
 		if (!check_unset_var(cmd->args[i]))
-			ft_unset_error(cmd->args[i]);
+			flag = ft_unset_error(cmd->args[i]);
 		var = find_env(*env, cmd->args[i]);
 		if (var)
 			remove_env_var(env, var->name);
 		i++;
 	}
-	exit_status(0);
+	exit_status(flag);
 }

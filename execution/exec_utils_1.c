@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/24 23:05:32 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/25 01:52:10 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 	{
 		close(fd[1]);
 		if (dup2(fd[0], STDIN_FILENO) == -1)
-			ft_error("dup2 failed");
+			ft_error("dup2 failed\n");
 		close(fd[0]);
 	}
 	return (pid);

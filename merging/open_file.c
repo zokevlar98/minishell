@@ -53,6 +53,7 @@ void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out,t_env *env)
 		{
 			*fd_in = -1;
 			*fd_out = -1;
+			exit_status(1);
 			break ;
 		}
 		if (redir[u->i][0] == '>')
@@ -64,7 +65,10 @@ void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out,t_env *env)
 			*fd_out = u->fd;
 			u->fds_tab[u->i] = u->fd;
 			if (u->fd == -1)
+			{
+				exit_status(1);
 				break ;
+			}
 		}
 		if (redir[u->i][0] == '<')
 		{
@@ -78,6 +82,7 @@ void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out,t_env *env)
 			if (u->fd == -1)
 			{
 				printf("minishell:%s: No such file or directory\n", u->f_name);
+				exit_status(1);
 				break ;
 			}
 		}
