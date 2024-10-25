@@ -178,6 +178,7 @@ t_env	*find_env(t_env *env, char *name);
 char	**ft_get_envp(t_env *env_list);
 int		count_env(t_env *env);
 char	**sort_env(t_env *env, int n);
+void    ft_lst_clear_env(t_env **env);
 
 //execution
 void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list, int fd_in, int fd_out);
@@ -215,4 +216,7 @@ void	ft_lstadd_back_cmd(t_cmd **cmd_list, t_cmd *new);
 void	ff(void);
 void	close_fd(int fd_in, int fd_out);
 
+//env_utils_4.c
+char	*ft_strdup_(const char *s);
+char	*ft_substr_(char const *s, unsigned int start, size_t len);
 #endif
