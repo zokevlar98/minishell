@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:35 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 01:57:20 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/25 02:42:59 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int	ft_echo(t_cmd *cmd)
 
 	while (cmd->args[i])
 	{
-		printf("%s", cmd->args[i ++]);
+		ft_putstr_fd(cmd->args[i ++], cmd->fd_out);
 		if (cmd->args[i])
-			printf(" ");
+			ft_putstr_fd(" ", cmd->fd_out);
 	}
 	if (!n_flag)
-		printf("\n");
+		ft_putstr_fd("\n", cmd->fd_out);
 	return (0);
 }

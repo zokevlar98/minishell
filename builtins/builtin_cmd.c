@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 01:45:09 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/25 02:44:27 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@ void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 		return ;
 	dup2(cmd_list->fd_in , STDIN_FILENO);
 	dup2(cmd_list->fd_out , STDOUT_FILENO);
-	if (cmd_list->fd_in != 0)
-		close(cmd_list->fd_in);
-	if (cmd_list->fd_out != 1)
-		close(cmd_list->fd_out);
 	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
 		exit_status(ft_echo(cmd_list));
 	else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
@@ -35,11 +31,13 @@ void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
 		exit_status(ft_env(cmd_list, *env_list));
 	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
 		ft_export(cmd_list, env_list);
-	else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
-		ft_exit(cmd_list);
+	else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0 && ft_lstsize(cmd_list) == 1)
+		ft_exit(cmd_list); //, exit_flag
+	else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0 && ft_lstsize(cmd_list) > 1)
+		return;
 	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
 		ft_unset(cmd_list, env_list);
-	
+	close_fd(cmd_list->fd_in, cmd_list->fd_out);
 }
 
 int	ft_export_error(char *name)
