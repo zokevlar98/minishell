@@ -11,14 +11,6 @@ cat <missing | cat
 ----------------------------------------
 cat <missing | cat \\Pipes probleme
 ----------------------------------------
-Test 133: ❌ $PWD 
-mini exit code = 127
-bash exit code = 126
-mini error = ( command not found)
-bash error = ( is a directory)
-----------------------------------------
-fd leaks in redirections
-----------------------------------------
 
 ----------------------------------------
 
