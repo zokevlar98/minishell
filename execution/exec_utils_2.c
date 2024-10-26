@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:57:41 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/26 09:26:09 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,10 @@ char	**ft_get_envp(t_env *env_list)
 	}
 	envp[i] = NULL;
 	return (envp);
+}
+
+void	ft_cloe_file(int fd)
+{
+	if (fd > 2)
+		close(fd);	
 }

@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 23:57:01 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/26 08:46:44 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	update_var(t_env **env, char *name, char *value, int flag)
 	if (!var)
 	{
 		var = ft_env_new_(name, value);
-		// printf("hahhahaha: %p\n", var);
 		ft_env_add_back(env, var);
 		return ;
 	}
@@ -86,7 +85,6 @@ void	add_var_env(char *var, t_env **env)
 		return ;
 	tmp = ft_substr_(var, 0, size_name);
 	name = check_name_env(tmp);
-	free(tmp);
 	size_value = size_name;
 	while (var[size_name] == '=' && var[size_value])
 		size_value++;
@@ -94,13 +92,13 @@ void	add_var_env(char *var, t_env **env)
 	if (ft_strlen(value) == 0)
 		value = NULL;
 	if (!check_empty_value(var))
+	{
 		value = "";
+	}
 	if (check_env_var(var, 1) == -1)
 		update_var(env, name, value, 1);//append
 	else
 		update_var(env, name, value, 0);//update
-	free(name);
-	free(value);
 }
 
 void	ft_export(t_cmd *cmd, t_env **env)

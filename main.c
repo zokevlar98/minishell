@@ -78,8 +78,14 @@ void	start_loop(t_env *env_list, struct termios *term)
 }
 
 
+void f()
+{
+	system("leaks minishell");
+}
+
 int	main(int ac, char **av, char **env)
 {
+	//atexit(f);
 	struct termios	term;
 	t_env	*env_list;
 
@@ -99,6 +105,7 @@ int	main(int ac, char **av, char **env)
 	rl_catch_signals = 0;
 	start_loop(env_list, &term);
 	ft_lst_clear_env(&env_list);
+	gb_malloc(0, 1);
 	ft_malloc(0, 1);
 	return (0);
 }

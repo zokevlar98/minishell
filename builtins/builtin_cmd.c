@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/26 01:58:19 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/26 08:36:13 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,23 @@ void	print_list_declare(t_env **env)
 
 char	*check_name_env(char *name)
 {
+	char	*new_name;
+	char	*tmp;
 	int	i;
 
 	i = 0;
 	while (name[i])
 	{
 		if (name[i] == '+')
-			return (ft_substr_(name, 0, i));
+		{
+			tmp = ft_substr_(name, 0, i);
+			new_name = ft_strdup_(tmp);
+			free(tmp);
+			return (new_name);
+		}
 		i++;
 	}
-	return (name);
+	return (ft_strdup_(name));
 }
 
 int	check_empty_value(char *var)

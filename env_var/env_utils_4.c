@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 03:07:19 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 23:39:16 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/26 09:14:21 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup_(const char *s)
 	if (!s)
 		return (NULL);
 	i = -1;
-    dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+    dup = (char *)gb_malloc(sizeof(char) * (ft_strlen(s) + 1), 0);
     if (!dup)
         return (NULL);
 	while (s[++i])
@@ -31,25 +31,50 @@ char	*ft_strdup_(const char *s)
 
 char	*ft_substr_(char const *s, unsigned int start, size_t len)
 {
-	char	*sub;
+	char	*ptr;
+	char	*dest;
 	size_t	i;
+	size_t	size;
 
 	if (!s)
 		return (NULL);
-	if (start > ft_strlen(s))
-		return (ft_strdup_("\0"));
+	ptr = (char *)s;
+	size = ft_strlen(s);
 	i = 0;
-    sub = (char *)malloc(sizeof(char) * (len + 1));
-    if (!sub)
-        return (NULL);
-	while (i < len && s[start + i])
-	{
-		sub[i] = s[start + i];
-		i++;
-	}
-	sub[i] = '\0';
-	return (sub);
+	if (len == 0 || start >= size)
+		return (ft_strdup_(""));
+	if (len > size - start)
+		len = size - start;
+	dest = (char *)gb_malloc(sizeof(char) * (len + 1), 0);
+	if (!dest)
+		return (NULL);
+	while (i < len && ptr[start])
+		dest[i++] = ptr[start++];
+	dest[i] = '\0';
+	return (dest);
 }
+
+// char	*ft_substr_(char const *s, unsigned int start, size_t len)
+// {
+// 	char	*sub;
+// 	size_t	i;
+
+// 	if (!s)
+// 		return (NULL);
+// 	if (start > ft_strlen(s))
+// 		return (ft_strdup_("\0"));
+// 	i = 0;
+//     sub = (char *)malloc(sizeof(char) * (len + 1));
+//     if (!sub)
+//         return (NULL);
+// 	while (i < len && s[start + i])
+// 	{
+// 		sub[i] = s[start + i];
+// 		i++;
+// 	}
+// 	sub[i] = '\0';
+// 	return (sub);
+// }
 
 char	*ft_strjoin_(char *s1, char *s2)
 {
@@ -67,7 +92,7 @@ char	*ft_strjoin_(char *s1, char *s2)
 	i = 0;
 	j = 0;
 	size = ft_strlen(s1) + ft_strlen(s2);
-	dest = (char *)malloc(sizeof(char) * (size + 1));
+	dest = (char *)gb_malloc(sizeof(char) * (size + 1), 0);
 	if (!dest)
 		return (NULL);
 	while (s1[i] != '\0')

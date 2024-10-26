@@ -17,7 +17,7 @@ bash exit code = 126
 mini error = ( command not found)
 bash error = ( is a directory)
 ----------------------------------------
-
+fd leaks in redirections
 ----------------------------------------
 
 ----------------------------------------

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 18:40:34 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/26 09:27:30 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 			ft_error("dup2 failed\n");
 		close(fd[0]);
 	}
+	ft_cloe_file(cmd_list->fd_out);
 	return (pid);
 }
 
@@ -134,6 +135,7 @@ int	process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[])
 			ft_error("dup2 failed\n");
 		close(fd[0]);
 	}
+	ft_cloe_file(cmd_list->fd_out);
 	return (pid);
 }
 
@@ -155,5 +157,6 @@ int	process_child_end(t_cmd *cmd_list, t_env **env_list)
 		// 	close(cmd_list->fd_in);
 		ft_execut(cmd_list, *env_list);
 	}
+	ft_cloe_file(cmd_list->fd_out);
 	return (pid);
 }

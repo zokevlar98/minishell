@@ -29,8 +29,8 @@
 # include <stddef.h>
 # include <fcntl.h>
 # include <termios.h>
-#include <sys/stat.h>
-
+# include <sys/stat.h>
+# include "gb/garbage.h"
 int		g_sig ;
 
 
@@ -221,4 +221,5 @@ void	close_fd(int fd_in, int fd_out);
 char	*ft_strdup_(const char *s);
 char	*ft_substr_(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin_(char *s1, char *s2);
+void	ft_cloe_file(int fd);
 #endif
