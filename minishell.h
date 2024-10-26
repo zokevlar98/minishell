@@ -198,7 +198,7 @@ void	print_list_declare(t_env **env);
 char	*check_name_env(char *name);
 int		check_empty_value(char *var);
 int		ft_echo(t_cmd *cmd_list);
-void	ft_cd(t_cmd *cmd_list, t_env *env_list);
+void	ft_cd(t_cmd *cmd_list, t_env *env_list, char *old_pwd, char *path);
 int		ft_pwd(t_env *env);
 void	ft_export(t_cmd *cmd, t_env **env);
 int		ft_env(t_cmd *cmd, t_env *env);

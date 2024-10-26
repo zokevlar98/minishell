@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:50:43 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/26 00:01:51 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/26 02:00:44 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,20 @@ void	cd_error(char *path, int flag)
 	exit_status(1);
 }
 
-void	ft_cd(t_cmd *cmd, t_env *env)
+void	ft_cd(t_cmd *cmd, t_env *env, char *old_pwd, char *path)
 {
-	char	*path;
-	char	*old_pwd;
-
 	old_pwd = getcwd(NULL, 0);
 	if (!cmd->args[1])
 	{
-		path = get_home(env);
-		if ((chdir(path) == -1 && !cmd->args[1]) || !path)
+		if ((chdir(get_home(env)) == -1 && !cmd->args[1]))
 		{
 			ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
 			exit_status(1);
 		}
 		exit_status(0);
 	}
-	else if (!ft_strcmp(cmd->args[1], ".") || !ft_strcmp(cmd->args[1], ".."))
+	if (cmd->args[1] && (!ft_strcmp(cmd->args[1], ".") || !ft_strcmp(cmd->args[1], "..")))
 	{
-		path = getcwd(NULL, 0);
 		chdir((const char *)cmd->args[1]);
 		exit_status(0);
 	}

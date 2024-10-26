@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_utilis_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 03:53:04 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/26 01:48:23 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_strdup(const char *s)
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	if (!s2)
+	if (!s2 || !s1)
 		return (1);
 	while (*s1 && *s2 && *s1 == *s2)
 	{
