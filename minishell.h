@@ -29,6 +29,7 @@
 # include <stddef.h>
 # include <fcntl.h>
 # include <termios.h>
+#include <sys/stat.h>
 
 int		g_sig ;
 
@@ -129,7 +130,7 @@ int		is_caracter(char *str, char c);
 void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list);
 char	**ft_split_cmd(char *line, char c, int s_q, int d_q);
 int		cnt_split(char *line, char c, int in_word);
-int		is_expandable(char c);
+int		is_expandable(char *line, int i, int *dq);
 char	*ft_get_name(char *str, int i);
 int		c_ex(char *str);
 int		not_expandable(char c);
