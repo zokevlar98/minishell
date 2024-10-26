@@ -1,3 +1,9 @@
+To check if we have memory leaks :
+1-open new terminal
+2-run the followinf command : while; do leaks minishell ; done
+3-run the minishell
+4-ctrl+c to stop the leaks command
+
 echo "$" \\ output: $
 ----------------------------------------
 cat <missing | cat 

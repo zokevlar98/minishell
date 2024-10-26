@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 02:22:34 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/25 23:57:01 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,35 +43,34 @@ int	check_env_var(char *var, int flag)
 void	update_var(t_env **env, char *name, char *value, int flag)
 {
 	t_env	*var;
+	char	*tmp;
 
 	var = find_env(*env, name);
 	if (!var)
 	{
 		var = ft_env_new_(name, value);
+		// printf("hahhahaha: %p\n", var);
 		ft_env_add_back(env, var);
+		return ;
+	}
+	if (var->name && var->value && !value)
+		return ;
+	if (var->value && value)
+	{
+		if (flag == 0)
+		{
+			free(var->value);
+			var->value = ft_strdup_(value);
+		}
+		else if (flag == 1)
+		{
+			tmp = ft_strdup_(var->value);
+			free(var->value);
+			var->value = ft_strjoin_(tmp, value);
+		}
 	}
 	else
-	{
-		if (var->name && var->value && !value)
-			return ;
-		if (var->value && value)
-		{
-			if (flag == 0)
-			{
-				free(var->value);
-				var->value = ft_strdup(value);
-			}
-			else if (flag == 1)
-				var->value = ft_strjoin(var->value, value);
-		}
-		else
-		{
-			if (flag == 0)
-				var->value = ft_strdup(value);
-			else if (flag == 1)
-			var->value = ft_strdup(value);
-		}
-	}
+		var->value = ft_strdup_(value);
 }
 
 void	add_var_env(char *var, t_env **env)
@@ -80,16 +79,18 @@ void	add_var_env(char *var, t_env **env)
 	int		size_value;
 	char	*name;
 	char	*value;
+	char	*tmp;
 
 	size_name = check_env_var(var, 0);
 	if (!size_name)
 		return ;
-	name = ft_substr(var, 0, size_name);
-	name = check_name_env(name);
+	tmp = ft_substr_(var, 0, size_name);
+	name = check_name_env(tmp);
+	free(tmp);
 	size_value = size_name;
 	while (var[size_name] == '=' && var[size_value])
 		size_value++;
-	value = ft_substr(var, size_name + 1, size_value);
+	value = ft_substr_(var, size_name + 1, size_value);
 	if (ft_strlen(value) == 0)
 		value = NULL;
 	if (!check_empty_value(var))
@@ -98,12 +99,14 @@ void	add_var_env(char *var, t_env **env)
 		update_var(env, name, value, 1);//append
 	else
 		update_var(env, name, value, 0);//update
+	free(name);
+	free(value);
 }
 
 void	ft_export(t_cmd *cmd, t_env **env)
 {
 	int	i;
-	int	status;//leaks
+	int	status;
 
 	i = 1;
 	status = 0;

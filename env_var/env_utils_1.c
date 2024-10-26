@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 21:21:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:06:09 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_change_env(t_env *env_list, char *name, char *value)
 	{
 		if (ft_strncmp(tmp->name, name, ft_strlen(tmp->name)) == 0)
 		{
-			// free(tmp->value);// if this line is uncommented, the program  will double free becouse of ft_malloc i need a solution
-			tmp->value = ft_strdup(value);
+			free(tmp->value);//line 47 in builtin_utils.c
+			tmp->value = ft_strdup_(value);
 			return ;
 		}
 		tmp = tmp->next;
@@ -34,7 +34,6 @@ void	ft_change_env(t_env *env_list, char *name, char *value)
 		tmp = ft_env_new_(name, value);
 		ft_env_add_back(&env_list, tmp);
 	}
-	free(value);
 }
 
 char	*ft_env_search(t_env *env_list, char *name)
