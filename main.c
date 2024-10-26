@@ -23,6 +23,7 @@ int	ft_add(char *line)
 	if (!ft_check_syntax(line))
 	{
 		ft_putstr_fd("syntax error\n", STDERR_FILENO);
+		exit_status(258);
 		return (1);
 	}
 	add_history(line);

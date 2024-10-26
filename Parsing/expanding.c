@@ -39,6 +39,7 @@ t_utils	*intialize_utils(int len)
 	u->fd = 0;
 	u->i = 0;
 	u->j = 0;
+	u->dq = 0;
 	u->f_name = NULL;
 	u->status = 0;
 	u->len = len;
@@ -52,7 +53,9 @@ int	fill_str(t_env *env, char *line, char *new_line, int pipe_line)
 	u = intialize_utils(ft_strlen(line));
 	while (u->i < u->len)
 	{
-		u->status = is_expandable(line[u->i]);
+		u->status = is_expandable(line, u->i, &u->dq);
+		if (u->status && u->dq && (line[u->i + 1] == '\'' || line[u->i + 1] == '\"'))
+			new_line[u->j++] = line[u->i++];
 		if (u->status && line[u->i + 1] && line[u->i + 1] != ' ')
 			u->i++;
 		if (line[u->i] && u->status && line[u->i] == '?')

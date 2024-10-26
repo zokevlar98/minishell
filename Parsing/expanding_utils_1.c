@@ -1,16 +1,17 @@
 
 #include "../minishell.h"
 
-int	is_expandable(char c)
+int	is_expandable(char *line, int i, int *dq)
 {
 	static int	inside_dq;
 	static int	inside_sq;
 
-	if (c == '\'' && !inside_dq)
+	if (line[i] == '\'' && !inside_dq)
 		inside_sq = !inside_sq;
-	if (c == '\"' && !inside_sq)
+	if (line[i] == '\"' && !inside_sq)
 		inside_dq = !inside_dq;
-	return (c == '$' && !inside_sq);
+	*dq = inside_dq;
+	return (line[i] == '$' && !inside_sq);
 }
 
 char	*ft_get_name(char *str, int i)
