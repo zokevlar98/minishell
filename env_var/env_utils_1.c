@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 21:21:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/26 02:33:33 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/26 18:09:35 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_env_search(t_env *env_list, char *name)
 	tmp = env_list;
 	while (tmp)
 	{
-		if (!ft_strncmp(tmp->name, name, ft_strlen(name)))
+		if (!ft_strcmp(tmp->name, name))
 			return (tmp->value);
 		tmp = tmp->next;
 	}

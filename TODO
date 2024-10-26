@@ -4,8 +4,6 @@ To check if we have memory leaks :
 2-for FD leaks : while; do lsof -c minishell ; done
 3-run the minishell
 4-ctrl+c to stop the leaks command
-
-echo "$" \\ output: $
 ----------------------------------------
 cat <missing | cat 
 ----------------------------------------

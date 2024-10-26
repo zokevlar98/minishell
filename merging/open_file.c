@@ -66,6 +66,7 @@ void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out,t_env *env)
 			u->fds_tab[u->i] = u->fd;
 			if (u->fd == -1)
 			{
+				ft_putstr_fd("minishell: Permission denied\n", STDERR_FILENO);
 				exit_status(1);
 				break ;
 			}
