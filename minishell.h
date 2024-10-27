@@ -211,7 +211,6 @@ void	shell_lvl(t_env *env);
 int		ft_lstsize(t_cmd *lst);
 t_cmd	*ft_lstlast(t_cmd *lst);
 void	ft_lstadd_back(t_cmd **lst, t_cmd *new);
-void	affiche_env(t_env *env);
 t_cmd	*ft_lstnew_cmd(char *cmd);
 void	ft_lstadd_back_cmd(t_cmd **cmd_list, t_cmd *new);
 void	ff(void);
