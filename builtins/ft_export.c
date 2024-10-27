@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/26 08:46:44 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/27 02:42:53 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_env_var(char *var, int flag)
 			return (0);
 		if (var[i] == '+' && var[i + 1] != '\0')
 		{
-			if  (flag == 0)
+			if (flag == 0)
 			{
 				if (var[i + 1] == '=')
 					return (i + 1);

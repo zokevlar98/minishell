@@ -1,17 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 02:45:48 by zqouri            #+#    #+#             */
+/*   Updated: 2024/10/27 02:45:48 by zqouri           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
-int    ft_unset_error(char *name)
+int	ft_unset_error(char *name)
 {
 	ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
 	ft_putstr_fd(name, STDERR_FILENO);
 	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
-	return 1;
+	return (1);
 }
 
-int check_unset_var(char *name)
+int	check_unset_var(char *name)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (name[i])
