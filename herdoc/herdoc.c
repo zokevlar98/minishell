@@ -152,5 +152,11 @@ void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 	}
 	file_tab[i] = NULL;
 	if (*sig_flag == -1337 || *sig_flag == -42)
+	{
 		unlik_herdoc(file_tab);
+		if (*sig_flag == -1337)
+			exit_status(1);
+		else
+			exit_status(0);
+	}
 }

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 06:32:46 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/10/27 06:35:51 by mohmazou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -82,7 +93,7 @@ void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list)
 	t_p_cmd	*cmd_list;
 	t_p_cmd	*new_cmd;
 	int		i;
-	int sig_flag;
+	int		sig_flag;
 
 	cmd_list = NULL;
 	i = 0;
@@ -95,17 +106,11 @@ void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list)
 		i++;
 	}
 	(*cp_list) = cmd_list;
-	while(cmd_list && sig_flag != -1337)
+	while (cmd_list && sig_flag != -1337)
 	{
 		herdoc_hundeler(&cmd_list, env_list, &sig_flag);
 		cmd_list = cmd_list->next;
 	}
 	if (sig_flag == -1337 || sig_flag == -42)
-	{
 		(*cp_list) = NULL;
-		if (sig_flag == -1337)
-			exit_status(1);
-		else
-			exit_status(0);
-	}
 }

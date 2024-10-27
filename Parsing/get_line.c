@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 04:06:57 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 04:39:03 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/27 06:20:27 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,35 +25,6 @@ t_utils	*ini_utls(char *line)
 	return (u);
 }
 
-char	*get_redir(char *line, int i)
-{
-	char	*redir;
-	int		j;
-	int		dq;
-	int		sq;
-
-	j = i;
-	dq = 0;
-	sq = 0;
-	while (line[j] && (line[j] == '>' || line[j] == '<'))
-		j++;
-	while (line[j] && (line[j] == ' ' || line[j] == '\t'))
-		j++;
-	while (line[j])
-	{
-		if (line[j] == '\'' && !dq)
-			sq = !sq;
-		if (line[j] == '\"' && !sq)
-			dq = !dq;
-		if ((line[j] == ' ' || line[j] == '\t'
-				|| line[j] == '>' || line[j] == '<') && !dq && !sq)
-			break ;
-		j++;
-	}
-	redir = ft_substr(line, i, j - i);
-	return (redir);
-}
-
 void	skip(char *line, int *i)
 {
 	if (line[(*i)] == '<' || line[(*i)] == '>')
@@ -62,12 +33,12 @@ void	skip(char *line, int *i)
 		(*i)++;
 }
 
-int skp(char l, int *sq, int *dq)
+void	copy_line(char l, char *c, int q)
 {
-	in_qote(sq, dq, l);
-	if ((l == ' ' || l == '\t') && !(*dq) && !(*sq))
-		return (0);
-	return (1);
+	if (l == '\t' && q)
+		*c = ' ';
+	else
+		*c = l;
 }
 
 char	*line_no_rd(char *line, int i, int j)
@@ -91,39 +62,12 @@ char	*line_no_rd(char *line, int i, int j)
 			}
 		}
 		else
-		{
-			if (line[i] == '\t' && !u->dq && !u->sq)
-				u->new_line[j++] = ' ';
-			else
-				u->new_line[j++] = line[i];
-		}
+			copy_line(line[i], u->new_line + j++, (!u->dq && !u->sq));
 		if (line[i])
 			i++;
 	}
 	u->new_line[j] = '\0';
 	return (u->new_line);
-}
-
-int	to_expand(char *line)
-{
-	int	i;
-	int	sq;
-	int	dq;
-
-	i = 0;
-	sq = 0;
-	dq = 0;
-	while (line[i])
-	{
-		if (line[i] == '\'' && !dq)
-			sq = !sq;
-		if (line[i] == '\"' && !sq)
-			dq = !dq;
-		if (line[i] == '$' && !sq)
-			return (1);
-		i++;
-	}
-	return (0);
 }
 
 void	get_line(char *line, t_p_cmd *cp_list, t_env *env_list)

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   open_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 06:39:48 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/10/27 08:03:10 by mohmazou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -20,8 +31,22 @@ t_utils	*init_utils(char **redir)
 	utils->i = 0;
 	utils->fds_tab = ft_malloc(sizeof(int) * cp_arr(redir), 0);
 	utils->f_name = NULL;
+	utils->flag = 1;
 	return (utils);
 }
+
+int	err_get_name(char *f_name, int *fd_in,int *fd_out)
+{
+	if (!f_name)
+	{
+		*fd_in = -1;
+		*fd_out = -1;
+		exit_status(1);
+		return (-1);
+	}
+	return (1);
+}
+
 
 char	*get_r_name(char *redir, t_env *env)
 {
@@ -38,25 +63,19 @@ char	*get_r_name(char *redir, t_env *env)
 	return (redir + i);
 }
 
-void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out,t_env *env)
+void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out, t_env *env)
 {
 	t_utils	*u;
-	char **redir;
-	
+	char	**redir;
+
 	redir = cmd->redir;
 	u = init_utils(redir);
-	while (redir && redir[u->i])
+	while (redir && redir[u->i] && u->fd != -1)
 	{
 		u->f_name = get_r_name(redir[u->i], env);
 		u->f_name = get_f_name(u->f_name, env, cmd->pipe_line);
-		if (!u->f_name)
-		{
-			*fd_in = -1;
-			*fd_out = -1;
-			exit_status(1);
-			break ;
-		}
-		if (redir[u->i][0] == '>')
+		u->fd = err_get_name(u->f_name, fd_in, fd_out);
+		if (redir[u->i][0] == '>' && u->fd != -1)
 		{
 			if (redir[u->i][1] == '>')
 				u->fd = open(u->f_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
@@ -71,7 +90,7 @@ void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out,t_env *env)
 				break ;
 			}
 		}
-		if (redir[u->i][0] == '<')
+		if (redir[u->i][0] == '<' && u->fd != -1)
 		{
 			u->fd = open(u->f_name, O_RDONLY);
 			if (redir[u->i][1] == '<')
@@ -92,14 +111,15 @@ void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out,t_env *env)
 		u->i ++;
 	}
 	close_tab(u->fds_tab, u->i, *fd_in, *fd_out);
-	while (redir && redir[u->i])
-	{
-		if (redir[u->i][0] == '<' && redir[u->i][1] == '<')
-		{
-			u->f_name = get_r_name(redir[u->i], env);
-			u->f_name = get_f_name(u->f_name, env, cmd->pipe_line);
-			unlink(u->f_name);
-		}
-		u->i ++;
-	}
+	unlinker(redir, u->i, env);
+	// while (redir && redir[u->i])
+	// {
+	// 	if (redir[u->i][0] == '<' && redir[u->i][1] == '<')
+	// 	{
+	// 		u->f_name = get_r_name(redir[u->i], env);
+	// 		u->f_name = get_f_name(u->f_name, env, cmd->pipe_line);
+	// 		unlink(u->f_name);
+	// 	}
+	// 	u->i ++;
+	// }
 }

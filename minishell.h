@@ -34,7 +34,8 @@
 
 //define
 # define NUM_BUILTINS 8
-int		g_sig ;
+
+int		g_sig;
 
 // environnement variables linked list
 typedef struct s_env
@@ -138,6 +139,7 @@ char	**get_rd(char *line, int dq, int sq);
 t_p_cmd	*ft_new_cp(char *cmd, int i, t_env *env_list);
 void	cp_add_back(t_p_cmd **cp_list, t_p_cmd *new_cmd);
 char	*expd_line(char *line, t_env *env, int pipe_line);
+int		to_expand(char *line);
 void	ft_merge(t_cmd **cmd_list, t_p_cmd *cp_list, t_env *env_list);
 t_cmd	*ft_new_cmd(t_p_cmd *cp_cmd, t_env *env_list);
 void	cmd_add_back(t_cmd **cmd_list, t_cmd *new_cmd);
@@ -151,7 +153,6 @@ void	ft_handle_signals(void);
 int		ft_maxsize(t_env *env_list, int flag);
 void	herdoc_hundeler(t_p_cmd **cmd, t_env *env, int *sig_flag);
 void	ft_sig_herdoc(int sig);
-int		to_expand(char *line);
 int		cp_arr(char **in_redir);
 int		will_expd(char *del);
 char	*expended_buffer(char *buffer, t_env *env, int pipe_line);
