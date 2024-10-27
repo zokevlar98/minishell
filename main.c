@@ -3,10 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/09 15:41:17 by zqouri           ###   ########.fr       */                                                                
+/*   Created: 2024/10/27 03:45:37 by zqouri            #+#    #+#             */
+/*   Updated: 2024/10/27 03:46:54 by zqouri           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -54,6 +55,7 @@ void	start_loop(t_env *env_list, struct termios *term)
 	char	*line;
 	t_p_cmd	*cp_list;
 	t_cmd	*cmd_list;
+
 	(void)term;
 	line = NULL;
 	while (1)
@@ -77,15 +79,8 @@ void	start_loop(t_env *env_list, struct termios *term)
 	}
 }
 
-
-void f()
-{
-	system("leaks minishell");
-}
-
 int	main(int ac, char **av, char **env)
 {
-	//atexit(f);
 	struct termios	term;
 	t_env	*env_list;
 

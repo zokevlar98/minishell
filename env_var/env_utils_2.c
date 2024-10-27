@@ -1,20 +1,30 @@
-	
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_utils_2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 03:35:57 by zqouri            #+#    #+#             */
+/*   Updated: 2024/10/27 03:38:41 by zqouri           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-char    **empty_env(void)
+char	**empty_env(void)
 {
-    char   **env;
-    char    *str;
+	char	**env;
+	char	*str;
 
-    str = getcwd(NULL, 0);
-    // env = (char **)ft_malloc(sizeof(char *) * 4, 0);
-    env = (char **)malloc(sizeof(char *) * 4);
-    env[0] = ft_strjoin_("PWD=", str);
-    env[1] = ft_strdup_("SHLVL=0");
-    env[2] = ft_strdup_("_=/usr/bin/env");
-    env[3] = NULL;
-    free(str);
-    return (env);
+	str = getcwd(NULL, 0);
+	env = (char **)malloc(sizeof(char *) * 4);
+	env[0] = ft_strjoin_("PWD=", str);
+	env[1] = ft_strdup_("SHLVL=0");
+	env[2] = ft_strdup_("_=/usr/bin/env");
+	env[3] = NULL;
+	free(str);
+	return (env);
 }
 
 t_env	*ft_env_new_(char *key, char *value)
@@ -25,7 +35,7 @@ t_env	*ft_env_new_(char *key, char *value)
 	if (!new)
 		return (NULL);
 	new->name = ft_strdup_(key);
-    new->value = ft_strdup_(value);
+	new->value = ft_strdup_(value);
 	new->next = NULL;
 	return (new);
 }
@@ -39,47 +49,47 @@ t_env	*ft_env_new(char *env)
 	if (!new)
 		return (NULL);
 	equal = ft_strchr(env, '=');
-    if (!equal)
-    {
-        new->name = ft_strdup_(env);
-        new->value = NULL;
-    }
-    else
-    {  
-	    new->name = ft_substr_(env, 0, equal - env);
-	    new->value = ft_strdup_(equal + 1);
-    }
+	if (!equal)
+	{
+		new->name = ft_strdup_(env);
+		new->value = NULL;
+	}
+	else
+	{
+		new->name = ft_substr_(env, 0, equal - env);
+		new->value = ft_strdup_(equal + 1);
+	}
 	new->next = NULL;
 	return (new);
 }
 
-t_env   *find_env(t_env *env, char *name)
+t_env	*find_env(t_env *env, char *name)
 {
-    t_env   *tmp;
+	t_env	*tmp;
 
-    tmp = env;
-    while (tmp)
-    {
-        if (ft_strncmp(tmp->name, name, ft_strlen(tmp->name)) == 0)
-            return (tmp);
-        tmp = tmp->next;
-    }
-    return (NULL);
+	tmp = env;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->name, name, ft_strlen(tmp->name)) == 0)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }
 
-int count_env(t_env *env)
+int	count_env(t_env *env)
 {
-    int     i;
-    t_env   *tmp;
+	int		i;
+	t_env	*tmp;
 
-    i = 0;
-    if (!env)
-        return (0);
-    tmp = env;
-    while (tmp)
-    {
-        i++;
-        tmp = tmp->next;
-    }
-    return (i);
+	i = 0;
+	if (!env)
+		return (0);
+	tmp = env;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
 }
