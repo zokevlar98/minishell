@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expanding.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 04:05:30 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/10/27 04:06:22 by mohmazou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -54,7 +65,8 @@ int	fill_str(t_env *env, char *line, char *new_line, int pipe_line)
 	while (u->i < u->len)
 	{
 		u->status = is_expandable(line, u->i, &u->dq);
-		if (u->status && u->dq && (line[u->i + 1] == '\'' || line[u->i + 1] == '\"'))
+		if (u->status && u->dq && (line[u->i + 1] == '\''
+				|| line[u->i + 1] == '\"'))
 			new_line[u->j++] = line[u->i++];
 		if (u->status && line[u->i + 1] && line[u->i + 1] != ' ')
 			u->i++;

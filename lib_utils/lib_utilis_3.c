@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 14:32:05 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/27 03:55:33 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	all_space(char *line)
 	i = 0;
 	while (line && line[i])
 	{
-		if (line[i] != ' ')
+		if (line[i] != ' ' && line[i] != '\t')
 			return (0);
 		i++;
 	}

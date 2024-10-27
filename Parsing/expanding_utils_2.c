@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expanding_utils_2.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 04:04:37 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/10/27 04:04:58 by mohmazou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -40,7 +51,7 @@ int	ft_cnt_red(char *line, char c)
 
 void	join_exit(char *new_line, int pipe_line, int *j, int *i)
 {
-	int	k;
+	int		k;
 	char	*str;
 
 	if (pipe_line == 0)

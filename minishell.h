@@ -83,6 +83,7 @@ typedef struct s_utils
 	char	*f_name;
 	int		status;
 	int		len;
+	int		flag;
 }	t_utils;
 
 // free_all.c

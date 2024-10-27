@@ -5,8 +5,9 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/09 15:41:17 by zqouri           ###   ########.fr       */                                                                
+/*   Created: 2024/10/27 04:01:04 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/10/27 04:21:05 by mohmazou         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -54,7 +55,7 @@ void	start_loop(t_env *env_list, struct termios *term)
 	char	*line;
 	t_p_cmd	*cp_list;
 	t_cmd	*cmd_list;
-	(void)term;
+
 	line = NULL;
 	while (1)
 	{
@@ -77,17 +78,10 @@ void	start_loop(t_env *env_list, struct termios *term)
 	}
 }
 
-
-void f()
-{
-	system("leaks minishell");
-}
-
 int	main(int ac, char **av, char **env)
 {
-	//atexit(f);
 	struct termios	term;
-	t_env	*env_list;
+	t_env			*env_list;
 
 	if (ac != 1 || av[1])
 		return (write(2, "Error: no arguments needed\n", 27));
