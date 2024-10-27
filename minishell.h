@@ -152,7 +152,7 @@ int		err_get_name(char *f_name, int *fd_in, int *fd_out);
 char	*get_r_name(char *redir, t_env *env);
 void	open_out(t_utils **u, char *red, int *fd_out);
 void	open_in(t_utils **u, char *redir, int *fd_in);
-void	unlinker(char **redir, int i,t_env *env);
+void	unlinker(char **redir, int i, t_env *env);
 int		exit_status(int status);
 void	ft_handle_signals(void);
 int		ft_maxsize(t_env *env_list, int flag);
