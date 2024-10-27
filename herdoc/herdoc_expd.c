@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:56:27 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 16:19:40 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/27 21:41:00 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,14 @@ char	*expended_buffer(char *buffer, t_env *env, int pipe_line)
 	if (fill_buffer(env, buffer, new_bf, pipe_line) == -1)
 		return (NULL);
 	return (new_bf);
+}
+
+t_utils	*init_herd_uti(void)
+{
+	t_utils	*utls;
+
+	utls = ft_malloc(sizeof(t_utils), 0);
+	utls->fd = 0;
+	utls->i = 0;
+	return (utls);
 }

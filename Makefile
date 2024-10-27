@@ -68,6 +68,7 @@ SRCS			=	main.c								\
 					herdoc/herdoc.c						\
 					herdoc/herdoc_expd.c				\
 					merging/open_file_utils.c			\
+					herdoc/herdoc_utils.c				\
 
 					
 RED             =   \033[0;31m

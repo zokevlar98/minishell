@@ -6,42 +6,11 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:21:25 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 16:28:12 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/27 21:41:42 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	to_herdoc(char *redir)
-{
-	if (redir[0] == '<' && redir[1] == '<')
-		return (1);
-	return (0);
-}
-
-char	*gnrt_name(void)
-{
-	char	*file_name;
-	static int	i;
-
-	file_name = ft_strjoin("herdoc", ft_itoa(i++));
-	return (file_name);
-}
-
-int	del_quote(int *sq, int *dq, char r)
-{
-	if (r == '\'' && !(*dq))
-	{
-		*sq = !(*sq);
-		return (1);
-	}
-	if (r == '"' && !(*sq))
-	{
-		*dq = !(*dq);
-		return (1);
-	}
-	return (0);
-}
 
 char	*get_del(char *redir)
 {
@@ -61,8 +30,8 @@ char	*get_del(char *redir)
 	while (redir[i])
 	{
 		i += del_quote(&sq, &dq, redir[i]);
-		if (!sq && !dq && redir[i] == '$' &&
-			(redir[i + 1] == '\'' || redir[i + 1] == '"'))
+		if (!sq && !dq && redir[i] == '$'
+			&& (redir[i + 1] == '\'' || redir[i + 1] == '"'))
 			i++;
 		i += del_quote(&sq, &dq, redir[i]);
 		if (redir[i])
@@ -72,7 +41,7 @@ char	*get_del(char *redir)
 	return (del);
 }
 
-char	*get_buffer(int *s, char *red, int pipe_line, t_env *env)
+char	*get_buf(int *s, char *red, int pipe_line, t_env *env)
 {
 	char	*line;
 	char	*buffer;
@@ -113,73 +82,31 @@ char	*get_buffer(int *s, char *red, int pipe_line, t_env *env)
 	return (buffer);
 }
 
-void	unlik_herdoc(char **redir)
-{
-	int	i;
-
-	i = 0;
-	while (redir[i])
-			unlink(redir[i++]);
-}
-
-int	will_expd(char *del)
-{
-	while (*del)
-	{
-		if (*del == '\'' || *del == '\"')
-			return (0);
-		del ++;
-	}
-	return (1);
-}
-
-t_utils	*init_herd_uti(t_p_cmd *new_cmd)
-{
-	t_utils	*utls;
-
-	utls = ft_malloc(sizeof(t_utils), 0);
-
-	return (utls);
-}
-
-void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
+void	herdoc_hundeler(t_p_cmd **cmd, t_env *env, int *sg)
 {
 	t_utils	*u;
-	
-	t_p_cmd	*cmd;
-	int		i;
-	int		fd;
 	char	*file_name;
 	char	**file_tab;
 	char	*buffer;
 
-	cmd = 	*new_cmd;
-	file_tab = (char **)ft_malloc(sizeof(char *) * (cp_arr(cmd->redir) + 1), 0);
-	i = 0;
-	u = init_herd_uti(*new_cmd);
-	if (!cmd || !cmd->redir)
+	file_tab = ft_malloc(sizeof(char *) * (cp_arr((*cmd)->redir) + 1), 0);
+	u = init_herd_uti();
+	if (!(*cmd) || !(*cmd)->redir)
 		return ;
-	while (cmd->redir[i] && *sig_flag != -1337 && *sig_flag != -42)
+	while ((*cmd)->redir[u->i] && *sg != -1337 && *sg != -42)
 	{
-		if (to_herdoc(cmd->redir[i]))
+		if (to_herdoc((*cmd)->redir[u->i]))
 		{
 			file_name = gnrt_name();
-			buffer = get_buffer(sig_flag, cmd->redir[i], cmd->pipe_line, env);
-			fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			file_tab[i] = file_name;
-			write(fd, buffer, ft_strlen(buffer));
-			close(fd);
-			cmd->redir[i] = ft_strjoin("<<",file_name);
+			buffer = get_buf(sg, (*cmd)->redir[u->i], (*cmd)->pipe_line, env);
+			u->fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			file_tab[u->i] = file_name;
+			write(u->fd, buffer, ft_strlen(buffer));
+			close(u->fd);
+			(*cmd)->redir[u->i] = ft_strjoin("<<", file_name);
 		}
-		i ++;
+		u->i ++;
 	}
-	file_tab[i] = NULL;
-	if (*sig_flag == -1337 || *sig_flag == -42)
-	{
-		unlik_herdoc(file_tab);
-		if (*sig_flag == -1337)
-			exit_status(1);
-		else
-			exit_status(0);
-	}
+	file_tab[u->i] = NULL;
+	unlik_herdoc(file_tab, *sg);
 }
