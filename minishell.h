@@ -213,7 +213,6 @@ t_cmd	*ft_lstlast(t_cmd *lst);
 void	ft_lstadd_back(t_cmd **lst, t_cmd *new);
 t_cmd	*ft_lstnew_cmd(char *cmd);
 void	ft_lstadd_back_cmd(t_cmd **cmd_list, t_cmd *new);
-void	ff(void);
 void	close_fd(int fd_in, int fd_out);
 
 //env_utils_4.c
