@@ -31,17 +31,10 @@
 # include <termios.h>
 # include <sys/stat.h>
 # include "gb/garbage.h"
-int		g_sig ;
-
 
 //define
 # define NUM_BUILTINS 8
-#define BLK "\e[1;90m"
-#define RED "\e[1;91m"
-#define GRN "\e[3;92m"
-#define MAG "\e[1;95m"
-#define CYN "\e[3;96m"
-#define RST "\e[0m"
+int		g_sig ;
 
 // environnement variables linked list
 typedef struct s_env
@@ -92,23 +85,20 @@ taking the size to allocate,
 and takes a boolean to free the allocated memory 1 to free all, 0 to not free
 */
 void	*ft_malloc(size_t size, int free);
-
-
 // lib_utils
-int     ft_strcmp(const char *s1, const char *s2);
-int     ft_strncmp(char *s1, char *s2, size_t size);
-// char    *lower_case(char *str); i9dar nemsse7ha
-void    ft_putstr_fd(char *str, int fd);
-void    ft_error(char *str);
+int		ft_strcmp(const char *s1, const char *s2);
+int		ft_strncmp(char *s1, char *s2, size_t size);
+void	ft_putstr_fd(char *str, int fd);
+void	ft_error(char *str);
 char	*ft_strchr(const char *s, int c);
 char	**ft_split(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
 void	ft_free(char **tab);
 char	*ft_strtrim(char *s1, char *set);
-int     ft_atoi(char *str);
+int		ft_atoi(char *str);
 char	*ft_itoa(int n);
 int		size_array(char **array);
-void    ft_execution_error(char *str);
+void	ft_execution_error(char *str);
 
 // lib_utils_2
 int		ft_isalpha(int c);
@@ -153,47 +143,45 @@ t_cmd	*ft_new_cmd(t_p_cmd *cp_cmd, t_env *env_list);
 void	cmd_add_back(t_cmd **cmd_list, t_cmd *new_cmd);
 char	*rm_qot(char *str, int s_q, int d_q);
 void	close_tab(int *fd_tab, int size, int in, int out);
-void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out,t_env *env);
+void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out, t_env *env);
 char	*get_f_name(char *f_name, t_env *env, int pipe_line);
 char	*expd_rd(char *f_name, t_env *env, int pipe_line);
 int		exit_status(int status);
 void	ft_handle_signals(void);
 int		ft_maxsize(t_env *env_list, int flag);
-void	herdoc_hundeler(t_p_cmd **cmd,t_env *env, int *sig_flag);
+void	herdoc_hundeler(t_p_cmd **cmd, t_env *env, int *sig_flag);
 void	ft_sig_herdoc(int sig);
 int		to_expand(char *line);
 int		cp_arr(char **in_redir);
 int		will_expd(char *del);
 char	*expended_buffer(char *buffer, t_env *env, int pipe_line);
-
-
 // env_utils_1.c
-char    **empty_env(void);
+char	**empty_env(void);
 void	ft_change_env(t_env *env_list, char *name, char *value);
 char	*ft_env_search(t_env *env_list, char *name);
 t_env	*ft_env_new_(char *key, char *value);
 t_env	*ft_env_new(char *env);
 t_env	*ft_lstlast_env(t_env *env);
 void	ft_env_add_back(t_env **env_list, t_env *new);
-void	ft_env_list(t_env **env_list,char **env, int flag);
+void	ft_env_list(t_env **env_list, char **env, int flag);
 t_env	*find_env(t_env *env, char *name);
 char	**ft_get_envp(t_env *env_list);
 int		count_env(t_env *env);
 char	**sort_env(t_env *env, int n);
-void    ft_lst_clear_env(t_env **env);
+void	ft_lst_clear_env(t_env **env);
 
 //execution
-void    ft_execut_cmd(t_cmd *cmd_list, t_env **env_list, int fd_in, int fd_out);
+void	ft_execut_cmd(t_cmd *cmd_list, t_env **env_list, int fd_in, int fd_out);
 void	ft_execut(t_cmd *cmd_list, t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
 int		fork1(void);
-int	    process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[]);
-int	    process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[]);
-int	    process_child_end(t_cmd *cmd_list, t_env **env_list);
+int		process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[]);
+int		process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[]);
+int		process_child_end(t_cmd *cmd_list, t_env **env_list);
 char	*check_path(char **path_s, char *cmd);
 
 //builtins
-int     is_builtin(t_cmd *cmd_list);
+int		is_builtin(t_cmd *cmd_list);
 void	ft_builtin(t_cmd *cmd_list, t_env **env_list);
 int		ft_export_error(char *name);
 void	print_list_declare(t_env **env);
@@ -212,10 +200,8 @@ void	shell_lvl(t_env *env);
 int		ft_lstsize(t_cmd *lst);
 t_cmd	*ft_lstlast(t_cmd *lst);
 void	ft_lstadd_back(t_cmd **lst, t_cmd *new);
-void	affiche_env(t_env *env);
 t_cmd	*ft_lstnew_cmd(char *cmd);
 void	ft_lstadd_back_cmd(t_cmd **cmd_list, t_cmd *new);
-void	ff(void);
 void	close_fd(int fd_in, int fd_out);
 
 //env_utils_4.c

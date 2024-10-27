@@ -6,11 +6,21 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:57:41 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/26 09:26:09 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/27 03:12:48 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	fork1(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		ft_error("fork failed: ");
+	return (pid);
+}
 
 char	*check_path(char **path_s, char *cmd)
 {
@@ -39,7 +49,7 @@ char	*find_path_env(char *cmd, char *envp[])
 	if (ft_strchr(cmd, '/'))
 	{
 		if (access(cmd, F_OK) == 0)
-			return (cmd);	
+			return (cmd);
 	}
 	else
 	{
@@ -92,5 +102,5 @@ char	**ft_get_envp(t_env *env_list)
 void	ft_cloe_file(int fd)
 {
 	if (fd > 2)
-		close(fd);	
+		close(fd);
 }

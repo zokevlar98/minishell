@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:50:43 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/26 02:00:44 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/27 02:38:47 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_home(t_env *env)
 			if (ft_strncmp(tmp->name, "HOME", 5) == 0)
 				return (tmp->value);
 			tmp = tmp->next;
-		}		
+		}
 	}
 	return (NULL);
 }
@@ -33,8 +33,10 @@ void	cd_error(char *path, int flag)
 {
 	if (flag == 0)
 	{
-		ft_putstr_fd("cd: error retrieving current directory: getcwd: cannot ", STDERR_FILENO);
-		ft_putstr_fd("access parent directories: No such file or directory\n", STDERR_FILENO);	
+		ft_putstr_fd("cd: error retrieving current directory: getcwd: cannot ",
+			STDERR_FILENO);
+		ft_putstr_fd("access parent directories: No such file or directory\n",
+			STDERR_FILENO);
 	}
 	else if (flag == 1 && path)
 	{
@@ -57,7 +59,8 @@ void	ft_cd(t_cmd *cmd, t_env *env, char *old_pwd, char *path)
 		}
 		exit_status(0);
 	}
-	if (cmd->args[1] && (!ft_strcmp(cmd->args[1], ".") || !ft_strcmp(cmd->args[1], "..")))
+	if (cmd->args[1] && (!ft_strcmp(cmd->args[1], ".")
+			|| !ft_strcmp(cmd->args[1], "..")))
 	{
 		chdir((const char *)cmd->args[1]);
 		exit_status(0);

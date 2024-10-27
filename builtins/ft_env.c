@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 09:10:19 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 19:23:25 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/27 02:39:52 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_env(t_cmd *cmd, t_env *env)
 {
 	t_env	*tmp;
-	
+
 	tmp = env;
 	if (cmd && !cmd->args[1])
 	{

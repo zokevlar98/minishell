@@ -3,7 +3,7 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h gb/garbage.h
 
-CC				=	cc -Wall -Wextra -Werror -g -fsanitize=address
+CC				=	cc -Wall -Wextra -Werror -g #-fsanitize=address
 
 READLINE_FLAGS	=	-lreadline \
 
@@ -26,7 +26,7 @@ SRCS			=	main.c								\
 					lib_utils/lib_utilis_2.c 			\
 					lib_utils/lib_utilis_3.c 			\
 					lib_utils/lib_utilis_4.c 			\
-					lib_utils/lib_utilis_exec.c 		\
+					lib_utils/lib_utilis_5.c	 		\
 					lib_utils/ft_atoi.c 				\
 					lib_utils/ft_itoa.c 				\
 					lib_utils/ft_lstnew.c				\
@@ -40,7 +40,6 @@ SRCS			=	main.c								\
 					env_var/env_utils_2.c				\
 					env_var/env_utils_3.c				\
 					env_var/env_utils_4.c				\
-					execution/test/outils_test.c		\
 					builtins/builtin_cmd.c				\
 					builtins/builtin_utils.c			\
 					builtins/ft_echo.c					\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:35 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 02:42:59 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/27 02:39:23 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	ft_echo(t_cmd *cmd)
 		n_flag++;
 		i++;
 	}
-
 	while (cmd->args[i])
 	{
 		ft_putstr_fd(cmd->args[i ++], cmd->fd_out);

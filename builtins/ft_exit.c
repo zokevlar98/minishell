@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/25 19:24:33 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/27 02:42:27 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ long long	ft_atoul(const char *str)
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
-	{//ovverflow
+	{
 		res = (res * 10) + (str[i] - '0');
 		i++;
 	}
@@ -64,7 +64,7 @@ int	ft_str_isdigit(char *str)
 	return (1);
 }
 
-int max_index(t_cmd *cmd)
+int	max_index(t_cmd *cmd)
 {
 	while (cmd->next)
 		cmd = cmd->next;
@@ -73,8 +73,8 @@ int max_index(t_cmd *cmd)
 
 void	ft_exit(t_cmd *cmd)
 {
-	int 		index;
-	//if numbers to big message error and exit 255!
+	int	index;
+
 	index = max_index(cmd);
 	if (size_array(cmd->args) > 2 && ft_str_isdigit(cmd->args[1]))
 	{

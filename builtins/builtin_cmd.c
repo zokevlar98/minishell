@@ -6,38 +6,37 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/26 08:36:13 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/27 02:34:28 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_builtin(t_cmd *cmd_list, t_env **env_list)
+void	ft_builtin(t_cmd *cmd, t_env **env_list)
 {
-	char	*cmd;
-	
-	cmd = cmd_list->args[0];
-	if (!cmd || cmd_list->fd_in == -1 || cmd_list->fd_out == -1)
+	if (!cmd || cmd->fd_in == -1 || cmd->fd_out == -1)
 		return ;
-	dup2(cmd_list->fd_in , STDIN_FILENO);
-	dup2(cmd_list->fd_out , STDOUT_FILENO);
-	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
-		exit_status(ft_echo(cmd_list));
-	else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
-		ft_cd(cmd_list, *env_list, NULL, NULL);
-	else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
+	dup2(cmd->fd_in, STDIN_FILENO);
+	dup2(cmd->fd_out, STDOUT_FILENO);
+	if (ft_strncmp(cmd->args[0], "echo", ft_strlen("echo")) == 0)
+		exit_status(ft_echo(cmd));
+	else if (ft_strncmp(cmd->args[0], "cd", ft_strlen("cd")) == 0)
+		ft_cd(cmd, *env_list, NULL, NULL);
+	else if (ft_strncmp(cmd->args[0], "pwd", ft_strlen("pwd")) == 0)
 		exit_status(ft_pwd(*env_list));
-	else if (ft_strncmp(cmd, "env", ft_strlen("env")) == 0)
-		exit_status(ft_env(cmd_list, *env_list));
-	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
-		ft_export(cmd_list, env_list);
-	else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0 && ft_lstsize(cmd_list) == 1)
-		ft_exit(cmd_list);
-	else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0 && ft_lstsize(cmd_list) > 1)
-		return;
-	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
-		ft_unset(cmd_list, env_list);
-	close_fd(cmd_list->fd_in, cmd_list->fd_out);
+	else if (ft_strncmp(cmd->args[0], "env", ft_strlen("env")) == 0)
+		exit_status(ft_env(cmd, *env_list));
+	else if (ft_strncmp(cmd->args[0], "export", ft_strlen("export")) == 0)
+		ft_export(cmd, env_list);
+	else if (!ft_strncmp(cmd->args[0], "exit", ft_strlen("exit"))
+		&& ft_lstsize(cmd) == 1)
+		ft_exit(cmd);
+	else if (!ft_strncmp(cmd->args[0], "exit", ft_strlen("exit"))
+		&& ft_lstsize(cmd) > 1)
+		return ;
+	else if (ft_strncmp(cmd->args[0], "unset", ft_strlen("unset")) == 0)
+		ft_unset(cmd, env_list);
+	close_fd(cmd->fd_in, cmd->fd_out);
 }
 
 int	ft_export_error(char *name)
@@ -67,7 +66,8 @@ void	print_list_declare(t_env **env)
 			continue ;
 		}
 		if (current_env->name && current_env->value)
-			printf("declare -x %s=\"%s\"\n", current_env->name, current_env->value);
+			printf("declare -x %s=\"%s\"\n",
+				current_env->name, current_env->value);
 		else if (!current_env->value)
 			printf("declare -x %s\n", current_env->name);
 		current_env = current_env->next;
@@ -79,7 +79,7 @@ char	*check_name_env(char *name)
 {
 	char	*new_name;
 	char	*tmp;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (name[i])

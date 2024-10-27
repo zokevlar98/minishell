@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 01:01:33 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/27 03:14:29 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_signe(int signe)
 	return (0);
 }
 
-int ft_atoi(char *str)
+int	ft_atoi(char *str)
 {
 	int			i;
 	int			signe;
@@ -38,7 +38,7 @@ int ft_atoi(char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (resu > 922337203685477580 
+		if (resu > 922337203685477580
 			|| (resu == 922337203685477580 && str[i] > 7))
 			return (ft_signe(signe));
 		resu = 10 * resu + str[i] - '0';

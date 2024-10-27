@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 21:21:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/26 18:09:35 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/27 03:35:30 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_change_env(t_env *env_list, char *name, char *value)
 	{
 		if (ft_strncmp(tmp->name, name, ft_strlen(tmp->name)) == 0)
 		{
-			free(tmp->value);//line 47 in builtin_utils.c
+			free(tmp->value);
 			tmp->value = ft_strdup_(value);
 			return ;
 		}

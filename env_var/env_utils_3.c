@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 07:45:31 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 14:28:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/27 03:39:16 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    swap(char **a, char **b)
+void	swap(char **a, char **b)
 {
 	char	*tmp;
 
@@ -27,7 +27,7 @@ char	**sort_env(t_env *env, int n)
 	int		swapped;
 	int		i;
 	int		j;
-	
+
 	envp = ft_get_envp(env);
 	i = 0;
 	while (i < n - 1)
