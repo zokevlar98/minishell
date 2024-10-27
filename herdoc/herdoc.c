@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:21:25 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 21:41:42 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/27 22:00:51 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,25 @@ char	*get_del(char *redir)
 	return (del);
 }
 
+int	buf_breaker(char *line, int *s, char *del)
+{
+	if (!line)
+	{
+		if (exit_status(-1) == -1337)
+			*s = -1337;
+		else
+			*s = -42;
+		rl_replace_line("", 0);
+		return (-1);
+	}
+	if (ft_strcmp(line, del) == 0)
+	{
+		free(line);
+		return (-1);
+	}
+	return (1);
+}
+
 char	*get_buf(int *s, char *red, int pipe_line, t_env *env)
 {
 	char	*line;
@@ -57,20 +76,8 @@ char	*get_buf(int *s, char *red, int pipe_line, t_env *env)
 	{
 		signal(SIGINT, ft_sig_herdoc);
 		line = readline("> ");
-		if (!line)
-		{
-			if (exit_status(-1) == -1337)
-				*s = -1337;
-			else
-				*s = -42;
-			rl_replace_line("", 0);
+		if (buf_breaker(line, s, del) == -1)
 			break ;
-		}
-		if (ft_strcmp(line, del) == 0)
-		{
-			free(line);
-			break ;
-		}
 		buffer = ft_strjoin(buffer, line);
 		buffer = ft_strjoin(buffer, "\n");
 		free(line);
