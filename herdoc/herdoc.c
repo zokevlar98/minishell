@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   herdoc.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 16:21:25 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/10/27 16:28:12 by mohmazou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 int	to_herdoc(char *redir)
@@ -121,8 +133,19 @@ int	will_expd(char *del)
 	return (1);
 }
 
+t_utils	*init_herd_uti(t_p_cmd *new_cmd)
+{
+	t_utils	*utls;
+
+	utls = ft_malloc(sizeof(t_utils), 0);
+
+	return (utls);
+}
+
 void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 {
+	t_utils	*u;
+	
 	t_p_cmd	*cmd;
 	int		i;
 	int		fd;
@@ -132,8 +155,8 @@ void	herdoc_hundeler(t_p_cmd **new_cmd,t_env *env, int *sig_flag)
 
 	cmd = 	*new_cmd;
 	file_tab = (char **)ft_malloc(sizeof(char *) * (cp_arr(cmd->redir) + 1), 0);
-(void)env;
 	i = 0;
+	u = init_herd_uti(*new_cmd);
 	if (!cmd || !cmd->redir)
 		return ;
 	while (cmd->redir[i] && *sig_flag != -1337 && *sig_flag != -42)

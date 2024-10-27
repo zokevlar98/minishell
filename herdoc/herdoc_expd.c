@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   herdoc_expd.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 15:56:27 by mohmazou          #+#    #+#             */
+/*   Updated: 2024/10/27 16:19:40 by mohmazou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -8,7 +19,8 @@ int	should_expd(char *buffer)
 		if (*buffer == '$')
 		{
 			buffer ++;
-			if (*buffer != '$' && *buffer != '\'' && *buffer != '\"' && *buffer != ' ')
+			if (*buffer != '$' && *buffer != '\'' && *buffer != '\"'
+				&& *buffer != ' ')
 				return (1);
 		}
 		buffer ++;
@@ -16,32 +28,42 @@ int	should_expd(char *buffer)
 	return (0);
 }
 
-int	fill_buffer(t_env *env, char *bfr,char *new_bf,int pipe_line)
+t_utils	*ini_fil_u(int len_bfr)
 {
-	int	i = 0;
-	int	j = 0;
-	int len = ft_strlen(bfr);
-	int	status;
+	t_utils	*utils;
 
-	while (i < len)
+	utils = ft_malloc(sizeof(t_utils), 0);
+	utils->i = 0;
+	utils->j = 0;
+	utils->len = len_bfr;
+	utils->status = 0;
+	return (utils);
+}
+
+int	fill_buffer(t_env *env, char *bfr, char *new_bf, int pipe_line)
+{
+	t_utils	*u;
+
+	u = ini_fil_u(ft_strlen(bfr));
+	while (u->i < u->len)
 	{
-		status = (bfr[i] == '$' && bfr[i + 1]);
-		if (status && bfr[i + 1] != ' ' && bfr[i +1] != '\t')
-			i++;
-		if (status && bfr[i] == '?')
-			join_exit(new_bf, pipe_line, &j, &i);
-		else if (status && not_expandable(bfr[i]))
-			i ++;
-		else if (status && ft_to_ex(bfr[i]))
+		u->status = (bfr[u->i] == '$' && bfr[u->i + 1]);
+		if (u->status && bfr[u->i + 1] != ' ' && bfr[u->i +1] != '\t')
+			u->i++;
+		if (u->status && bfr[u->i] == '?')
+			join_exit(new_bf, pipe_line, &u->j, &u->i);
+		else if (u->status && not_expandable(bfr[u->i]))
+			u->i ++;
+		else if (u->status && ft_to_ex(bfr[u->i]))
 		{
-			join_val(env, bfr + i, new_bf, &j);
-			while (bfr[i] && ft_to_ex(bfr[i]))
-				i ++;
+			join_val(env, bfr + u->i, new_bf, &u->j);
+			while (bfr[u->i] && ft_to_ex(bfr[u->i]))
+				u->i ++;
 		}
 		else
-			new_bf[j++] = bfr[i++];
+			new_bf[u->j++] = bfr[u->i++];
 	}
-	return 0;
+	return (0);
 }
 
 char	*expended_buffer(char *buffer, t_env *env, int pipe_line)
@@ -51,12 +73,9 @@ char	*expended_buffer(char *buffer, t_env *env, int pipe_line)
 
 	if (!buffer || !should_expd(buffer))
 		return (buffer);
-	len = new_len(buffer,env);
+	len = new_len(buffer, env);
 	new_bf = allocat_zero(len + 1);
 	if (fill_buffer(env, buffer, new_bf, pipe_line) == -1)
 		return (NULL);
 	return (new_bf);
-
-	
-
 }
