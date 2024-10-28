@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/28 04:48:29 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/28 05:06:26 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void    ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 				close(cmd->fd_in);
 			if (cmd->fd_out > 1)
 				close(cmd->fd_out);
-			cmd->fd_in = open("ll",O_CREAT | O_RDWR, 0644);//ne9dro n7elo lmouckil bhadi 
+			// cmd->fd_in = open("ll",O_CREAT | O_RDWR, 0644);//ne9dro n7elo lmouckil bhadi 
 			cmd = cmd->next;
 			continue;
 		}
