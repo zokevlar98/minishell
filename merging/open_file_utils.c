@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:44:31 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 15:50:42 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/28 04:24:09 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	open_in(t_utils **u, char *redir, int *fd_in)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd((*u)->f_name, STDERR_FILENO);
-		ft_putstr_fd(": No such file or directory:\n", STDERR_FILENO);
+		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		exit_status(1);
 	}
 }
