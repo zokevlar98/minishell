@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/22 20:10:04 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/28 11:20:10 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_str_isdigit(char *str)
 	return (1);
 }
 
-void	ft_exit(t_cmd *cmd, int flag)
+int	ft_exit(t_cmd *cmd, int flag)
 {
 	long long	exit_status;
 
@@ -75,7 +75,7 @@ void	ft_exit(t_cmd *cmd, int flag)
 		if (flag)
 			ft_putstr_fd("exit\n", STDOUT_FILENO);
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
-		return ;//when exit status emplimented, remove this return and replace by exit_status = 1;
+		return (1);//when exit status emplimented, remove this return and replace by exit_status = 1;
 	}
 	else if (!cmd->args[1])
 		exit_status = 0;//i need here

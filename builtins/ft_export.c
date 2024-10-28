@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/21 03:29:44 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/28 11:20:00 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	add_var_env(char *var, t_env **env)
 		update_var(env, name, value, 0);//update
 }
 
-void	ft_export(t_cmd *cmd, t_env **env)
+int	ft_export(t_cmd *cmd, t_env **env)
 {
 	int		i;
 
@@ -108,7 +108,7 @@ void	ft_export(t_cmd *cmd, t_env **env)
 	if (!cmd->args[1])
 	{
 		print_list_declare(env);
-		return ;
+		return (1);
 	}
 	while (cmd->args[i])
 	{
@@ -118,4 +118,5 @@ void	ft_export(t_cmd *cmd, t_env **env)
 			add_var_env(cmd->args[i], env);
 		i++;
 	}
+	return (0);
 }

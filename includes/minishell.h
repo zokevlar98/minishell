@@ -194,13 +194,13 @@ void	ft_export_error(char *name);
 void	print_list_declare(t_env **env);
 char	*check_name_env(char *name);
 int		check_empty_value(char *var);
-void	ft_echo(t_cmd *cmd_list);
-void	ft_cd(t_cmd *cmd_list, t_env *env_list);
-void	ft_pwd(t_env *env);
-void	ft_export(t_cmd *cmd, t_env **env);
-void	ft_env(t_cmd *cmd, t_env *env);
-void	ft_exit(t_cmd *cmd, int flag);
-void	ft_unset(t_cmd *cmd, t_env **env);
+int		ft_echo(t_cmd *cmd_list);
+int		ft_cd(t_cmd *cmd_list, t_env *env_list);
+int		ft_pwd(t_env *env);
+int		ft_export(t_cmd *cmd, t_env **env);
+int		ft_env(t_cmd *cmd, t_env *env);
+int		ft_exit(t_cmd *cmd, int flag);
+int		ft_unset(t_cmd *cmd, t_env **env);
 void	shell_lvl(t_env *env);
 
 //test
@@ -211,5 +211,7 @@ void	affiche_env(t_env *env);
 t_cmd	*ft_lstnew_cmd(char *cmd);
 void	ft_lstadd_back_cmd(t_cmd **cmd_list, t_cmd *new);
 void	ff(void);
-
+void	affiche_cmd(t_cmd *cmd);
+void	ft_test_execution(t_cmd *cmd, t_env **env, int in_save, int out_save);
+void	get_exit_status(int status);
 #endif

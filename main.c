@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 04:01:55 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/22 17:37:22 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/28 13:09:16 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void	start_loop(t_env *env_list)
 		ft_parsing(line, &cp_list, env_list);
 		cmd_list = NULL;
 		ft_merge(&cmd_list, cp_list, env_list);
-		// ft_test_execution(cmd_list, &env_list, 0, 0);
-		ft_execut_cmd(cmd_list, &env_list);
+		ft_test_execution(cmd_list, &env_list, 0, 0);
+		// ft_execut_cmd(cmd_list, &env_list);
+		// affiche_cmd(cmd_list);
 		free(line);
 	}
 }

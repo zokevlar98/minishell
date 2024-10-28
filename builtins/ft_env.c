@@ -6,13 +6,13 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 09:10:19 by zqouri            #+#    #+#             */
-/*   Updated: 2024/09/24 21:53:42 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/28 11:18:35 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(t_cmd *cmd, t_env *env)
+int	ft_env(t_cmd *cmd, t_env *env)
 {
 	t_env	*tmp;
 	
@@ -32,4 +32,5 @@ void	ft_env(t_cmd *cmd, t_env *env)
 		ft_putstr_fd(cmd->args[1], STDOUT_FILENO);
 		ft_putstr_fd("': No such file or directory\n", STDOUT_FILENO);
 	}
+	return (0);
 }

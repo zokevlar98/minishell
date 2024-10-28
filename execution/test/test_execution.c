@@ -6,32 +6,66 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 22:49:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/22 18:03:04 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/28 13:06:48 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	child_execution(t_cmd *cmd, t_env *env, int *fd)
+void	ft_execut_builtin(t_cmd *cmd_list, t_env **env_list)
+{
+	char	*cmd;
+	
+	cmd = cmd_list->args[0];
+	if (!cmd || cmd_list->fd_in == -1 || cmd_list->fd_out == -1)
+		return ;
+	if (cmd_list->fd_in != 0 || cmd_list->fd_out != 1)
+	{
+		dup2(cmd_list->fd_in , STDIN_FILENO);	
+		dup2(cmd_list->fd_out , STDOUT_FILENO);
+	}
+	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
+		g_data = ft_echo(cmd_list);
+	else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
+		g_data = ft_cd(cmd_list, *env_list);
+	else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
+		g_data = ft_pwd(*env_list);
+	else if (ft_strncmp(cmd, "env", ft_strlen("env")) == 0)
+		g_data = ft_env(cmd_list, *env_list);
+	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
+		g_data = ft_export(cmd_list, env_list);
+	else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
+		g_data = ft_exit(cmd_list, 1);
+	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
+		g_data = ft_unset(cmd_list, env_list);
+	// close(cmd_list->fd_in);
+	// close(cmd_list->fd_out);
+	get_exit_status(g_data);
+}
+
+void	child_execution(t_cmd *cmd, t_env **env, int *fd)
 {
 	//Protection
 	if (cmd->fd_in == -1 || cmd->fd_out == -1)
 		return ;
-	if (cmd->next)
+	if (cmd->fd_in != 0 || cmd->fd_out != 1)
 	{
 		dup2(cmd->fd_in, STDIN_FILENO);
+		dup2(cmd->fd_out, STDOUT_FILENO);
+	}
+	if (cmd->next)
+	{//we write in the pipe
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
-		dup2(cmd->fd_out, STDOUT_FILENO);
 	}
 	if (is_builtin(cmd))
 	{
-		ft_builtin(cmd, &env, 0);
+		ft_execut_builtin(cmd, env);
 		exit(EXIT_SUCCESS);
 	}
 	else
-		ft_execut(cmd, env);
+		ft_execut(cmd, *env);
 }
 
 void	close_dup(int in_save, int out_save)
@@ -42,7 +76,7 @@ void	close_dup(int in_save, int out_save)
 	close(out_save);
 }
 
-int	execut_command(t_cmd *cmd,t_env *env)
+int	execut_command(t_cmd *cmd,t_env **env)
 {
 	int	fd[2];
 	int	pid;
@@ -60,32 +94,9 @@ int	execut_command(t_cmd *cmd,t_env *env)
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 	}
+	else
+		close(STDIN_FILENO);//resposnable for broken pipe
 	return (pid);
-}
-
-void	ft_execut_builtin(t_cmd *cmd_list, t_env **env_list)
-{
-	char	*cmd;
-	
-	cmd = cmd_list->args[0];
-	if (!cmd || cmd_list->fd_in == -1 || cmd_list->fd_out == -1)
-		return ;
-	dup2(cmd_list->fd_in , STDIN_FILENO);
-	dup2(cmd_list->fd_out , STDOUT_FILENO);
-	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
-		g_data = ft_echo(cmd_list);
-	else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
-		g_data = ft_cd(cmd_list, *env_list);
-	else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
-		g_data = ft_pwd(*env_list);
-	else if (ft_strncmp(cmd, "env", ft_strlen("env")) == 0)
-		g_data = ft_env(cmd_list, *env_list);
-	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
-		g_data = ft_export(cmd_list, env_list);
-	else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
-		g_data = ft_exit(cmd_list, 1);
-	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
-		g_data = ft_unset(cmd_list, env_list);
 }
 
 int	execution_builtin(t_cmd *cmd, t_env **env)
@@ -103,17 +114,18 @@ void	ft_test_execution(t_cmd *cmd, t_env **env, int in_save, int out_save)
     int pid;
     int status;
 
-    if (execution_builtin(cmd, env))//I will check if i have one builtins first the i check multiple command
+    if (execution_builtin(cmd, env))//I will check if i have one builtins first then i check multiple command
 		return ;
-	in_save = dup(STDIN_FILENO);
+	in_save = dup(STDIN_FILENO);//i think i dont need to save the out
 	out_save = dup(STDOUT_FILENO);
 	while (cmd)
 	{
 		pid = execut_command(cmd, env);
 		cmd = cmd->next;
 	}
-	waitipid(pid, &status, 0);
+	waitpid(pid, &status, 0);
 	while (waitpid(-1, NULL, WNOHANG) != -1)
 		;
 	close_dup(in_save, out_save);
+	get_exit_status(status);
 }

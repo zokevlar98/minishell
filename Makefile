@@ -4,7 +4,7 @@ NAME			=	minishell
 HEADER			=	includes/minishell.h gb/garbage.h
 
 
-CC				=	cc -Wall -Wextra -Werror -g -I ./includes #-fsanitize=address
+CC				=	cc -Wall -Wextra -Werror -g -I ./includes -fsanitize=address
 
 READLINE_FLAGS	=	-lreadline \
 
@@ -32,6 +32,7 @@ SRCS			=	main.c								\
 					env_var/env_utils_2.c				\
 					env_var/env_utils_3.c				\
 					execution/test/outils_test.c		\
+					execution/test/test_mini.c			\
 					builtins/builtin_cmd.c				\
 					builtins/builtin_utils.c			\
 					builtins/ft_echo.c					\
@@ -55,7 +56,8 @@ SRCS			=	main.c								\
 					merging/open_file.c					\
 					merging/expaind_red.c 				\
 					free_funcs/free_all.c 				\
-					gb/gb.c
+					gb/gb.c								\
+					execution/test/test_execution.c		\
 					
 
 RED             =   \033[0;31m
