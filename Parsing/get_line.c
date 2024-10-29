@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 04:06:57 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 06:20:27 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 10:25:32 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ char	*line_no_rd(char *line, int i, int j)
 			while (line[i])
 			{
 				in_qote(&u->sq, &u->dq, line[i]);
-				if ((line[i] == ' ' || line[i] == '\t') && !u->dq && !u->sq)
+				if (line[i] && (line[i] == ' ' || line[i] == '\t'
+					|| line[i] == '<' || line[i] == '>') && !u->dq && !u->sq)
 					break ;
 				i++;
 			}

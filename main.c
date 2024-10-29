@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 04:01:04 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/29 09:25:44 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 10:26:15 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,18 @@ int	ft_maxsize(t_env *env_list, int flag)
 		}
 	}
 	return (i);
+}
+
+void affiche_arr(char **arr)
+{
+	int i = 0;
+
+	while (arr[i])
+	{
+		printf("arr[%d] : %s\n", i, arr[i]);
+		i ++;
+	}
+	
 }
 
 void	start_loop(t_env *env_list, struct termios *term)

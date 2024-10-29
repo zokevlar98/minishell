@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 09:09:46 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 10:01:44 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	process_child(t_cmd *cmd_list, t_env **env_list, int fd[])
 			ft_error("dup2 failed");
 		close(fd[0]);
 	}
-	ft_cloe_file(cmd_list->fd_out);
+	close_fd(cmd_list->fd_in, cmd_list->fd_out);
 	return (pid);
 }
 
