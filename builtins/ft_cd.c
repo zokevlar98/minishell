@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:50:43 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/28 03:40:45 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/29 04:43:19 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_home(t_env *env)
 	return (NULL);
 }
 
-void	cd_error(char *path, int flag)
+int	cd_error(char *path, int flag)
 {
 	if (flag == 0)
 	{
@@ -44,34 +44,38 @@ void	cd_error(char *path, int flag)
 		ft_putstr_fd(path, STDERR_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 	}
-	exit_status(1);
+	return 1;
 }
 
-void	ft_cd(t_cmd *cmd, t_env *env, char *old_pwd, char *path)
+int	ft_cd(t_cmd *cmd, t_env *env, char *old_pwd, char *path)
 {
+	int	st;
+	st = 0;
 	old_pwd = getcwd(NULL, 0);
 	if (!cmd->args[1])
 	{
 		if ((chdir(get_home(env)) == -1 && !cmd->args[1]) || !get_home(env))
 		{
 			ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
-			exit_status(1);
+			st = 1;
 		}
-		exit_status(0);
+		else
+			st = 0;
 	}
 	if (cmd->args[1] && (!ft_strcmp(cmd->args[1], ".")
 			|| !ft_strcmp(cmd->args[1], "..")))
 	{
 		chdir((const char *)cmd->args[1]);
-		exit_status(0);
+		st = 0;
 	}
 	else if (chdir((const char *)cmd->args[1]) == -1)
-		cd_error(cmd->args[1], 1);
+		st = cd_error(cmd->args[1], 1);
 	path = getcwd(NULL, 0);
 	if (!path)
-		cd_error(NULL, 0);
+		st = cd_error(NULL, 0);
 	ft_change_env(env, "OLDPWD", old_pwd);
 	ft_change_env(env, "PWD", path);
 	free(old_pwd);
 	free(path);
+	return (st);
 }

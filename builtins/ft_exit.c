@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/27 02:42:27 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/29 06:22:06 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	max_index(t_cmd *cmd)
 	return (cmd->pipe_line);
 }
 
-void	ft_exit(t_cmd *cmd)
+int	ft_exit(t_cmd *cmd)
 {
 	int	index;
 
@@ -80,8 +80,7 @@ void	ft_exit(t_cmd *cmd)
 	{
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
-		exit_status(1);
-		return ;
+		return (1);
 	}
 	else if (!cmd->args[1])
 		exit_status(0);
@@ -91,6 +90,6 @@ void	ft_exit(t_cmd *cmd)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (cmd->args[1] && !ft_str_isdigit(cmd->args[1]))
 		exit_error(cmd->args[1]);
-	if (!index)
-		exit(exit_status(-1));
+	exit(exit_status(-1));
+	return (exit_status(-1));
 }

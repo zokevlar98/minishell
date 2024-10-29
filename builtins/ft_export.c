@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/27 02:42:53 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/29 04:44:23 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	add_var_env(char *var, t_env **env)
 		update_var(env, name, value, 0);//update
 }
 
-void	ft_export(t_cmd *cmd, t_env **env)
+int	ft_export(t_cmd *cmd, t_env **env)
 {
 	int	i;
 	int	status;
@@ -111,7 +111,7 @@ void	ft_export(t_cmd *cmd, t_env **env)
 	if (!cmd->args[1])
 	{
 		print_list_declare(env);
-		return ;
+		return (0);
 	}
 	while (cmd->args[i])
 	{
@@ -121,5 +121,5 @@ void	ft_export(t_cmd *cmd, t_env **env)
 			add_var_env(cmd->args[i], env);
 		i++;
 	}
-	exit_status(status);
+	return (status);
 }

@@ -3,40 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/27 02:34:28 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/29 06:24:11 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_builtin(t_cmd *cmd, t_env **env_list)
+int	ft_builtin(t_cmd *cmd, t_env **env_list)
 {
+	int	st;
+	
+	st = 0;
 	if (!cmd || cmd->fd_in == -1 || cmd->fd_out == -1)
-		return ;
+		return 1;
 	dup2(cmd->fd_in, STDIN_FILENO);
 	dup2(cmd->fd_out, STDOUT_FILENO);
 	if (ft_strncmp(cmd->args[0], "echo", ft_strlen("echo")) == 0)
-		exit_status(ft_echo(cmd));
+		st = ft_echo(cmd);
 	else if (ft_strncmp(cmd->args[0], "cd", ft_strlen("cd")) == 0)
-		ft_cd(cmd, *env_list, NULL, NULL);
+		st = ft_cd(cmd, *env_list, NULL, NULL);
 	else if (ft_strncmp(cmd->args[0], "pwd", ft_strlen("pwd")) == 0)
-		exit_status(ft_pwd(*env_list));
+		st = (ft_pwd(*env_list));
 	else if (ft_strncmp(cmd->args[0], "env", ft_strlen("env")) == 0)
-		exit_status(ft_env(cmd, *env_list));
+		st = (ft_env(cmd, *env_list));
 	else if (ft_strncmp(cmd->args[0], "export", ft_strlen("export")) == 0)
-		ft_export(cmd, env_list);
-	else if (!ft_strncmp(cmd->args[0], "exit", ft_strlen("exit"))
-		&& ft_lstsize(cmd) == 1)
-		ft_exit(cmd);
-	else if (!ft_strncmp(cmd->args[0], "exit", ft_strlen("exit"))
-		&& ft_lstsize(cmd) > 1)
-		return ;
+		st = ft_export(cmd, env_list);
+	else if (!ft_strncmp(cmd->args[0], "exit", ft_strlen("exit")))
+		st = ft_exit(cmd);
 	else if (ft_strncmp(cmd->args[0], "unset", ft_strlen("unset")) == 0)
-		ft_unset(cmd, env_list);
+		st = ft_unset(cmd, env_list);
 	close_fd(cmd->fd_in, cmd->fd_out);
+	return (st);
 }
 
 int	ft_export_error(char *name)

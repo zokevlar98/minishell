@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/28 04:48:19 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/29 05:52:26 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,14 @@ void	ft_execut(t_cmd *cmd_list, t_env *env_list)
 	path = find_path_env(cmd_list->args[0], envp);
 	if (!path)
 		ft_execution_error(cmd_list->args[0]);
-	if (execve(path, cmd_list->args, envp) == -1)
-		ft_execution_error(cmd_list->args[0]);
-	exit(EXIT_SUCCESS);
+	if (cmd_list->fd_in != -1 && cmd_list->fd_out != -1)
+	{
+		if (execve(path, cmd_list->args, envp) == -1)
+			ft_execution_error(cmd_list->args[0]);
+		else
+			exit_status(1);
+	}
+	exit(exit_status(-1));
 }
 
 int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
@@ -76,10 +81,9 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 		close(fd[1]);
 		if (is_builtin(cmd_list))
 		{
-			ft_builtin(cmd_list, env_list);
-			exit(EXIT_SUCCESS);
+			exit(ft_builtin(cmd_list, env_list));
 		}
-		else
+		else 
 			ft_execut(cmd_list, *env_list);
 	}
 	else
@@ -112,8 +116,7 @@ int	process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[])
 		close(fd[1]);
 		if (is_builtin(cmd_list))
 		{
-			ft_builtin(cmd_list, env_list);
-			exit(EXIT_SUCCESS);
+			exit(ft_builtin(cmd_list, env_list));
 		}
 		else
 			ft_execut(cmd_list, *env_list);
@@ -141,7 +144,10 @@ int	process_child_end(t_cmd *cmd_list, t_env **env_list)
 		signal(SIGQUIT, SIG_DFL);
 		dup2(cmd_list->fd_in, STDIN_FILENO);
 		dup2(cmd_list->fd_out, STDOUT_FILENO);
-		ft_execut(cmd_list, *env_list);
+		if (is_builtin(cmd_list))
+			exit(ft_builtin(cmd_list, env_list));
+		else
+			ft_execut(cmd_list, *env_list);
 	}
 	ft_cloe_file(cmd_list->fd_out);
 	return (pid);

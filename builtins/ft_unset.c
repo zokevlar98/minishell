@@ -85,7 +85,7 @@ void	remove_env_var(t_env **env, char *name)
 		free(next_var);
 }
 
-void	ft_unset(t_cmd *cmd, t_env **env)
+int	ft_unset(t_cmd *cmd, t_env **env)
 {
 	int		i;
 	int		flag;
@@ -95,7 +95,7 @@ void	ft_unset(t_cmd *cmd, t_env **env)
 	flag = 0;
 	if (!cmd->args[i] || !(*env))
 	{
-		return ;
+		return 0;
 	}
 	while (cmd->args[i])
 	{
@@ -106,5 +106,5 @@ void	ft_unset(t_cmd *cmd, t_env **env)
 			remove_env_var(env, var->name);
 		i++;
 	}
-	exit_status(flag);
+	return(flag);
 }

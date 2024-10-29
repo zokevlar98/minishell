@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/28 05:06:26 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/29 06:16:09 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,10 @@ void    ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 	fd_out = dup(STDOUT_FILENO); 
 	while (cmd)
 	{
-		if (cmd->fd_in == -1 || cmd->fd_out == -1)
-		{
-			if (cmd->fd_in > 0)
-				close(cmd->fd_in);
-			if (cmd->fd_out > 1)
-				close(cmd->fd_out);
-			// cmd->fd_in = open("ll",O_CREAT | O_RDWR, 0644);//ne9dro n7elo lmouckil bhadi 
-			cmd = cmd->next;
-			continue;
-		}
 		if (cmd->next == NULL)
 		{
-			if (is_builtin(cmd))
-				ft_builtin(cmd, env_list);
+			if (is_builtin(cmd) && cmd->pipe_line == 0)
+				exit_status(ft_builtin(cmd, env_list));
 			else
 				process_child_end(cmd, env_list);
 			break ;
@@ -45,12 +35,7 @@ void    ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 		if (cmd && cmd->next != NULL)
 			pid = process_child_read(cmd, env_list, fd);
 		else
-		{
-			if (is_builtin(cmd))
-				ft_builtin(cmd, env_list);
-			else
 				process_child_end(cmd, env_list);
-		}
 		cmd = cmd->next;
 	}
 	dup2(fd_in, STDIN_FILENO);
