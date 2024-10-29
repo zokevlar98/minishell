@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 05:52:26 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 06:33:24 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,6 @@ int	process_child_end(t_cmd *cmd_list, t_env **env_list)
 		else
 			ft_execut(cmd_list, *env_list);
 	}
-	ft_cloe_file(cmd_list->fd_out);
+	close_fd(cmd_list->fd_in, cmd_list->fd_out);
 	return (pid);
 }
