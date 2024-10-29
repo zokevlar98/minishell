@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 04:44:23 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 07:57:02 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ void	add_var_env(char *var, t_env **env)
 		value = "";
 	}
 	if (check_env_var(var, 1) == -1)
-		update_var(env, name, value, 1);//append
+		update_var(env, name, value, 1);
 	else
-		update_var(env, name, value, 0);//update
+		update_var(env, name, value, 0);
 }
 
 int	ft_export(t_cmd *cmd, t_env **env)

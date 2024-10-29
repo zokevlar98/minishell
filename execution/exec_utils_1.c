@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 06:33:24 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 07:52:52 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 		{
 			exit(ft_builtin(cmd_list, env_list));
 		}
-		else 
+		else
 			ft_execut(cmd_list, *env_list);
 	}
 	else

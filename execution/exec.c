@@ -6,41 +6,16 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 06:16:09 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 07:55:12 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
+void	pid_waiting(void)
 {
-	int		pid;
-	int		status;
-	int		fd[2];
+	int	status;
 
-	fd_in = dup(STDIN_FILENO); 
-	fd_out = dup(STDOUT_FILENO); 
-	while (cmd)
-	{
-		if (cmd->next == NULL)
-		{
-			if (is_builtin(cmd) && cmd->pipe_line == 0)
-				exit_status(ft_builtin(cmd, env_list));
-			else
-				process_child_end(cmd, env_list);
-			break ;
-		}
-		pid = process_child_write(cmd, env_list, fd);
-		cmd = cmd->next;
-		if (cmd && cmd->next != NULL)
-			pid = process_child_read(cmd, env_list, fd);
-		else
-				process_child_end(cmd, env_list);
-		cmd = cmd->next;
-	}
-	dup2(fd_in, STDIN_FILENO);
-	dup2(fd_out, STDOUT_FILENO);
-	close_fd(fd_in, fd_out);
 	while (waitpid(-1, &status, 0) != -1)
 	{
 		if (WIFEXITED(status))
@@ -59,4 +34,35 @@ void    ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 			}
 		}
 	}
+}
+
+void	ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
+{
+	int		pid;
+	int		fd[2];
+
+	fd_in = dup(STDIN_FILENO);
+	fd_out = dup(STDOUT_FILENO);
+	while (cmd)
+	{
+		if (cmd->next == NULL)
+		{
+			if (is_builtin(cmd) && cmd->pipe_line == 0)
+				exit_status(ft_builtin(cmd, env_list));
+			else
+				process_child_end(cmd, env_list);
+			break ;
+		}
+		pid = process_child_write(cmd, env_list, fd);
+		cmd = cmd->next;
+		if (cmd && cmd->next != NULL)
+			pid = process_child_read(cmd, env_list, fd);
+		else
+			process_child_end(cmd, env_list);
+		cmd = cmd->next;
+	}
+	dup2(fd_in, STDIN_FILENO);
+	dup2(fd_out, STDOUT_FILENO);
+	close_fd(fd_in, fd_out);
+	pid_waiting();
 }

@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:50:43 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 04:43:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 08:00:06 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,13 @@ int	cd_error(char *path, int flag)
 		ft_putstr_fd(path, STDERR_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 	}
-	return 1;
+	return (1);
 }
 
 int	ft_cd(t_cmd *cmd, t_env *env, char *old_pwd, char *path)
 {
 	int	st;
+
 	st = 0;
 	old_pwd = getcwd(NULL, 0);
 	if (!cmd->args[1])

@@ -59,24 +59,19 @@ void	remove_env_var(t_env **env, char *name)
 	t_env	*var;
 	t_env	*next_var;
 
-	//Initialization:
 	var = (*env);
 	next_var = (*env)->next;
-	//check the first node :
 	if ((*env) && ft_strcmp((*env)->name, name) == 0)
 	{
 		remove_first_node(env);
 		return ;
 	}
-	//Traversal of the env linked list:
 	while (next_var && ft_strcmp(next_var->name, name) != 0)
 	{
 		var = var->next;
 		next_var = next_var->next;
 	}
-	//Unlinking the Node frome env linked list:
 	var->next = next_var->next;
-	//Free the Node:
 	if (next_var && next_var->name)
 		free(next_var->name);
 	if (next_var && next_var->value)
@@ -95,7 +90,7 @@ int	ft_unset(t_cmd *cmd, t_env **env)
 	flag = 0;
 	if (!cmd->args[i] || !(*env))
 	{
-		return 0;
+		return (0);
 	}
 	while (cmd->args[i])
 	{
@@ -106,5 +101,5 @@ int	ft_unset(t_cmd *cmd, t_env **env)
 			remove_env_var(env, var->name);
 		i++;
 	}
-	return(flag);
+	return (flag);
 }

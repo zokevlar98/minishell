@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 06:24:11 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 07:59:35 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int	ft_builtin(t_cmd *cmd, t_env **env_list)
 {
 	int	st;
-	
+
 	st = 0;
 	if (!cmd || cmd->fd_in == -1 || cmd->fd_out == -1)
-		return 1;
+		return (1);
 	dup2(cmd->fd_in, STDIN_FILENO);
 	dup2(cmd->fd_out, STDOUT_FILENO);
 	if (ft_strncmp(cmd->args[0], "echo", ft_strlen("echo")) == 0)

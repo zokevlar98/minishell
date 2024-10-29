@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gb.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 09:42:32 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/27 02:55:56 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/29 07:51:34 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,9 @@ void	*gb_malloc(size_t size, int type)
 		clear_list(list);
 	else if (type == 0)
 	{
-		if (!(addr = malloc(size)))
-		{
-			clear_list(list);
-			return (NULL);
-		}
-		if (!(node = malloc(sizeof(t_garb))))
+		addr = malloc(size);
+		node = malloc(sizeof(t_garb));
+		if (!addr || !node)
 		{
 			clear_list(list);
 			return (NULL);
