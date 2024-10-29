@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/27 03:07:40 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/28 04:48:19 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 		dup2(cmd_list->fd_in, STDIN_FILENO);
 		close(fd[0]);
 		if (dup2(fd[1], STDOUT_FILENO) == -1)
-			ft_error("dup2 failed\n");
+			ft_error("dup2 failed");
 		dup2(cmd_list->fd_out, STDOUT_FILENO);
 		close(fd[1]);
 		if (is_builtin(cmd_list))
@@ -86,7 +86,7 @@ int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
 	{
 		close(fd[1]);
 		if (dup2(fd[0], STDIN_FILENO) == -1)
-			ft_error("dup2 failed\n");
+			ft_error("dup2 failed");
 		close(fd[0]);
 	}
 	ft_cloe_file(cmd_list->fd_out);

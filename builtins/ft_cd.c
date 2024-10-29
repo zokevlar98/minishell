@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:50:43 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/27 02:38:47 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/28 03:40:45 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_cd(t_cmd *cmd, t_env *env, char *old_pwd, char *path)
 	old_pwd = getcwd(NULL, 0);
 	if (!cmd->args[1])
 	{
-		if ((chdir(get_home(env)) == -1 && !cmd->args[1]))
+		if ((chdir(get_home(env)) == -1 && !cmd->args[1]) || !get_home(env))
 		{
 			ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
 			exit_status(1);
