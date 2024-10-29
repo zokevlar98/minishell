@@ -6,11 +6,21 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 07:55:12 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 08:58:23 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	fork1(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		ft_error("fork failed: ");
+	return (pid);
+}
 
 void	pid_waiting(void)
 {
@@ -19,7 +29,9 @@ void	pid_waiting(void)
 	while (waitpid(-1, &status, 0) != -1)
 	{
 		if (WIFEXITED(status))
+		{
 			exit_status(WEXITSTATUS(status));
+		}
 		else if (WIFSIGNALED(status))
 		{
 			if (WTERMSIG(status) == 2)
@@ -38,7 +50,6 @@ void	pid_waiting(void)
 
 void	ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 {
-	int		pid;
 	int		fd[2];
 
 	fd_in = dup(STDIN_FILENO);
@@ -53,12 +64,7 @@ void	ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 				process_child_end(cmd, env_list);
 			break ;
 		}
-		pid = process_child_write(cmd, env_list, fd);
-		cmd = cmd->next;
-		if (cmd && cmd->next != NULL)
-			pid = process_child_read(cmd, env_list, fd);
-		else
-			process_child_end(cmd, env_list);
+		process_child(cmd, env_list, fd);
 		cmd = cmd->next;
 	}
 	dup2(fd_in, STDIN_FILENO);

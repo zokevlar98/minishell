@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 04:01:04 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/29 06:24:40 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 09:25:44 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int ac, char **av, char **env)
 		return (write(2, "Error: no arguments needed\n", 27));
 	if (!isatty(STDIN_FILENO))
 	{
-		printf("You should run minishell from TTY :\n");
+		printf("You should run minishell from a terminal file :\n");
 		exit(1);
 	}
 	if (!env[0])

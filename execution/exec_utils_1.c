@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 07:52:52 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 09:09:46 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,42 +62,21 @@ void	ft_execut(t_cmd *cmd_list, t_env *env_list)
 	exit(exit_status(-1));
 }
 
-int	process_child_write(t_cmd *cmd_list, t_env **env_list, int fd[])
+void	child_progress(t_cmd *cmd_list, int fd[], t_env **env_list)
 {
-	int	pid;
-
-	pipe(fd);
-	signal(SIGINT, SIG_IGN);
-	pid = fork1();
-	if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		dup2(cmd_list->fd_in, STDIN_FILENO);
-		close(fd[0]);
-		if (dup2(fd[1], STDOUT_FILENO) == -1)
-			ft_error("dup2 failed");
-		dup2(cmd_list->fd_out, STDOUT_FILENO);
-		close(fd[1]);
-		if (is_builtin(cmd_list))
-		{
-			exit(ft_builtin(cmd_list, env_list));
-		}
-		else
-			ft_execut(cmd_list, *env_list);
-	}
+	dup2(cmd_list->fd_in, STDIN_FILENO);
+	close(fd[0]);
+	if (dup2(fd[1], STDOUT_FILENO) == -1)
+		ft_error("dup2 failed");
+	dup2(cmd_list->fd_out, STDOUT_FILENO);
+	close(fd[1]);
+	if (is_builtin(cmd_list))
+		exit(ft_builtin(cmd_list, env_list));
 	else
-	{
-		close(fd[1]);
-		if (dup2(fd[0], STDIN_FILENO) == -1)
-			ft_error("dup2 failed");
-		close(fd[0]);
-	}
-	ft_cloe_file(cmd_list->fd_out);
-	return (pid);
+		ft_execut(cmd_list, *env_list);
 }
 
-int	process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[])
+int	process_child(t_cmd *cmd_list, t_env **env_list, int fd[])
 {
 	int	pid;
 
@@ -108,24 +87,13 @@ int	process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[])
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		dup2(cmd_list->fd_in, STDIN_FILENO);
-		close(fd[0]);
-		if (dup2(fd[1], STDOUT_FILENO) == -1)
-			ft_error("dup2 failed\n");
-		dup2(cmd_list->fd_out, STDOUT_FILENO);
-		close(fd[1]);
-		if (is_builtin(cmd_list))
-		{
-			exit(ft_builtin(cmd_list, env_list));
-		}
-		else
-			ft_execut(cmd_list, *env_list);
+		child_progress(cmd_list, fd, env_list);
 	}
 	else
 	{
 		close(fd[1]);
 		if (dup2(fd[0], STDIN_FILENO) == -1)
-			ft_error("dup2 failed\n");
+			ft_error("dup2 failed");
 		close(fd[0]);
 	}
 	ft_cloe_file(cmd_list->fd_out);

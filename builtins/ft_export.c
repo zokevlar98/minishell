@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 07:57:02 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/29 09:18:36 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,26 @@ int	check_env_var(char *var, int flag)
 	return (i);
 }
 
+char	*new_value(char *var_value, char *value, int flag)
+{
+	char	*tmp;
+
+	if (flag == 0)
+	{
+		free(var_value);
+		return (ft_strdup_(value));
+	}
+	else
+	{
+		tmp = ft_strdup_(var_value);
+		free(var_value);
+		return (ft_strjoin_(tmp, value));
+	}
+}
+
 void	update_var(t_env **env, char *name, char *value, int flag)
 {
 	t_env	*var;
-	char	*tmp;
 
 	var = find_env(*env, name);
 	if (!var)
@@ -55,19 +71,7 @@ void	update_var(t_env **env, char *name, char *value, int flag)
 	if (var->name && var->value && !value)
 		return ;
 	if (var->value && value)
-	{
-		if (flag == 0)
-		{
-			free(var->value);
-			var->value = ft_strdup_(value);
-		}
-		else if (flag == 1)
-		{
-			tmp = ft_strdup_(var->value);
-			free(var->value);
-			var->value = ft_strjoin_(tmp, value);
-		}
-	}
+		var->value = new_value(var->value, value, flag);
 	else
 		var->value = ft_strdup_(value);
 }

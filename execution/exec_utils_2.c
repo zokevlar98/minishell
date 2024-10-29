@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:57:41 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/27 03:12:48 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/29 08:58:19 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	fork1(void)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == -1)
-		ft_error("fork failed: ");
-	return (pid);
-}
 
 char	*check_path(char **path_s, char *cmd)
 {
@@ -28,6 +18,8 @@ char	*check_path(char **path_s, char *cmd)
 	char	*path;
 
 	i = 0;
+	if (!path_s || !cmd)
+		return (NULL);
 	while (path_s[i])
 	{
 		path = ft_strjoin(path_s[i], "/");
@@ -37,6 +29,14 @@ char	*check_path(char **path_s, char *cmd)
 		i++;
 	}
 	return (NULL);
+}
+
+void	path_env_err(char *cmd)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+	exit(EXIT_FAILURE);
 }
 
 char	*find_path_env(char *cmd, char *envp[])
@@ -61,12 +61,7 @@ char	*find_path_env(char *cmd, char *envp[])
 	while (ft_strncmp(envp[i], "PATH", 4) != 0)
 		i++;
 	if (!envp[i])
-	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		ft_putstr_fd(cmd, STDERR_FILENO);
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
+		path_env_err(cmd);
 	path_s = ft_split(envp[i] + 5, ':');
 	path = check_path(path_s, cmd);
 	return (path);
