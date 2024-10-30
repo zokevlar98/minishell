@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:57:41 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 08:58:19 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/31 00:19:52 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*find_path_env(char *cmd, char *envp[])
 	i = 0;
 	if (ft_strchr(cmd, '/'))
 	{
-		if (access(cmd, F_OK) == 0)
+		if (access(cmd, X_OK | F_OK) == 0)
 			return (cmd);
 	}
 	else

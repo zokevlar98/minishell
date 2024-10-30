@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:50:43 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 09:25:12 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/31 00:26:09 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ int	cd_home(t_cmd *cmd, t_env *env)
 		ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
 		return (1);
 	}
-	else
-		return (0);
+	return (0);
 }
 
 int	ft_cd(t_cmd *cmd, t_env *env, char *old_pwd, char *path)

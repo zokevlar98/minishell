@@ -4,22 +4,71 @@ To check if we have memory leaks :
 2-for FD leaks : while; do lsof -c minishell ; done
 3-run the minishell
 4-ctrl+c to stop the leaks command
-----------------------------------------
-cat <missing | cat 
-----------------------------------------
-cat <missing | cat \\Pipes probleme
-----------------------------------------
+
 ovverflow in exit
 ----------------------------------------
+bash-3.2$ echo `$pwd`
+
+minishell $> echo `$pwd`
+``
+----------------------------------------
+bash: /Users/zqouri/Desktop/minishell: is a directory
+
+minishell $> echo `$PWD`
+`/Users/zqouri/Desktop/minishell`
+----------------------------------------
+bash-3.2$ :
+bash-3.2$
+bash-3.2$ echo $?
+0
+minishell $> :
+minishell: :: command not found
+minishell $> echo $?
+127
+----------------------------------------
+bash-3.2$ &&
+bash: syntax error near unexpected token `&&'
+bash-3.2$ echo $?
+258
+minishell $> &&
+minishell: &&: command not found
+minishell $> echo $?
+127
+----------------------------------------
+bash-3.2$ echo \$HOME
+$HOME
+minishell $> echo \$HOME
+\/Users/zqouri
+----------------------------------------
+bash-3.2$ echo $:$= | cat -e
+$:$=$
+minishell $> echo $:$= | cat -e
+:=$
+----------------------------------------
+bash-3.2$ echo $UID
+103467
+minishell $> echo $UID
 
 ----------------------------------------
-
+bash-3.2$ echo $USER$var\$USER$USER\$USERtest$USER
+zqouri$USERzqouri$USERtestzqouri
+minishell $> echo $USER$var\$USER$USER\$USERtest$USER
+zqouri\zqourizqouri\zqouri
 ----------------------------------------
-
+bash-3.2$ echo $''HOME
+HOME
+minishell $> echo $''HOME
+$HOME
 ----------------------------------------
-
+bash-3.2$ echo $""HOME
+HOME
+minishell $> echo $""HOME
+$HOME
 ----------------------------------------
-
+bash-3.2$ echo $=HOME
+$=HOME
+minishell $> echo $=HOME
+=HOME
 ----------------------------------------
 
 ----------------------------------------
