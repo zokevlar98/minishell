@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 03:35:57 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/27 03:38:41 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/31 00:57:06 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ char	**empty_env(void)
 	char	*str;
 
 	str = getcwd(NULL, 0);
-	env = (char **)malloc(sizeof(char *) * 4);
-	env[0] = ft_strjoin_("PWD=", str);
-	env[1] = ft_strdup_("SHLVL=0");
-	env[2] = ft_strdup_("_=/usr/bin/env");
-	env[3] = NULL;
+	env = (char **)malloc(sizeof(char *) * 5);
+	env[0] = ft_strdup("PATH=/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.");
+	env[1] = ft_strjoin_("PWD=", str);
+	env[2] = ft_strdup_("SHLVL=0");
+	env[3] = ft_strdup_("_=/usr/bin/env");
+	env[4] = NULL;
 	free(str);
 	return (env);
 }
