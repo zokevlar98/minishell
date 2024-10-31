@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/31 03:06:44 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/31 04:18:49 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,17 @@ long long	ft_atoul(const char *str)
 		res = (res * 10) + (str[i] - '0');
 		i++;
 	}
-	return (res * sign);
+	return ((long long)(res * sign));
+}
+
+int	check_num(char *str)
+{
+	long long	x;
+
+	x = ft_atoul(str);
+	if (x >= LLONG_MAX || x <= LLONG_MIN)
+		return (1);
+	return (0);
 }
 
 int	ft_str_isdigit(char *str)
@@ -50,6 +60,8 @@ int	ft_str_isdigit(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (1);
 	if (str[0] == '-' || str[0] == '+')
 		i++;
 	while (str[i])
@@ -59,16 +71,7 @@ int	ft_str_isdigit(char *str)
 		else
 			return (0);
 	}
-	if (ft_atoul(str) > 9223372036854775807)
-		return (0);
 	return (1);
-}
-
-int	max_index(t_cmd *cmd)
-{
-	while (cmd->next)
-		cmd = cmd->next;
-	return (cmd->pipe_line);
 }
 
 int	ft_exit(t_cmd *cmd)
@@ -76,7 +79,7 @@ int	ft_exit(t_cmd *cmd)
 	int	index;
 
 	index = max_index(cmd);
-	if (size_array(cmd->args) > 2 && ft_str_isdigit(cmd->args[1]))
+	if ((size_array(cmd->args) > 2 && ft_str_isdigit(cmd->args[1])))
 	{
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
@@ -88,7 +91,8 @@ int	ft_exit(t_cmd *cmd)
 		exit_status(ft_atoul(cmd->args[1]));
 	if (!index && cmd->pipe_line == 0)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
-	if (cmd->args[1] && !ft_str_isdigit(cmd->args[1]))
+	if ((cmd->args[1] && !ft_str_isdigit(cmd->args[1]))
+		|| check_num(cmd->args[1]))
 		exit_error(cmd->args[1]);
 	exit(exit_status(-1));
 	return (exit_status(-1));

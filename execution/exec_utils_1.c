@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/31 03:02:46 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/31 04:19:15 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	process_child_end(t_cmd *cmd_list, t_env **env_list, int *flag)
 	pid = fork1();
 	if (pid == -1)
 	{
-		*flag = 1;	
+		*flag = 1;
 		return (-1);
 	}
 	signal(SIGINT, SIG_IGN);

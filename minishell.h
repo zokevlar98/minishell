@@ -195,6 +195,7 @@ char	*check_path(char **path_s, char *cmd);
 int		is_builtin(t_cmd *cmd_list);
 int		ft_builtin(t_cmd *cmd_list, t_env **env_list);
 int		ft_export_error(char *name);
+int		max_index(t_cmd *cmd);
 void	print_list_declare(t_env **env);
 char	*check_name_env(char *name);
 int		check_empty_value(char *var);
