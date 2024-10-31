@@ -3,14 +3,14 @@ NAME			=	minishell
 
 HEADER			=	includes/minishell.h gb/garbage.h
 
-CC				=	cc -Wall -Wextra -Werror -g -fsanitize=address
+CC				=	cc -Wall -Wextra -Werror
 
 READLINE_FLAGS	=	-lreadline \
 
-USER = $(shell echo $$USER)
+# USER = $(shell echo $$USER)
 
-LDFLAGS = -L/goinfre/$(USER)/homebrew/opt/readline/lib
-CPPFLAGS = -I/goinfre/$(USER)/homebrew/opt/readline/include
+# LDFLAGS = -L/goinfre/$(USER)/homebrew/opt/readline/lib
+# CPPFLAGS = -I/goinfre/$(USER)/homebrew/opt/readline/include
 
 # USER = $(shell echo $$HOME)
 
