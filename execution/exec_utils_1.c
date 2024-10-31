@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/31 00:50:28 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/31 03:02:46 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,18 @@ void	child_progress(t_cmd *cmd_list, int fd[], t_env **env_list)
 		ft_execut(cmd_list, *env_list);
 }
 
-int	process_child(t_cmd *cmd_list, t_env **env_list, int fd[])
+int	process_child(t_cmd *cmd_list, t_env **env_list, int fd[], int *flag)
 {
 	int	pid;
 
 	pipe(fd);
 	signal(SIGINT, SIG_IGN);
 	pid = fork1();
+	if (pid == -1)
+	{
+		*flag = 1;
+		return (close_fd(fd[0], fd[1]), -1);
+	}
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
@@ -100,11 +105,16 @@ int	process_child(t_cmd *cmd_list, t_env **env_list, int fd[])
 	return (pid);
 }
 
-int	process_child_end(t_cmd *cmd_list, t_env **env_list)
+int	process_child_end(t_cmd *cmd_list, t_env **env_list, int *flag)
 {
 	int	pid;
 
 	pid = fork1();
+	if (pid == -1)
+	{
+		*flag = 1;	
+		return (-1);
+	}
 	signal(SIGINT, SIG_IGN);
 	if (pid == 0)
 	{

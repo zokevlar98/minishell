@@ -187,9 +187,8 @@ void	ft_execut_cmd(t_cmd *cmd_list, t_env **env_list, int fd_in, int fd_out);
 void	ft_execut(t_cmd *cmd_list, t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
 int		fork1(void);
-int		process_child(t_cmd *cmd_list, t_env **env_list, int fd[]);
-int		process_child_read(t_cmd *cmd_list, t_env **env_list, int fd[]);
-int		process_child_end(t_cmd *cmd_list, t_env **env_list);
+int		process_child(t_cmd *cmd_list, t_env **env_list, int fd[], int *flag);
+int		process_child_end(t_cmd *cmd_list, t_env **env_list, int *flag);
 char	*check_path(char **path_s, char *cmd);
 
 //builtins

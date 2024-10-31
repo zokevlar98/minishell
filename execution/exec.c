@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/31 00:34:22 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/31 03:03:26 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ int	fork1(void)
 
 	pid = fork();
 	if (pid == -1)
+	{
 		ft_error("fork failed: ");
+		return (-1);
+	}
 	return (pid);
 }
 
-void	pid_waiting(void)
+void	pid_waiting(int flag)
 {
 	int	status;
 
@@ -46,12 +49,16 @@ void	pid_waiting(void)
 			}
 		}
 	}
+	if (flag)
+		exit_status(1);
 }
 
 void	ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 {
 	int		fd[2];
+	int		flag;
 
+	flag = 0;
 	fd_in = dup(STDIN_FILENO);
 	fd_out = dup(STDOUT_FILENO);
 	while (cmd)
@@ -61,14 +68,16 @@ void	ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 			if (is_builtin(cmd) && cmd->pipe_line == 0)
 				exit_status(ft_builtin(cmd, env_list));
 			else
-				process_child_end(cmd, env_list);
+				if (process_child_end(cmd, env_list, &flag) == -1)
+					break ;
 			break ;
 		}
-		process_child(cmd, env_list, fd);
+		if (process_child(cmd, env_list, fd, &flag) == -1)
+			break ;
 		cmd = cmd->next;
 	}
 	dup2(fd_in, STDIN_FILENO);
 	dup2(fd_out, STDOUT_FILENO);
 	close_fd(fd_in, fd_out);
-	pid_waiting();
+	pid_waiting(flag);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 06:22:06 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/31 03:06:44 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_exit(t_cmd *cmd)
 		exit_status(0);
 	else if (cmd->args[1] && ft_str_isdigit(cmd->args[1]))
 		exit_status(ft_atoul(cmd->args[1]));
-	if (!index)
+	if (!index && cmd->pipe_line == 0)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (cmd->args[1] && !ft_str_isdigit(cmd->args[1]))
 		exit_error(cmd->args[1]);
