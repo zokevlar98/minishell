@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:21:25 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/31 00:22:04 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/31 02:27:26 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,12 @@ char	*get_buf(int *s, char *red, int pipe_line, t_env *env)
 	char	*buffer;
 	char	*del;
 	int		expd;
+	int		fd_dup;
 
 	del = get_del(red);
 	expd = will_expd(red);
 	buffer = NULL;
+	fd_dup = dup(STDIN_FILENO);
 	while (1)
 	{
 		signal(SIGINT, ft_sig_herdoc);
@@ -80,6 +82,8 @@ char	*get_buf(int *s, char *red, int pipe_line, t_env *env)
 		buffer = ft_strjoin(buffer, "\n");
 		free(line);
 	}
+	dup2(fd_dup, STDIN_FILENO);
+	close(fd_dup);
 	if (expd)
 		return (expended_buffer(buffer, env, pipe_line));
 	return (buffer);

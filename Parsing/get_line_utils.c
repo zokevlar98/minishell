@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 04:06:35 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 06:20:31 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/10/31 02:07:14 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,9 @@ char	*get_redir(char *line, int i)
 	}
 	redir = ft_substr(line, i, j - i);
 	return (redir);
+}
+
+int	to_break(char l)
+{
+	return (l == ' ' || l == '\t' || l == '<' || l == '>');
 }

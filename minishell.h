@@ -134,6 +134,7 @@ void	join_exit(char *new_line, int pipe_line, int *j, int *i);
 void	join_val(t_env *env, char *line, char *new_line, int *j);
 void	get_line(char *line, t_p_cmd *cp_list, t_env *env_list);
 char	*get_redir(char *line, int i);
+int		to_break(char l);
 void	in_qote(int *sq, int *dq, char c);
 char	**get_rd(char *line, int dq, int sq);
 t_p_cmd	*ft_new_cp(char *cmd, int i, t_env *env_list);
