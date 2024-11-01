@@ -13,8 +13,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-// # define malloc(x) NULL
-
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -23,16 +21,13 @@
 # include <signal.h>
 # include <sys/types.h>
 # include <errno.h>
-# include <dirent.h>
 # include <limits.h>
 # include <sys/wait.h>
-# include <stddef.h>
 # include <fcntl.h>
 # include <termios.h>
 # include <sys/stat.h>
 # include "gb/garbage.h"
 
-//define
 # define NUM_BUILTINS 8
 
 int		g_sig;
@@ -79,8 +74,8 @@ typedef struct s_utils
 	int		flag;
 }	t_utils;
 
-void	*ft_malloc(size_t size, int free);
 // lib_utils
+void	*ft_malloc(size_t size, int free);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(char *s1, char *s2, size_t size);
 void	ft_putstr_fd(char *str, int fd);

@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 04:06:57 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/11/01 01:41:58 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/01 03:22:42 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ char	*line_no_rd(char *line, int i, int j)
 			}
 		}
 		else
-			copy_line(line[i], u->new_line + j++, (!u->dq && !u->sq));
-		if (line[i])
-			i++;
+			copy_line(line[i++], u->new_line + j++, (!u->dq && !u->sq));
 	}
 	u->new_line[j] = '\0';
 	return (u->new_line);
