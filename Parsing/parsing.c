@@ -6,13 +6,13 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 06:32:46 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 06:35:51 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/01 02:10:13 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	cnt_split(char *line, char c, int in_word)
+int	cnt_split(char *line, char c, char t, int in_word)
 {
 	int	count;
 	int	s_q;
@@ -29,12 +29,12 @@ int	cnt_split(char *line, char c, int in_word)
 			s_q = !s_q;
 		if (line[i] == '\"' && !s_q)
 			d_q = !d_q;
-		if (line[i] != c && !in_word)
+		if (line[i] != c && line[i] != t && !in_word)
 		{
 			count++;
 			in_word = 1;
 		}
-		if (line[i] == c && !s_q && !d_q)
+		if ((line[i] == c || line[i] == t) && !s_q && !d_q)
 			in_word = 0;
 	}
 	return (count);
@@ -48,11 +48,15 @@ void	sp_qt(char c, int *s_q, int *d_q)
 		(*d_q) = !(*d_q);
 }
 
-t_utils	*utils_init(void)
+t_utils	*utils_init(char c)
 {
 	t_utils	*u;
 
 	u = (t_utils *)ft_malloc(sizeof(t_utils), 0);
+	if (c == ' ')
+		u->c = '\t';
+	else
+		u->c = c;
 	u->i = -1;
 	u->j = 0;
 	u->k = 0;
@@ -64,17 +68,18 @@ char	**ft_split_cmd(char *line, char c, int s_q, int d_q)
 	t_utils	*u;
 	char	**cmd;
 
-	u = utils_init();
-	cmd = (char **)ft_malloc(sizeof(char *) * (cnt_split(line, c, 0) + 1), 0);
+	u = utils_init(c);
+	cmd = ft_malloc(sizeof(char *) * (cnt_split(line, c, u->c, 0) + 1), 0);
 	while (line[++u->i])
 	{
 		sp_qt(line[u->i], &s_q, &d_q);
-		if (line[u->i] != c)
+		if (line[u->i] != c && line[u->i] != u->c)
 		{
 			if (u->k == -1)
 				u->k = u->i;
 		}
-		if (line[u->i] == c && !s_q && !d_q && u->k != -1)
+		if ((line[u->i] == c || line[u->i] == u->c)
+			&& !s_q && !d_q && u->k != -1)
 		{
 			if (u->i > u->k)
 				cmd[u->j++] = ft_substr(line, u->k, u->i - u->k);

@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 04:03:22 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 04:03:23 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/01 01:51:10 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	check_red_pattern(char *line, int *i)
 		j++;
 	else
 		return (0);
-	while (line[j] && line[j] == ' ')
+	while (line[j] && (line[j] == ' ' || line[j] == '\t'))
 		j++;
 	if (line[j] == '|')
 		return (0);

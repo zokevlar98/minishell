@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 06:39:48 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 15:44:06 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/01 01:44:29 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*get_r_name(char *redir, t_env *env)
 		i++;
 	if (redir[i] == '<' || redir[i] == '>')
 		i++;
-	while (redir[i] == ' ')
+	while (redir[i] == ' ' || redir[i] == '\t')
 		i++;
 	return (redir + i);
 }

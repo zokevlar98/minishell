@@ -66,6 +66,7 @@ typedef struct s_cmd
 
 typedef struct s_utils
 {
+	char	c;
 	int		fd;
 	int		i;
 	int		j;
@@ -121,7 +122,7 @@ int		is_caracter(char *str, char c);
 
 void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list);
 char	**ft_split_cmd(char *line, char c, int s_q, int d_q);
-int		cnt_split(char *line, char c, int in_word);
+int		cnt_split(char *line, char c, char t, int in_word);
 int		is_expandable(char *line, int i, int *dq);
 char	*ft_get_name(char *str, int i);
 int		c_ex(char *str);

@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 04:06:57 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/31 02:03:08 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/01 01:41:58 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	skip(char *line, int *i)
 {
 	if (line[(*i)] == '<' || line[(*i)] == '>')
 		(*i)++;
-	while (line[(*i)] && line[(*i)] == ' ')
+	while (line[(*i)] && (line[(*i)] == ' ' || line[(*i)] == '\t'))
 		(*i)++;
 }
 

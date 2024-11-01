@@ -12,11 +12,6 @@ USER = $(shell echo $$USER)
 LDFLAGS = -L/goinfre/$(USER)/homebrew/opt/readline/lib
 CPPFLAGS = -I/goinfre/$(USER)/homebrew/opt/readline/include
 
-# USER = $(shell echo $$HOME)
-
-# LDFLAGS = -L/$(USER)/.brew/opt/readline/lib
-# CPPFLAGS = -I/$(USER)/.brew/opt/readline/include
-
 SRCS			=	main.c								\
 					lib_utils/ft_error.c 				\
 					lib_utils/ft_putstr_fd.c			\
