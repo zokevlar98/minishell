@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:57:41 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/31 00:51:58 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/10/31 23:26:19 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*find_path_env(char *cmd, char *envp[])
 	{
 		path = ft_strjoin(getcwd(NULL, 0), "/");
 		path = ft_strjoin(path, cmd);
-		if (access(path, F_OK) == 0)
+		if (access(path, X_OK | F_OK) == 0)
 			return (path);
 	}
 	while (ft_strncmp(envp[i], "PATH", 4) != 0)

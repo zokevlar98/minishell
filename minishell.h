@@ -37,7 +37,6 @@
 
 int		g_sig;
 
-// environnement variables linked list
 typedef struct s_env
 {
 	char			*name;
@@ -45,7 +44,6 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-// command linked list
 typedef struct s_p_cmd
 {
 	int				pipe_line;
@@ -81,11 +79,6 @@ typedef struct s_utils
 	int		flag;
 }	t_utils;
 
-// free_all.c
-/*
-taking the size to allocate,
-and takes a boolean to free the allocated memory 1 to free all, 0 to not free
-*/
 void	*ft_malloc(size_t size, int free);
 // lib_utils
 int		ft_strcmp(const char *s1, const char *s2);
@@ -100,7 +93,6 @@ char	*ft_strtrim(char *s1, char *set);
 int		ft_atoi(char *str);
 char	*ft_itoa(int n);
 int		size_array(char **array);
-void	ft_execution_error(char *str);
 
 // lib_utils_2
 int		ft_isalpha(int c);
@@ -188,6 +180,7 @@ void	ft_execut_cmd(t_cmd *cmd_list, t_env **env_list, int fd_in, int fd_out);
 void	ft_execut(t_cmd *cmd_list, t_env *env_list);
 char	*find_path_env(char *cmd, char *envp[]);
 int		fork1(void);
+void	ft_execution_error(char *str);
 int		process_child(t_cmd *cmd_list, t_env **env_list, int fd[], int *flag);
 int		process_child_end(t_cmd *cmd_list, t_env **env_list, int *flag);
 char	*check_path(char **path_s, char *cmd);
@@ -221,5 +214,4 @@ void	close_fd(int fd_in, int fd_out);
 char	*ft_strdup_(const char *s);
 char	*ft_substr_(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin_(char *s1, char *s2);
-void	ft_cloe_file(int fd);
 #endif
