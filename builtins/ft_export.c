@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 09:18:36 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/01 02:55:53 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,7 @@ void	add_var_env(char *var, t_env **env)
 	if (ft_strlen(value) == 0)
 		value = NULL;
 	if (!check_empty_value(var))
-	{
 		value = "";
-	}
 	if (check_env_var(var, 1) == -1)
 		update_var(env, name, value, 1);
 	else

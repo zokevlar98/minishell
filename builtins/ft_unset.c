@@ -89,9 +89,7 @@ int	ft_unset(t_cmd *cmd, t_env **env)
 	i = 1;
 	flag = 0;
 	if (!cmd->args[i] || !(*env))
-	{
 		return (0);
-	}
 	while (cmd->args[i])
 	{
 		if (!check_unset_var(cmd->args[i]))

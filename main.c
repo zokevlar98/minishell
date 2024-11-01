@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 04:01:04 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/11/01 02:15:27 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/01 02:59:35 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	start_loop(t_env *env_list, struct termios *term)
 		ft_parsing(line, &cp_list, env_list);
 		cmd_list = NULL;
 		ft_merge(&cmd_list, cp_list, env_list);
+		affiche_cmd(cmd_list);
 		ft_execut_cmd(cmd_list, &env_list, 0, 0);
 		free(line);
 		if (g_sig)
