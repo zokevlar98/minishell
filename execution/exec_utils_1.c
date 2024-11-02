@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/31 04:19:15 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/02 13:28:53 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,11 @@ void	ft_execut(t_cmd *cmd_list, t_env *env_list)
 	if (cmd_list->fd_in != -1 && cmd_list->fd_out != -1)
 	{
 		if (execve(path, cmd_list->args, envp) == -1)
-			ft_execution_error(cmd_list->args[0]);
+		{
+			ft_error("minishell:");
+			// ft_execution_error(cmd_list->args[0]);
+			// exit_status()
+		}
 		else
 			exit_status(1);
 	}
