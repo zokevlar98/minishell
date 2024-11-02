@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 21:15:24 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 21:41:49 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/02 16:15:35 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	unlik_herdoc(char **redir, int sig_flag)
 {
 	int	i;
 
-	if (sig_flag == -1337 || sig_flag == -42)
+	if (sig_flag == -1337)
 	{
 		i = 0;
 		while (redir[i])

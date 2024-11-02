@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 06:32:46 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/11/01 02:10:13 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/02 16:08:11 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,6 @@ void	ft_parsing(char *line, t_p_cmd **cp_list, t_env *env_list)
 		herdoc_hundeler(&cmd_list, env_list, &sig_flag);
 		cmd_list = cmd_list->next;
 	}
-	if (sig_flag == -1337 || sig_flag == -42)
+	if (sig_flag == -1337)
 		(*cp_list) = NULL;
 }
