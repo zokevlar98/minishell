@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/31 04:18:49 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/02 12:42:30 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ long long	ft_atoul(const char *str)
 		res = (res * 10) + (str[i] - '0');
 		i++;
 	}
+	if ((long long)(res * sign) == -1)
+		return (255);
 	return ((long long)(res * sign));
 }
 
