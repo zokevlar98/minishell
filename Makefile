@@ -77,7 +77,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME) $(CPPFLAGS) $(LDFLAGS)
 
-%.o:		%.c $(HEADER)
+%.o:		%.c $(HEADER) minishell.h
 			@$(CC) -c $< -o $@
 
 clean:

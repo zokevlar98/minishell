@@ -137,7 +137,7 @@ void	close_tab(int *fd_tab, int size, int in, int out);
 void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out, t_env *env);
 char	*get_f_name(char *f_name, t_env *env, int pipe_line);
 char	*expd_rd(char *f_name, t_env *env, int pipe_line);
-int		err_get_name(char *f_name, int *fd_in, int *fd_out);
+int		err_get_name(t_utils **u, int *fd_in, int *fd_out);
 char	*get_r_name(char *redir, t_env *env);
 void	open_out(t_utils **u, char *red, int *fd_out);
 void	open_in(t_utils **u, char *redir, int *fd_in);

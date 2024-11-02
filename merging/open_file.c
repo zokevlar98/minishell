@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 06:39:48 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/11/01 01:44:29 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/02 12:20:24 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	open_red(t_p_cmd *cmd, int *fd_in, int *fd_out, t_env *env)
 	{
 		u->f_name = get_r_name(redir[u->i], env);
 		u->f_name = get_f_name(u->f_name, env, cmd->pipe_line);
-		u->fd = err_get_name(u->f_name, fd_in, fd_out);
+		u->fd = err_get_name(&u, fd_in, fd_out);
 		if (redir[u->i][0] == '>' && u->fd != -1)
 			open_out(&u, redir[u->i], fd_out);
 		if (redir[u->i][0] == '<' && u->fd != -1)

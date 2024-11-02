@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:21:25 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/31 02:27:26 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/02 12:27:10 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	herdoc_hundeler(t_p_cmd **cmd, t_env *env, int *sg)
 	u = init_herd_uti();
 	if (!(*cmd) || !(*cmd)->redir)
 		return ;
-	while ((*cmd)->redir[u->i] && *sg != -1337 && *sg != -42)
+	while ((*cmd)->redir[u->i] && *sg != -1337)
 	{
 		if (to_herdoc((*cmd)->redir[u->i]))
 		{

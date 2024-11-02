@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   open_file_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:44:31 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/28 04:24:09 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/02 12:21:56 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	err_get_name(char *f_name, int *fd_in, int *fd_out)
+int	err_get_name(t_utils **u, int *fd_in, int *fd_out)
 {
-	if (!f_name)
+	if (!(*u)->f_name)
 	{
 		*fd_in = -1;
 		*fd_out = -1;
 		exit_status(1);
+		(*u)->fds_tab[(*u)->i] = -1;
 		return (-1);
 	}
 	return (1);
