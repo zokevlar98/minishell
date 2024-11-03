@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/02 12:46:58 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/03 20:58:10 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,28 @@ void	pid_waiting(int flag)
 		exit_status(1);
 }
 
+char	*get_last_arg(char **args)
+{
+	int i;
+
+	i = 0;
+	while (args && args[i])
+		i++;
+	return (ft_strdup_(args[i - 1]));
+}
+
 void	ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 {
 	int		fd[2];
 	int		flag;
+	char	*last_arg;
 
 	flag = 0;
 	fd_in = dup(STDIN_FILENO);
 	fd_out = dup(STDOUT_FILENO);
 	while (cmd)
 	{
+		last_arg = get_last_arg(cmd->args);
 		if (cmd->next == NULL)
 		{
 			if (is_builtin(cmd) && cmd->pipe_line == 0)
@@ -76,6 +88,7 @@ void	ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 			break ;
 		cmd = cmd->next;
 	}
+	update_var(env_list, "_", last_arg, 0);
 	dup2(fd_in, STDIN_FILENO);
 	dup2(fd_out, STDOUT_FILENO);
 	close_fd(fd_in, fd_out);

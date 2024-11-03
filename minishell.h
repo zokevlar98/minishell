@@ -192,6 +192,7 @@ int		ft_echo(t_cmd *cmd_list);
 int		ft_cd(t_cmd *cmd_list, t_env *env_list, char *old_pwd, char *path);
 int		ft_pwd(t_env *env);
 int		ft_export(t_cmd *cmd, t_env **env);
+void	update_var(t_env **env, char *name, char *value, int flag);
 int		ft_env(t_cmd *cmd, t_env *env);
 int		ft_exit(t_cmd *cmd);
 int		ft_unset(t_cmd *cmd, t_env **env);
