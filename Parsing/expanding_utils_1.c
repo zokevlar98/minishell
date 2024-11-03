@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 04:04:08 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 04:04:10 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/03 13:20:02 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	c_ex(char *str)
 	count = 0;
 	while (str && str[i])
 	{
-		if (str[i] == '$' && (ft_to_ex(str[i + 1]) || str[i + 1] == '?'))
+		if (str[i] == '$' && (ft_to_ex(str[i + 1]) || str[i + 1] == '?' || str[i + 1] == '\'' || str[i + 1] == '\"'))
 			count ++;
 		i ++;
 	}
