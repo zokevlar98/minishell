@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 04:01:04 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/11/03 15:59:44 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/03 21:08:07 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	start_loop(t_env *env_list, struct termios *term)
 		free(line);
 		if (g_sig)
 			tcsetattr(STDIN_FILENO, TCSANOW, term);
-		// ft_malloc(0, 1);
+		ft_malloc(0, 1);
 	}
 }
 

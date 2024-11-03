@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/03 20:58:10 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/03 21:06:14 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ char	*get_last_arg(char **args)
 	i = 0;
 	while (args && args[i])
 		i++;
+	if (i == 0)
+		return (NULL);
 	return (ft_strdup_(args[i - 1]));
 }
 
