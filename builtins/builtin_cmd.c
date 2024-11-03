@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/29 07:59:35 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/03 13:37:12 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	print_list_declare(t_env **env)
 	envp = sort_env(*env, count_env(*env));
 	ft_env_list(&current_env, envp, 1);
 	tmp = current_env;
-	ft_free(envp);
 	while (current_env)
 	{
 		if (ft_strcmp(current_env->name, "_") == 0)

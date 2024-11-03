@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:57:41 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/31 23:26:19 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/03 13:33:06 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*check_path(char **path_s, char *cmd)
 		path = ft_strjoin(path_s[i], "/");
 		path = ft_strjoin(path, cmd);
 		if (access(path, F_OK) == 0)
-			return (ft_free(path_s), path);
+			return (path);
 		i++;
 	}
 	return (NULL);
@@ -75,17 +75,17 @@ char	**ft_get_envp(t_env *env_list)
 
 	tmp = env_list;
 	i = 0;
-	envp = (char **)malloc(sizeof(char *) * (count_env(tmp) + 1));
+	envp = (char **)gb_malloc(sizeof(char *) * (count_env(tmp) + 1), 0);
 	if (!envp)
 		return (NULL);
 	while (tmp)
 	{
 		if (!tmp->value)
-			envp[i] = ft_strdup(tmp->name);
+			envp[i] = ft_strdup_(tmp->name);
 		else
 		{
-			envp[i] = ft_strjoin(tmp->name, "=");
-			envp[i] = ft_strjoin(envp[i], tmp->value);
+			envp[i] = ft_strjoin_(tmp->name, "=");
+			envp[i] = ft_strjoin_(envp[i], tmp->value);
 		}
 		tmp = tmp->next;
 		i++;

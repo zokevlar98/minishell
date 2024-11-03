@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 03:07:19 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/27 03:42:39 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/03 12:56:44 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strdup_(const char *s)
 {
 	char	*dup;
-	size_t	i;
+	int		i;
 
 	if (!s)
 		return (NULL);
@@ -62,9 +62,9 @@ char	*ft_strjoin_(char *s1, char *s2)
 
 	if (!s1 && !s2)
 		return (NULL);
-	if (!s1)
+	if (!s1 && s2)
 		return (ft_strdup_(s2));
-	if (!s2)
+	if (!s2 && s1)
 		return (ft_strdup_(s1));
 	i = 0;
 	j = 0;
