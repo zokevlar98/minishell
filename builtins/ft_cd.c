@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:50:43 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/31 00:26:09 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/06 05:57:51 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,16 @@ int	cd_error(char *path, int flag)
 
 int	cd_home(t_cmd *cmd, t_env *env)
 {
-	if ((chdir(get_home(env)) == -1 && !cmd->args[1]) || !get_home(env))
+	char	*home;
+
+	home = get_home(env);
+	if (!home)
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
 		return (1);
 	}
+	if ((chdir(home) == -1) && !cmd->args[1] && (home[0] != '\0'))
+		return (cd_error(home, 1));
 	return (0);
 }
 
@@ -65,7 +70,7 @@ int	ft_cd(t_cmd *cmd, t_env *env, char *old_pwd, char *path)
 	old_pwd = getcwd(NULL, 0);
 	if (!cmd->args[1])
 		st = cd_home(cmd, env);
-	if (cmd->args[1] && (!ft_strcmp(cmd->args[1], ".")
+	else if (cmd->args[1] && (!ft_strcmp(cmd->args[1], ".")
 			|| !ft_strcmp(cmd->args[1], "..")))
 	{
 		chdir((const char *)cmd->args[1]);
