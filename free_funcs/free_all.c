@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 02:56:27 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/27 02:57:11 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/03 12:12:55 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_free_all(void **ptrs_list, int *s)
 	while (ptrs_list[i])
 	{
 		free(ptrs_list[i]);
+		ptrs_list[i] = NULL;
 		i++;
 	}
 	(*s) = 0;

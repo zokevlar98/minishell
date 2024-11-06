@@ -14,9 +14,9 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
 # include <sys/types.h>
@@ -178,6 +178,7 @@ int		fork1(void);
 void	ft_execution_error(char *str);
 int		process_child(t_cmd *cmd_list, t_env **env_list, int fd[], int *flag);
 int		process_child_end(t_cmd *cmd_list, t_env **env_list, int *flag);
+void	pid_waiting(int pid, int flag);
 char	*check_path(char **path_s, char *cmd);
 
 //builtins
@@ -192,6 +193,7 @@ int		ft_echo(t_cmd *cmd_list);
 int		ft_cd(t_cmd *cmd_list, t_env *env_list, char *old_pwd, char *path);
 int		ft_pwd(t_env *env);
 int		ft_export(t_cmd *cmd, t_env **env);
+void	update_var(t_env **env, char *name, char *value, int flag);
 int		ft_env(t_cmd *cmd, t_env *env);
 int		ft_exit(t_cmd *cmd);
 int		ft_unset(t_cmd *cmd, t_env **env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 04:01:04 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/11/03 13:37:05 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/06 02:50:17 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	start_loop(t_env *env_list, struct termios *term)
 		free(line);
 		if (g_sig)
 			tcsetattr(STDIN_FILENO, TCSANOW, term);
+		ft_malloc(0, 1);
 	}
 }
 
