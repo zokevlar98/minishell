@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/06 00:58:08 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/06 02:50:03 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	pid_waiting(int pid, int flag)
 
 char	*get_last_arg(char **args)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (args && args[i])
@@ -63,6 +63,21 @@ char	*get_last_arg(char **args)
 	if (i == 0)
 		return (NULL);
 	return (ft_strdup_(args[i - 1]));
+}
+
+int	cmd_loop(t_cmd *cmd, t_env **env_list, int *fd, int *flag)
+{
+	if (cmd->next == NULL)
+	{
+		if (is_builtin(cmd) && cmd->pipe_line == 0)
+			exit_status(ft_builtin(cmd, env_list));
+		else if (process_child_end(cmd, env_list, flag) == -1)
+			return (-1);
+		return (-1);
+	}
+	if (process_child(cmd, env_list, fd, flag) == -1)
+		return (-1);
+	return (0);
 }
 
 void	ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
@@ -77,16 +92,7 @@ void	ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 	while (cmd)
 	{
 		last_arg = get_last_arg(cmd->args);
-		if (cmd->next == NULL)
-		{
-			if (is_builtin(cmd) && cmd->pipe_line == 0)
-				exit_status(ft_builtin(cmd, env_list));
-			else
-				if (process_child_end(cmd, env_list, &flag) == -1)
-					break ;
-			break ;
-		}
-		if (process_child(cmd, env_list, fd, &flag) == -1)
+		if (cmd_loop(cmd, env_list, fd, &flag) == -1)
 			break ;
 		cmd = cmd->next;
 	}
