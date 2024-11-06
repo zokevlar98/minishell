@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 03:35:57 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/03 12:40:12 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/06 11:13:30 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_env	*find_env(t_env *env, char *name)
 	tmp = env;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->name, name, ft_strlen(tmp->name)) == 0)
+		if (ft_strcmp(tmp->name, name) == 0)
 			return (tmp);
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:38:28 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/01 02:55:53 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/06 11:08:19 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_env_var(char *var, int flag)
 	i = 0;
 	while (var[i])
 	{
-		if (i == 0 && ft_isdigit(var[i]) && var[i] != '_')
+		if ((i == 0 && ft_isdigit(var[i]) && var[i] != '_') || var[0] == '+')
 			return (0);
 		if (var[i] == '+' && var[i + 1] != '\0')
 		{

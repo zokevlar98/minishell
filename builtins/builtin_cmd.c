@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 03:56:00 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/03 13:37:12 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/06 10:24:40 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char	*check_name_env(char *name)
 	int		i;
 
 	i = 0;
+	if (!name)
+		return (NULL);
 	while (name[i])
 	{
 		if (name[i] == '+')

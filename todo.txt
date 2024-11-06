@@ -1,0 +1,7 @@
+export ""+=dfgg
+$_$_$_$_$_$_$_
+$_$_$_$_$_$_$_
+exit "            1     " khassha tkhdm
+exit "       1   1     " khassha tkhror b numeric argument required
+exit 4534589734589739457934659465934693
+export _HOLA=bonjour
