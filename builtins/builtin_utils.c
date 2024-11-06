@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 04:02:26 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/31 04:17:51 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/06 17:56:20 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,20 @@ int	max_index(t_cmd *cmd)
 	while (cmd->next)
 		cmd = cmd->next;
 	return (cmd->pipe_line);
+}
+
+int	is_ne_one(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == '-' && str[i + 1] == '1')
+			return (1);
+		i++;
+	}
+	return (0);
 }

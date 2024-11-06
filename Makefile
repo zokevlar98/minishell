@@ -9,11 +9,11 @@ READLINE_FLAGS	=	-lreadline \
 
 USER = $(shell echo $$USER)
 
-LDFLAGS = -L/goinfre/$(USER)/homebrew/opt/readline/lib
-CPPFLAGS = -I/goinfre/$(USER)/homebrew/opt/readline/include
+# LDFLAGS = -L/goinfre/$(USER)/homebrew/opt/readline/lib
+# CPPFLAGS = -I/goinfre/$(USER)/homebrew/opt/readline/include
 
-# LDFLAGS = -L/Users/$(USER)/.brew/opt/readline/lib
-# CPPFLAGS = -I/Users/$(USER)/.brew/opt/readline/include
+LDFLAGS = -L/Users/$(USER)/.brew/opt/readline/lib
+CPPFLAGS = -I/Users/$(USER)/.brew/opt/readline/include
 
 SRCS			=	main.c								\
 					lib_utils/ft_error.c 				\

@@ -198,6 +198,7 @@ int		ft_env(t_cmd *cmd, t_env *env);
 int		ft_exit(t_cmd *cmd);
 int		ft_unset(t_cmd *cmd, t_env **env);
 void	shell_lvl(t_env *env);
+int		is_ne_one(char *str);
 
 //test
 int		ft_lstsize(t_cmd *lst);

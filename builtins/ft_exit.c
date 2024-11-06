@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/06 06:09:42 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:21:31 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,19 @@ long long	ft_atoul(const char *str)
 	if (!str)
 		return (0);
 	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
+		if (str[i++] == '-')
 			sign = -1;
-		i++;
-	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = (res * 10) + (str[i] - '0');
+		if (res < 0 && sign == -1)
+			if (str[i] - '0' > 8)
+				return (-1);
+		if (res < 0 && sign == 1)
+			if (str[i] - '0' > 7)
+				return (-1);
 		i++;
 	}
-	if ((long long)(res * sign) == -1)
-		return (255);
 	return ((long long)(res * sign));
 }
 
@@ -52,8 +53,12 @@ int	check_num(char *str)
 	long long	x;
 
 	x = ft_atoul(str);
-	if (x >= LLONG_MAX || x <= LLONG_MIN)
+	if (x == -1 && !is_ne_one(str))
 		return (1);
+	if (x > LLONG_MAX || x < LLONG_MIN)
+		return (1);
+	if (x == -1 && is_ne_one(str))
+		exit_status (255);
 	return (0);
 }
 
@@ -64,6 +69,8 @@ int	ft_str_isdigit(char *str)
 	i = 0;
 	if (!str)
 		return (1);
+	if (!ft_isdigit(str[i]) && str[i + 1] == '\0')
+		return (0);
 	if (str[0] == '-' || str[0] == '+')
 		i++;
 	while (str[i])
@@ -89,7 +96,8 @@ int	ft_exit(t_cmd *cmd)
 	}
 	else if (!cmd->args[1])
 		exit_status(0);
-	else if (cmd->args[1] && ft_str_isdigit(cmd->args[1]))
+	else if (cmd->args[1] && ft_str_isdigit(cmd->args[1])
+		&& !check_num(cmd->args[1]))
 		exit_status(ft_atoul(cmd->args[1]));
 	if (!index && cmd->pipe_line == 0)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
