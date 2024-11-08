@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/06 19:21:31 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/08 05:33:39 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,23 +86,24 @@ int	ft_str_isdigit(char *str)
 int	ft_exit(t_cmd *cmd)
 {
 	int	index;
+	char	*str;
 
 	index = max_index(cmd);
-	if ((size_array(cmd->args) > 2 && ft_str_isdigit(cmd->args[1])))
+	str = ft_strtrim_(cmd->args[1]);
+	if ((size_array(cmd->args) > 2 && ft_str_isdigit(str)))
 	{
-		ft_putstr_fd("exit\n", STDERR_FILENO);
-		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", STDERR_FILENO);
 		return (1);
 	}
 	else if (!cmd->args[1])
 		exit_status(0);
-	else if (cmd->args[1] && ft_str_isdigit(cmd->args[1])
-		&& !check_num(cmd->args[1]))
-		exit_status(ft_atoul(cmd->args[1]));
+	else if (cmd->args[1] && ft_str_isdigit(str)
+		&& !check_num(str))
+		exit_status(ft_atoul(str));
 	if (!index && cmd->pipe_line == 0)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
-	if ((cmd->args[1] && !ft_str_isdigit(cmd->args[1]))
-		|| check_num(cmd->args[1]))
+	if ((cmd->args[1] && !ft_str_isdigit(str))
+		|| check_num(str))
 		exit_error(cmd->args[1]);
 	exit(exit_status(-1));
 	return (exit_status(-1));

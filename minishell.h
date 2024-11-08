@@ -85,6 +85,7 @@ char	**ft_split(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
 void	ft_free(char **tab);
 char	*ft_strtrim(char *s1, char *set);
+char	*ft_strtrim_(char *str);
 int		ft_atoi(char *str);
 char	*ft_itoa(int n);
 int		size_array(char **array);
