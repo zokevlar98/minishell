@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/08 09:53:56 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:07:55 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,13 @@ void	exit_error(char *str)
 	exit_status(255);
 }
 
-long long	ft_atoul(const char *str)
+long long	ft_atoul(const char *str, int sign)
 {
 	long long	res;
 	int			i;
-	int			sign;
 
 	res = 0;
 	i = 0;
-	sign = 1;
 	if (!str)
 		return (0);
 	if (str[i] == '-' || str[i] == '+')
@@ -54,7 +52,7 @@ int	check_num(char *str)
 {
 	long long	x;
 
-	x = ft_atoul(str);
+	x = ft_atoul(str, 1);
 	if (x == -1 && !is_ne_one(str))
 		return (1);
 	if (x > LLONG_MAX || x < LLONG_MIN)
@@ -101,7 +99,7 @@ int	ft_exit(t_cmd *cmd)
 		exit_status(0);
 	else if (cmd->args[1] && ft_str_isdigit(str)
 		&& !check_num(str))
-		exit_status(ft_atoul(str));
+		exit_status(ft_atoul(str, 1));
 	if (!index && cmd->pipe_line == 0)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if ((cmd->args[1] && !ft_str_isdigit(str))
