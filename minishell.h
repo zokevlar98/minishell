@@ -30,7 +30,7 @@
 
 # define NUM_BUILTINS 8
 
-int		g_sig;
+int		g_sig = 1337;
 
 typedef struct s_env
 {

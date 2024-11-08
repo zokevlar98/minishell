@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 21:21:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/10/27 03:35:30 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/08 08:20:54 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,7 @@ void	ft_env_list(t_env **env_list, char **env, int flag)
 	new = NULL;
 	if (!env)
 		return ;
-	if (!flag)
-	{
-		new = ft_env_new_("OLDPWD", NULL);
-		ft_env_add_back(env_list, new);
-	}
-	while (env[i])
+	while (env[i] && flag)
 	{
 		new = ft_env_new(env[i]);
 		if (!new)
@@ -101,4 +96,20 @@ void	ft_env_list(t_env **env_list, char **env, int flag)
 		ft_env_add_back(env_list, new);
 		i++;
 	}
+	while (env[i] && !flag)
+	{
+		if (ft_strncmp(env[i], "OLDPWD", 6) != 0)
+		{
+			new = ft_env_new(env[i]);
+			if (!new)
+				ft_error("error: failed");
+			ft_env_add_back(env_list, new);
+		}
+		i++;
+	}
+	// if (!flag)
+	// {
+	// 	// new = ft_env_new_("OLDPWD", NULL);
+	// 	// ft_env_add_back(env_list, new);
+	// }
 }
