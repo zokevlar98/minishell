@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/08 10:07:55 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:59:24 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	exit_error(char *str)
 long long	ft_atoul(const char *str, int sign)
 {
 	long long	res;
+	long long	tmp;
 	int			i;
 
 	res = 0;
@@ -34,17 +35,12 @@ long long	ft_atoul(const char *str, int sign)
 			sign = -1;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
+		tmp = res;
 		res = (res * 10) + (str[i] - '0');
-		if (res < 0 && sign == -1)
-			if (str[i] - '0' > 8)
-				return (-1);
-		if (res < 0 && sign == 1)
-			if (str[i] - '0' > 7)
-				return (-1);
+		if (tmp > res)
+			return (-1);
 		i++;
 	}
-	if (res * sign == 9223372036854775807)
-		return (255);
 	return ((long long)(res * sign));
 }
 
