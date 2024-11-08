@@ -26,11 +26,23 @@
 # include <fcntl.h>
 # include <termios.h>
 # include <sys/stat.h>
-# include "gb/garbage.h"
+// # include "gb/garbage.h"
 
 # define NUM_BUILTINS 8
 
 int		g_sig;
+
+// garbage ----------------------
+typedef struct s_garb
+{
+	void			*addr;
+	struct s_garb	*next;
+}	t_garb;
+
+void	clear_list(t_garb *list);
+void	add_node(t_garb **list, t_garb *node);
+void	*gb_malloc(size_t size, int type);
+// -------------------------------
 
 typedef struct s_env
 {

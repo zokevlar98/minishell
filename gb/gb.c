@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gb.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 09:42:32 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/03 12:08:44 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/08 12:20:08 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "garbage.h"
+#include "../minishell.h"
 
 void	clear_list(t_garb *list)
 {

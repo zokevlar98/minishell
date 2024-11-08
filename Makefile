@@ -1,16 +1,16 @@
 
 NAME			=	minishell
 
-HEADER			=	includes/minishell.h gb/garbage.h
+HEADER			=	minishell.h 
 
-CC				=	cc -Wall -Wextra -Werror
+CC				=	cc
 
-READLINE_FLAGS	=	-lreadline \
+CFLAGS 			= -Wall -Wextra -Werror
 
 USER = $(shell echo $$USER)
 
-LDFLAGS = -L/goinfre/$(USER)/homebrew/opt/readline/lib
-CPPFLAGS = -I/goinfre/$(USER)/homebrew/opt/readline/include
+LFLAGS = -L/goinfre/$(USER)/homebrew/opt/readline/lib/
+IFLAGS = -I/goinfre/$(USER)/homebrew/opt/readline/include/
 
 
 SRCS			=	main.c								\
@@ -71,13 +71,13 @@ OBJS		=	$(SRCS:.c=.o)
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			$(CC) $(OBJS) $(READLINE_FLAGS) -o $(NAME) $(CPPFLAGS) $(LDFLAGS)
+			$(CC) $(LFLAGS) -lreadline $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o:		%.c $(HEADER) minishell.h
-			@$(CC) -c $< -o $@
+%.o:		%.c $(HEADER)
+			@$(CC) $(IFLAGS) $(CFLAGS) -c $< -o $@
 
 clean:
-			rm -rf $(OBJS)
+			@rm -rf $(OBJS)
 
 fclean:		clean
 			rm -rf $(NAME)
