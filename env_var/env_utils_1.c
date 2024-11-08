@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 21:21:42 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/08 08:20:54 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/08 09:48:36 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,10 @@ void	ft_env_list(t_env **env_list, char **env, int flag)
 		return ;
 	while (env[i] && flag)
 	{
-		new = ft_env_new(env[i]);
+		new = ft_env_new(env[i++]);
 		if (!new)
 			ft_error("error: failed");
 		ft_env_add_back(env_list, new);
-		i++;
 	}
 	while (env[i] && !flag)
 	{
@@ -107,9 +106,4 @@ void	ft_env_list(t_env **env_list, char **env, int flag)
 		}
 		i++;
 	}
-	// if (!flag)
-	// {
-	// 	// new = ft_env_new_("OLDPWD", NULL);
-	// 	// ft_env_add_back(env_list, new);
-	// }
 }

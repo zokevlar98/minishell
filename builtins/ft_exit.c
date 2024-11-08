@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:58:04 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/08 05:33:39 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/08 09:53:56 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ long long	ft_atoul(const char *str)
 				return (-1);
 		i++;
 	}
+	if (res * sign == 9223372036854775807)
+		return (255);
 	return ((long long)(res * sign));
 }
 
@@ -85,14 +87,14 @@ int	ft_str_isdigit(char *str)
 
 int	ft_exit(t_cmd *cmd)
 {
-	int	index;
+	int		index;
 	char	*str;
 
 	index = max_index(cmd);
 	str = ft_strtrim_(cmd->args[1]);
 	if ((size_array(cmd->args) > 2 && ft_str_isdigit(str)))
 	{
-		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", STDERR_FILENO);
+		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
 		return (1);
 	}
 	else if (!cmd->args[1])

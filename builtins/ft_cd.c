@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 03:50:43 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/06 11:16:22 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/08 09:57:48 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ int	ft_cd(t_cmd *cmd, t_env *env, char *old_pwd, char *path)
 	int	st;
 
 	st = 0;
-	old_pwd = getcwd(NULL, 0);
+	if (ft_env_search(env, "PWD"))
+		old_pwd = ft_strdup_(ft_env_search(env, "PWD"));
+	else
+		old_pwd = getcwd(NULL, 0);
 	if (!cmd->args[1])
 		st = cd_home(cmd, env);
 	else if (cmd->args[1] && (!ft_strcmp(cmd->args[1], ".")
