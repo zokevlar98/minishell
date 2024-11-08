@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:44:31 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/11/02 16:22:30 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:55:51 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,22 @@ void	open_out(t_utils **u, char *red, int *fd_out)
 
 void	open_in(t_utils **u, char *redir, int *fd_in)
 {
-	(*u)->fd = open((*u)->f_name, O_RDONLY);
+	int	fd;
+
 	if (redir[1] == '<')
+	{
+		fd = open((*u)->f_name, O_RDONLY);
+		if (fd != -1)
+			*fd_in = fd;
 		unlink((*u)->f_name);
-	*fd_in = (*u)->fd;
-	(*u)->fds_tab[(*u)->i] = (*u)->fd;
+		(*u)->fds_tab[(*u)->i] = *fd_in;
+	}
+	else
+	{
+		(*u)->fd = open((*u)->f_name, O_RDONLY);
+		*fd_in = (*u)->fd;
+		(*u)->fds_tab[(*u)->i] = (*u)->fd;
+	}
 	if ((*u)->fd == -1)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);

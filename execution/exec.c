@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/06 02:50:03 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:29:59 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	fork1(void)
 	return (pid);
 }
 
-void	pid_waiting(int pid, int flag)
+void	pid_waiting(int flag)
 {
 	int	status;
 
-	if (waitpid(pid, &status, 0) != -1)
+	while (waitpid(-1, &status, 0) != -1)
 	{
 		if (WIFEXITED(status))
 		{
@@ -100,4 +100,5 @@ void	ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 	dup2(fd_in, STDIN_FILENO);
 	dup2(fd_out, STDOUT_FILENO);
 	close_fd(fd_in, fd_out);
+	pid_waiting(flag);
 }

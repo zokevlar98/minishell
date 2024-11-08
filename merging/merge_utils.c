@@ -6,7 +6,7 @@
 /*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 06:39:21 by mohmazou          #+#    #+#             */
-/*   Updated: 2024/10/27 06:39:22 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:56:39 by mohmazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ void	close_tab(int *fd_tab, int size, int in, int out)
 	i = 0;
 	while (i < size)
 	{
-		if (fd_tab[i] != in && fd_tab[i] != out)
+		if (fd_tab[i] != in && fd_tab[i] != out
+			&& fd_tab[i] != 0 && fd_tab[i] != 1)
 			close(fd_tab[i]);
 		i++;
 	}
