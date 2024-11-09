@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:45:05 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/08 11:28:24 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:09:47 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,9 @@ int	process_child_end(t_cmd *cmd_list, t_env **env_list, int *flag)
 			ft_execut(cmd_list, *env_list);
 	}
 	else if (pid > 0)
+	{
+		pid_waiting(pid);
 		close_fd(cmd_list->fd_in, cmd_list->fd_out);
+	}
 	return (pid);
 }

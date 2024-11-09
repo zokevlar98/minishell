@@ -6,7 +6,7 @@
 /*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:57:41 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/03 13:33:06 by zqouri           ###   ########.fr       */
+/*   Updated: 2024/11/09 12:10:21 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ char	*find_path_env(char *cmd, char *envp[])
 	int		i;
 
 	i = 0;
-	if (ft_strchr(cmd, '/'))
+	if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/'))
 	{
 		if (access(cmd, X_OK | F_OK) == 0)
 			return (cmd);
+		return (NULL);
 	}
 	else
 	{

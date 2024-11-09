@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohmazou <mohmazou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zqouri <zqouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 00:17:39 by zqouri            #+#    #+#             */
-/*   Updated: 2024/11/08 11:29:59 by mohmazou         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:09:16 by zqouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,14 @@ int	fork1(void)
 	return (pid);
 }
 
-void	pid_waiting(int flag)
+void	pid_waiting(int pid)
 {
 	int	status;
 
-	while (waitpid(-1, &status, 0) != -1)
+	if (waitpid(pid, &status, 0) != -1)
 	{
 		if (WIFEXITED(status))
-		{
 			exit_status(WEXITSTATUS(status));
-		}
 		else if (WIFSIGNALED(status))
 		{
 			if (WTERMSIG(status) == 2)
@@ -49,8 +47,6 @@ void	pid_waiting(int flag)
 			}
 		}
 	}
-	if (flag)
-		exit_status(1);
 }
 
 char	*get_last_arg(char **args)
@@ -85,6 +81,7 @@ void	ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 	int		fd[2];
 	int		flag;
 	char	*last_arg;
+	int		status;
 
 	flag = 0;
 	fd_in = dup(STDIN_FILENO);
@@ -100,5 +97,8 @@ void	ft_execut_cmd(t_cmd *cmd, t_env **env_list, int fd_in, int fd_out)
 	dup2(fd_in, STDIN_FILENO);
 	dup2(fd_out, STDOUT_FILENO);
 	close_fd(fd_in, fd_out);
-	pid_waiting(flag);
+	while (waitpid(-1, &status, 0) != -1)
+		;
+	if (flag)
+		exit_status(1);
 }

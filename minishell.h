@@ -191,7 +191,7 @@ int		fork1(void);
 void	ft_execution_error(char *str);
 int		process_child(t_cmd *cmd_list, t_env **env_list, int fd[], int *flag);
 int		process_child_end(t_cmd *cmd_list, t_env **env_list, int *flag);
-void	pid_waiting(int flag);
+void	pid_waiting(int pid);
 char	*check_path(char **path_s, char *cmd);
 
 //builtins
